@@ -109,6 +109,31 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Tree
     second: {fileID: 2100000, guid: 6355f4c2e24b6615aed2c86c38bc48db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cutlery
+    second: {fileID: 2100000, guid: 5eb6efca9cb78372e84a9efda5bbd745, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh
+    second: {fileID: 2100000, guid: 533b2df715c2ffbf1c3fa13ec6298807, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: c963d328635087286074d45e16e2adfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire2
+    second: {fileID: 2100000, guid: 7f51ac0618b07c7f1f289e0b4357d65f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire3
+    second: {fileID: 2100000, guid: d2c6e907101adb17543f4ac4b8656603, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

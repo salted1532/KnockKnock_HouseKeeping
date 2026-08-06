@@ -3,7 +3,152 @@ guid: 7d58486cbdf55434284d6f9d811b0471
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Background
+    second: {fileID: 2100000, guid: 76ce00ad215802beb14387b8e87c7597, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bush
+    second: {fileID: 2100000, guid: d2034bf344dd8cd5a15520f3db3cc39c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower_Table
+    second: {fileID: 2100000, guid: 9230abef676fc4aa621b53e72d8aba7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flowers
+    second: {fileID: 2100000, guid: 82c262a11e64d2ab9ae7936ca0705185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants
+    second: {fileID: 2100000, guid: 21c6ca075f2c330511b26ccd42debee6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_01
+    second: {fileID: 2100000, guid: 8e4de3408a28a71baa2a289b06eff2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_02
+    second: {fileID: 2100000, guid: 3ebd1781775de279a4cfe951b0cf3521, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_03
+    second: {fileID: 2100000, guid: 06ed265a80e915132211e9472aaad3a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_04
+    second: {fileID: 2100000, guid: ebc08bedc838ac29720907b8410f2020, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_05
+    second: {fileID: 2100000, guid: 426d198a500e49ee82f310a885c6a32a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NaturePlants_06
+    second: {fileID: 2100000, guid: 2c17a1e0ebba4d14f01299a0dc02eb5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants
+    second: {fileID: 2100000, guid: eac34dea5817d337cae62663aba6008f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: 3dec3b9c705419ae4de5f39f852aa4f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_01
+    second: {fileID: 2100000, guid: 9798a5e73be9f4b1f8c06c70ec1c5f1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_02
+    second: {fileID: 2100000, guid: e68a6559f41638ea3b97ac1a46768040, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_03
+    second: {fileID: 2100000, guid: 7eac285c7bfb94c494983727831579f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_04
+    second: {fileID: 2100000, guid: 147c31a02ef5d909744b3716e168c1c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_06
+    second: {fileID: 2100000, guid: 9a4cdb11215d37e4531777e97a916f95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plants_flowers
+    second: {fileID: 2100000, guid: 8b7ea6f4258cef114887b4740ca883fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cutlery
+    second: {fileID: 2100000, guid: b183d5191d092ace158d302725f12d58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Entertainment
+    second: {fileID: 2100000, guid: 16645141589b842e02d351c0384d030c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence
+    second: {fileID: 2100000, guid: a0331a49e1fd98f5a57a6cd5ed0369d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Phone
+    second: {fileID: 2100000, guid: ff98d38f6b99952f59a108e11027bf9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Phone_01
+    second: {fileID: 2100000, guid: 27521e8d1466b7c2307b475daaea4daf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_10
+    second: {fileID: 2100000, guid: 6451cb18dc0a137d28a27dc080bf24b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rake
+    second: {fileID: 2100000, guid: 089742176b9af6c2a8ac8cc50e017141, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rake_01
+    second: {fileID: 2100000, guid: c8fc89dcf4081d601b106b6b1757d8e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator
+    second: {fileID: 2100000, guid: 1523ee761c80f7449c0dc2ac68930f3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shelving
+    second: {fileID: 2100000, guid: a921793d32e2a33c4f79ea2bfa130512, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

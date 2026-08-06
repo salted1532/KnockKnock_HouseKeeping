@@ -9,6 +9,26 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Plants
     second: {fileID: 2100000, guid: 2ecfb39484dd2d941a3d614957a7c9d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cutlery
+    second: {fileID: 2100000, guid: 1a8c15c10e8da4ee75ab95231ad46b4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Entertainment
+    second: {fileID: 2100000, guid: 9396ec51f892f6c0d3e14deb009c34bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_10
+    second: {fileID: 2100000, guid: 6abdb55942d5f43f00c7daf4db2bd017, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: 6c74e37e66c759c0a057c4df61b9cc17, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

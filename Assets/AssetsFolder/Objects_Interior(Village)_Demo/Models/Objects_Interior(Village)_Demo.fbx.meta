@@ -3,7 +3,62 @@ guid: c0d0244f7bdc4b14886ef2391876f645
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cutlery
+    second: {fileID: 2100000, guid: 827e6ef5b8cb2518de7202f38e8d3d5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower_Table
+    second: {fileID: 2100000, guid: c9312df1ecd4ef9c89eca28bbadb62d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower_Table_01
+    second: {fileID: 2100000, guid: 05d1cf20889b87e6728b3306b9b9f1d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gadgets
+    second: {fileID: 2100000, guid: 57187829a719acc3afd1150e6e18130e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Phone
+    second: {fileID: 2100000, guid: 6401af9d917174a501b46e59fe405510, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Phone_01
+    second: {fileID: 2100000, guid: a76f57b8379ee9bda094b14ce6f5dfec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator
+    second: {fileID: 2100000, guid: ef5cfca2ee2f1ac10036866a4a0fc19e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table_01
+    second: {fileID: 2100000, guid: d32a9cdb6f05d2771a0202740ecabcd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table_02
+    second: {fileID: 2100000, guid: a669869db6235f36b21ea911cd3baa22, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ventilator
+    second: {fileID: 2100000, guid: 50742192f2e0de29d5eb96be1d094275, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ventilator_01
+    second: {fileID: 2100000, guid: 1fc7a2849b24305d7399c0985bf78507, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

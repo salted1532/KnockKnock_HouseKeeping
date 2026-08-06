@@ -3,7 +3,32 @@ guid: cf4d3995eb168be48ae8a62afc403448
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: 9564d3944bfee920ce2bb87a0f47c7bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pineapple
+    second: {fileID: 2100000, guid: 074c3bf4a2a01fe0e0d52b4e5fa92e7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator
+    second: {fileID: 2100000, guid: bcfed9784b54cba3691ffbe206f42e31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator_01
+    second: {fileID: 2100000, guid: 7b63224cef6423ee5595f701433fb3c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dough_press
+    second: {fileID: 2100000, guid: 4268656be410be48ddfcf51e0a0d54d5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

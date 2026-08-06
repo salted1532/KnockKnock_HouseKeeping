@@ -3,7 +3,42 @@ guid: 07821ad07da4ac747be6438db8ba3e48
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: 9564d3944bfee920ce2bb87a0f47c7bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence
+    second: {fileID: 2100000, guid: c7abddbd970863e38e6a07f3d2669226, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lines
+    second: {fileID: 2100000, guid: e84457ce748fd9ce6b352012a215a72b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator
+    second: {fileID: 2100000, guid: bcfed9784b54cba3691ffbe206f42e31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator_01
+    second: {fileID: 2100000, guid: 7b63224cef6423ee5595f701433fb3c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: da9b1dfefcd18fb80ce940a198556998, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dough_press
+    second: {fileID: 2100000, guid: 4268656be410be48ddfcf51e0a0d54d5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
