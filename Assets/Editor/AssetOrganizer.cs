@@ -25,6 +25,10 @@ public static class AssetOrganizer
     private const string PrefabRoot = "Assets/My/Prefabs";
     private const string MaterialRoot = "Assets/My/Materials";
 
+    // Every extracted prop was coming out lying on its side — the source packs' root axis doesn't
+    // match Unity's Y-up. Confirmed fix (2026-08-06): rotate -90 on X.
+    private static readonly Quaternion FixedRotation = Quaternion.Euler(-90f, 0f, 0f);
+
     // ponytail: reset local position/rotation on extraction, keep scale — most of these packs lay
     // props out scattered across the source scene for preview purposes, not at a usable local origin.
     // Flip off per-pack in SourceModels below if a pack turns out to already be authored at origin.
@@ -179,10 +183,12 @@ public static class AssetOrganizer
                 clone.name = rawName;
                 try
                 {
+                    // Source packs export Z-up/lying-down; every extracted prop gets this fixed rotation
+                    // regardless of resetTransform (that flag only controls whether position is re-centered).
+                    clone.transform.localRotation = FixedRotation;
                     if (resetTransform)
                     {
                         clone.transform.localPosition = Vector3.zero;
-                        clone.transform.localRotation = Quaternion.identity;
                     }
 
                     RemapMaterials(clone.transform, category, label, materialCache, allocatedPaths, ref materialMoved, ref materialCreated);
