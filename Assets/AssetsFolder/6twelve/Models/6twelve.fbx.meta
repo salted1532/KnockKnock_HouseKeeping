@@ -3,7 +3,72 @@ guid: c80789c51f634454ca92661eb8a81087
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Branches
+    second: {fileID: 2100000, guid: 73256cca30b42e99587a536347f851f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cigars
+    second: {fileID: 2100000, guid: f0e35bcda0dacaaa01cd2dffdbf61f5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Garbage_bag
+    second: {fileID: 2100000, guid: 2fecd5b23d4cf4cbdf489287e6a4a785, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 7c0b94eeb595cd39f7248315013ce2a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants_01
+    second: {fileID: 2100000, guid: 197a758ca96b632d65460bb715b46c82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants_02
+    second: {fileID: 2100000, guid: 95aa5732aec4ec76aea0eaf810677cdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_05
+    second: {fileID: 2100000, guid: 5ee205985718f03b59061807125003fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoadMarkings
+    second: {fileID: 2100000, guid: a4f7d5dd2804223a815868cde6005807, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scattered
+    second: {fileID: 2100000, guid: d20473907b2346e09247a83d29d9b1cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Store_fridge
+    second: {fileID: 2100000, guid: f263b610b5845991dfb9877916238bb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: b9c32e485e9515c59bf894cb88350462, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_01
+    second: {fileID: 2100000, guid: 4c8ed94e46c73c0cd8ff1095a3691e73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trees_Background
+    second: {fileID: 2100000, guid: 81272a34a8304150d2ea1aacefc8fc80, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

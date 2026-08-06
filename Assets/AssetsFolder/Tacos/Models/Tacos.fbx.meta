@@ -3,7 +3,32 @@ guid: b3d104ee28490e244b4a238a45859c82
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Branches
+    second: {fileID: 2100000, guid: 10e5bd097c45b14c5356bebf56ef8e67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants
+    second: {fileID: 2100000, guid: 6812ce6c4f72afaba29c32339451cfde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants_02
+    second: {fileID: 2100000, guid: 76e972f9f59898d642a1128db9939ffc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: e36991d242885170f2480cf5ea9c3e62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plastic_bag_P
+    second: {fileID: 2100000, guid: fb3f5e90eb4fb56dc645f0ad78cedc66, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

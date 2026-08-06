@@ -3,7 +3,32 @@ guid: 22b9e8987d2aaa44386b3731afd4b162
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass_02
+    second: {fileID: 2100000, guid: 023bcf55c4cc4bb442f424a4d3429648, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: a43749d2d6ee1b3aa9c1ffddc236ca01, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_01
+    second: {fileID: 2100000, guid: b753120b9252cf7d25911cf88f1c8d88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheat
+    second: {fileID: 2100000, guid: a3690d49303c01b140088f72075256ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: 6c41a973c2baf2a71be0a2a2d00afb32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,42 @@ guid: d22f5bc6fdbcfd64d8a76d6270dae502
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Land
+    second: {fileID: 2100000, guid: 9db0c5c1ca3a4f9a51799fa5921987dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants
+    second: {fileID: 2100000, guid: 3cb0d6f4d66904a1e8c671359dfc3c63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants_01
+    second: {fileID: 2100000, guid: 324bd8b40e91d0207dc6dfbeb6b9db81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plants_02
+    second: {fileID: 2100000, guid: 9fc7cd643a309e1098c4ce473c503972, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_02
+    second: {fileID: 2100000, guid: 1f74ada5a9e8be175145fbc96be0043a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_03
+    second: {fileID: 2100000, guid: ab3e749f59c04b459bbc5d7c18eda780, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fence_metal
+    second: {fileID: 2100000, guid: f81b40494aa0ea2fd775a029f3a08adc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,52 @@ guid: 3a69448ba1ed58d459b2fe5682030bc0
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bush
+    second: {fileID: 2100000, guid: fd005fd4f32f00a8f82f64413942754b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cans
+    second: {fileID: 2100000, guid: 6ec39be02d60414ddd5582bb682009d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grid
+    second: {fileID: 2100000, guid: 14dcc4db2c4ebb4f46edfa8bd8fbbc8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oven
+    second: {fileID: 2100000, guid: 73799764bd6e63c0641b9ee049d9e258, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Refrigerator
+    second: {fileID: 2100000, guid: 70fa6c069f4747de9f9a0d5102379794, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sewer
+    second: {fileID: 2100000, guid: a7c7d8c1c656a34328492f717969b0ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree
+    second: {fileID: 2100000, guid: 1b71d1e942411c53368ca0376383e189, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_01
+    second: {fileID: 2100000, guid: 240eefdd2ad2351240187d12e5bdddf1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: 1e42f675bc936727a44ef97b0963e382, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
