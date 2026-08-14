@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ff1a17720ed229e4880c865b9dcad918
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 316991
+  packageName: WG Free Skies
+  packageVersion: 1.0
+  assetPath: Assets/WG Free Skies/Skyboxes/URP Procedural Skybox/Procedural Day/LightingData.asset
+  uploadId: 748398

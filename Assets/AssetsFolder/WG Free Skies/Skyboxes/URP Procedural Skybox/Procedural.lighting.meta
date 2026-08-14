@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 89c0e34a70f99bb43a7694a0f24592cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 316991
+  packageName: WG Free Skies
+  packageVersion: 1.0
+  assetPath: Assets/WG Free Skies/Skyboxes/URP Procedural Skybox/Procedural.lighting
+  uploadId: 748398

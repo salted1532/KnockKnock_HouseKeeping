@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e771cc05d87d47947901ef2310ecefae
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 316991
+  packageName: WG Free Skies
+  packageVersion: 1.0
+  assetPath: Assets/WG Free Skies/Skyboxes/URP Procedural Skybox/Procedural SunSet/LightingData.asset
+  uploadId: 748398

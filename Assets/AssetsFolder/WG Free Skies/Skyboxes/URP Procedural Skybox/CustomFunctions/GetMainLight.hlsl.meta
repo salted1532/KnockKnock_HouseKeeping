@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc7646a559f526544bbc2d76d4ea3feb
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 316991
+  packageName: WG Free Skies
+  packageVersion: 1.0
+  assetPath: Assets/WG Free Skies/Skyboxes/URP Procedural Skybox/CustomFunctions/GetMainLight.hlsl
+  uploadId: 748398
