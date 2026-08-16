@@ -43967,10 +43967,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Directional Light(Night)
       objectReference: {fileID: 0}
-    - target: {fileID: 4222004951695976044, guid: 5328ab9e42f30f2499d8556ad449b7e5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
