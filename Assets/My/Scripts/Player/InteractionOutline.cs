@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractionOutline : MonoBehaviour
 {
@@ -7,25 +8,32 @@ public class InteractionOutline : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private Outline currentOutline;
+    private Interactable currentInteractable;
 
     private void Update()
     {
         Outline hitOutline = null;
+        Interactable hitInteractable = null;
 
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
         {
             hitOutline = hit.collider.GetComponentInParent<Outline>();
+            hitInteractable = hit.collider.GetComponentInParent<Interactable>();
         }
 
-        if (hitOutline == currentOutline)
-            return;
+        if (hitOutline != currentOutline)
+        {
+            if (currentOutline != null)
+                currentOutline.enabled = false;
+            if (hitOutline != null)
+                hitOutline.enabled = true;
+            currentOutline = hitOutline;
+        }
 
-        if (currentOutline != null)
-            currentOutline.enabled = false;
-        if (hitOutline != null)
-            hitOutline.enabled = true;
+        currentInteractable = hitInteractable;
 
-        currentOutline = hitOutline;
+        if (currentInteractable != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            currentInteractable.Interact();
     }
 }

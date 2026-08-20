@@ -130,13 +130,16 @@ public class Interactable : MonoBehaviour
 - `Outline`과 `Interactable`은 보통 같은 오브젝트에 같이 붙임(하이라이트되는 물건 = 상호작용 가능한 물건).
 - E키는 `SoundManager.cs`와 동일하게 `Keyboard.current` 폴링 방식 사용, `.inputactions` 에셋은 건드리지 않음.
 
-## 남은 작업 (승인 후 씬 작업, 사용자 진행)
+## 결과
+승인 후 계획대로 적용 완료.
+
+## 남은 작업 (씬 작업, 사용자 진행)
 1. 상호작용시킬 각 오브젝트(손전등, 침대 등)에 `Interactable` 컴포넌트 추가하고 `type` 지정
    - 손전등 → `Pickup`, `itemName`에 이름 입력
    - 어질러진 침대 → `TidyBed`, `messyVisual`/`tidyVisual`에 각각의 비주얼(자식 오브젝트 등) 연결
    - 버튼/스위치 등 → `Generic`, `onInteract`에 원하는 동작 연결
 2. 이미 `Interaction` 레이어 + `Outline` 컴포넌트가 붙어있는 오브젝트라면 `Interactable`만 추가로 붙이면 됨
 
-## 변경 파일 (승인 시)
+## 변경된 파일
 - `Assets/My/Scripts/Interaction/Interactable.cs` (신규)
 - `Assets/My/Scripts/Player/InteractionOutline.cs`
