@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4676567824868158033}
   - component: {fileID: 1641354974250143837}
   - component: {fileID: 1394753119456360595}
+  - component: {fileID: -8741178757984590506}
   m_Layer: 11
   m_Name: FlashLight_low-Poly
   m_TagString: Untagged
@@ -131,3 +132,24 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-8741178757984590506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029360721989362242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e9f9b24393be243a2feb6cca3752ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  type: 3
+  itemName: Flashlight
+  itemIcon: {fileID: 977040944, guid: 02e6df14ce8a94146bcfce9773b63e08, type: 3}
+  equipTarget: {fileID: 0}
+  messyVisual: {fileID: 0}
+  tidyVisual: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []

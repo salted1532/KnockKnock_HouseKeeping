@@ -12,15 +12,19 @@ public class DayNightSwitcher : MonoBehaviour
     [SerializeField] private VolumeProfile nightProfile;
     [SerializeField] private VolumeProfile morningProfile;
 
+    private bool isNight = true;
+
     private void Update()
     {
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        if (keyboard.digit1Key.wasPressedThisFrame)
-            SetNight();
-        else if (keyboard.digit2Key.wasPressedThisFrame)
-            SetMorning();
+        if (keyboard.qKey.wasPressedThisFrame)
+        {
+            isNight = !isNight;
+            if (isNight) SetNight();
+            else SetMorning();
+        }
     }
 
     private void SetNight()

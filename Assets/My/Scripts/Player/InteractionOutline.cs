@@ -6,6 +6,7 @@ public class InteractionOutline : MonoBehaviour
     [SerializeField] private float interactDistance = 3f;
     [SerializeField] private LayerMask interactMask = ~0;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private GameObject interactionText;
 
     private Outline currentOutline;
     private Interactable currentInteractable;
@@ -31,9 +32,24 @@ public class InteractionOutline : MonoBehaviour
             currentOutline = hitOutline;
         }
 
-        currentInteractable = hitInteractable;
+        if (hitInteractable != currentInteractable)
+        {
+            currentInteractable = hitInteractable;
+            if (interactionText != null)
+                interactionText.SetActive(currentInteractable != null);
+        }
 
         if (currentInteractable != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        {
             currentInteractable.Interact();
+
+            if (currentOutline != null)
+                currentOutline.enabled = false;
+            currentOutline = null;
+            currentInteractable = null;
+
+            if (interactionText != null)
+                interactionText.SetActive(false);
+        }
     }
 }

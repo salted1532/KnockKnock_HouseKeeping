@@ -1,3 +1,4 @@
+using StarterAssets;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -6,13 +7,16 @@ public class FootstepSystem : MonoBehaviour
     [SerializeField] private float stepDistance = 2f;
     [SerializeField] private float rayDistance = 1.5f;
     [SerializeField] private LayerMask groundMask = ~0;
+    [SerializeField] private float sprintPitch = 2f;
 
     private CharacterController controller;
+    private StarterAssetsInputs input;
     private float distanceAccumulator;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        input = GetComponent<StarterAssetsInputs>();
     }
 
     private void Update()
@@ -44,6 +48,7 @@ public class FootstepSystem : MonoBehaviour
         if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, rayDistance, groundMask, QueryTriggerInteraction.Ignore))
             return;
 
-        SoundManager.Instance?.PlayFootstep(hit.collider.gameObject.layer);
+        float pitch = (input != null && input.sprint) ? sprintPitch : 1f;
+        SoundManager.Instance?.PlayFootstep(hit.collider.gameObject.layer, pitch);
     }
 }

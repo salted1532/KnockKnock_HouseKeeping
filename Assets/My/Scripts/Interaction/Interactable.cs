@@ -6,6 +6,7 @@ public enum InteractionType
     Pickup,
     TidyBed,
     Generic,
+    Flashlight,
 }
 
 public class Interactable : MonoBehaviour
@@ -14,6 +15,8 @@ public class Interactable : MonoBehaviour
 
     [Header("Pickup")]
     [SerializeField] private string itemName;
+    [SerializeField] private Sprite itemIcon;
+    [SerializeField] private GameObject equipTarget;
 
     [Header("TidyBed")]
     [SerializeField] private GameObject messyVisual;
@@ -35,18 +38,43 @@ public class Interactable : MonoBehaviour
             case InteractionType.Generic:
                 onInteract?.Invoke();
                 break;
+            case InteractionType.Flashlight:
+                ActivatePlayerFlashlight();
+                break;
         }
     }
 
     private void Pickup()
     {
-        Debug.Log($"Picked up {itemName}");
-        Destroy(gameObject);
+        if (equipTarget == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (InventorySystem.Instance != null && InventorySystem.Instance.AddItem(itemIcon, equipTarget))
+            gameObject.SetActive(false);
     }
 
     private void TidyBed()
     {
         if (messyVisual != null) messyVisual.SetActive(false);
         if (tidyVisual != null) tidyVisual.SetActive(true);
+    }
+
+    private void ActivatePlayerFlashlight()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Transform flashlight = player != null ? player.transform.Find("PlayerCameraRoot/flashlight") : null;
+
+        if (flashlight == null || InventorySystem.Instance == null || !InventorySystem.Instance.AddItem(itemIcon, flashlight.gameObject))
+            return;
+
+        GameObject canvas = GameObject.Find("Canvas");
+        Transform hint = canvas != null ? canvas.transform.Find("HowToUse_Flashlight") : null;
+        if (hint != null)
+            hint.gameObject.SetActive(true);
+
+        gameObject.SetActive(false);
     }
 }

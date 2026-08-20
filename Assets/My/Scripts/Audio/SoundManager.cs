@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource source;
 
     private int woodLayer, concreteLayer, metalLayer, grassLayer;
+    private bool isNight = true;
 
     private void Awake()
     {
@@ -43,10 +44,11 @@ public class SoundManager : MonoBehaviour
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        if (keyboard.digit1Key.wasPressedThisFrame)
-            Play(nightClip);
-        else if (keyboard.digit2Key.wasPressedThisFrame)
-            Play(morningClip);
+        if (keyboard.qKey.wasPressedThisFrame)
+        {
+            isNight = !isNight;
+            Play(isNight ? nightClip : morningClip);
+        }
     }
 
     private void Play(AudioClip clip)
@@ -56,9 +58,9 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
-    public void PlayFootstep(int groundLayer)
+    public void PlayFootstep(int groundLayer, float pitch = 1f)
     {
-        if (footstepSource == null) return;
+        if (footstepSource == null || footstepSource.isPlaying) return;
 
         AudioClip[] clips =
             groundLayer == woodLayer ? woodStepClips :
@@ -66,6 +68,7 @@ public class SoundManager : MonoBehaviour
             groundLayer == grassLayer ? grassStepClips : concreteStepClips;
 
         if (clips == null || clips.Length == 0) return;
+        footstepSource.pitch = pitch;
         footstepSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
 }
