@@ -10,9 +10,13 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField] private Image[] slotIcons = new Image[SlotCount];
     [SerializeField] private GameObject[] activateIcons = new GameObject[SlotCount];
+    [SerializeField] private Transform throwPos;
+    [SerializeField] private float throwForce = 10f;
 
     private readonly Sprite[] itemIcons = new Sprite[SlotCount];
     private readonly GameObject[] equipTargets = new GameObject[SlotCount];
+    private readonly GameObject[] pickupSources = new GameObject[SlotCount];
+    private readonly bool[] isFlashlightSlot = new bool[SlotCount];
     private int activeSlot = -1;
 
     private void Awake()
@@ -39,9 +43,11 @@ public class InventorySystem : MonoBehaviour
         else if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectSlot(2);
         else if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectSlot(3);
         else if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectSlot(4);
+
+        if (Keyboard.current.fKey.wasPressedThisFrame) ThrowActiveItem();
     }
 
-    public bool AddItem(Sprite icon, GameObject equipTarget)
+    public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false)
     {
         for (int i = 0; i < SlotCount; i++)
         {
@@ -50,13 +56,51 @@ public class InventorySystem : MonoBehaviour
 
             itemIcons[i] = icon;
             equipTargets[i] = equipTarget;
+            pickupSources[i] = pickupSource;
+            isFlashlightSlot[i] = isFlashlight;
             equipTarget.SetActive(i == activeSlot);
 
             if (slotIcons[i] != null)
                 slotIcons[i].sprite = icon;
+
+            UpdateFlashlightHint();
             return true;
         }
         return false;
+    }
+
+    private void ThrowActiveItem()
+    {
+        if (activeSlot < 0 || equipTargets[activeSlot] == null || throwPos == null)
+            return;
+
+        GameObject heldItem = equipTargets[activeSlot];
+        GameObject thrownItem = pickupSources[activeSlot];
+
+        heldItem.SetActive(false);
+
+        if (thrownItem != null)
+        {
+            thrownItem.SetActive(true);
+            thrownItem.transform.SetParent(null);
+            thrownItem.transform.SetPositionAndRotation(throwPos.position, throwPos.rotation);
+
+            Rigidbody rb = thrownItem.GetComponent<Rigidbody>();
+            if (rb == null)
+                rb = thrownItem.AddComponent<Rigidbody>();
+            rb.AddForce(throwPos.forward * throwForce, ForceMode.Impulse);
+        }
+
+        equipTargets[activeSlot] = null;
+        itemIcons[activeSlot] = null;
+        pickupSources[activeSlot] = null;
+        isFlashlightSlot[activeSlot] = false;
+        if (slotIcons[activeSlot] != null)
+            slotIcons[activeSlot].sprite = null;
+        if (activateIcons[activeSlot] != null)
+            activateIcons[activeSlot].SetActive(false);
+
+        UpdateFlashlightHint();
     }
 
     private void SelectSlot(int index)
@@ -74,5 +118,17 @@ public class InventorySystem : MonoBehaviour
 
         if (activateIcons[index] != null)
             activateIcons[index].SetActive(true);
+
+        UpdateFlashlightHint();
+    }
+
+    private void UpdateFlashlightHint()
+    {
+        bool holdingFlashlight = activeSlot >= 0 && equipTargets[activeSlot] != null && isFlashlightSlot[activeSlot];
+
+        GameObject canvas = GameObject.Find("Canvas");
+        Transform hint = canvas != null ? canvas.transform.Find("HowToUse_Flashlight") : null;
+        if (hint != null)
+            hint.gameObject.SetActive(holdingFlashlight);
     }
 }

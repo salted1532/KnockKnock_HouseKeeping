@@ -35,13 +35,12 @@ public class Interactable : MonoBehaviour
             case InteractionType.TidyBed:
                 TidyBed();
                 break;
-            case InteractionType.Generic:
-                onInteract?.Invoke();
-                break;
             case InteractionType.Flashlight:
                 ActivatePlayerFlashlight();
                 break;
         }
+
+        onInteract?.Invoke();
     }
 
     private void Pickup()
@@ -52,7 +51,7 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        if (InventorySystem.Instance != null && InventorySystem.Instance.AddItem(itemIcon, equipTarget))
+        if (InventorySystem.Instance != null && InventorySystem.Instance.AddItem(itemIcon, equipTarget, gameObject))
             gameObject.SetActive(false);
     }
 
@@ -67,13 +66,8 @@ public class Interactable : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Transform flashlight = player != null ? player.transform.Find("PlayerCameraRoot/flashlight") : null;
 
-        if (flashlight == null || InventorySystem.Instance == null || !InventorySystem.Instance.AddItem(itemIcon, flashlight.gameObject))
+        if (flashlight == null || InventorySystem.Instance == null || !InventorySystem.Instance.AddItem(itemIcon, flashlight.gameObject, gameObject, isFlashlight: true))
             return;
-
-        GameObject canvas = GameObject.Find("Canvas");
-        Transform hint = canvas != null ? canvas.transform.Find("HowToUse_Flashlight") : null;
-        if (hint != null)
-            hint.gameObject.SetActive(true);
 
         gameObject.SetActive(false);
     }
