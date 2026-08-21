@@ -37118,6 +37118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doorway Wall With Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8834822052534986488, guid: 9646fd3cab74714469446d2743fa68a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7695218163804670196, guid: 9646fd3cab74714469446d2743fa68a1, type: 3}
     - {fileID: 6731422939387899307, guid: 9646fd3cab74714469446d2743fa68a1, type: 3}
@@ -37205,6 +37209,10 @@ PrefabInstance:
     - target: {fileID: 7671083460517208785, guid: fc0c28ce365e05b4982d8ef944291faf, type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671083460517208785, guid: fc0c28ce365e05b4982d8ef944291faf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8330053777898229256, guid: fc0c28ce365e05b4982d8ef944291faf, type: 3}
       propertyPath: m_VersionIndex
