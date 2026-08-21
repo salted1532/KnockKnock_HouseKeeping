@@ -7,6 +7,7 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem Instance { get; private set; }
 
     private const int SlotCount = 5;
+    private static readonly Color EmptySlotColor = new Color(0.32156864f, 0.32156864f, 0.32156864f, 1f);
 
     [SerializeField] private Image[] slotIcons = new Image[SlotCount];
     [SerializeField] private GameObject[] activateIcons = new GameObject[SlotCount];
@@ -61,7 +62,10 @@ public class InventorySystem : MonoBehaviour
             equipTarget.SetActive(i == activeSlot);
 
             if (slotIcons[i] != null)
+            {
                 slotIcons[i].sprite = icon;
+                slotIcons[i].color = Color.white;
+            }
 
             UpdateFlashlightHint();
             return true;
@@ -96,7 +100,10 @@ public class InventorySystem : MonoBehaviour
         pickupSources[activeSlot] = null;
         isFlashlightSlot[activeSlot] = false;
         if (slotIcons[activeSlot] != null)
+        {
             slotIcons[activeSlot].sprite = null;
+            slotIcons[activeSlot].color = EmptySlotColor;
+        }
         if (activateIcons[activeSlot] != null)
             activateIcons[activeSlot].SetActive(false);
 

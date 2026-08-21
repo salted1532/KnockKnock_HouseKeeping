@@ -18,6 +18,8 @@ public class Interactable : MonoBehaviour
     [SerializeField] private Sprite itemIcon;
     [SerializeField] private GameObject equipTarget;
 
+    public void SetEquipTarget(GameObject target) => equipTarget = target;
+
     [Header("TidyBed")]
     [SerializeField] private GameObject messyVisual;
     [SerializeField] private GameObject tidyVisual;
