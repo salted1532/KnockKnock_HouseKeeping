@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour
     [SerializeField] private string itemName;
     [SerializeField] private Sprite itemIcon;
     [SerializeField] private GameObject equipTarget;
+    [SerializeField] private AudioClip useClip;
+    [SerializeField] private bool consumeOnUse;
 
     public void SetEquipTarget(GameObject target) => equipTarget = target;
 
@@ -53,7 +55,7 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        if (InventorySystem.Instance != null && InventorySystem.Instance.AddItem(itemIcon, equipTarget, gameObject))
+        if (InventorySystem.Instance != null && InventorySystem.Instance.AddItem(itemIcon, equipTarget, gameObject, useClip: useClip, consumeOnUse: consumeOnUse))
             gameObject.SetActive(false);
     }
 

@@ -13,11 +13,14 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject[] activateIcons = new GameObject[SlotCount];
     [SerializeField] private Transform throwPos;
     [SerializeField] private float throwForce = 10f;
+    [SerializeField] private AudioSource audioSource;
 
     private readonly Sprite[] itemIcons = new Sprite[SlotCount];
     private readonly GameObject[] equipTargets = new GameObject[SlotCount];
     private readonly GameObject[] pickupSources = new GameObject[SlotCount];
     private readonly bool[] isFlashlightSlot = new bool[SlotCount];
+    private readonly AudioClip[] useClips = new AudioClip[SlotCount];
+    private readonly bool[] consumeOnUseSlot = new bool[SlotCount];
     private int activeSlot = -1;
 
     private void Awake()
@@ -46,9 +49,10 @@ public class InventorySystem : MonoBehaviour
         else if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectSlot(4);
 
         if (Keyboard.current.fKey.wasPressedThisFrame) ThrowActiveItem();
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) UseActiveItem();
     }
 
-    public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false)
+    public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false)
     {
         for (int i = 0; i < SlotCount; i++)
         {
@@ -59,6 +63,8 @@ public class InventorySystem : MonoBehaviour
             equipTargets[i] = equipTarget;
             pickupSources[i] = pickupSource;
             isFlashlightSlot[i] = isFlashlight;
+            useClips[i] = useClip;
+            consumeOnUseSlot[i] = consumeOnUse;
             equipTarget.SetActive(i == activeSlot);
 
             if (slotIcons[i] != null)
@@ -95,18 +101,39 @@ public class InventorySystem : MonoBehaviour
             rb.AddForce(throwPos.forward * throwForce, ForceMode.Impulse);
         }
 
-        equipTargets[activeSlot] = null;
-        itemIcons[activeSlot] = null;
-        pickupSources[activeSlot] = null;
-        isFlashlightSlot[activeSlot] = false;
-        if (slotIcons[activeSlot] != null)
-        {
-            slotIcons[activeSlot].sprite = null;
-            slotIcons[activeSlot].color = EmptySlotColor;
-        }
-        if (activateIcons[activeSlot] != null)
-            activateIcons[activeSlot].SetActive(false);
+        ClearSlot(activeSlot);
+    }
 
+    private void UseActiveItem()
+    {
+        if (activeSlot < 0 || equipTargets[activeSlot] == null || useClips[activeSlot] == null)
+            return;
+
+        if (audioSource != null)
+            audioSource.PlayOneShot(useClips[activeSlot]);
+
+        if (consumeOnUseSlot[activeSlot])
+        {
+            if (pickupSources[activeSlot] != null)
+                Destroy(pickupSources[activeSlot]);
+            equipTargets[activeSlot].SetActive(false);
+            ClearSlot(activeSlot);
+        }
+    }
+
+    private void ClearSlot(int index)
+    {
+        equipTargets[index] = null;
+        itemIcons[index] = null;
+        pickupSources[index] = null;
+        isFlashlightSlot[index] = false;
+        useClips[index] = null;
+        consumeOnUseSlot[index] = false;
+        if (slotIcons[index] != null)
+        {
+            slotIcons[index].sprite = null;
+            slotIcons[index].color = EmptySlotColor;
+        }
         UpdateFlashlightHint();
     }
 

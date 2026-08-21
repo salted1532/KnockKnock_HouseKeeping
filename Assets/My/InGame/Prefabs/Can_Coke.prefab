@@ -178,6 +178,8 @@ MonoBehaviour:
   itemName: Coke
   itemIcon: {fileID: -1755866852, guid: 9c80429061df2174ba13597cdf42b2fa, type: 3}
   equipTarget: {fileID: 0}
+  useClip: {fileID: 8300000, guid: 5e0c8dcb44c86c94791b47deacc122f2, type: 3}
+  consumeOnUse: 1
   messyVisual: {fileID: 0}
   tidyVisual: {fileID: 0}
   onInteract:
