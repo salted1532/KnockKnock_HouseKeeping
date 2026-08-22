@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3597918841236128595}
   - component: {fileID: 4572982209638387319}
   - component: {fileID: 792969731866993133}
+  - component: {fileID: -3110334736156429345}
   m_Layer: 11
   m_Name: Can_Coke
   m_TagString: Untagged
@@ -113,8 +114,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.005
-  m_Height: 0.015
+  m_Radius: 0.003
+  m_Height: 0.012
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.001203988}
 --- !u!54 &3597918841236128595
@@ -185,3 +186,21 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3110334736156429345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646787420501089157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe03282629cb3946ad9e090ab6e4b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemImpactSound
+  impactClips:
+  - {fileID: 8300000, guid: 4cf438265fec4a246a5ca06e365b90ac, type: 3}
+  - {fileID: 8300000, guid: 40b33c40a493883458c54583562011d5, type: 3}
+  - {fileID: 8300000, guid: d71b5a2704b91534a91a2a209c7710fe, type: 3}
+  minImpactVelocity: 1.5
+  cooldown: 0.2

@@ -33,6 +33,7 @@ public class DayNightSwitcher : MonoBehaviour
         nightLight.SetActive(true);
         morningLight.SetActive(false);
         globalVolume.sharedProfile = nightProfile;
+        RenderSettings.fog = true;
     }
 
     private void SetMorning()
@@ -41,5 +42,6 @@ public class DayNightSwitcher : MonoBehaviour
         morningLight.SetActive(true);
         nightLight.SetActive(false);
         globalVolume.sharedProfile = morningProfile;
+        RenderSettings.fog = false;
     }
 }

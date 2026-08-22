@@ -93,11 +93,34 @@ public class InventorySystem : MonoBehaviour
         {
             thrownItem.SetActive(true);
             thrownItem.transform.SetParent(null);
-            thrownItem.transform.SetPositionAndRotation(throwPos.position, throwPos.rotation);
+
+            Transform origin = throwPos.parent != null ? throwPos.parent : throwPos;
+            Vector3 spawnPos = throwPos.position;
+            Vector3 offset = spawnPos - origin.position;
+            float checkDist = offset.magnitude;
+            if (checkDist > 0.01f)
+            {
+                Transform playerRoot = throwPos.root;
+                Vector3 dir = offset.normalized;
+                float closest = checkDist;
+                bool blocked = false;
+                foreach (RaycastHit h in Physics.SphereCastAll(origin.position, 0.1f, dir, checkDist, ~0, QueryTriggerInteraction.Ignore))
+                {
+                    if (h.transform.IsChildOf(playerRoot) || h.distance >= closest)
+                        continue;
+                    closest = h.distance;
+                    blocked = true;
+                }
+                if (blocked)
+                    spawnPos = origin.position + dir * Mathf.Max(closest - 0.15f, 0f);
+            }
+
+            thrownItem.transform.SetPositionAndRotation(spawnPos, throwPos.rotation);
 
             Rigidbody rb = thrownItem.GetComponent<Rigidbody>();
             if (rb == null)
                 rb = thrownItem.AddComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.AddForce(throwPos.forward * throwForce, ForceMode.Impulse);
         }
 
