@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Game.PlayerHandItem;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class InventorySystem : MonoBehaviour
     private readonly bool[] isFlashlightSlot = new bool[SlotCount];
     private readonly AudioClip[] useClips = new AudioClip[SlotCount];
     private readonly bool[] consumeOnUseSlot = new bool[SlotCount];
+    private readonly Flashlight[] flashlightRefs = new Flashlight[SlotCount];
     private int activeSlot = -1;
 
     private void Awake()
@@ -50,6 +52,13 @@ public class InventorySystem : MonoBehaviour
 
         if (Keyboard.current.fKey.wasPressedThisFrame) ThrowActiveItem();
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) UseActiveItem();
+
+        if (Mouse.current != null)
+        {
+            float scroll = Mouse.current.scroll.ReadValue().y;
+            if (scroll != 0f && !IsActiveFlashlightOn())
+                SelectSlot((activeSlot + (scroll > 0f ? SlotCount - 1 : 1)) % SlotCount);
+        }
     }
 
     public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false)
@@ -65,6 +74,7 @@ public class InventorySystem : MonoBehaviour
             isFlashlightSlot[i] = isFlashlight;
             useClips[i] = useClip;
             consumeOnUseSlot[i] = consumeOnUse;
+            flashlightRefs[i] = isFlashlight ? equipTarget.GetComponentInChildren<Flashlight>(true) : null;
             equipTarget.SetActive(i == activeSlot);
 
             if (slotIcons[i] != null)
@@ -122,6 +132,14 @@ public class InventorySystem : MonoBehaviour
                 rb = thrownItem.AddComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.AddForce(throwPos.forward * throwForce, ForceMode.Impulse);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            CharacterController playerController = player != null ? player.GetComponent<CharacterController>() : null;
+            if (playerController != null)
+            {
+                foreach (Collider itemCollider in thrownItem.GetComponentsInChildren<Collider>())
+                    Physics.IgnoreCollision(itemCollider, playerController, true);
+            }
         }
 
         ClearSlot(activeSlot);
@@ -152,6 +170,7 @@ public class InventorySystem : MonoBehaviour
         isFlashlightSlot[index] = false;
         useClips[index] = null;
         consumeOnUseSlot[index] = false;
+        flashlightRefs[index] = null;
         if (slotIcons[index] != null)
         {
             slotIcons[index].sprite = null;
@@ -178,6 +197,10 @@ public class InventorySystem : MonoBehaviour
 
         UpdateFlashlightHint();
     }
+
+    private bool IsActiveFlashlightOn() =>
+        activeSlot >= 0 && isFlashlightSlot[activeSlot] &&
+        flashlightRefs[activeSlot] != null && flashlightRefs[activeSlot].IsOpen;
 
     private void UpdateFlashlightHint()
     {

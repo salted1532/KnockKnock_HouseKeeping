@@ -41,7 +41,7 @@ public class InteractionOutline : MonoBehaviour
 
         if (currentInteractable != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            currentInteractable.Interact();
+            currentInteractable.Interact(hit.point);
 
             if (currentOutline != null)
                 currentOutline.enabled = false;

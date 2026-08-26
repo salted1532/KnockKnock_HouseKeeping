@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3697834584173707366}
     m_Modifications:
+    - target: {fileID: 947859237616641125, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3904470374105054418, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.096392
@@ -49,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_VersionIndex
       value: 7711
       objectReference: {fileID: 0}
@@ -67,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 6278521274891881159, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_Name
       value: Window Frame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499401791788241391, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2111,6 +2123,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3697834584173707366}
     m_Modifications:
+    - target: {fileID: 947859237616641125, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3904470374105054418, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.09028
@@ -2152,12 +2168,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_VersionIndex
       value: 7711
       objectReference: {fileID: 0}
     - target: {fileID: 6278521274891881159, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_Name
       value: Window Frame (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499401791788241391, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

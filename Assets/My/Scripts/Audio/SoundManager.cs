@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
 
     private int woodLayer, concreteLayer, metalLayer, grassLayer;
     private bool isNight = true;
+    private AudioClip lastFootstepClip;
 
     private void Awake()
     {
@@ -68,7 +69,13 @@ public class SoundManager : MonoBehaviour
             groundLayer == grassLayer ? grassStepClips : concreteStepClips;
 
         if (clips == null || clips.Length == 0) return;
+
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        if (clips.Length > 1 && clip == lastFootstepClip)
+            clip = clips[(System.Array.IndexOf(clips, clip) + 1) % clips.Length];
+        lastFootstepClip = clip;
+
         footstepSource.pitch = pitch;
-        footstepSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+        footstepSource.PlayOneShot(clip);
     }
 }
