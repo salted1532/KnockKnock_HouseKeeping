@@ -1,0 +1,906 @@
+-- ratio=1 vert=(64,64) tri=(32,32) bounds_a=(0.143,0.143,1.4238) bounds_b=(0.143,0.143,1.4238)
+   Assets/My/Prefabs/Uncategorized/cor.002.prefab
+   Assets/My/Prefabs/Uncategorized/cor.005.prefab
+-- ratio=1 vert=(113,113) tri=(108,108) bounds_a=(0.1995,0.3139,0.1945) bounds_b=(0.1849,0.2908,0.1802)
+   Assets/My/Prefabs/Decor/Accessories/Vase_01.002.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_01.001.prefab
+-- ratio=1 vert=(64,64) tri=(44,44) bounds_a=(0.242,2.6931,1.1823) bounds_b=(0.242,2.6931,1.2188)
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/frame_door_01_Laundry_Props.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/frame_door_Laundry_Props.prefab
+-- ratio=1 vert=(49,49) tri=(25,25) bounds_a=(0.0996,0.2565,0.0996) bounds_b=(0.0996,0.2565,0.0996)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk.prefab
+-- ratio=1 vert=(49,49) tri=(25,25) bounds_a=(0.0996,0.2565,0.0996) bounds_b=(0.0956,0.2644,0.0956)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk_02.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.245,0.0761,0.3442) bounds_b=(0.2185,0.0761,0.3442)
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_04.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_12.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.0446,0.8194,0.6101) bounds_b=(0.0446,0.8194,0.6101)
+   Assets/My/Prefabs/Furniture/Storage/Shelf_P.001.prefab
+   Assets/My/Prefabs/Furniture/Storage/Shelf_P_01.001.prefab
+-- ratio=1 vert=(8,8) tri=(4,4) bounds_a=(4.4956,0,6.1177) bounds_b=(4.4956,0,6.1177)
+   Assets/My/Prefabs/Uncategorized/Lines.019.prefab
+   Assets/My/Prefabs/Uncategorized/Lines.001.prefab
+-- ratio=1 vert=(96,96) tri=(48,48) bounds_a=(4.8804,5.0174,2.5267) bounds_b=(4.8804,5.0174,2.5267)
+   Assets/My/Prefabs/Plants_Nature/Flowers/plants_flowers.008.prefab
+   Assets/My/Prefabs/Plants_Nature/Flowers/plants_flowers.001.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.6271,0.5684,0.862) bounds_b=(0.6271,0.5684,0.862)
+   Assets/My/Prefabs/Uncategorized/Box_06.prefab
+   Assets/My/Prefabs/Uncategorized/Box_13.prefab
+-- ratio=1 vert=(96,96) tri=(48,48) bounds_a=(4.4163,4.2303,2.5507) bounds_b=(4.4234,4.2371,2.5548)
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_03_001_Laundry.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_03_Laundry_Props.prefab
+-- ratio=1 vert=(64,64) tri=(36,36) bounds_a=(2.3041,0.0448,1.9916) bounds_b=(2.3041,0.0448,1.9916)
+   Assets/My/Prefabs/Uncategorized/Clothings_01.prefab
+   Assets/My/Prefabs/Uncategorized/Clothings_TrailerPark_Props.prefab
+-- ratio=1 vert=(49,49) tri=(25,25) bounds_a=(0.0956,0.2644,0.0956) bounds_b=(0.0996,0.2565,0.0996)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Milk.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.0692,0.0165,0.0815) bounds_b=(0.0589,0.0169,0.0693)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_03.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Eggplant_03.prefab
+-- ratio=1 vert=(56,56) tri=(44,44) bounds_a=(0.0656,0.0557,0.0323) bounds_b=(0.0656,0.0557,0.0335)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_capsules.008.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_capsules.006.prefab
+-- ratio=1 vert=(64,64) tri=(44,44) bounds_a=(0.242,2.6931,1.2188) bounds_b=(0.242,2.6931,1.1823)
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/frame_door.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/frame_door_01.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.1078,0.0399,0.4617) bounds_b=(0.136,0.0399,0.4539)
+   Assets/My/Prefabs/Uncategorized/Control.prefab
+   Assets/My/Prefabs/Uncategorized/Control_02.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.1078,0.0399,0.4617) bounds_b=(0.1078,0.0399,0.4679)
+   Assets/My/Prefabs/Uncategorized/Control.prefab
+   Assets/My/Prefabs/Uncategorized/Control_01.prefab
+-- ratio=1 vert=(43,43) tri=(34,34) bounds_a=(0.0692,0.1589,0.0793) bounds_b=(0.0692,0.1589,0.0791)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_02.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_01.prefab
+-- ratio=1 vert=(286,286) tri=(180,180) bounds_a=(0.2023,1.4517,0.8192) bounds_b=(0.2023,1.4517,0.8192)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_P_01.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_P_01.001.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.6314,1.8612,0.6281) bounds_b=(0.6254,1.8612,0.6281)
+   Assets/My/Prefabs/Uncategorized/Archivists.prefab
+   Assets/My/Prefabs/Uncategorized/Archivists_02.prefab
+-- ratio=1 vert=(95,95) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.prefab
+-- ratio=1 vert=(76,76) tri=(46,46) bounds_a=(0.9653,2.1017,0.1307) bounds_b=(0.9653,2.1017,0.1307)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_Door_DINER_Objects.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_Door_01_DINER_Objects.prefab
+-- ratio=1 vert=(146,146) tri=(84,84) bounds_a=(0.2023,0.6441,0.8192) bounds_b=(0.2023,0.6441,0.8192)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_P.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_P.001.prefab
+-- ratio=1 vert=(116,116) tri=(70,70) bounds_a=(0.651,2.1155,0.8269) bounds_b=(0.651,2.1155,0.8269)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator.001_TrailerPark.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_TrailerPark_Props.prefab
+-- ratio=1 vert=(95,95) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.006.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.007.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.011.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.006.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.011.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.007.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.011.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.002.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.003.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.008.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.003.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.005.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.1848) bounds_b=(0.2843,0.0301,0.1848)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.009.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.004.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.2055,0.0244,0.3054) bounds_b=(0.1879,0.0223,0.2793)
+   Assets/My/Prefabs/Decor/Accessories/Book.001.prefab
+   Assets/My/Prefabs/Decor/Accessories/Book_008.001.prefab
+-- ratio=1 vert=(21,21) tri=(24,24) bounds_a=(0.2665,0.0174,0.3112) bounds_b=(0.2414,0.0157,0.3236)
+   Assets/My/Prefabs/Food/Prepared_Food/Meat.002.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Meat.003.prefab
+-- ratio=1 vert=(76,76) tri=(46,46) bounds_a=(0.9653,2.1017,0.1307) bounds_b=(0.9653,2.1017,0.1307)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_Door_01.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_Door.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.010.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.008.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.010.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.005.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.010.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.003.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.002.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.007.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.3636,0.273,0.0902) bounds_b=(0.3636,0.2903,0.0902)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Box_cookies.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Box_cookies_04.prefab
+-- ratio=1 vert=(62,62) tri=(28,28) bounds_a=(0.0825,0.0419,0.3645) bounds_b=(0.0869,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_07.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_05.prefab
+-- ratio=1 vert=(24,24) tri=(28,28) bounds_a=(0.0876,0.0343,0.2533) bounds_b=(0.08,0.0314,0.2731)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_22.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_13.prefab
+-- ratio=1 vert=(128,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.003.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.004.prefab
+-- ratio=1 vert=(176,176) tri=(112,112) bounds_a=(2.3756,0.3547,0.4717) bounds_b=(2.3756,0.3547,0.4717)
+   Assets/My/Prefabs/Uncategorized/Rack_03.prefab
+   Assets/My/Prefabs/Uncategorized/Rack_01.prefab
+-- ratio=1 vert=(20,20) tri=(10,10) bounds_a=(13.1601,0,4.5004) bounds_b=(13.1601,0,4.5004)
+   Assets/My/Prefabs/Uncategorized/Lines_001_Laundry_Props.prefab
+   Assets/My/Prefabs/Uncategorized/Lines_001.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.007.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.006.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.2843,0.0301,0.2419) bounds_b=(0.2843,0.0301,0.2419)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.005.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.008.prefab
+-- ratio=1 vert=(22,22) tri=(14,14) bounds_a=(0.1757,0.0301,0.299) bounds_b=(0.1757,0.0301,0.299)
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.002.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Pizza_S.006.prefab
+-- ratio=1 vert=(54,54) tri=(28,28) bounds_a=(0.2818,0.2163,0.1022) bounds_b=(0.2949,0.2163,0.1022)
+   Assets/My/Prefabs/Decor/Wall_Art/Photo_frame_01.001.prefab
+   Assets/My/Prefabs/Decor/Wall_Art/Photo_frame.001.prefab
+-- ratio=1 vert=(8,8) tri=(4,4) bounds_a=(1.1703,0,1.2882) bounds_b=(1.1703,0,1.2882)
+   Assets/My/Prefabs/Uncategorized/hanging_clothes_001_Laundry_Props.prefab
+   Assets/My/Prefabs/Uncategorized/hanging_clothes_001.prefab
+-- ratio=1 vert=(8,8) tri=(4,4) bounds_a=(1.5017,0,1.1827) bounds_b=(1.5017,0,1.1827)
+   Assets/My/Prefabs/Uncategorized/hanging_clothes.prefab
+   Assets/My/Prefabs/Uncategorized/hanging_clothes_Laundry_Props.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.1078,0.0399,0.4679) bounds_b=(0.136,0.0399,0.4539)
+   Assets/My/Prefabs/Uncategorized/Control_01.prefab
+   Assets/My/Prefabs/Uncategorized/Control_02.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.1886,0.5797,0.1886) bounds_b=(0.2005,0.5896,0.2005)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_15.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_05.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.1886,0.5797,0.1886) bounds_b=(0.2005,0.5896,0.2005)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_15.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_11.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.143,0.4554,0.143) bounds_b=(0.143,0.4581,0.143)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_14.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_13.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.2005,0.5896,0.2005) bounds_b=(0.2005,0.6395,0.2005)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_05.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_04.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.2005,0.5896,0.2005) bounds_b=(0.2005,0.6395,0.2005)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_11.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_04.prefab
+-- ratio=1 vert=(140,140) tri=(190,190) bounds_a=(0.2005,0.5896,0.2005) bounds_b=(0.2005,0.5896,0.2005)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_11.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_05.prefab
+-- ratio=1 vert=(50,50) tri=(76,76) bounds_a=(0.3619,0.029,0.3805) bounds_b=(0.3619,0.029,0.3805)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Dish_Pizzeria_Props.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Dish.001_Pizzeria_Props.prefab
+-- ratio=1 vert=(21,21) tri=(24,24) bounds_a=(0.2414,0.0157,0.3236) bounds_b=(0.2665,0.0174,0.3112)
+   Assets/My/Prefabs/Food/Prepared_Food/Meat_02.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Meat_Tacos_Props.prefab
+-- ratio=1 vert=(196,196) tri=(104,104) bounds_a=(9.8214,12.019,7.7924) bounds_b=(9.8214,12.019,7.7924)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.006.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.002.prefab
+-- ratio=1 vert=(59,59) tri=(41,41) bounds_a=(6.2896,10.6335,6.2897) bounds_b=(6.2896,10.6335,6.2897)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.002.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.016.prefab
+-- ratio=1 vert=(59,59) tri=(41,41) bounds_a=(5.9169,10.0034,5.9169) bounds_b=(5.9169,10.0034,5.9169)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.018.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.001.prefab
+-- ratio=1 vert=(59,59) tri=(41,41) bounds_a=(5.2108,8.8096,5.2108) bounds_b=(5.2108,8.8096,5.2108)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.017.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_04.003.prefab
+-- ratio=1 vert=(56,56) tri=(28,28) bounds_a=(0.7237,0.5295,0.7404) bounds_b=(0.7237,0.5295,0.7404)
+   Assets/My/Prefabs/Uncategorized/air-conditioning.001_TrailerPark.prefab
+   Assets/My/Prefabs/Uncategorized/air-conditioning.002.prefab
+-- ratio=1 vert=(217,217) tri=(107,107) bounds_a=(6.7033,8.7637,6.7033) bounds_b=(6.7033,8.7637,6.7033)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.004.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.005.prefab
+-- ratio=1 vert=(217,217) tri=(107,107) bounds_a=(6.7033,8.7637,6.7033) bounds_b=(6.7033,8.7637,6.7033)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.004.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.001.prefab
+-- ratio=1 vert=(56,56) tri=(44,44) bounds_a=(0.0656,0.0557,0.0323) bounds_b=(0.0656,0.0557,0.0335)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_capsules.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_capsules.001.prefab
+-- ratio=1 vert=(64,64) tri=(44,44) bounds_a=(1.0274,2.5397,0.1728) bounds_b=(1.0216,2.544,0.1728)
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Door_frame_005.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Door_frame_002.prefab
+-- ratio=1 vert=(217,217) tri=(107,107) bounds_a=(7.3508,9.6102,7.3508) bounds_b=(7.3508,9.6102,7.3508)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.006.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.003.prefab
+-- ratio=1 vert=(217,217) tri=(107,107) bounds_a=(6.7033,8.7637,6.7033) bounds_b=(6.7033,8.7637,6.7033)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.001.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_02.005.prefab
+-- ratio=1 vert=(31,31) tri=(13,13) bounds_a=(4.6557,13.3165,4.6557) bounds_b=(4.6557,13.3165,4.6557)
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_02_Laundry_Props.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_02_Laundry.prefab
+-- ratio=1 vert=(50,50) tri=(76,76) bounds_a=(0.3619,0.029,0.3805) bounds_b=(0.3619,0.029,0.3805)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Dish.002_Pizzeria_Scene.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Dish.003_Pizzeria_Scene.prefab
+-- ratio=1 vert=(88,88) tri=(60,60) bounds_a=(0.1614,0.2533,0.1614) bounds_b=(0.1614,0.2533,0.1614)
+   Assets/My/Prefabs/Food/Drinks_Condiments/vessel_Soda.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/vessel_Soda.prefab
+-- ratio=1 vert=(31,31) tri=(13,13) bounds_a=(5.4548,12.2893,5.4548) bounds_b=(5.4548,12.2893,5.4548)
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_001_Laundry.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Tree_Laundry_Props.prefab
+-- ratio=1 vert=(48,48) tri=(44,44) bounds_a=(0.0635,0.0172,0.0998) bounds_b=(0.0509,0.0172,0.1027)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_ketchup.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_mustard.prefab
+-- ratio=1 vert=(128,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.001.prefab
+-- ratio=1 vert=(196,196) tri=(104,104) bounds_a=(9.2335,11.2995,7.326) bounds_b=(9.2335,11.2995,7.326)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.007.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.003.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_03.prefab
+-- ratio=1 vert=(54,54) tri=(28,28) bounds_a=(0.2818,0.2163,0.1022) bounds_b=(0.2949,0.2163,0.1022)
+   Assets/My/Prefabs/Decor/Wall_Art/Photo_frame_01.prefab
+   Assets/My/Prefabs/Decor/Wall_Art/Photo_frame.prefab
+-- ratio=1 vert=(130,130) tri=(114,114) bounds_a=(0.3578,0.0506,0.5512) bounds_b=(0.3377,0.0478,0.5202)
+   Assets/My/Prefabs/Kitchen/Cookware/Skillet.001.prefab
+   Assets/My/Prefabs/Kitchen/Cookware/Skillet.002.prefab
+-- ratio=1 vert=(94,94) tri=(69,69) bounds_a=(5.3215,9.7561,5.3128) bounds_b=(5.3215,9.7561,5.3128)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.003.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.007.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_03.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_02.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_02.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(7.1686,9.5077,7.684) bounds_b=(7.1455,9.4771,7.6592)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.006.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.099.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(7.1686,9.5077,7.684) bounds_b=(7.1686,9.5077,7.684)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.006.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.002.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(7.879,10.4498,8.4454) bounds_b=(7.879,10.4498,8.4454)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.001.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.005.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(7.2533,9.62,7.7747) bounds_b=(7.2533,9.62,7.7747)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.004.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.008.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(8.4737,11.2387,9.0829) bounds_b=(8.4737,11.2387,9.0829)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.007.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.003.prefab
+-- ratio=1 vert=(97,97) tri=(85,85) bounds_a=(7.1686,9.5077,7.684) bounds_b=(7.1455,9.4771,7.6592)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.002.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_05.099.prefab
+-- ratio=1 vert=(94,94) tri=(69,69) bounds_a=(6.2238,11.4101,6.2136) bounds_b=(6.2238,11.4101,6.2136)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.001_TrailerPark.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.006.prefab
+-- ratio=1 vert=(64,64) tri=(48,44) bounds_a=(0.0938,0.0655,0.0938) bounds_b=(0.0747,0.0733,0.0747)
+   Assets/My/Prefabs/Uncategorized/B_03.prefab
+   Assets/My/Prefabs/Uncategorized/Manija_04.prefab
+-- ratio=1 vert=(64,64) tri=(44,44) bounds_a=(0.1234,0.0878,0.1234) bounds_b=(0.0747,0.0733,0.0747)
+   Assets/My/Prefabs/Uncategorized/Manija.prefab
+   Assets/My/Prefabs/Uncategorized/Manija_04.prefab
+-- ratio=1 vert=(64,64) tri=(44,48) bounds_a=(0.1234,0.0878,0.1234) bounds_b=(0.0938,0.0655,0.0938)
+   Assets/My/Prefabs/Uncategorized/Manija.prefab
+   Assets/My/Prefabs/Uncategorized/B_03.prefab
+-- ratio=1 vert=(196,196) tri=(104,104) bounds_a=(8.0352,9.8331,6.3752) bounds_b=(8.0352,9.8331,6.3752)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.008.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.004.prefab
+-- ratio=1 vert=(196,196) tri=(104,104) bounds_a=(9.4137,11.5201,7.469) bounds_b=(9.4137,11.5201,7.469)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.005.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees_01.001.prefab
+-- ratio=1 vert=(114,114) tri=(92,92) bounds_a=(0.195,0.3185,0.2252) bounds_b=(0.1823,0.2977,0.2105)
+   Assets/My/Prefabs/Decor/Accessories/Vase_03.001.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_03.002.prefab
+-- ratio=1 vert=(134,134) tri=(80,80) bounds_a=(0.1343,0.2657,0.1569) bounds_b=(0.1419,0.2808,0.1659)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/cutlery_holder.001.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/cutlery_holder.002.prefab
+-- ratio=1 vert=(44,44) tri=(22,22) bounds_a=(3.0891,0.0505,1.4948) bounds_b=(3.0891,0.0505,1.4948)
+   Assets/My/Prefabs/Furniture/Soft_Furnishing/Rug.002.prefab
+   Assets/My/Prefabs/Furniture/Soft_Furnishing/Rug.003.prefab
+-- ratio=1 vert=(94,94) tri=(69,69) bounds_a=(5.9011,10.8186,5.8915) bounds_b=(5.9011,10.8186,5.8915)
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.008.prefab
+   Assets/My/Prefabs/Plants_Nature/Trees/Trees.004.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.4513,0.7438,0.0357) bounds_b=(0.4387,0.7438,0.0357)
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_05.003.prefab
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_05.008.prefab
+-- ratio=1 vert=(48,48) tri=(28,28) bounds_a=(0.5526,0.1554,0.5444) bounds_b=(0.5526,0.1624,0.5444)
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_05.005.prefab
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_05.004.prefab
+-- ratio=1 vert=(48,48) tri=(28,28) bounds_a=(0.2862,0.199,0.3139) bounds_b=(0.2485,0.2398,0.2726)
+   Assets/My/Prefabs/Uncategorized/folded_clothes_001.prefab
+   Assets/My/Prefabs/Uncategorized/folded_clothes_004.prefab
+-- ratio=1 vert=(48,48) tri=(28,28) bounds_a=(1.1173,0.2301,0.6184) bounds_b=(1.1173,0.2331,0.6184)
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_02.003.prefab
+   Assets/My/Prefabs/Furniture/Storage/Chest_drawers_02.002.prefab
+-- ratio=1 vert=(56,56) tri=(28,28) bounds_a=(1.1772,0.884,0.0505) bounds_b=(1.1913,0.884,0.0505)
+   Assets/My/Prefabs/Decor/Wall_Art/Paintings_01.prefab
+   Assets/My/Prefabs/Decor/Wall_Art/Paintings_04.prefab
+-- ratio=1 vert=(44,44) tri=(36,36) bounds_a=(0.0992,0.1261,0.1145) bounds_b=(0.0897,0.1122,0.1035)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Kiwi.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/lemon.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.1138,0.1049,0.1138) bounds_b=(0.1367,0.1367,0.1367)
+   Assets/My/Prefabs/Uncategorized/Canned_food_06.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food.prefab
+-- ratio=1 vert=(36,36) tri=(24,24) bounds_a=(0.0496,0.1261,0.1145) bounds_b=(0.0637,0.1353,0.1471)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Kiwi_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Orange_01.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.1138,0.1049,0.1138) bounds_b=(0.0916,0.0953,0.0916)
+   Assets/My/Prefabs/Uncategorized/Canned_food_06.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_11.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.0446,0.8194,0.6101) bounds_b=(0.0446,0.8194,0.6101)
+   Assets/My/Prefabs/Furniture/Storage/Shelf_P.prefab
+   Assets/My/Prefabs/Furniture/Storage/Shelf_P_01.prefab
+-- ratio=1 vert=(48,48) tri=(28,28) bounds_a=(0.2862,0.199,0.3139) bounds_b=(0.2485,0.2398,0.2726)
+   Assets/My/Prefabs/Uncategorized/folded_clothes_001_Laundry_Props.prefab
+   Assets/My/Prefabs/Uncategorized/folded_clothes_004_Laundry_Props.prefab
+-- ratio=1 vert=(56,56) tri=(28,28) bounds_a=(1.2999,0.884,0.0505) bounds_b=(1.305,0.884,0.0505)
+   Assets/My/Prefabs/Decor/Wall_Art/Paintings_06.prefab
+   Assets/My/Prefabs/Decor/Wall_Art/Paintings_03.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.1138,0.1049,0.1138) bounds_b=(0.0792,0.0872,0.0792)
+   Assets/My/Prefabs/Uncategorized/Canned_food_06.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_07.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.2856,0.391,0.1338) bounds_b=(0.2675,0.391,0.0993)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_04_Laundry_Props.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_03_Laundry_Props.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.0792,0.0959,0.0792) bounds_b=(0.1138,0.1049,0.1138)
+   Assets/My/Prefabs/Uncategorized/Canned_food_08.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_06.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.2856,0.391,0.0993) bounds_b=(0.2675,0.391,0.0993)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_01_Laundry_Props.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_03_Laundry_Props.prefab
+-- ratio=1 vert=(94,94) tri=(98,98) bounds_a=(0.0454,0.1935,0.0454) bounds_b=(0.0535,0.2046,0.0535)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce.prefab
+-- ratio=1 vert=(94,94) tri=(98,98) bounds_a=(0.0454,0.1935,0.0454) bounds_b=(0.047,0.208,0.047)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_01.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.0792,0.0959,0.0792) bounds_b=(0.0916,0.0953,0.0916)
+   Assets/My/Prefabs/Uncategorized/Canned_food_08.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_11.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.0849,0.0249,0.2833) bounds_b=(0.0733,0.0271,0.318)
+   Assets/My/Prefabs/Uncategorized/Control_02_House.prefab
+   Assets/My/Prefabs/Uncategorized/Control_01_House.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.0792,0.0959,0.0792) bounds_b=(0.0792,0.0872,0.0792)
+   Assets/My/Prefabs/Uncategorized/Canned_food_08.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_07.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.2856,0.391,0.1338) bounds_b=(0.2856,0.391,0.0993)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_04_Laundry_Props.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Soap_Box_01_Laundry_Props.prefab
+-- ratio=1 vert=(36,36) tri=(20,20) bounds_a=(0.0794,0.0294,0.34) bounds_b=(0.0733,0.0271,0.318)
+   Assets/My/Prefabs/Uncategorized/Control_House.prefab
+   Assets/My/Prefabs/Uncategorized/Control_01_House.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates.001.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_03.001.prefab
+-- ratio=1 vert=(46,46) tri=(32,32) bounds_a=(0.3249,21.3695,0.6245) bounds_b=(0.352,21.3884,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.001.prefab
+-- ratio=1 vert=(58,58) tri=(32,32) bounds_a=(0.0695,0.0167,0.5039) bounds_b=(0.0695,0.0167,0.5039)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Knife_07.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Knife_02.prefab
+-- ratio=1 vert=(48,48) tri=(44,44) bounds_a=(0.0635,0.0172,0.0998) bounds_b=(0.0509,0.0172,0.1027)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_ketchup.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_mustard.001.prefab
+-- ratio=1 vert=(94,94) tri=(98,98) bounds_a=(0.047,0.208,0.047) bounds_b=(0.0535,0.2046,0.0535)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce.prefab
+-- ratio=1 vert=(46,46) tri=(32,32) bounds_a=(0.3249,21.3695,0.6245) bounds_b=(0.3243,21.3884,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.003.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(62.0727,0.0985,19.8747) bounds_b=(62.0727,0.0985,19.8747)
+   Assets/My/Prefabs/Outdoor_Street/Road/Road.005_Tacos.prefab
+   Assets/My/Prefabs/Outdoor_Street/Road/Road.003_Tacos.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_03.001.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_02.001.prefab
+-- ratio=1 vert=(80,80) tri=(40,40) bounds_a=(0.2082,1.2023,1.5351) bounds_b=(0.2082,1.2023,1.5136)
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Frame_Windows_04.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Frame_Windows_39.prefab
+-- ratio=1 vert=(132,132) tri=(76,76) bounds_a=(0.338,0.0229,0.3554) bounds_b=(0.338,0.0229,0.3554)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates.001.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Plates_02.001.prefab
+-- ratio=1 vert=(58,58) tri=(32,32) bounds_a=(0.1181,0.03,0.6161) bounds_b=(0.0798,0.0263,0.608)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Knife_05.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Knife_03.prefab
+-- ratio=1 vert=(46,46) tri=(32,32) bounds_a=(0.3233,22.0346,0.6246) bounds_b=(0.3249,21.9892,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.014.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.012.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.0792,0.0872,0.0792) bounds_b=(0.0916,0.0953,0.0916)
+   Assets/My/Prefabs/Uncategorized/Canned_food_07.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_11.prefab
+-- ratio=1 vert=(192,192) tri=(96,96) bounds_a=(3.2232,2.3553,1.0335) bounds_b=(3.2232,2.3553,1.0335)
+   Assets/My/Prefabs/Uncategorized/Boxs_01.prefab
+   Assets/My/Prefabs/Uncategorized/Boxs_04.prefab
+-- ratio=1 vert=(24,24) tri=(12,12) bounds_a=(0.6655,1.3206,0.2967) bounds_b=(0.6655,1.3206,0.3435)
+   Assets/My/Prefabs/Uncategorized/colliders_020.prefab
+   Assets/My/Prefabs/Uncategorized/colliders_022.prefab
+-- ratio=1 vert=(40,40) tri=(28,28) bounds_a=(0.1367,0.1367,0.1367) bounds_b=(0.0916,0.0953,0.0916)
+   Assets/My/Prefabs/Uncategorized/Canned_food.prefab
+   Assets/My/Prefabs/Uncategorized/Canned_food_11.prefab
+-- ratio=1 vert=(18,18) tri=(8,8) bounds_a=(11.3764,54.3036,0.0559) bounds_b=(11.3681,54.2829,0.0559)
+   Assets/My/Prefabs/Uncategorized/Cable.051.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.050.prefab
+-- ratio=1 vert=(46,46) tri=(32,32) bounds_a=(0.3233,22.0346,0.6246) bounds_b=(0.3517,22.0692,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.014.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.013.prefab
+-- ratio=1 vert=(46,46) tri=(32,32) bounds_a=(0.352,21.3884,0.6245) bounds_b=(0.3243,21.3884,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.001.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.003.prefab
+-- ratio=1 vert=(50,50) tri=(32,32) bounds_a=(0.8997,58.834,0.6245) bounds_b=(0.9274,58.834,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.007.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.006.prefab
+-- ratio=1 vert=(48,48) tri=(32,32) bounds_a=(0.9003,58.8151,0.6245) bounds_b=(0.9274,58.834,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.004.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.005.prefab
+-- ratio=0.99 vert=(147,148) tri=(88,88) bounds_a=(0.3971,0.0379,0.4708) bounds_b=(0.3817,0.0312,0.4346)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.002.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.001.prefab
+-- ratio=0.99 vert=(129,130) tri=(80,80) bounds_a=(0.6556,0.3591,0.4376) bounds_b=(0.6887,0.3658,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_03.prefab
+-- ratio=0.99 vert=(127,126) tri=(102,102) bounds_a=(0.0593,0.294,0.0593) bounds_b=(0.0593,0.3134,0.0593)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Cooking_oil_03.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Cooking_oil_02.prefab
+-- ratio=0.99 vert=(736,742) tri=(370,370) bounds_a=(1.2927,2.4526,0.9193) bounds_b=(1.2927,2.4526,0.9193)
+   Assets/My/Prefabs/Kitchen/Appliances/Oven_DINER_Objects.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Oven.prefab
+-- ratio=0.99 vert=(96,95) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.001.prefab
+-- ratio=0.99 vert=(96,95) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.prefab
+-- ratio=0.99 vert=(96,95) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.038.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.006.prefab
+-- ratio=0.99 vert=(96,95) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.038.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.007.prefab
+-- ratio=0.99 vert=(68,67) tri=(61,68) bounds_a=(0.1198,0.1584,0.1384) bounds_b=(0.1374,0.166,0.1343)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.001.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Mango.prefab
+-- ratio=0.99 vert=(134,132) tri=(80,80) bounds_a=(0.6887,0.3591,0.4376) bounds_b=(0.6887,0.3591,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_02.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_01.prefab
+-- ratio=0.99 vert=(132,134) tri=(80,80) bounds_a=(1.1236,0.6286,0.6401) bounds_b=(1.1236,0.6286,0.6401)
+   Assets/My/Prefabs/Kitchen/Appliances/Microondas.001.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microondas.prefab
+-- ratio=0.98 vert=(130,132) tri=(80,80) bounds_a=(0.6887,0.3658,0.4376) bounds_b=(0.6887,0.3591,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_03.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_01.prefab
+-- ratio=0.98 vert=(130,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.005.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.003.prefab
+-- ratio=0.98 vert=(130,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.prefab
+-- ratio=0.98 vert=(130,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.001.prefab
+-- ratio=0.98 vert=(130,128) tri=(92,92) bounds_a=(0.0804,0.2659,0.0804) bounds_b=(0.0804,0.2659,0.0804)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.005.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces_bottle_01.004.prefab
+-- ratio=0.98 vert=(59,58) tri=(54,32) bounds_a=(0.4497,0.0197,0.2264) bounds_b=(0.4081,0.0247,0.2331)
+   Assets/My/Prefabs/Food/Prepared_Food/Raw_meat_04.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Roast_meat_02.prefab
+-- ratio=0.98 vert=(52,51) tri=(26,26) bounds_a=(1.1448,30.0364,0.6797) bounds_b=(1.1647,29.9889,0.6665)
+   Assets/My/Prefabs/Uncategorized/Cable.029.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.031.prefab
+-- ratio=0.98 vert=(50,51) tri=(32,32) bounds_a=(0.8023,29.5741,0.6245) bounds_b=(0.7988,29.612,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.020.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.019.prefab
+-- ratio=0.98 vert=(148,151) tri=(88,88) bounds_a=(0.3817,0.0312,0.4346) bounds_b=(0.4162,0.0341,0.4542)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.001.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.003.prefab
+-- ratio=0.98 vert=(49,50) tri=(32,32) bounds_a=(0.8321,29.5379,0.6245) bounds_b=(0.8023,29.5741,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.022.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.020.prefab
+-- ratio=0.98 vert=(144,147) tri=(88,88) bounds_a=(0.3861,0.0312,0.4348) bounds_b=(0.3971,0.0379,0.4708)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.005.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.002.prefab
+-- ratio=0.98 vert=(188,192) tri=(100,102) bounds_a=(22.9156,0.0985,25.9565) bounds_b=(22.9156,0.0985,25.9565)
+   Assets/My/Prefabs/Outdoor_Street/Road/Road.007_Tacos.prefab
+   Assets/My/Prefabs/Outdoor_Street/Road/Road.010_Tacos.prefab
+-- ratio=0.98 vert=(129,132) tri=(80,80) bounds_a=(0.6556,0.3591,0.4376) bounds_b=(0.6887,0.3591,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_01.prefab
+-- ratio=0.98 vert=(42,43) tri=(28,34) bounds_a=(0.0945,0.1187,0.0449) bounds_b=(0.0692,0.1589,0.0791)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Brussel_sprouts_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_01.prefab
+-- ratio=0.98 vert=(43,42) tri=(34,28) bounds_a=(0.0692,0.1589,0.0793) bounds_b=(0.0945,0.1187,0.0449)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_02.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Brussel_sprouts_01.prefab
+-- ratio=0.98 vert=(120,117) tri=(82,82) bounds_a=(0.166,0.6405,0.2126) bounds_b=(0.166,0.6405,0.2126)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Watering_can_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Watering_can.prefab
+-- ratio=0.97 vert=(39,38) tri=(30,32) bounds_a=(0.1056,0.12,0.1005) bounds_b=(0.1175,0.1123,0.1356)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Brussel_sprouts.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Potato_02.prefab
+-- ratio=0.97 vert=(147,151) tri=(88,88) bounds_a=(0.3971,0.0379,0.4708) bounds_b=(0.4162,0.0341,0.4542)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.002.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.003.prefab
+-- ratio=0.97 vert=(144,148) tri=(88,88) bounds_a=(0.3861,0.0312,0.4348) bounds_b=(0.3817,0.0312,0.4346)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.005.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.001.prefab
+-- ratio=0.97 vert=(148,144) tri=(80,76) bounds_a=(1.1006,0.8896,2.1433) bounds_b=(1.1073,0.8793,2.1433)
+   Assets/My/Prefabs/Furniture/Tables/Table_03.prefab
+   Assets/My/Prefabs/Furniture/Tables/Table_01.prefab
+-- ratio=0.97 vert=(146,142) tri=(146,168) bounds_a=(0.0663,0.1909,0.0663) bounds_b=(0.0603,0.2019,0.0603)
+   Assets/My/Prefabs/Uncategorized/Chemical_01.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_03.prefab
+-- ratio=0.97 vert=(146,142) tri=(146,168) bounds_a=(0.0817,0.2352,0.0817) bounds_b=(0.0743,0.2487,0.0743)
+   Assets/My/Prefabs/Uncategorized/Chemical_01_House.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_03_House.prefab
+-- ratio=0.97 vert=(68,70) tri=(40,40) bounds_a=(0.4922,0.3328,0.7118) bounds_b=(0.4922,0.3328,0.7118)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_C.001.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_C.prefab
+-- ratio=0.97 vert=(133,137) tri=(83,83) bounds_a=(0.1865,0.2804,0.4029) bounds_b=(0.1865,0.2804,0.3935)
+   Assets/My/Prefabs/Kitchen/Appliances/Toaster_01.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Toaster_02.prefab
+-- ratio=0.97 vert=(134,130) tri=(80,80) bounds_a=(0.6887,0.3591,0.4376) bounds_b=(0.6887,0.3658,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_02.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_03.prefab
+-- ratio=0.97 vert=(100,97) tri=(108,92) bounds_a=(0.0962,0.3505,0.0938) bounds_b=(0.0739,0.3437,0.0867)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Yam.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Zucchini.prefab
+-- ratio=0.97 vert=(62,64) tri=(28,28) bounds_a=(0.0825,0.0419,0.3645) bounds_b=(0.1068,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_07.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_17.prefab
+-- ratio=0.97 vert=(62,64) tri=(28,28) bounds_a=(0.0869,0.0419,0.3645) bounds_b=(0.1068,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_05.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_17.prefab
+-- ratio=0.97 vert=(91,94) tri=(68,98) bounds_a=(0.0799,0.2007,0.076) bounds_b=(0.0535,0.2046,0.0535)
+   Assets/My/Prefabs/Food/Prepared_Food/Fried_chicken_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce.prefab
+-- ratio=0.97 vert=(94,91) tri=(98,68) bounds_a=(0.0454,0.1935,0.0454) bounds_b=(0.0799,0.2007,0.076)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_02.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Fried_chicken_01.prefab
+-- ratio=0.97 vert=(94,91) tri=(98,68) bounds_a=(0.047,0.208,0.047) bounds_b=(0.0799,0.2007,0.076)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_01.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Fried_chicken_01.prefab
+-- ratio=0.97 vert=(91,88) tri=(68,92) bounds_a=(0.0799,0.2007,0.076) bounds_b=(0.0655,0.2022,0.0655)
+   Assets/My/Prefabs/Food/Prepared_Food/Fried_chicken_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_03.prefab
+-- ratio=0.97 vert=(58,60) tri=(38,38) bounds_a=(0.1698,0.1655,0.2599) bounds_b=(0.1698,0.1655,0.2883)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Tumbler_DINER.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Tumbler_01.prefab
+-- ratio=0.97 vert=(58,60) tri=(38,38) bounds_a=(0.1698,0.1655,0.2599) bounds_b=(0.1698,0.1655,0.2883)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Tumbler_DINER_Objects.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Tumbler_01_DINER_Objects.prefab
+-- ratio=0.97 vert=(117,113) tri=(108,108) bounds_a=(0.2239,0.3111,0.2183) bounds_b=(0.1849,0.2908,0.1802)
+   Assets/My/Prefabs/Decor/Accessories/Vase.001.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_01.001.prefab
+-- ratio=0.97 vert=(117,113) tri=(108,108) bounds_a=(0.2239,0.3111,0.2183) bounds_b=(0.1995,0.3139,0.1945)
+   Assets/My/Prefabs/Decor/Accessories/Vase.001.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_01.002.prefab
+-- ratio=0.96 vert=(56,54) tri=(28,28) bounds_a=(0.2072,0.0456,0.3266) bounds_b=(0.203,0.0456,0.3266)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Rice.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Rice_02.prefab
+-- ratio=0.96 vert=(210,218) tri=(174,174) bounds_a=(0.199,0.5896,0.199) bounds_b=(0.199,0.5896,0.199)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_10.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_08.prefab
+-- ratio=0.96 vert=(129,134) tri=(80,80) bounds_a=(0.6556,0.3591,0.4376) bounds_b=(0.6887,0.3591,0.4376)
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Microwave_02.prefab
+-- ratio=0.96 vert=(79,76) tri=(78,60) bounds_a=(0.1684,0.1673,0.1457) bounds_b=(0.1191,0.2056,0.1375)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Papaya_03.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pear.prefab
+-- ratio=0.96 vert=(227,218) tri=(174,174) bounds_a=(0.199,0.5896,0.199) bounds_b=(0.199,0.5896,0.199)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_09.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_08.prefab
+-- ratio=0.96 vert=(50,48) tri=(32,32) bounds_a=(0.8997,58.834,0.6245) bounds_b=(0.9274,58.834,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.007.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.005.prefab
+-- ratio=0.96 vert=(50,48) tri=(32,32) bounds_a=(0.9274,58.834,0.6245) bounds_b=(0.9274,58.834,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.006.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.005.prefab
+-- ratio=0.96 vert=(50,48) tri=(32,32) bounds_a=(0.8054,29.623,0.8956) bounds_b=(0.7877,29.6232,0.9163)
+   Assets/My/Prefabs/Uncategorized/Cable.021.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.018.prefab
+-- ratio=0.96 vert=(50,48) tri=(32,32) bounds_a=(0.8997,58.834,0.6245) bounds_b=(0.9003,58.8151,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.007.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.004.prefab
+-- ratio=0.96 vert=(48,50) tri=(32,32) bounds_a=(0.9003,58.8151,0.6245) bounds_b=(0.9274,58.834,0.6245)
+   Assets/My/Prefabs/Uncategorized/Cable.004.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.006.prefab
+-- ratio=0.96 vert=(384,368) tri=(192,184) bounds_a=(8.2802,8.0503,1.0623) bounds_b=(8.2802,8.0503,1.0623)
+   Assets/My/Prefabs/Plants_Nature/Ground_Terrain/Grass_01.prefab
+   Assets/My/Prefabs/Plants_Nature/Ground_Terrain/Grass_02.prefab
+-- ratio=0.96 vert=(45,47) tri=(38,38) bounds_a=(0.0898,0.0672,0.0874) bounds_b=(0.07,0.0597,0.0674)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Yam.002.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Yam.003.prefab
+-- ratio=0.96 vert=(111,116) tri=(76,76) bounds_a=(0.1693,0.5117,0.1693) bounds_b=(0.1693,0.4916,0.1693)
+   Assets/My/Prefabs/Food/Bakery_Snacks/bread.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/bread_01.prefab
+-- ratio=0.95 vert=(44,42) tri=(28,28) bounds_a=(0.1813,0.0419,0.3645) bounds_b=(0.2251,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_08.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies.prefab
+-- ratio=0.95 vert=(144,151) tri=(88,88) bounds_a=(0.3861,0.0312,0.4348) bounds_b=(0.4162,0.0341,0.4542)
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.005.prefab
+   Assets/My/Prefabs/Uncategorized/plastic_bag_P.003.prefab
+-- ratio=0.95 vert=(41,43) tri=(30,34) bounds_a=(0.1175,0.1974,0.1017) bounds_b=(0.0692,0.1589,0.0791)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Potato_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_01.prefab
+-- ratio=0.95 vert=(41,43) tri=(30,34) bounds_a=(0.1175,0.1974,0.1017) bounds_b=(0.0692,0.1589,0.0793)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Potato_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_02.prefab
+-- ratio=0.95 vert=(210,200) tri=(174,158) bounds_a=(0.199,0.5896,0.199) bounds_b=(0.2323,0.6202,0.2323)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_10.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_06.prefab
+-- ratio=0.95 vert=(61,58) tri=(60,60) bounds_a=(0.071,0.1971,0.082) bounds_b=(0.0566,0.2092,0.0654)
+   Assets/My/Prefabs/Uncategorized/Frozen_01.prefab
+   Assets/My/Prefabs/Uncategorized/Frozen_04.prefab
+-- ratio=0.95 vert=(146,154) tri=(146,92) bounds_a=(0.0817,0.2352,0.0817) bounds_b=(0.094,0.2415,0.063)
+   Assets/My/Prefabs/Uncategorized/Chemical_01_House.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Softener_02_House.prefab
+-- ratio=0.95 vert=(172,163) tri=(100,100) bounds_a=(2.1814,3.0711,0.8527) bounds_b=(2.1814,3.0711,0.8527)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_DINER.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_DINER_Objects.prefab
+-- ratio=0.95 vert=(152,144) tri=(108,108) bounds_a=(0.4629,0.6831,0.6995) bounds_b=(0.4629,0.6831,0.6995)
+   Assets/My/Prefabs/Laundry_Cleaning/Cleaning_Tools/Trash_can_01_Interior.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Cleaning_Tools/Trash_can_Interior.prefab
+-- ratio=0.95 vert=(90,95) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.005.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.007.prefab
+-- ratio=0.95 vert=(90,95) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.005.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.006.prefab
+-- ratio=0.95 vert=(90,95) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.003.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.prefab
+-- ratio=0.95 vert=(144,152) tri=(108,108) bounds_a=(0.4629,0.6831,0.6995) bounds_b=(0.444,0.6552,0.671)
+   Assets/My/Prefabs/Laundry_Cleaning/Cleaning_Tools/Trash_can.002_House.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Cleaning_Tools/Trash_can_01.002.prefab
+-- ratio=0.95 vert=(90,95) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.003.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.001.prefab
+-- ratio=0.95 vert=(38,36) tri=(28,20) bounds_a=(0.0402,0.0554,0.0349) bounds_b=(0.0589,0.0169,0.0693)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Garlic_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Eggplant_03.prefab
+-- ratio=0.95 vert=(36,38) tri=(20,28) bounds_a=(0.0692,0.0165,0.0815) bounds_b=(0.0402,0.0554,0.0349)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_03.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Garlic_01.prefab
+-- ratio=0.95 vert=(1741,1648) tri=(1127,1105) bounds_a=(0.9079,2.1314,1.1142) bounds_b=(0.9106,2.1314,1.1142)
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_02.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Refrigerator_01.prefab
+-- ratio=0.95 vert=(53,56) tri=(52,52) bounds_a=(0.1818,0.0079,0.1779) bounds_b=(0.1795,0.0146,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Tacos.008.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Tacos.001.prefab
+-- ratio=0.95 vert=(53,56) tri=(52,52) bounds_a=(0.1818,0.0079,0.1779) bounds_b=(0.1795,0.0146,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.007.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.004.prefab
+-- ratio=0.94 vert=(51,54) tri=(26,26) bounds_a=(1.1647,29.9889,0.6665) bounds_b=(1.1303,29.948,0.6752)
+   Assets/My/Prefabs/Uncategorized/Cable.031.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.028.prefab
+-- ratio=0.94 vert=(52,49) tri=(40,27) bounds_a=(0.0275,0.0704,0.0819) bounds_b=(0.0581,0.0293,0.1066)
+   Assets/My/Prefabs/Uncategorized/Manija_03.prefab
+   Assets/My/Prefabs/Uncategorized/Manija_05.prefab
+-- ratio=0.94 vert=(52,49) tri=(26,26) bounds_a=(1.1448,30.0364,0.6797) bounds_b=(1.1331,30.0595,0.6673)
+   Assets/My/Prefabs/Uncategorized/Cable.029.prefab
+   Assets/My/Prefabs/Uncategorized/Cable.030.prefab
+-- ratio=0.94 vert=(114,121) tri=(92,108) bounds_a=(0.195,0.3185,0.2252) bounds_b=(0.2337,0.3471,0.2278)
+   Assets/My/Prefabs/Decor/Accessories/Vase_03.001.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_02.001.prefab
+-- ratio=0.94 vert=(121,114) tri=(108,92) bounds_a=(0.2505,0.3721,0.2443) bounds_b=(0.2288,0.3736,0.2642)
+   Assets/My/Prefabs/Decor/Accessories/Vase_02.prefab
+   Assets/My/Prefabs/Decor/Accessories/Vase_03.prefab
+-- ratio=0.94 vert=(96,90) tri=(60,60) bounds_a=(0.1061,0.2039,0.1061) bounds_b=(0.1061,0.2039,0.1061)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.038.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.005.prefab
+-- ratio=0.94 vert=(90,96) tri=(60,60) bounds_a=(0.1031,0.1981,0.1031) bounds_b=(0.1031,0.1981,0.1031)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.003.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Can_Soda.002.prefab
+-- ratio=0.94 vert=(88,94) tri=(92,98) bounds_a=(0.0655,0.2022,0.0655) bounds_b=(0.0535,0.2046,0.0535)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_03.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce.prefab
+-- ratio=0.94 vert=(94,88) tri=(98,92) bounds_a=(0.047,0.208,0.047) bounds_b=(0.0655,0.2022,0.0655)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_01.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_03.prefab
+-- ratio=0.94 vert=(94,88) tri=(98,92) bounds_a=(0.0454,0.1935,0.0454) bounds_b=(0.0655,0.2022,0.0655)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauce_03.prefab
+-- ratio=0.93 vert=(56,60) tri=(48,48) bounds_a=(0.3395,0.0197,0.1879) bounds_b=(0.3395,0.0197,0.2001)
+   Assets/My/Prefabs/Food/Prepared_Food/Raw_meat_01.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Raw_meat_02.prefab
+-- ratio=0.93 vert=(216,233) tri=(133,163) bounds_a=(0.3244,0.5633,0.3173) bounds_b=(0.3244,0.5633,0.3173)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pineapple_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pineapple.prefab
+-- ratio=0.93 vert=(227,210) tri=(174,174) bounds_a=(0.199,0.5896,0.199) bounds_b=(0.199,0.5896,0.199)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_09.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_10.prefab
+-- ratio=0.92 vert=(48,52) tri=(44,50) bounds_a=(0.0635,0.0172,0.0998) bounds_b=(0.0508,0.0172,0.1114)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_ketchup.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_Mayonnaise.prefab
+-- ratio=0.92 vert=(48,52) tri=(44,50) bounds_a=(0.0635,0.0172,0.0998) bounds_b=(0.0508,0.0172,0.1114)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_ketchup.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_Mayonnaise.001.prefab
+-- ratio=0.92 vert=(52,48) tri=(50,44) bounds_a=(0.0508,0.0172,0.1114) bounds_b=(0.0509,0.0172,0.1027)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_Mayonnaise.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_mustard.prefab
+-- ratio=0.92 vert=(52,48) tri=(50,44) bounds_a=(0.0508,0.0172,0.1114) bounds_b=(0.0509,0.0172,0.1027)
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_Mayonnaise.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/B_mustard.001.prefab
+-- ratio=0.92 vert=(77,71) tri=(60,56) bounds_a=(0.071,0.1971,0.082) bounds_b=(0.0627,0.1673,0.0801)
+   Assets/My/Prefabs/Uncategorized/Frozen.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Zucchini.002.prefab
+-- ratio=0.92 vert=(154,142) tri=(92,168) bounds_a=(0.094,0.2415,0.063) bounds_b=(0.0603,0.2019,0.0603)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Softener_02.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_03.prefab
+-- ratio=0.92 vert=(154,142) tri=(92,168) bounds_a=(0.094,0.2415,0.063) bounds_b=(0.0743,0.2487,0.0743)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Softener_02_House.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_03_House.prefab
+-- ratio=0.92 vert=(87,80) tri=(70,56) bounds_a=(0.0682,0.078,0.0788) bounds_b=(0.0941,0.0847,0.0894)
+   Assets/My/Prefabs/Uncategorized/Mushrooms.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Garlic.prefab
+-- ratio=0.92 vert=(200,218) tri=(158,174) bounds_a=(0.2323,0.6202,0.2323) bounds_b=(0.199,0.5896,0.199)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_06.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_08.prefab
+-- ratio=0.92 vert=(44,48) tri=(36,38) bounds_a=(0.0992,0.1261,0.1145) bounds_b=(0.06,0.1255,0.1384)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Kiwi.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.prefab
+-- ratio=0.92 vert=(36,33) tri=(24,24) bounds_a=(0.0496,0.1261,0.1145) bounds_b=(0.0897,0.1122,0.0777)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Kiwi_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/lemon_01.prefab
+-- ratio=0.92 vert=(48,44) tri=(38,36) bounds_a=(0.06,0.1255,0.1384) bounds_b=(0.0897,0.1122,0.1035)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/lemon.prefab
+-- ratio=0.92 vert=(55,60) tri=(48,40) bounds_a=(0.0993,0.166,0.1343) bounds_b=(0.0595,0.2056,0.1375)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Mango_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pear_01.prefab
+-- ratio=0.92 vert=(174,190) tri=(168,178) bounds_a=(0.1783,0.3628,0.0737) bounds_b=(0.1597,0.3788,0.0816)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Detergent_bottle_04.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Detergent_bottle_02.prefab
+-- ratio=0.92 vert=(174,190) tri=(168,178) bounds_a=(0.1783,0.3628,0.0737) bounds_b=(0.1597,0.3788,0.0816)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Detergent_bottle_04_Laundry_Props.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Detergent_bottle_02_Laundry_Props.prefab
+-- ratio=0.91 vert=(55,50) tri=(28,28) bounds_a=(0.1014,0.0398,0.37) bounds_b=(0.1395,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_21.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_01.prefab
+-- ratio=0.91 vert=(118,130) tri=(80,80) bounds_a=(0.8146,1.213,0.8025) bounds_b=(0.8146,1.1718,0.8025)
+   Assets/My/Prefabs/Kitchen/Appliances/Washing_machine_01.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Washing_machine.prefab
+-- ratio=0.91 vert=(88,97) tri=(66,66) bounds_a=(0.1352,0.0903,0.162) bounds_b=(0.1352,0.0903,0.162)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Cup_T_03.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Cup_03.prefab
+-- ratio=0.91 vert=(43,39) tri=(34,30) bounds_a=(0.0692,0.1589,0.0793) bounds_b=(0.1056,0.12,0.1005)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_02.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Brussel_sprouts.prefab
+-- ratio=0.91 vert=(39,43) tri=(30,34) bounds_a=(0.1056,0.12,0.1005) bounds_b=(0.0692,0.1589,0.0791)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Brussel_sprouts.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Cucumber_01.prefab
+-- ratio=0.91 vert=(53,48) tri=(52,52) bounds_a=(0.1818,0.0079,0.1779) bounds_b=(0.1795,0.0129,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.007.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.006.prefab
+-- ratio=0.9 vert=(126,114) tri=(102,130) bounds_a=(0.0593,0.3134,0.0593) bounds_b=(0.0801,0.2952,0.0801)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Cooking_oil_02.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Water.prefab
+-- ratio=0.9 vert=(110,122) tri=(134,136) bounds_a=(0.0894,0.223,0.0522) bounds_b=(0.0734,0.208,0.0734)
+   Assets/My/Prefabs/Uncategorized/Chemical_02.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_06.prefab
+-- ratio=0.9 vert=(110,122) tri=(134,136) bounds_a=(0.1101,0.2747,0.0642) bounds_b=(0.0903,0.2562,0.0903)
+   Assets/My/Prefabs/Uncategorized/Chemical_02_House.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_06_House.prefab
+-- ratio=0.9 vert=(80,89) tri=(60,70) bounds_a=(0.1433,0.1142,0.1709) bounds_b=(0.1433,0.1142,0.1709)
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Cup_T.prefab
+   Assets/My/Prefabs/Kitchen/Tableware_Cutlery/Cup.prefab
+-- ratio=0.9 vert=(127,114) tri=(102,130) bounds_a=(0.0593,0.294,0.0593) bounds_b=(0.0801,0.2952,0.0801)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Cooking_oil_03.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Water.prefab
+-- ratio=0.9 vert=(58,52) tri=(32,32) bounds_a=(0.4081,0.0247,0.2331) bounds_b=(0.4569,0.0231,0.2292)
+   Assets/My/Prefabs/Food/Prepared_Food/Roast_meat_02.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Roast_meat_01.prefab
+-- ratio=0.9 vert=(69,77) tri=(66,60) bounds_a=(0.0962,0.2395,0.0938) bounds_b=(0.071,0.1971,0.082)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Yam.001.prefab
+   Assets/My/Prefabs/Uncategorized/Frozen.prefab
+-- ratio=0.9 vert=(48,43) tri=(34,29) bounds_a=(0.271,0.0692,0.2062) bounds_b=(0.2262,0.0904,0.2205)
+   Assets/My/Prefabs/Uncategorized/Fast_food_10.prefab
+   Assets/My/Prefabs/Uncategorized/Fast_food_09.prefab
+-- ratio=0.89 vert=(76,68) tri=(60,61) bounds_a=(0.1191,0.2056,0.1375) bounds_b=(0.1198,0.1584,0.1384)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pear.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.001.prefab
+-- ratio=0.89 vert=(19,17) tri=(13,13) bounds_a=(13.3095,0,14.0352) bounds_b=(13.3095,0.0055,14.0352)
+   Assets/My/Prefabs/Buildings_Architecture/Walls_Floors_Ceilings/colliders_floor_02.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Walls_Floors_Ceilings/colliders_floor_03.prefab
+-- ratio=0.89 vert=(100,112) tri=(108,124) bounds_a=(0.0872,0.3216,0.0872) bounds_b=(0.0872,0.3216,0.0872)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.003.prefab
+-- ratio=0.89 vert=(100,112) tri=(108,124) bounds_a=(0.0927,0.342,0.0927) bounds_b=(0.0927,0.342,0.0927)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.006.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.007.prefab
+-- ratio=0.89 vert=(56,63) tri=(52,52) bounds_a=(0.1795,0.0146,0.1757) bounds_b=(0.1795,0.0134,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.004.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.005.prefab
+-- ratio=0.89 vert=(96,108) tri=(76,76) bounds_a=(0.0577,0.2366,0.0577) bounds_b=(0.0577,0.2147,0.0577)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces.002.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces.003.prefab
+-- ratio=0.89 vert=(96,108) tri=(76,76) bounds_a=(0.0577,0.2366,0.0577) bounds_b=(0.0577,0.2147,0.0577)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Sauces.001.prefab
+-- ratio=0.89 vert=(56,63) tri=(52,52) bounds_a=(0.1795,0.0146,0.1757) bounds_b=(0.1795,0.0134,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Tacos.001.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Tacos.002.prefab
+-- ratio=0.89 vert=(55,62) tri=(28,28) bounds_a=(0.1014,0.0398,0.37) bounds_b=(0.0869,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_21.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_05.prefab
+-- ratio=0.89 vert=(62,55) tri=(28,28) bounds_a=(0.0825,0.0419,0.3645) bounds_b=(0.1014,0.0398,0.37)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_07.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_21.prefab
+-- ratio=0.88 vert=(69,61) tri=(66,60) bounds_a=(0.0962,0.2395,0.0938) bounds_b=(0.071,0.1971,0.082)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Yam.001.prefab
+   Assets/My/Prefabs/Uncategorized/Frozen_01.prefab
+-- ratio=0.88 vert=(76,67) tri=(60,68) bounds_a=(0.1191,0.2056,0.1375) bounds_b=(0.1374,0.166,0.1343)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Pear.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Mango.prefab
+-- ratio=0.88 vert=(59,52) tri=(54,32) bounds_a=(0.4497,0.0197,0.2264) bounds_b=(0.4569,0.0231,0.2292)
+   Assets/My/Prefabs/Food/Prepared_Food/Raw_meat_04.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Roast_meat_01.prefab
+-- ratio=0.88 vert=(227,200) tri=(174,158) bounds_a=(0.199,0.5896,0.199) bounds_b=(0.2323,0.6202,0.2323)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_09.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_06.prefab
+-- ratio=0.88 vert=(236,268) tri=(118,142) bounds_a=(0.5264,1.0959,0.5264) bounds_b=(0.52,1.1366,0.5264)
+   Assets/My/Prefabs/Furniture/Chairs_Seating/Chair_14.prefab
+   Assets/My/Prefabs/Furniture/Chairs_Seating/Chair_15.prefab
+-- ratio=0.88 vert=(50,44) tri=(28,28) bounds_a=(0.1395,0.0419,0.3645) bounds_b=(0.1813,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_01.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_08.prefab
+-- ratio=0.88 vert=(88,100) tri=(92,108) bounds_a=(0.0872,0.3216,0.0872) bounds_b=(0.0872,0.3216,0.0872)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.001.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.002.prefab
+-- ratio=0.88 vert=(88,100) tri=(92,108) bounds_a=(0.0927,0.342,0.0927) bounds_b=(0.0927,0.342,0.0927)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.005.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soft_drinks_01.006.prefab
+-- ratio=0.88 vert=(56,64) tri=(32,32) bounds_a=(0.2082,0.4449,0.8191) bounds_b=(0.2082,0.4449,0.8191)
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Frame_Windows_27.prefab
+   Assets/My/Prefabs/Buildings_Architecture/Doors_Windows/Frame_Windows_06.prefab
+-- ratio=0.87 vert=(48,55) tri=(38,48) bounds_a=(0.06,0.1255,0.1384) bounds_b=(0.0993,0.166,0.1343)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Mango_01.prefab
+-- ratio=0.87 vert=(46,40) tri=(28,28) bounds_a=(0.307,0.282,0.1659) bounds_b=(0.307,0.307,0.1659)
+   Assets/My/Prefabs/Uncategorized/Paper_rolls_02.prefab
+   Assets/My/Prefabs/Uncategorized/Paper_rolls.prefab
+-- ratio=0.87 vert=(40,46) tri=(28,28) bounds_a=(0.307,0.307,0.1659) bounds_b=(0.2993,0.2749,0.1617)
+   Assets/My/Prefabs/Uncategorized/Paper_rolls_01_House.prefab
+   Assets/My/Prefabs/Uncategorized/Paper_rolls_02_House.prefab
+-- ratio=0.87 vert=(40,46) tri=(28,28) bounds_a=(0.245,0.0761,0.3442) bounds_b=(0.206,0.0761,0.3442)
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_04.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_13.prefab
+-- ratio=0.87 vert=(40,46) tri=(28,28) bounds_a=(0.2185,0.0761,0.3442) bounds_b=(0.206,0.0761,0.3442)
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_12.prefab
+   Assets/My/Prefabs/Kitchen/Appliances/Frying_13.prefab
+-- ratio=0.86 vert=(152,176) tri=(76,88) bounds_a=(2.8418,1.84,1.5673) bounds_b=(2.8418,1.84,1.5673)
+   Assets/My/Prefabs/Furniture/Tables/Mesa.005.prefab
+   Assets/My/Prefabs/Furniture/Tables/Mesa.004.prefab
+-- ratio=0.86 vert=(79,68) tri=(78,61) bounds_a=(0.1684,0.1673,0.1457) bounds_b=(0.1198,0.1584,0.1384)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Papaya_03.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Apple.001.prefab
+-- ratio=0.86 vert=(55,64) tri=(28,28) bounds_a=(0.1014,0.0398,0.37) bounds_b=(0.1068,0.0419,0.3645)
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_21.prefab
+   Assets/My/Prefabs/Food/Bakery_Snacks/Cookies_17.prefab
+-- ratio=0.86 vert=(61,71) tri=(60,56) bounds_a=(0.071,0.1971,0.082) bounds_b=(0.0627,0.1673,0.0801)
+   Assets/My/Prefabs/Uncategorized/Frozen_01.prefab
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Zucchini.002.prefab
+-- ratio=0.86 vert=(142,122) tri=(168,136) bounds_a=(0.0743,0.2487,0.0743) bounds_b=(0.0903,0.2562,0.0903)
+   Assets/My/Prefabs/Uncategorized/Chemical_03_House.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_06_House.prefab
+-- ratio=0.86 vert=(142,122) tri=(168,136) bounds_a=(0.0603,0.2019,0.0603) bounds_b=(0.0734,0.208,0.0734)
+   Assets/My/Prefabs/Uncategorized/Chemical_03.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_06.prefab
+-- ratio=0.86 vert=(120,140) tri=(158,190) bounds_a=(0.143,0.4581,0.143) bounds_b=(0.143,0.4581,0.143)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_12.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_13.prefab
+-- ratio=0.86 vert=(56,48) tri=(52,52) bounds_a=(0.1795,0.0146,0.1757) bounds_b=(0.1795,0.0129,0.1757)
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.004.prefab
+   Assets/My/Prefabs/Food/Prepared_Food/Taco.006.prefab
+-- ratio=0.86 vert=(120,140) tri=(158,190) bounds_a=(0.143,0.4581,0.143) bounds_b=(0.143,0.4554,0.143)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_12.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Soda_14.prefab
+-- ratio=0.86 vert=(180,154) tri=(168,92) bounds_a=(0.0817,0.2574,0.0817) bounds_b=(0.094,0.2415,0.063)
+   Assets/My/Prefabs/Uncategorized/Chemical_05_House.prefab
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Softener_02_House.prefab
+-- ratio=0.86 vert=(154,180) tri=(92,168) bounds_a=(0.094,0.2415,0.063) bounds_b=(0.0663,0.209,0.0663)
+   Assets/My/Prefabs/Laundry_Cleaning/Supplies/Softener_02.prefab
+   Assets/My/Prefabs/Uncategorized/Chemical_05.prefab
+-- ratio=0.85 vert=(53,62) tri=(46,46) bounds_a=(0.0632,0.1067,0.0728) bounds_b=(0.0682,0.078,0.0591)
+   Assets/My/Prefabs/Food/Fruits_Vegetables/Eggplant_02.prefab
+   Assets/My/Prefabs/Uncategorized/Mushrooms_01.prefab
+-- ratio=0.85 vert=(134,114) tri=(162,130) bounds_a=(0.1138,0.3697,0.1138) bounds_b=(0.1003,0.3695,0.1003)
+   Assets/My/Prefabs/Food/Drinks_Condiments/Cooking_oil.prefab
+   Assets/My/Prefabs/Food/Drinks_Condiments/Water_02.prefab
