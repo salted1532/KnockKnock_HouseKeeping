@@ -53,7 +53,30 @@
 - **렌더 파이프라인**: URP (Universal Render Pipeline) 17.4.0
 - **주요 패키지**: Input System 1.19.0, AI Navigation 2.0.12, Timeline 1.8.12, Visual Scripting 1.9.11
 
+## 개발 현황
+
+### 구현됨
+- 1인칭 이동/시야 상호작용 (`Interactable.cs`, `InteractionOutline.cs`) — 레이캐스트 감지 후 프롬프트, `Generic` 타입 + `UnityEvent`로 오브젝트별 동작 연결
+- 인벤토리 시스템 (`InventorySystem.cs`) — 5슬롯, 아이템 줍기/장착/사용/버리기, 손전등 슬롯 특수 처리
+- 아이템 상호작용 사운드 (`ItemImpactSound.cs`, `SoundManager.cs`) — 바닥 낙하음 등
+- 발소리 시스템 (`FootstepSystem.cs`), 손전등
+- 낮/밤 전환 (`DayNightSwitcher.cs`) — 라이팅 볼륨 프로파일 전환
+- 모텔 프로토타입 모델링/텍스처링, 쇼핑카트 디테일(진행 중, `CartGroundAlign.cs`)
+- `Assets/My/Prefabs` 에셋 정리 — 중복 프롭 스캔 후 3,592개 제거 (재질+지오메트리 동일 기준, [`doc/0072-prefab-dedup-scan.md`](doc/0072-prefab-dedup-scan.md))
+
+### 설계는 끝났고 미구현 (`기획/기능정의서.md` 기준)
+코어 루프(하루일과 → 청소 → 숙박객 모집 → 자유시간 → 취침)의 접객·판별·경영 파트는 아직 코드가 없다.
+- 일과 태스크 관리, 시간대 전환/HUD (SYS-02, 12)
+- 숙박객 접객 대화, 신분증 확인, 승인/거절 판단 (SYS-03~05)
+- 객실 배정 UI, 상점 UI/구매 (SYS-06, 08)
+- NPC 이동/경로, 새벽 자유활동(탐문), 취침&일차 전환 (SYS-09~11)
+
+`기획/상호작용-미니게임-연동-설계안.md`는 위 시스템들을 `StoryFlags`/`OverlayGate`/`DayPhaseManager` 3개 싱글톤으로 엮는 구현 순서를 제안한 상태.
+
 ## 기획 문서
 
-- 상세 기획서: [`Git_Stuff/넉넉하우스키핑.md`](Git_Stuff/넉넉하우스키핑.md)
-- 키비주얼: [`Git_Stuff/넉넉하우스키핑.png`](Git_Stuff/넉넉하우스키핑.png)
+- 원안: [`Git_Stuff/넉넉하우스키핑.md`](Git_Stuff/넉넉하우스키핑.md), 키비주얼 [`Git_Stuff/넉넉하우스키핑.png`](Git_Stuff/넉넉하우스키핑.png)
+- 기능 정의서: [`기획/기능정의서.md`](기획/기능정의서.md) — SYS-01~12 기능 목록, 데이터 구조, 개발 우선순위
+- 핵심 컨셉 분석 및 제언: [`기획/핵심컨셉-분석및제언.md`](기획/핵심컨셉-분석및제언.md) — 장르 차별화, 구별법/오판 시스템, 엔딩 분기 제안
+- 상호작용·미니게임 연동 설계안: [`기획/상호작용-미니게임-연동-설계안.md`](기획/상호작용-미니게임-연동-설계안.md) — SYS-01~06/10 통합 구조 제안
+- 작업 로그: [`doc/`](doc/) — 세션별 요청/조사/구현 기록
