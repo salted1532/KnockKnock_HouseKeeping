@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c01da3a6320c730f8a6e0a53dc16ff30
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 157334
+  packageName: Destroyable Retro CRT Monitor Prop
+  packageVersion: 1
+  assetPath: Assets/Pekdata/PekdataCRTMonitor/Scripts/ExampleBullet.cs
+  uploadId: 347892

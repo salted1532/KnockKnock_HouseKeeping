@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0911f0bec2234e1e863160cafdfd711
+timeCreated: 1579058168
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 157334
+  packageName: Destroyable Retro CRT Monitor Prop
+  packageVersion: 1
+  assetPath: Assets/Pekdata/PekdataCRTMonitor/CRTMonitorExampleScene.unity
+  uploadId: 347892
