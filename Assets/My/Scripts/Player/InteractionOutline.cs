@@ -19,8 +19,14 @@ public class InteractionOutline : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
         {
-            hitOutline = hit.collider.GetComponentInParent<Outline>();
-            hitInteractable = hit.collider.GetComponentInParent<Interactable>();
+            // 벽 너머 상호작용 차단: 대상까지 사이에 막는 콜라이더(Interaction / Ignore Raycast 레이어 제외)가 있으면 무시
+            const int ignoreRaycastLayer = 2;
+            int occlusionMask = ~interactMask.value & ~(1 << ignoreRaycastLayer);
+            if (!Physics.Raycast(ray, hit.distance - 0.01f, occlusionMask, QueryTriggerInteraction.Ignore))
+            {
+                hitOutline = hit.collider.GetComponentInParent<Outline>();
+                hitInteractable = hit.collider.GetComponentInParent<Interactable>();
+            }
         }
 
         if (hitOutline != currentOutline)

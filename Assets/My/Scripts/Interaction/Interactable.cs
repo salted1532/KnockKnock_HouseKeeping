@@ -8,6 +8,8 @@ public enum InteractionType
     Generic,
     Flashlight,
     Push,
+    Door,
+    Curtain,
 }
 
 public class Interactable : MonoBehaviour
@@ -34,6 +36,34 @@ public class Interactable : MonoBehaviour
     [SerializeField] private float pushForce = 6f;
     [SerializeField] private float rotationForce = 2f;
 
+    [Header("Door")]
+    [SerializeField] private Door door;
+
+    [Header("Curtain (on/off 토글)")]
+    [SerializeField] private GameObject curtainOpen;
+    [SerializeField] private GameObject curtainClosed;
+    [SerializeField] private AudioClip curtainOpenClip;
+    [SerializeField] private AudioClip curtainCloseClip;
+    private bool curtainIsOpen;
+    private AudioSource curtainAudio;
+
+    private void Awake()
+    {
+        // 씬에서 켜둔 쪽을 초기 상태로 인식 (강제로 바꾸지 않음)
+        if (curtainOpen != null) curtainIsOpen = curtainOpen.activeSelf;
+
+        if (curtainOpenClip != null || curtainCloseClip != null)
+        {
+            curtainAudio = GetComponent<AudioSource>();
+            if (curtainAudio == null)
+            {
+                curtainAudio = gameObject.AddComponent<AudioSource>();
+                curtainAudio.playOnAwake = false;
+                curtainAudio.spatialBlend = 1f;
+            }
+        }
+    }
+
     public void Interact(Vector3? hitPoint = null)
     {
         switch (type)
@@ -49,6 +79,12 @@ public class Interactable : MonoBehaviour
                 break;
             case InteractionType.Push:
                 PushAwayFromPlayer(hitPoint ?? transform.position);
+                break;
+            case InteractionType.Door:
+                if (door != null) door.Toggle();
+                break;
+            case InteractionType.Curtain:
+                ToggleCurtain();
                 break;
         }
 
@@ -71,6 +107,22 @@ public class Interactable : MonoBehaviour
     {
         if (messyVisual != null) messyVisual.SetActive(false);
         if (tidyVisual != null) tidyVisual.SetActive(true);
+    }
+
+    private void ToggleCurtain()
+    {
+        curtainIsOpen = !curtainIsOpen;
+        if (curtainOpen != null) curtainOpen.SetActive(curtainIsOpen);
+        if (curtainClosed != null) curtainClosed.SetActive(!curtainIsOpen);
+
+        // 소리 재생 중에 다시 토글하면 이전 소리를 끊고 새 소리로 교체
+        AudioClip clip = curtainIsOpen ? curtainOpenClip : curtainCloseClip;
+        if (curtainAudio != null && clip != null)
+        {
+            curtainAudio.Stop();
+            curtainAudio.clip = clip;
+            curtainAudio.Play();
+        }
     }
 
     private void ActivatePlayerFlashlight()
