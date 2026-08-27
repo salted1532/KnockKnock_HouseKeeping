@@ -219,25 +219,4 @@ public class Interactable : MonoBehaviour
         }
     }
 #endif
-
-    // ─────────────────────────────────────────────────────────────
-    // LEGACY — 구 enum 방식 필드. 마이그레이션(0078) 후 정리 예정. 직접 쓰지 말 것.
-    public enum LegacyType { Pickup, TidyBed, Generic, Flashlight, Push, Door, Curtain, Migrated = 99 }
-    [HideInInspector] public LegacyType type = LegacyType.Migrated;
-    [HideInInspector] public string itemName;
-    [HideInInspector] public Sprite itemIcon;
-    [HideInInspector] public GameObject equipTarget;
-    [HideInInspector] public AudioClip useClip;
-    [HideInInspector] public bool consumeOnUse;
-    [HideInInspector] public GameObject messyVisual;
-    [HideInInspector] public GameObject tidyVisual;
-    [HideInInspector] public float pushForce = 6f;
-    [HideInInspector] public float rotationForce = 2f;
-    [HideInInspector] public Door door;
-    [HideInInspector] public GameObject curtainOpen;
-    [HideInInspector] public GameObject curtainClosed;
-    [HideInInspector] public AudioClip curtainOpenClip;
-    [HideInInspector] public AudioClip curtainCloseClip;
-
-    public void SetEquipTarget(GameObject target) => equipTarget = target; // ItemDispenser 호환 (마이그레이션 전까지)
 }

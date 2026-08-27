@@ -10,8 +10,8 @@ public class SpawnObjectEffect : InteractionEffect
     [SerializeField] private Transform spawnPoint;
     [Tooltip("생성물의 부모. 비우면 씬 최상위 (보통 비움)")]
     [SerializeField] private Transform parent;
-    [Tooltip("동시에 존재 가능한 최대 개수 (0 = 무제한). 초과 시 생성 안 함")]
-    [SerializeField] private int maxCount = 1;
+    [Tooltip("동시에 존재 가능한 최대 개수. 0 = 무제한(기본). 초과 시 생성 안 함")]
+    [SerializeField] private int maxCount = 0;
 
     private readonly List<GameObject> spawned = new();
 

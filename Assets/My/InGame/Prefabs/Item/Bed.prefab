@@ -79,21 +79,6 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  type: 99
-  itemName: 
-  itemIcon: {fileID: 0}
-  equipTarget: {fileID: 0}
-  useClip: {fileID: 0}
-  consumeOnUse: 0
-  messyVisual: {fileID: 0}
-  tidyVisual: {fileID: 0}
-  pushForce: 3
-  rotationForce: 2
-  door: {fileID: 0}
-  curtainOpen: {fileID: 0}
-  curtainClosed: {fileID: 0}
-  curtainOpenClip: {fileID: 0}
-  curtainCloseClip: {fileID: 0}
 --- !u!114 &938565263838079934
 MonoBehaviour:
   m_ObjectHideFlags: 0

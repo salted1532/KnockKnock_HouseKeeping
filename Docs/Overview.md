@@ -27,6 +27,7 @@
 | [UIInteractionMode](UIInteractionMode.md) | `Interaction/Modes/UIInteractionMode.cs` |
 | [ItemImpactSound](ItemImpactSound.md) | `Interaction/ItemImpactSound.cs` |
 | [CartGroundAlign](CartGroundAlign.md) | `Interaction/CartGroundAlign.cs` |
+| [OutlineWhenOff](OutlineWhenOff.md) | `Interaction/OutlineWhenOff.cs` — 꺼져 있을 때 외곽선 상시 표시 (조명 스위치) |
 
 ## 인벤토리 / 아이템
 
@@ -44,11 +45,8 @@
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |
 | [FootstepSystem](FootstepSystem.md) | `Player/FootstepSystem.cs` |
 
-## 정리 대상 (미문서화)
+## 정리 완료 (doc/0081)
 
-- `Interaction/Door.cs` — [HingeEffect](HingeEffect.md) 로 대체됨. 마이그레이션 검증 후 삭제 예정.
-- `Interaction/ItemDispenser.cs` — [SpawnObjectEffect](SpawnObjectEffect.md) 로 대체. 자판기 재배선 후 삭제 예정.
-- `Editor/InteractionMigrator.cs` — 1회용 마이그레이션 스크립트. 완료 후 삭제.
-- `Interactable.cs` 의 `LEGACY` 필드 블록.
+마이그레이션 완료 확인 후 삭제됨: `Interaction/Door.cs` → [HingeEffect](HingeEffect.md), `Interaction/ItemDispenser.cs` → [SpawnObjectEffect](SpawnObjectEffect.md), `Editor/InteractionMigrator.cs`(1회용), `Interactable.cs` 의 `LEGACY` 필드 블록.
 
-자세한 정리 계획은 [`doc/0078`](../doc/0078-interaction-system-redesign.md), [README 스크립트 정리 분석](../README.md#스크립트-정리-분석) 참고.
+남은 정리 검토 대상(Unity 템플릿 잔재 등)은 [README 스크립트 정리 분석](../README.md#스크립트-정리-분석) 참고.

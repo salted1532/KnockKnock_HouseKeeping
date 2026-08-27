@@ -169,21 +169,6 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  type: 99
-  itemName: 
-  itemIcon: {fileID: 0}
-  equipTarget: {fileID: 0}
-  useClip: {fileID: 0}
-  consumeOnUse: 0
-  messyVisual: {fileID: 0}
-  tidyVisual: {fileID: 0}
-  pushForce: 3
-  rotationForce: 2
-  door: {fileID: 0}
-  curtainOpen: {fileID: 0}
-  curtainClosed: {fileID: 0}
-  curtainOpenClip: {fileID: 0}
-  curtainCloseClip: {fileID: 0}
 --- !u!114 &5627335717377345957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +184,7 @@ MonoBehaviour:
   prefab: {fileID: 1646787420501089157, guid: 4bae73d3731f4c3469efc99aa604c22f, type: 3}
   spawnPoint: {fileID: 6167753337704386293}
   parent: {fileID: 0}
-  maxCount: 1
-  linkEquipTarget: {fileID: 0}
+  maxCount: 0
 --- !u!114 &2169482126643606117
 MonoBehaviour:
   m_ObjectHideFlags: 0

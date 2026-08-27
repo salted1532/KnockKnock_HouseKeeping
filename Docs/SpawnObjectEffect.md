@@ -11,7 +11,7 @@
 | `prefab` (`GameObject`) | 생성할 프리팹 |
 | `spawnPoint` (`Transform`) | 생성 위치/회전. 비우면 이 오브젝트 transform |
 | `parent` (`Transform`) | 생성물이 자식으로 들어갈 Transform. 비우면 씬 최상위 (보통 비움) |
-| `maxCount` (int, 기본 1) | 동시 존재 최대 개수. 0이면 무제한. 초과 시 생성 안 함 |
+| `maxCount` (int, 기본 0) | 동시 존재 최대 개수. **0 = 무제한(기본)**. 초과 시 생성 안 함 |
 
 ## 동작
 

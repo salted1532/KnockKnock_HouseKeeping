@@ -208,14 +208,12 @@ GameObject
 
 ## 스크립트 정리 분석
 
-### 삭제 예정 (상호작용 마이그레이션 완료 후)
+### 삭제 완료 (2026-08-27, `doc/0081` — 마이그레이션 완료 확인 후)
 
-| 스크립트 | 사유 |
-|---|---|
-| `Interaction/Door.cs` | `HingeEffect` 로 대체. `Motel_Room.prefab` 마이그레이션 후 삭제 |
-| `Interaction/ItemDispenser.cs` | `SpawnObjectEffect` 로 대체. `Vending_machine.prefab` 에 붙어 있지만 아무것도 호출 안 하는 죽은 컴포넌트 — 자판기 재배선 후 삭제 |
-| `Editor/InteractionMigrator.cs` | 1회용. 마이그레이션 검증 후 삭제 |
-| `Interactable.cs` 의 `LEGACY` 필드 블록 (`type`, `messyVisual`, `door`, `curtainOpen` …) | 마이그레이터가 읽는 임시 필드. 마이그레이션 후 제거 |
+- `Interaction/Door.cs` → `HingeEffect`
+- `Interaction/ItemDispenser.cs` → `SpawnObjectEffect`
+- `Editor/InteractionMigrator.cs` (1회용)
+- `Interactable.cs` 의 `LEGACY` 필드 블록 (`type`, `messyVisual`, `door` …) + `SetEquipTarget`
 
 ### 삭제 검토 (Unity 템플릿/프로토타입 잔재)
 
@@ -245,7 +243,6 @@ GameObject
 1. [Unity Hub](https://unity.com/download)에서 **Unity 6000.4.8f1** 설치.
 2. 저장소를 클론한 뒤 Unity Hub에서 프로젝트 폴더를 엽니다.
 3. `Assets/Scenes/InGame` 을 열어 Play.
-4. (상호작용 마이그레이션이 아직이면) `Tools > Interaction > Migrate Legacy Interactables` 실행 후 씬 저장 — [`doc/0078`](doc/0078-interaction-system-redesign.md) 참고.
 
 ## 기획 문서
 

@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6fb866653e1fb5d4eab01d0ec530da07, type: 2}
+  - {fileID: 2100000, guid: c35a5db1706ff314d9a76e7ea0781168, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -418,21 +418,6 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  type: 99
-  itemName: 
-  itemIcon: {fileID: 0}
-  equipTarget: {fileID: 0}
-  useClip: {fileID: 0}
-  consumeOnUse: 0
-  messyVisual: {fileID: 0}
-  tidyVisual: {fileID: 0}
-  pushForce: 6
-  rotationForce: 2
-  door: {fileID: 0}
-  curtainOpen: {fileID: 0}
-  curtainClosed: {fileID: 0}
-  curtainOpenClip: {fileID: 0}
-  curtainCloseClip: {fileID: 0}
 --- !u!114 &4265715764048928965
 MonoBehaviour:
   m_ObjectHideFlags: 0
