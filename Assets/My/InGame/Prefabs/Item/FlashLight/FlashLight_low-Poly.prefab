@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 2548633831275687596}
   - component: {fileID: 4676567824868158033}
   - component: {fileID: 1641354974250143837}
-  - component: {fileID: 1394753119456360595}
   - component: {fileID: -8741178757984590506}
+  - component: {fileID: 7528869842670594860}
+  - component: {fileID: 2449970032973519847}
+  - component: {fileID: 1394753119456360595}
+  - component: {fileID: 1562646647579746716}
   m_Layer: 11
   m_Name: FlashLight_low-Poly
   m_TagString: Untagged
@@ -114,6 +117,73 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.06894819, y: 0.06894819, z: 0.20015909}
   m_Center: {x: 0, y: -0.0015783049, z: -0.028477184}
+--- !u!114 &-8741178757984590506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029360721989362242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e9f9b24393be243a2feb6cca3752ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  promptType: 3
+  customPrompt: 
+  isToggle: 0
+  startOn: 0
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 99
+  itemName: 
+  itemIcon: {fileID: 0}
+  equipTarget: {fileID: 0}
+  useClip: {fileID: 0}
+  consumeOnUse: 0
+  messyVisual: {fileID: 0}
+  tidyVisual: {fileID: 0}
+  pushForce: 6
+  rotationForce: 2
+  door: {fileID: 0}
+  curtainOpen: {fileID: 0}
+  curtainClosed: {fileID: 0}
+  curtainOpenClip: {fileID: 0}
+  curtainCloseClip: {fileID: 0}
+--- !u!114 &7528869842670594860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029360721989362242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2611097c6055f4a44a7206376e0d4ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupEffect
+  icon: {fileID: 977040944, guid: 02e6df14ce8a94146bcfce9773b63e08, type: 3}
+  itemId: 1
+  equipTargetOverride: {fileID: 0}
+  useClip: {fileID: 0}
+  consumeOnUse: 0
+--- !u!114 &2449970032973519847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029360721989362242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f6bab59cc65a94d86719b0b414abd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SfxEffect
+  clip: {fileID: 0}
+  onClip: {fileID: 0}
+  offClip: {fileID: 0}
+  interrupt: 1
 --- !u!114 &1394753119456360595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,26 +202,100 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &-8741178757984590506
-MonoBehaviour:
+--- !u!82 &1562646647579746716
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9029360721989362242}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1e9f9b24393be243a2feb6cca3752ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  type: 3
-  itemName: Flashlight
-  itemIcon: {fileID: 977040944, guid: 02e6df14ce8a94146bcfce9773b63e08, type: 3}
-  equipTarget: {fileID: 0}
-  useClip: {fileID: 0}
-  consumeOnUse: 0
-  messyVisual: {fileID: 0}
-  tidyVisual: {fileID: 0}
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
