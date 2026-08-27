@@ -27,10 +27,12 @@
 
 ## 핵심 루프 (하루 일과)
 
+**아침 → 점심 → 저녁(접객) → 새벽** 4단계로 하루가 진행된다 (`DayPhaseManager`).
+
 1. **일과 처리**: 울타리 수리, 노숙자 내쫓기, 불법주차 신고 등 매일 다른 이벤트 진행
 2. **모텔 청소**: 퇴실한 객실 청소
-3. **숙박객 모집**: 신규 방문자 체크인 심사 (수락/거절)
-4. **자유시간**: 취침 전 밤 — 행동력 범위 내에서 숙박객과 대화 가능, 이후 취침으로 다음날 진행
+3. **숙박객 모집 (접객)**: 점심 일과를 마치고 책상으로 가서 상호작용 → **UI 모드**로 전환(플레이어/카메라 고정, 마우스 표시) → 테이블 위 컴퓨터·신분증 등을 마우스로 조작하며 신규 방문자 체크인 심사 (수락/거절)
+4. **자유시간(새벽)**: 취침 전 밤 — 행동력 범위 내에서 숙박객과 대화 가능, 이후 취침으로 다음날 진행
 
 일과 중에는 게임 진행에 따른 분위기 변화를 체감할 수 있다 (예: 초반에 쫓아낸 노숙자가 후반엔 시체로 발견되거나, 불법주차 신고 시 경찰이 응답하지 않는 등).
 
@@ -49,34 +51,211 @@
 
 ## 개발 환경
 
-- **엔진**: Unity `6000.4.8f1`
-- **렌더 파이프라인**: URP (Universal Render Pipeline) 17.4.0
-- **주요 패키지**: Input System 1.19.0, AI Navigation 2.0.12, Timeline 1.8.12, Visual Scripting 1.9.11
+| 구분 | 내용 |
+|---|---|
+| 엔진 | Unity `6000.4.8f1` |
+| 렌더 파이프라인 | Universal Render Pipeline (URP) 17.4.0 |
+| 입력 | Unity Input System 1.19.0 (StarterAssets FirstPersonController 기반) |
+| 길찾기 | AI Navigation (NavMesh) 2.0.12 |
+| 기타 패키지 | Timeline 1.8.12, Visual Scripting 1.9.11, TextMesh Pro |
+| 외곽선 | QuickOutline (로컬 패치됨 — `doc/0076`) |
 
-## 개발 현황
+## 프로젝트 구조
 
-### 구현됨
-- 1인칭 이동/시야 상호작용 (`Interactable.cs`, `InteractionOutline.cs`) — 레이캐스트 감지 후 프롬프트, `Generic` 타입 + `UnityEvent`로 오브젝트별 동작 연결
-- 인벤토리 시스템 (`InventorySystem.cs`) — 5슬롯, 아이템 줍기/장착/사용/버리기, 손전등 슬롯 특수 처리
-- 아이템 상호작용 사운드 (`ItemImpactSound.cs`, `SoundManager.cs`) — 바닥 낙하음 등
-- 발소리 시스템 (`FootstepSystem.cs`), 손전등
-- 낮/밤 전환 (`DayNightSwitcher.cs`) — 라이팅 볼륨 프로파일 전환
-- 모텔 프로토타입 모델링/텍스처링, 쇼핑카트 디테일(진행 중, `CartGroundAlign.cs`)
-- `Assets/My/Prefabs` 에셋 정리 — 중복 프롭 스캔 후 3,592개 제거 (재질+지오메트리 동일 기준, [`doc/0072-prefab-dedup-scan.md`](doc/0072-prefab-dedup-scan.md))
+```
+Assets/
+├─ My/
+│  ├─ Scripts/
+│  │  ├─ Interaction/   # 상호작용 시스템 — Core(베이스), Effects(효과), Conditions(게이트),
+│  │  │                 #   Drivers(입력), Modes(UI모드) + CartGroundAlign, ItemImpactSound
+│  │  ├─ Inventory/     # 5슬롯 인벤토리 + 아이템 ID 연결(ItemId/HandItem/HandItemRegistry)
+│  │  ├─ Game/          # DayPhaseManager (하루 4단계 진행)
+│  │  ├─ Environment/   # DayNightSwitcher (라이팅/스카이박스/볼륨 전환)
+│  │  ├─ Audio/         # SoundManager (앰비언스 + 발소리)
+│  │  └─ Player/        # FootstepSystem
+│  ├─ InGame/           # 씬에 실제로 쓰는 프리팹/머티리얼/사운드/렌더텍스처
+│  │  └─ Prefabs/       #   Item(문/커튼/침대/자판기/쓰레기통/쇼핑카트…), MotelRoom, 시간대별 조명
+│  └─ Prefabs, Materials # 정리된 3rd-party 프롭(카테고리별, 중복 제거 완료 — doc/0072)
+├─ Scenes/              # InGame(본편), SampleScene·TestScene(프로토타입 잔재)
+├─ AssetsFolder/        # 3rd-party 원본 에셋 팩 (임포트 상태, HDRP→URP 변환 등)
+├─ Editor/              # AssetOrganizer, InteractionMigrator (1회용 마이그레이션)
+└─ TutorialInfo, TextMesh Pro/Examples  # Unity 템플릿/샘플 잔재 (게임에 미사용)
 
-### 설계는 끝났고 미구현 (`기획/기능정의서.md` 기준)
-코어 루프(하루일과 → 청소 → 숙박객 모집 → 자유시간 → 취침)의 접객·판별·경영 파트는 아직 코드가 없다.
-- 일과 태스크 관리, 시간대 전환/HUD (SYS-02, 12)
-- 숙박객 접객 대화, 신분증 확인, 승인/거절 판단 (SYS-03~05)
-- 객실 배정 UI, 상점 UI/구매 (SYS-06, 08)
-- NPC 이동/경로, 새벽 자유활동(탐문), 취침&일차 전환 (SYS-09~11)
+Docs/                    # 스크립트별 레퍼런스 문서 (역할/필드/동작) — 허브: Docs/Overview.md
+doc/                     # 세션별 작업 로그 + 코드 변경 전/후 + 설계 노트, 0001~ 번호 통합
+기획/                    # 기능정의서, 핵심컨셉 분석, 상호작용·미니게임 연동 설계안
+```
 
-`기획/상호작용-미니게임-연동-설계안.md`는 위 시스템들을 `StoryFlags`/`OverlayGate`/`DayPhaseManager` 3개 싱글톤으로 엮는 구현 순서를 제안한 상태.
+> `Docs/`(복수)와 `doc/`(소문자)는 Windows 대소문자 미구분 때문에 이름을 분리한 것. `Docs/` = 스크립트 문서, `doc/` = 세션 로그.
+
+## 상호작용 시스템
+
+전체 개편 완료 ([`doc/0078`](doc/0078-interaction-system-redesign.md), [`doc/0079`](doc/0079-interaction-effects-reference.md), 허브 문서 [`Docs/InteractionSystem.md`](Docs/InteractionSystem.md)).
+
+**구 방식** (`InteractionType` enum + 거대 switch에 케이스를 하나씩 추가) → **컴포넌트 조합 방식**으로 전환:
+
+```
+GameObject
+├─ Interactable            ← 플레이어가 찾는 대상 (디스패처)
+├─ InteractionEffect …     ← 실제 동작 (여러 개 스택)
+└─ InteractionCondition …  ← 상호작용 가능 여부 게이트 (선택)
+```
+
+### 작업 흐름
+
+큰 행동 카테고리를 `Interactable` 의 **Prompt Type** 으로 지정 → 컴포넌트 **우클릭 "Prompt Type에 맞게 효과 재설정"** →
+해당 카테고리 표준 스크립트 자동 추가/정리(+콜라이더·Interaction 레이어·Outline·컴포넌트 순서) → 각 효과의 오브젝트/클립 필드 수동 연결 → 완성.
+
+행동 카테고리에도 들어가기 힘든 특별한 작동만 새 `InteractionEffect` 서브클래스를 만들어 붙인다. 큰 틀은 건드리지 않는다. 기존 행동에 옵션을 추가하거나 새 행동이 필요하면 카테고리/효과를 추가한다.
+
+### 행동 카테고리 & 효과
+
+| 카테고리 | 붙는 효과 | 구 방식 |
+|---|---|---|
+| 여닫기 (열기/닫기) | `HingeEffect` + `SfxEffect` | `Door` |
+| 켜고끄기 (켜기/끄기) | `ChangeObjectEffect` + `SfxEffect` | `Curtain` |
+| 정리하기 | `ChangeObjectEffect` + `SfxEffect` | `TidyBed` |
+| 줍기 | `PickupEffect` + `SfxEffect` + `ItemImpactSound` | `Pickup` / `Flashlight` |
+| 사용 | `SpawnObjectEffect` + `SfxEffect` | `ItemDispenser` |
+| 밀기 | `PushEffect` + `SfxEffect` + `ItemImpactSound` | `Push` |
+| 접객 | `EnterUIModeEffect` + `SfxEffect` + `PhaseCondition` | (신규) |
+| 상호작용 / 조사 | `SfxEffect` | `Generic` + `UnityEvent` |
+
+- **모든 상호작용에 효과음** — `SfxEffect` 는 항상 포함. `[RequireComponent(AudioSource)]` 로 자동 부착.
+- **on/off 상호작용은 소리 2개** — 토글이면 `SfxEffect` 가 `onClip` / `offClip` 을 따로 재생.
+- **획득 아이템은 ID로 연결** — 줍는 프리팹의 `PickupEffect.itemId` ↔ 플레이어 손 오브젝트의 `HandItem.id` (`HandItemRegistry` 가 매칭). 손전등=001, 소다=002.
+
+### 핵심 스크립트
+
+각 스크립트 상세(필드·동작)는 [`Docs/`](Docs) 폴더 참조 (허브: [`Docs/Overview.md`](Docs/Overview.md)).
+
+| 스크립트 | 역할 | 문서 |
+|---|---|---|
+| `Interactable` | 디스패처. promptType/isToggle/onInteracted, 효과 실행, 우클릭 재설정 메뉴 | [doc](Docs/Interactable.md) |
+| `InteractionEffect` | 효과 추상 베이스 + `InteractionContext` 구조체 | [doc](Docs/InteractionEffect.md) |
+| `InteractionCondition` | 게이트 추상 베이스 (`IsMet`) | [doc](Docs/InteractionCondition.md) |
+| `SfxEffect` | 효과음. 토글이면 on/off 2클립, `interrupt` 시 이전 소리 끊고 교체 | [doc](Docs/SfxEffect.md) |
+| `ChangeObjectEffect` | `onObjects`/`offObjects` SetActive 스왑 (침대·커튼) | [doc](Docs/ChangeObjectEffect.md) |
+| `HingeEffect` | 경첩 회전 여닫기. `hinge` Transform·`axis` 직접 지정 (문·쓰레기통 뚜껑) | [doc](Docs/HingeEffect.md) |
+| `PushEffect` | 부모 Rigidbody 를 주체 반대로 임펄스+토크 (쇼핑카트) | [doc](Docs/PushEffect.md) |
+| `PickupEffect` | `InventorySystem.AddItem`. `itemId` 로 손 오브젝트 조회 | [doc](Docs/PickupEffect.md) |
+| `SpawnObjectEffect` | 프리팹 생성, `maxCount` 제한 (자판기) | [doc](Docs/SpawnObjectEffect.md) |
+| `EnterUIModeEffect` | `UIInteractionMode.Enter(anchor)` (책상 접객) | [doc](Docs/EnterUIModeEffect.md) |
+| `PhaseCondition` | 지정 하루 단계에서만 상호작용 허용 | [doc](Docs/PhaseCondition.md) |
+| `GazeInteractor` | 화면중앙 레이 + 아웃라인 + E, 벽 너머 차단 (구 `InteractionOutline`) | [doc](Docs/GazeInteractor.md) |
+| `CursorInteractor` | 마우스 레이 + 좌클릭, UI 모드에서만 활성 | [doc](Docs/CursorInteractor.md) |
+| `UIInteractionMode` | 접객 UI 모드 — 카메라 고정, 마우스 표시, Gaze↔Cursor 전환, ESC | [doc](Docs/UIInteractionMode.md) |
+| `DayPhaseManager` | 아침/점심/저녁/새벽 순환, `OnPhaseChanged` 이벤트 | [doc](Docs/DayPhaseManager.md) |
+| `ItemId` / `HandItem` / `HandItemRegistry` | 획득 아이템 프리팹 ↔ 손 오브젝트 번호 연결 | [doc](Docs/HandItemRegistry.md) |
+| `InventorySystem` | 5슬롯, 줍기/장착/사용/던지기, 손전등 슬롯 특수 | [doc](Docs/InventorySystem.md) |
+| `ItemImpactSound` | 물리 충돌 시 임팩트 사운드 (줍기·밀기 자동 추가) | [doc](Docs/ItemImpactSound.md) |
+| `CartGroundAlign` | 쇼핑카트 4바퀴 레이캐스트로 바닥 기울기 정렬 (진행 중) | [doc](Docs/CartGroundAlign.md) |
+| `SoundManager` | 앰비언스(밤/아침) + 지면 레이어별 발소리 재생 | [doc](Docs/SoundManager.md) |
+| `FootstepSystem` | 이동 거리 누적 → 발소리 타이밍, 지면 레이어 판정 | [doc](Docs/FootstepSystem.md) |
+| `DayNightSwitcher` | 스카이박스/라이트/볼륨 프로파일 밤↔아침 전환 | [doc](Docs/DayNightSwitcher.md) |
+
+## 구현 완료 기능
+
+### 플레이어 / 이동
+- [x] 1인칭 이동/시야 (StarterAssets FirstPersonController)
+- [x] 이동 거리 기반 발소리 + 지면 레이어(Wood/Concrete/Metal/Grass)별 클립 + 스프린트 피치
+- [x] 손전등 (인벤토리 손전등 슬롯 특수 처리 — 켜져 있으면 휠 슬롯 전환 잠금)
+
+### 상호작용 시스템 (개편)
+- [x] `Interactable` + `InteractionEffect` 컴포넌트 조합 구조 — enum+switch 방식 폐기
+- [x] 효과 6종 + 조건 1종 + 입력 드라이버 2종 + UI 모드 매니저
+- [x] `GazeInteractor` — 화면중앙 레이, 아웃라인, E키, **벽 너머 상호작용 차단**(가림 2차 레이캐스트, `doc/0077`)
+- [x] `Interactable` 우클릭 **"Prompt Type에 맞게 효과 재설정"** — 카테고리별 표준 효과 추가/제거, 콜라이더·Interaction 레이어·Outline 자동, 컴포넌트 순서 정렬(메쉬→콜라이더→스크립트→사운드→나머지)
+- [x] 모든 상호작용 효과음 + 토글 상호작용 on/off 소리 분리
+- [x] `HingeEffect` — `hinge` Transform·`axis` 지정으로 문/쓰레기통 뚜껑 등 임의 축 여닫기
+- [x] 획득 아이템 ID 연결 — `ItemId` enum + `HandItem` + `HandItemRegistry` (프리팹 ↔ 손 오브젝트)
+- [x] 구 프리팹 → 신 구조 1회용 마이그레이션 스크립트 (`Editor/InteractionMigrator.cs`)
+- [x] 스왑되는 메쉬(침대/커튼)의 외곽선 유지 — QuickOutline 로컬 패치 (`doc/0076`)
+
+### 인벤토리
+- [x] 5슬롯, 아이템 줍기(`PickupEffect`)/슬롯 선택(1~5)/사용(좌클릭)/던지기(F)
+- [x] 던질 때 원본 픽업 오브젝트 되살려 Rigidbody 부착 + 플레이어 콜라이더 충돌 무시 + 벽 관통 방지 스피어캐스트
+
+### 하루 진행 / 환경
+- [x] `DayPhaseManager` — 아침→점심→저녁→새벽 순환, `OnPhaseChanged` 이벤트, 디버그 `N` 키
+- [x] `PhaseCondition` — 특정 단계에서만 상호작용 가능 (책상 접객 = 저녁)
+- [x] `DayNightSwitcher` — 스카이박스/디렉셔널 라이트/URP 볼륨 프로파일/포그 밤↔아침 전환 (현재 `Q` 키 디버그)
+- [x] `SoundManager` — 밤/아침 앰비언스 루프, 발소리 재생
+
+### 접객 UI 모드
+- [x] `UIInteractionMode` — 책상 상호작용 시 FPC·CharacterController 비활성, 카메라를 앵커로 lerp, 마우스 커서 표시, `GazeInteractor`↔`CursorInteractor` 전환, ESC 해제
+- [x] `CursorInteractor` — UI 모드에서 마우스로 테이블 위 오브젝트 상호작용
+
+### 아트 / 에셋
+- [x] 모텔방 프로토타입 모델링/텍스처링 (`Motel_Room` 프리팹), 시간대별 조명 프리팹
+- [x] 3rd-party 프롭 정리 — 카테고리별 프리팹/머티리얼 분류, 중복 프롭 3,592개 제거 (`doc/0072`)
+- [x] HDRP 전용 에셋 팩(Vintage Living Room 등) URP Lit 로 변환 — 마젠타 깨짐 해결
+- [x] 신규 URP 머티리얼 Smoothness 기본 0 규칙, 알파 투명 머티리얼 스윕 절차 확립
+- [x] 쇼핑카트 디테일 (진행 중, `CartGroundAlign` — 4바퀴 지면 정렬)
+
+## 로드맵 (미구현)
+
+`기획/기능정의서.md` 의 SYS-01~12 중 코어 루프의 접객·판별·경영 파트는 아직 코드가 없다.
+
+- [ ] **접객 게임로직** — 손님 대화, 신분증/서류 확인, TV 구별법 표시, 승인/거절 판단 (SYS-03~05). UI 모드 스캐폴드(`UIInteractionMode`)까지만 완료
+- [ ] **일과 태스크 관리** — 울타리 수리/노숙자/불법주차 등 일별 이벤트, 시간대 전환 HUD (SYS-02, 12)
+- [ ] **객실 배정 UI**, **상점 UI/구매** (SYS-06, 08)
+- [ ] **NPC** 이동/경로, 숙박객 대화, 새벽 자유활동(탐문), 취침&일차 전환 (SYS-09~11)
+- [ ] **몽유병 판별/살해 시뮬레이션** — 밤마다 감염자 수 대비 확률 처리, 게임오버 조건
+- [ ] `StoryFlags` / `OverlayGate` / `DayPhaseManager` 3싱글톤으로 시스템 엮기 (`기획/상호작용-미니게임-연동-설계안.md`) — `DayPhaseManager` 만 존재
+- [ ] `DayPhaseManager` ↔ `DayNightSwitcher` / `SoundManager` 연결 (현재 각자 `Q` 키 디버그 토글)
+- [ ] 세계관 붕괴 연출 (도시 화재, 분위기 변화), 상점 제한, 엔딩 분기
+
+## 스크립트 정리 분석
+
+### 삭제 예정 (상호작용 마이그레이션 완료 후)
+
+| 스크립트 | 사유 |
+|---|---|
+| `Interaction/Door.cs` | `HingeEffect` 로 대체. `Motel_Room.prefab` 마이그레이션 후 삭제 |
+| `Interaction/ItemDispenser.cs` | `SpawnObjectEffect` 로 대체. `Vending_machine.prefab` 에 붙어 있지만 아무것도 호출 안 하는 죽은 컴포넌트 — 자판기 재배선 후 삭제 |
+| `Editor/InteractionMigrator.cs` | 1회용. 마이그레이션 검증 후 삭제 |
+| `Interactable.cs` 의 `LEGACY` 필드 블록 (`type`, `messyVisual`, `door`, `curtainOpen` …) | 마이그레이터가 읽는 임시 필드. 마이그레이션 후 제거 |
+
+### 삭제 검토 (Unity 템플릿/프로토타입 잔재)
+
+| 대상 | 사유 |
+|---|---|
+| `Assets/TutorialInfo/` (`Readme.cs`, `ReadmeEditor.cs`) | Unity 템플릿 안내문. 게임 미사용 |
+| `Assets/TextMesh Pro/Examples & Extras/` | TMP 샘플 씬/스크립트 40여 개. 게임 미사용 |
+| `Assets/Scenes/SampleScene.unity`, `TestScene.unity` | 초기 프로토타입 씬. `InGame` 으로 대체됨 |
+| `Assets/My/InGame/Editor/StripTestRoomProBuilder.cs` | 특정 테스트룸 ProBuilder 정리용 1회 유틸 — 역할 다했으면 삭제 |
+| `Assets/Editor/AssetOrganizer.cs` | 프롭 분류 1회 실행 완료 (`doc/0072`). 재실행 안 하면 삭제, 남길 거면 문서화 |
+
+### 수정 필요 / 개선 여지
+
+| 스크립트 | 내용 |
+|---|---|
+| `SoundManager` / `DayNightSwitcher` | 둘 다 자체 `Q` 키 `isNight` 토글 보유 → `DayPhaseManager.OnPhaseChanged` 구독으로 교체해야 4단계와 일관 (Evening/Dawn = 밤) |
+| `SoundManager` | 게임 규모에 비해 너무 얇음 — BGM, SFX 카테고리 볼륨/뮤트, AudioSource 풀링, 3D 감쇠 등 없음. 접객/공포 연출 들어가기 전 확장 필요 |
+| `InventorySystem.UpdateFlashlightHint()` | 매 호출 `GameObject.Find("Canvas")` + `transform.Find("HowToUse_Flashlight")` 문자열 탐색 — 직렬화 참조로 교체 |
+| `InventorySystem` | 같은 `ItemId` 아이템 2개(소다 등)를 주우면 두 슬롯이 같은 손 오브젝트를 가리켜 `SelectSlot`/`SetActive` 충돌 — 소모품 다중 소지 규칙 정리 필요 |
+| `CartGroundAlign` | `Quaternion.FromToRotation(transform.forward, targetUp)` — `forward` 를 지면 법선에 맞추면 카트가 앞으로 고꾸라짐. `transform.up` 이 맞을 가능성. (진행 중 표시된 기능) |
+| `GazeInteractor` / `CursorInteractor` | `playerCamera` / `cam` null 시 NRE, 가드 없음 |
+| `Interactor.Owner` | `?? gameObject` 폴백 + 탐색 실패 시 매번 `FindGameObjectWithTag` 재시도 — 씬에 Player 태그 없으면 조용히 오작동 |
+| `PickupEffect` | `equipTargetOverride` 도 `itemId` 도 비면 조용히 `Destroy` — 연출용 의도지만 설정 실수 시 아이템이 사라짐 (경고 로그는 있음) |
+
+## 시작하기
+
+1. [Unity Hub](https://unity.com/download)에서 **Unity 6000.4.8f1** 설치.
+2. 저장소를 클론한 뒤 Unity Hub에서 프로젝트 폴더를 엽니다.
+3. `Assets/Scenes/InGame` 을 열어 Play.
+4. (상호작용 마이그레이션이 아직이면) `Tools > Interaction > Migrate Legacy Interactables` 실행 후 씬 저장 — [`doc/0078`](doc/0078-interaction-system-redesign.md) 참고.
 
 ## 기획 문서
 
 - 원안: [`Git_Stuff/넉넉하우스키핑.md`](Git_Stuff/넉넉하우스키핑.md), 키비주얼 [`Git_Stuff/넉넉하우스키핑.png`](Git_Stuff/넉넉하우스키핑.png)
 - 기능 정의서: [`기획/기능정의서.md`](기획/기능정의서.md) — SYS-01~12 기능 목록, 데이터 구조, 개발 우선순위
-- 핵심 컨셉 분석 및 제언: [`기획/핵심컨셉-분석및제언.md`](기획/핵심컨셉-분석및제언.md) — 장르 차별화, 구별법/오판 시스템, 엔딩 분기 제안
-- 상호작용·미니게임 연동 설계안: [`기획/상호작용-미니게임-연동-설계안.md`](기획/상호작용-미니게임-연동-설계안.md) — SYS-01~06/10 통합 구조 제안
-- 작업 로그: [`doc/`](doc/) — 세션별 요청/조사/구현 기록
+- 핵심 컨셉 분석 및 제언: [`기획/핵심컨셉-분석및제언.md`](기획/핵심컨셉-분석및제언.md) — 장르 차별화, 구별법/오판 시스템, 엔딩 분기
+- 상호작용·미니게임 연동 설계안: [`기획/상호작용-미니게임-연동-설계안.md`](기획/상호작용-미니게임-연동-설계안.md) — SYS-01~06/10 통합 구조
+
+## 개발 프로세스 메모
+
+- 세션마다 사용자 요청과 변경 내역(코드 변경 전/후 포함)을 `doc/0001-...` 형식의 번호 매긴 마크다운으로 남깁니다. 번호는 세션이 바뀌어도 이어집니다. 특정 기능이 "왜" 지금 형태인지 궁금하면 `doc/` 의 관련 번호 문서를 먼저 확인하세요.
+- `Docs/*.md` 는 세션 로그가 아니라 **스크립트별 코드 문서**입니다 (역할/필드/동작). 새 게임플레이 스크립트를 추가하면 `Docs/` 에 문서 1개 + `Docs/Overview.md` 표를 갱신합니다.
+- 코드/에셋 변경은 먼저 `doc/` 제안서를 쓰고 승인받은 뒤 적용합니다.
