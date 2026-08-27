@@ -64,6 +64,9 @@ public class Outline : MonoBehaviour {
 
   [Header("Optional")]
 
+  [SerializeField, Tooltip("이 Transform 들(및 그 자식)의 Renderer 는 외곽선에서 제외 (조명 스위치 안의 램프 등). LOCAL PATCH — doc/0083")]
+  private Transform[] excludeRoots;
+
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
   + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
   private bool precomputeOutline;
@@ -85,6 +88,11 @@ public class Outline : MonoBehaviour {
     // Cache renderers (include inactive: 토글로 스왑되는 자식 메쉬도 캐시)
     renderers = GetComponentsInChildren<Renderer>(true);
 
+    // LOCAL PATCH (doc/0083): excludeRoots 자식 렌더러 제외
+    if (excludeRoots != null && excludeRoots.Length > 0) {
+      renderers = System.Array.FindAll(renderers, r => !IsExcluded(r.transform));
+    }
+
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
@@ -97,6 +105,16 @@ public class Outline : MonoBehaviour {
 
     // Apply material properties immediately
     needsUpdate = true;
+  }
+
+  // LOCAL PATCH (doc/0083)
+  bool IsExcluded(Transform t) {
+    foreach (var root in excludeRoots) {
+      if (root != null && t.IsChildOf(root)) {
+        return true; // IsChildOf 는 자기 자신도 true
+      }
+    }
+    return false;
   }
 
   void OnEnable() {

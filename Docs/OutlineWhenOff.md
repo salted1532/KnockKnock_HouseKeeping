@@ -18,6 +18,8 @@
 조명 스위치: `Interactable`(켜고끄기) + `ChangeObjectEffect`(불 켜짐/꺼짐 오브젝트) + `SfxEffect` 에 더해 **`OutlineWhenOff` 추가**.
 `Interactable.startOn` = 방이 처음부터 밝으면 on, 어두우면 off.
 
+on/off 램프가 스위치 자식이면 `Outline` 이 램프까지 외곽선을 그린다 → `Outline.excludeRoots` (QuickOutline 로컬 패치 doc/0083)에 램프 부모 Transform 을 넣어 제외.
+
 우클릭 "재설정" 은 이 컴포넌트를 자동으로 붙이지 않음 (조명 스위치 등 특정 오브젝트에만 필요) — 수동 추가.
 
 ## 관련

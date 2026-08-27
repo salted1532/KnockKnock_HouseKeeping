@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1090681729478540397}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.61000013, y: 1.6399999, z: 0.049999878}
+  m_LocalPosition: {x: 0.5999998, y: 1.6399999, z: 0.049999878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165,17 +165,17 @@ MonoBehaviour:
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
-      m_FlipU: 0
+      m_FlipU: 1
       m_FlipV: 0
       m_SwapUV: 0
       m_Fill: 1
-      m_Scale: {x: 1, y: 1}
-      m_Offset: {x: 0, y: 0}
+      m_Scale: {x: 0.8230925, y: 0.3040503}
+      m_Offset: {x: -0.5, y: -0.5}
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
     m_SubmeshIndex: 0
-    m_ManualUV: 1
+    m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
   - m_Indexes: 0c0000000d0000000e0000000c0000000e0000000f000000
@@ -273,10 +273,10 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 1, y: 1}
   - {x: 1, y: 0}
-  - {x: 1.0004672, y: 0.9995324}
-  - {x: 0.9995324, y: -0.0004671812}
-  - {x: -0.0004671812, y: 0.00046759844}
-  - {x: 0.00046759844, y: 1.0004672}
+  - {x: -0.000010728836, y: 1.0000107}
+  - {x: -0.000010728836, y: -0.000010728836}
+  - {x: 1.0000107, y: -0.000010728836}
+  - {x: 1.0000107, y: 1.0000107}
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 1, y: 1}
@@ -300,10 +300,10 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
-  - {x: 0.99999684, y: 0.0025305287, z: 0, w: -1}
-  - {x: 0.99999684, y: 0.0025305287, z: 0, w: -1}
-  - {x: 0.99999684, y: 0.0025305287, z: 0, w: -1}
-  - {x: 0.99999684, y: 0.0025305287, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: 1}
+  - {x: -1, y: 0, z: 0, w: 1}
+  - {x: -1, y: 0, z: 0, w: 1}
+  - {x: -1, y: 0, z: 0, w: 1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 988
+  m_VersionIndex: 1001
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -354,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7094896303691884657}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HingeEffect
   hinge: {fileID: 0}
   axis: {x: 0, y: 1, z: 0}
-  openAngle: -90
+  openAngle: 90
   openTime: 0.6
   ease:
     serializedVersion: 2
@@ -489,6 +489,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
+  excludeRoots: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

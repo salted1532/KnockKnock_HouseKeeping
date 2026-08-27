@@ -45,6 +45,14 @@
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |
 | [FootstepSystem](FootstepSystem.md) | `Player/FootstepSystem.cs` |
 
+## 서드파티 로컬 패치
+
+`Assets/AssetsFolder/QuickOutline/Scripts/Outline.cs` 에 로컬 수정 있음 (`grep "LOCAL PATCH"`):
+- **doc/0076** — `GetComponentsInChildren<...>(true)` (비활성 자식 포함, 스왑 메쉬 외곽선 유지)
+- **doc/0083** — `excludeRoots` 필드 (특정 자식 트리 렌더러를 외곽선에서 제외, 조명 스위치 안 램프 등)
+
+에셋 재임포트/업데이트 시 날아감 → 해당 doc 보고 재적용.
+
 ## 정리 완료 (doc/0081)
 
 마이그레이션 완료 확인 후 삭제됨: `Interaction/Door.cs` → [HingeEffect](HingeEffect.md), `Interaction/ItemDispenser.cs` → [SpawnObjectEffect](SpawnObjectEffect.md), `Editor/InteractionMigrator.cs`(1회용), `Interactable.cs` 의 `LEGACY` 필드 블록.

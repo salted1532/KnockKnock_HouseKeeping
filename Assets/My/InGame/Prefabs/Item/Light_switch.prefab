@@ -198,6 +198,9 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
+  excludeRoots:
+  - {fileID: 6548698232520430084}
+  - {fileID: 8274976042028691276}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
