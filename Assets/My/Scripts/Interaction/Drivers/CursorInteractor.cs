@@ -35,11 +35,17 @@ public class CursorInteractor : Interactor
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
         {
-            point = hit.point;
-            hitOutline = hit.collider.GetComponentInParent<Outline>();
-            var candidate = hit.collider.GetComponentInParent<Interactable>();
-            if (candidate != null && candidate.CanInteract)
-                hovered = candidate;
+            // 벽 너머 상호작용 차단: 대상 앞에 막는 콜라이더(Interaction / Ignore Raycast 제외)가 있으면 무시 (GazeInteractor 와 동일)
+            const int ignoreRaycastLayer = 2;
+            int occlusionMask = ~interactMask.value & ~(1 << ignoreRaycastLayer);
+            if (!Physics.Raycast(ray, hit.distance - 0.01f, occlusionMask, QueryTriggerInteraction.Ignore))
+            {
+                point = hit.point;
+                hitOutline = hit.collider.GetComponentInParent<Outline>();
+                var candidate = hit.collider.GetComponentInParent<Interactable>();
+                if (candidate != null && candidate.CanInteract)
+                    hovered = candidate;
+            }
         }
 
         if (hitOutline != currentOutline)

@@ -5,7 +5,13 @@ using UnityEngine.Serialization;
 
 // 프롬프트 문구 목록. 여닫기/켜고끄기는 토글 상태(IsOn)에 따라 문구가 바뀐다.
 // 새 문구가 필요하면 여기에 추가하거나 직접입력 사용.
-public enum InteractionPrompt { 상호작용, 여닫기, 켜고끄기, 줍기, 사용, 조사, 정리하기, 밀기, 접객, 직접입력, 걸기 }
+// 순서(정수값)로 직렬화됨 — 기존 값 사이에 삽입 금지, 새 값은 끝에만 추가.
+// index 8 은 구 '접객' → '화면고정' 으로 rename (기존 프리팹은 그대로 매핑됨).
+public enum InteractionPrompt
+{
+    상호작용, 여닫기, 켜고끄기, 줍기, 사용, 조사, 정리하기, 밀기, 화면고정, 직접입력, 걸기,
+    읽기, 아침종료, 점심종료, 저녁종료, 하루종료,
+}
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
 // 한 GameObject에 Interactable 1 + Effect 여러 개 + Condition 0~N 를 조합한다.
@@ -26,6 +32,9 @@ public class Interactable : MonoBehaviour
         InteractionPrompt.여닫기 => IsOn ? "닫기" : "열기",
         InteractionPrompt.켜고끄기 => IsOn ? "끄기" : "켜기",
         InteractionPrompt.직접입력 => customPrompt,
+        InteractionPrompt.아침종료 or InteractionPrompt.점심종료 => "일과 종료",
+        InteractionPrompt.저녁종료 => "영업 종료",
+        InteractionPrompt.하루종료 => "취침",
         _ => promptType.ToString(),
     };
     public bool IsToggle => isToggle;
@@ -82,7 +91,7 @@ public class Interactable : MonoBehaviour
     {
         typeof(SfxEffect), typeof(ChangeObjectEffect), typeof(HingeEffect),
         typeof(PushEffect), typeof(PickupEffect), typeof(SpawnObjectEffect), typeof(EnterUIModeEffect),
-        typeof(HookEffect),
+        typeof(HookEffect), typeof(ShowPanelEffect), typeof(PhaseSwitchEffect),
     };
 
     // 컴포넌트 우클릭 메뉴: promptType 에 맞게 효과 구성을 맞춘다.
@@ -96,6 +105,7 @@ public class Interactable : MonoBehaviour
         UnityEditor.Undo.RecordObjects(new Object[] { this, gameObject }, "Sync Interaction Effects");
 
         var wanted = new System.Collections.Generic.List<System.Type> { typeof(SfxEffect) };
+        DayPhase? fromPhase = null;   // 값이 있으면 PhaseSwitchEffect(from/to) + PhaseCondition 을 자동 설정
         switch (promptType)
         {
             case InteractionPrompt.여닫기:   wanted.Add(typeof(HingeEffect));        isToggle = true;  break;
@@ -104,8 +114,13 @@ public class Interactable : MonoBehaviour
             case InteractionPrompt.줍기:     wanted.Add(typeof(PickupEffect)); wanted.Add(typeof(ItemImpactSound)); break;
             case InteractionPrompt.사용:     wanted.Add(typeof(SpawnObjectEffect));                    break;
             case InteractionPrompt.밀기:     wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
-            case InteractionPrompt.접객:     wanted.Add(typeof(EnterUIModeEffect));                    break;
+            case InteractionPrompt.화면고정: wanted.Add(typeof(EnterUIModeEffect));                    break;
+            case InteractionPrompt.읽기:     wanted.Add(typeof(ShowPanelEffect));                      break;
             case InteractionPrompt.걸기:     wanted.Add(typeof(HookEffect));                           break;
+            case InteractionPrompt.아침종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Morning; break;
+            case InteractionPrompt.점심종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Noon;    break;
+            case InteractionPrompt.저녁종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Evening; break;
+            case InteractionPrompt.하루종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Dawn;    break;
             default: /* 상호작용 / 조사 / 직접입력 */                                                   break;
         }
 
@@ -129,8 +144,39 @@ public class Interactable : MonoBehaviour
                 UnityEditor.Undo.AddComponent(gameObject, t);
             }
 
-        if (promptType == InteractionPrompt.접객 && GetComponent<PhaseCondition>() == null)
-            UnityEditor.Undo.AddComponent<PhaseCondition>(gameObject);
+        if (fromPhase.HasValue)
+        {
+            DayPhase from = fromPhase.Value;
+            DayPhase to = (DayPhase)(((int)from + 1) % 4);   // 하루는 한 방향 순환
+
+            // PhaseSwitchEffect.from / .to
+            var sw = GetComponent<PhaseSwitchEffect>();
+            if (sw != null)
+            {
+                UnityEditor.Undo.RecordObject(sw, "Sync Interaction Effects");
+                var so = new UnityEditor.SerializedObject(sw);
+                so.FindProperty("from").enumValueIndex = (int)from;
+                so.FindProperty("to").enumValueIndex = (int)to;
+                so.ApplyModifiedProperties();
+                UnityEditor.EditorUtility.SetDirty(sw);
+            }
+
+            // PhaseCondition.allowedPhases = [from] — 프롬프트/아웃라인이 from 단계에서만 뜨게
+            var pc = GetComponent<PhaseCondition>();
+            if (pc == null) pc = UnityEditor.Undo.AddComponent<PhaseCondition>(gameObject);
+            if (pc != null)
+            {
+                UnityEditor.Undo.RecordObject(pc, "Sync Interaction Effects");
+                var so = new UnityEditor.SerializedObject(pc);
+                var arr = so.FindProperty("allowedPhases");
+                arr.arraySize = 1;
+                arr.GetArrayElementAtIndex(0).enumValueIndex = (int)from;
+                so.ApplyModifiedProperties();
+                UnityEditor.EditorUtility.SetDirty(pc);
+            }
+
+            Debug.Log($"[Interactable] '{name}' 단계 전환 스위치: {from} → {to}", this);
+        }
 
         EnsureOutline();
         if (promptType == InteractionPrompt.줍기)

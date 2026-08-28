@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -19,7 +18,6 @@ public class SoundManager : MonoBehaviour
     private AudioSource source;
 
     private int woodLayer, concreteLayer, metalLayer, grassLayer;
-    private bool isNight = true;
     private AudioClip lastFootstepClip;
 
     private void Awake()
@@ -37,19 +35,25 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        Play(nightClip);
+        if (DayPhaseManager.Instance != null)
+        {
+            DayPhaseManager.Instance.OnPhaseChanged += ApplyAmbience;
+            ApplyAmbience(DayPhaseManager.Instance.Current);
+        }
+        else Play(nightClip);
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        var keyboard = Keyboard.current;
-        if (keyboard == null) return;
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.OnPhaseChanged -= ApplyAmbience;
+    }
 
-        if (keyboard.qKey.wasPressedThisFrame)
-        {
-            isNight = !isNight;
-            Play(isNight ? nightClip : morningClip);
-        }
+    // 저녁·새벽 = 밤 앰비언스, 아침·점심 = 낮 앰비언스
+    private void ApplyAmbience(DayPhase phase)
+    {
+        bool night = phase == DayPhase.Evening || phase == DayPhase.Dawn;
+        Play(night ? nightClip : morningClip);
     }
 
     private void Play(AudioClip clip)

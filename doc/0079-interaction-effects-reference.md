@@ -268,5 +268,53 @@ Collider·Outline·레이어는 우클릭 "재설정" 이 자동으로 챙긴다
 ## 새 동작이 필요하면
 위 효과 조합으로 안 되는 특수 작동만 새 `InteractionEffect` 서브클래스를 만든다 (`Play(in InteractionContext ctx)` 하나 구현, `[RequireComponent(typeof(Interactable))]` 자동 상속). 큰 틀은 건드리지 않는다.
 
+---
+
+## 2026-08-28 갱신: 노트/모니터 + 하루 시간대 전환 (doc/0100)
+
+### 프롬프트 변경
+- `접객` → **`화면고정`** 으로 rename (enum index 8 유지 → 기존 프리팹 자동 매핑). 효과 = `EnterUIModeEffect` + `SfxEffect`. **`PhaseCondition` 자동추가 없음** (모니터 등 시간대 무관 재사용).
+- 신규 `읽기` → `ShowPanelEffect` + `SfxEffect`.
+- 신규 하루종료 스위치 4종: `아침종료`/`점심종료`/`저녁종료`/`하루종료` → `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition`. 재설정 시 `PhaseSwitchEffect.from/to` 와 `PhaseCondition.allowedPhases[0]` 가 **자동 설정** (아침종료 = Morning→Noon, 점심종료 = Noon→Evening, 저녁종료 = Evening→Dawn, 하루종료 = Dawn→Morning). 문구: 아침·점심 "일과 종료", 저녁 "영업 종료", 하루종료 "취침".
+- `ManagedEffects` 에 `ShowPanelEffect`, `PhaseSwitchEffect` 추가.
+
+### 신규 효과
+**ShowPanelEffect — "읽기" (노트/편지/사진)**
+| 필드 | 설명 |
+|---|---|
+| `content` | 상호작용 시 켤 오브젝트. UI 이미지·패널이든 별도 Canvas 든 3D 오브젝트든 아무 GameObject. `Awake` 에서 자동 비활성화 |
+
+- 상호작용 시 `content` 토글 + `UIInteractionMode.FreezeForOverlay(true)` (이동/시야 정지 + 커서 표시, 앵커 이동 없음). ESC 또는 재상호작용으로 닫음. UI면 닫기 버튼에서 `ShowPanelEffect.Close()` 호출 가능 (`SetActive(false)` 직접 호출 금지 — 퍼즈 안 풀림).
+- 필드명 `panel` → `content` 로 변경 (`[FormerlySerializedAs]` 로 기존 연결 유지).
+
+**PhaseSwitchEffect — 하루 단계 전환 스위치**
+| 필드 | 설명 |
+|---|---|
+| `from` | 이 단계일 때만 전환 (현재가 `from` 이 아니면 무시 — 안전장치) |
+| `to` | 전환 목표 단계 |
+
+- `Play()` → 현재 == `from` 이면 `DayPhaseManager.TransitionTo(to)` (ScreenFader 페이드 경유).
+- 프롬프트/아웃라인 표시는 같은 오브젝트의 `PhaseCondition(from)` 이 게이팅. 둘 다 재설정으로 자동 세팅.
+- `Advance()`(순환상 다음)는 디버그 N/Q 와 `ReceptionManager` 접객 종료에서만 사용.
+
+### 신규/변경 매니저
+| 스크립트 | 역할 |
+|---|---|
+| `Environment/ScreenFader` (신규, 싱글턴) | 풀스크린 검정 Image+CanvasGroup. `FadeThrough(atBlack, done)` — 암전→콜백→밝아짐 (out 0.4 / hold 0.1 / in 0.6). 없으면 콜백 즉시 |
+| `Environment/PhaseVisuals` (신규, 구 `DayNightSwitcher` 대체) | `OnPhaseChanged` 구독 → 4단계 `PhaseLook{skybox,lightRoot,volume,fog}` 배열 스왑 (암전 중이라 안 보임) |
+| `Game/DayPhaseManager` (변경) | `Advance()` 가 `ScreenFader` 경유. 암전 시 `Current`/`DayCount`/`OnPhaseChanged`, 페이드 인 후 신규 `OnPhaseChangeFinished`. `Transitioning` 가드. 디버그 **N + Q** 로 Advance |
+| `Game/ReceptionManager` (변경) | heuristic 삭제. `OnPhaseChanged`→`Evening` 시 `UIInteractionMode.Enter(receptionAnchor)` + 세션 시작 + `SuppressEscExit`. `EndSession()` (손님 전원 처리 시 호출 예정, 임시 디버그 K) → `UIInteractionMode.Exit()` + `Advance()`(→새벽) |
+| `Interaction/Modes/UIInteractionMode` (변경) | **앵커 스택**: `Enter` 가 Active 면 위에 쌓음(접객→모니터), `Exit`=한 단계 pop(비면 `Teardown`+`Exited`), `ExitAll`=전부. ESC = 항상 한 겹 벗김 (노트가 `ConsumesEsc` 로 우선). `FreezeForOverlay(bool)` (이동 없이 정지+커서, 노트용). `crosshair` 필드 |
+| `Audio/SoundManager` (변경) | Q 토글 삭제 → `OnPhaseChanged` 구독, 저녁·새벽=밤 / 아침·점심=낮 앰비언스 |
+
+### 조립 레시피 추가
+| 대상 | promptType | 재설정 자동 | 수동 |
+|---|---|---|---|
+| **게시판** (아침→점심) | `아침종료` | `PhaseSwitchEffect`+`SfxEffect`+`PhaseCondition(Morning)` | 콜라이더/레이어 |
+| **접객 테이블** (점심→저녁) | `점심종료` | `PhaseSwitchEffect`+`SfxEffect`+`PhaseCondition(Noon)` | 자식 `Player_Anchor` → `ReceptionManager.receptionAnchor`. 저녁 접객은 자동 진입 |
+| **침대** (새벽→아침) | `하루종료` | `PhaseSwitchEffect`+`SfxEffect`+`PhaseCondition(Dawn)` | — |
+| **모니터** | `화면고정` | `EnterUIModeEffect`+`SfxEffect` | anchor. 화면버튼 = Quad+BoxCollider+Interaction 레이어+`Interactable` (월드 UI Canvas 금지, `CursorInteractor` 는 물리 레이) |
+| **노트** | `읽기` | `ShowPanelEffect`+`SfxEffect` | `content` = 보여줄 오브젝트(UI/Canvas/3D 등, Awake 가 자동 비활성) |
+
 ## 상태
-2026-08-27 작성. 코드 기준 doc/0078. 마이그레이션·정리 대상은 doc/0078 참조.
+2026-08-27 작성. 2026-08-28 갱신 (doc/0100). 코드 기준 doc/0078 + doc/0100.
