@@ -130,6 +130,7 @@ public class InventorySystem : MonoBehaviour
             Rigidbody rb = thrownItem.GetComponent<Rigidbody>();
             if (rb == null)
                 rb = thrownItem.AddComponent<Rigidbody>();
+            rb.isKinematic = false;   // 고리에 걸렸다 다시 주워 던지는 경로 대비
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.AddForce(throwPos.forward * throwForce, ForceMode.Impulse);
 
@@ -160,6 +161,23 @@ public class InventorySystem : MonoBehaviour
             equipTargets[activeSlot].SetActive(false);
             ClearSlot(activeSlot);
         }
+    }
+
+    // 현재 활성 슬롯(손에 든 것)의 HandItem. 없으면 null.
+    public HandItem ActiveHandItem =>
+        activeSlot >= 0 && equipTargets[activeSlot] != null
+            ? equipTargets[activeSlot].GetComponentInChildren<HandItem>(true)
+            : null;
+
+    // 활성 슬롯을 비우고 원래 월드 오브젝트(pickupSource)를 반환. 빈 손이면 null.
+    // HookEffect 가 "들고 있는 아이템을 고리에 건다" 용도로 사용.
+    public GameObject RemoveActiveItem()
+    {
+        if (activeSlot < 0 || equipTargets[activeSlot] == null) return null;
+        GameObject pickupSource = pickupSources[activeSlot];
+        equipTargets[activeSlot].SetActive(false);
+        ClearSlot(activeSlot);
+        return pickupSource;
     }
 
     private void ClearSlot(int index)

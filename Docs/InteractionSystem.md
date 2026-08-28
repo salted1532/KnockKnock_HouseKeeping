@@ -37,16 +37,18 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 | 밀기 | "밀기" | `PushEffect` + `SfxEffect` + `ItemImpactSound` | ✗ |
 | 접객 | "접객" | `EnterUIModeEffect` + `SfxEffect` + `PhaseCondition` | ✗ |
 | 직접입력 | `customPrompt` | `SfxEffect` | — |
+| 걸기 | "걸기" | `HookEffect` + `SfxEffect` | — |
 
 ## "재설정" 우클릭 메뉴가 하는 일
 
 1. promptType 에 맞는 효과 **추가** + 필요 없는 managed 효과 **제거** (Undo 가능, 콘솔 로그)
-   - managed = `Sfx / ChangeObject / Hinge / Push / Pickup / SpawnObject / EnterUIMode` 만 자동 제거.
+   - managed = `Sfx / ChangeObject / Hinge / Push / Pickup / SpawnObject / EnterUIMode / Hook` 만 자동 제거.
    - `ItemImpactSound` · `PhaseCondition` · 커스텀 효과 · `onInteracted` 는 추가만, 제거 안 함.
 2. `SfxEffect` 는 항상 포함 → `[RequireComponent(AudioSource)]` 로 AudioSource 자동(3D/논플레이온어웨이크).
 3. 콜라이더 없으면 `BoxCollider`(메시 bounds 크기) 추가 + `Interaction` 레이어. 자식에 있으면 경고.
 4. `Outline` 없으면 추가 → `enabled=off`, 모드 `OutlineVisible`.
-5. 컴포넌트 순서 정렬: `Transform → MeshFilter → Renderer → Collider → Rigidbody → Interactable → Condition → 일반 Effect → SfxEffect → Outline·기타 .cs → AudioSource → 그 외`.
+5. `줍기`면 `Rigidbody` 없을 때 기본값으로 추가 (바닥에 물리적으로 놓이는 아이템이라 필요).
+6. 컴포넌트 순서 정렬: `Transform → MeshFilter → Renderer → Collider → Rigidbody → Interactable → Condition → 일반 Effect → SfxEffect → Outline·기타 .cs → AudioSource → 그 외`.
 
 ## 스크립트별 문서
 
@@ -60,6 +62,7 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 | [HingeEffect](HingeEffect.md) | 경첩 회전 (구 Door), hinge·axis 지정 가능 |
 | [PushEffect](PushEffect.md) | 물리 밀기 (구 Push) |
 | [PickupEffect](PickupEffect.md) | 인벤토리 획득 (구 Pickup/Flashlight), itemId 연결 |
+| [HookEffect](HookEffect.md) | 빈 고리에 든 아이템 걸기 (Key_hook), `걸기` 프롬프트 표준 효과 |
 | [SpawnObjectEffect](SpawnObjectEffect.md) | 프리팹 생성 (구 ItemDispenser) |
 | [EnterUIModeEffect](EnterUIModeEffect.md) | UI 모드 진입 (책상 접객) |
 | [PhaseCondition](PhaseCondition.md) | 하루 단계 게이트 |

@@ -5,5 +5,8 @@ using UnityEngine;
 public class HandItem : MonoBehaviour
 {
     [SerializeField] private ItemId id;
+    [Tooltip("열쇠 종류 아이템인가 (Key_hook 등에 걸 수 있음)")]
+    [SerializeField] private bool isKey;
     public ItemId Id => id;
+    public bool IsKey => isKey;
 }

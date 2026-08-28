@@ -23,4 +23,4 @@
 - `InventorySystem.Instance.AddItem(icon, target, gameObject, isFlashlight, useClip, consumeOnUse)` 성공 시 이 오브젝트 `SetActive(false)`.
 
 ## 관련
-[Interactable](Interactable.md) · [HandItemRegistry](HandItemRegistry.md) · [InventorySystem](InventorySystem.md) · [`doc/0078`](../doc/0078-interaction-system-redesign.md)
+[Interactable](Interactable.md) · [HandItemRegistry](HandItemRegistry.md) · [InventorySystem](InventorySystem.md) · [HookEffect](HookEffect.md) · [`doc/0078`](../doc/0078-interaction-system-redesign.md)

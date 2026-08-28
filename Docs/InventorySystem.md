@@ -24,7 +24,9 @@
 ## API
 
 - `AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false)` → 빈 슬롯에 등록, 성공 시 true. [PickupEffect](PickupEffect.md) 가 호출.
+- `ActiveHandItem` (프로퍼티) → 현재 활성 슬롯(손에 든 것)의 `HandItem`. 없으면 null.
+- `RemoveActiveItem()` → 활성 슬롯을 비우고 원래 월드 오브젝트를 반환. 빈 손이면 null. [HookEffect](HookEffect.md) 가 호출.
 - 손전등 슬롯: `equipTarget` 의 자식 `Flashlight` 참조를 잡아 `IsOpen` 으로 휠 잠금 판정.
 
 ## 관련
-[PickupEffect](PickupEffect.md) · [HandItemRegistry](HandItemRegistry.md)
+[PickupEffect](PickupEffect.md) · [HandItemRegistry](HandItemRegistry.md) · [HookEffect](HookEffect.md)

@@ -18,8 +18,9 @@ public enum ItemId { None = 0, Flashlight = 1, Soda = 2 }
 | 필드 | 설명 |
 |---|---|
 | `id` (`ItemId`) | 어떤 아이템인지 |
+| `isKey` (bool) | 열쇠 종류인가 — [HookEffect](HookEffect.md)가 고리에 걸 수 있는지 판정에 씀 |
 
-프로퍼티 `Id` 노출.
+프로퍼티 `Id`, `IsKey` 노출.
 
 ## HandItemRegistry
 

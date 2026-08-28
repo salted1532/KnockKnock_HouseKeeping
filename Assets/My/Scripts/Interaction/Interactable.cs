@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 // 프롬프트 문구 목록. 여닫기/켜고끄기는 토글 상태(IsOn)에 따라 문구가 바뀐다.
 // 새 문구가 필요하면 여기에 추가하거나 직접입력 사용.
-public enum InteractionPrompt { 상호작용, 여닫기, 켜고끄기, 줍기, 사용, 조사, 정리하기, 밀기, 접객, 직접입력 }
+public enum InteractionPrompt { 상호작용, 여닫기, 켜고끄기, 줍기, 사용, 조사, 정리하기, 밀기, 접객, 직접입력, 걸기 }
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
 // 한 GameObject에 Interactable 1 + Effect 여러 개 + Condition 0~N 를 조합한다.
@@ -77,6 +77,7 @@ public class Interactable : MonoBehaviour
     {
         typeof(SfxEffect), typeof(ChangeObjectEffect), typeof(HingeEffect),
         typeof(PushEffect), typeof(PickupEffect), typeof(SpawnObjectEffect), typeof(EnterUIModeEffect),
+        typeof(HookEffect),
     };
 
     // 컴포넌트 우클릭 메뉴: promptType 에 맞게 효과 구성을 맞춘다.
@@ -99,6 +100,7 @@ public class Interactable : MonoBehaviour
             case InteractionPrompt.사용:     wanted.Add(typeof(SpawnObjectEffect));                    break;
             case InteractionPrompt.밀기:     wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
             case InteractionPrompt.접객:     wanted.Add(typeof(EnterUIModeEffect));                    break;
+            case InteractionPrompt.걸기:     wanted.Add(typeof(HookEffect));                           break;
             default: /* 상호작용 / 조사 / 직접입력 */                                                   break;
         }
 
@@ -126,6 +128,8 @@ public class Interactable : MonoBehaviour
             UnityEditor.Undo.AddComponent<PhaseCondition>(gameObject);
 
         EnsureOutline();
+        if (promptType == InteractionPrompt.줍기)
+            EnsureRigidbody();
         ReorderComponents();
         UnityEditor.EditorUtility.SetDirty(this);
     }
@@ -144,6 +148,14 @@ public class Interactable : MonoBehaviour
         so.ApplyModifiedProperties();
         outline.enabled = false;
         UnityEditor.EditorUtility.SetDirty(outline);
+    }
+
+    // 줍기 아이템은 바닥에 물리적으로 놓이므로 Rigidbody 필요. 이미 있으면 손대지 않음.
+    private void EnsureRigidbody()
+    {
+        if (GetComponent<Rigidbody>() != null) return;
+        UnityEditor.Undo.AddComponent<Rigidbody>(gameObject);
+        Debug.Log($"[Interactable] '{name}' Rigidbody 추가 (줍기)", this);
     }
 
     // 인스펙터 컴포넌트 순서:

@@ -53,10 +53,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_VersionIndex
       value: 7711
       objectReference: {fileID: 0}
@@ -2166,10 +2162,6 @@ PrefabInstance:
     - target: {fileID: 3904470374105054418, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5157396166787695014, guid: 70bf01a755634f24d8a50f1c7c389c67, type: 3}
       propertyPath: m_VersionIndex
