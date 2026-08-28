@@ -33,6 +33,7 @@ public class HookEffect : InteractionEffect
 
         item.transform.SetPositionAndRotation(Socket.position, Socket.rotation);
         item.SetActive(true);
+        PickupEffect.Reactivate(item);
 
         var rb = item.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;

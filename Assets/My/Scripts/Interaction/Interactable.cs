@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -47,7 +48,11 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        effects = GetComponents<InteractionEffect>();
+        // SfxEffect 는 항상 먼저 실행 — 뒤따르는 효과(PickupEffect 등)가 오브젝트를 비활성화해도
+        // 소리는 이미 재생을 시작한 뒤라 안 끊김. 인스펙터 컴포넌트 나열 순서와는 무관.
+        effects = GetComponents<InteractionEffect>()
+            .OrderBy(e => e is SfxEffect ? 0 : 1)
+            .ToArray();
         conditions = GetComponents<InteractionCondition>();
         IsOn = startOn;
 

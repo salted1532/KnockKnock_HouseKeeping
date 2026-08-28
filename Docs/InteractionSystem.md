@@ -15,6 +15,7 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 - 플레이어 쪽 **Interactor**(`GazeInteractor` 화면중앙+E / `CursorInteractor` 마우스+클릭)가 대상을 찾아 `Interactable.Interact()` 호출.
 - `Interactable`은 붙어 있는 모든 `InteractionEffect.Play(ctx)`를 컴포넌트 순서대로 실행 + `onInteracted` UnityEvent 발동.
 - 효과는 `InteractionContext`(대상/주체/IsOn/히트지점)를 읽는다.
+- **실제 실행 순서는 `SfxEffect`가 항상 최우선** — `Interactable.Awake()`에서 강제 정렬함(인스펙터 컴포넌트 나열 순서와는 별개). 뒤따르는 효과(`PickupEffect` 등)가 오브젝트를 비활성화해도 소리가 이미 재생 시작된 뒤라 안 끊김.
 
 ## 작업 흐름
 

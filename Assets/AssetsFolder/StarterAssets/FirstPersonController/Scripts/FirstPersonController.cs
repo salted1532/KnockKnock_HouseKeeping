@@ -131,8 +131,8 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
+			// 마우스는 델타값이라 데드존 불필요 — 게임패드 스틱 흔들림 방지용 데드존은 마우스가 아닐 때만 적용
+			if (_input.look.sqrMagnitude >= _threshold || IsCurrentDeviceMouse)
 			{
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;

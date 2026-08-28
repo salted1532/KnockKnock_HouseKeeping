@@ -102,6 +102,7 @@ public class InventorySystem : MonoBehaviour
         if (thrownItem != null)
         {
             thrownItem.SetActive(true);
+            PickupEffect.Reactivate(thrownItem);
             thrownItem.transform.SetParent(null);
 
             Transform origin = throwPos.parent != null ? throwPos.parent : throwPos;

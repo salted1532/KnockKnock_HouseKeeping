@@ -4,7 +4,7 @@ using UnityEngine;
 // 저녁에만 쓰려면 같은 오브젝트에 PhaseCondition 추가.
 public class EnterUIModeEffect : InteractionEffect
 {
-    [Tooltip("카메라가 이동할 위치/방향 (앉은 시점)")]
+    [Tooltip("플레이어가 이동해 고정될 위치 + 바라볼 정면 (Player_Anchor). Y 회전만 사용, 비우면 이 오브젝트")]
     [SerializeField] private Transform anchor;
 
     public override void Play(in InteractionContext ctx)
