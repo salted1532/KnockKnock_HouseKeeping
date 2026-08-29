@@ -27,12 +27,12 @@
 
 ## 핵심 루프 (하루 일과)
 
-**아침 → 점심 → 저녁(접객) → 새벽** 4단계로 하루가 진행된다 (`DayPhaseManager`).
+**아침 → 점심 → 저녁(접객) → 새벽** 4단계로 하루가 진행된다 (`DayPhaseManager`). 각 단계는 지정 오브젝트를 상호작용해 넘긴다 — 게시판(아침→점심), 접객 테이블(점심→저녁), 침대(새벽→다음날). 전환마다 검정 페이드가 조명/앰비언스 스왑을 가려준다 (`ScreenFader` + `PhaseVisuals`).
 
-1. **일과 처리**: 울타리 수리, 노숙자 내쫓기, 불법주차 신고 등 매일 다른 이벤트 진행
-2. **모텔 청소**: 퇴실한 객실 청소
-3. **숙박객 모집 (접객)**: 점심 일과를 마치고 책상으로 가서 상호작용 → **UI 모드**로 전환(플레이어/카메라 고정, 마우스 표시) → 테이블 위 컴퓨터·신분증 등을 마우스로 조작하며 신규 방문자 체크인 심사 (수락/거절)
-4. **자유시간(새벽)**: 취침 전 밤 — 행동력 범위 내에서 숙박객과 대화 가능, 이후 취침으로 다음날 진행
+1. **아침 — 방 청소**: 퇴실한 객실의 쓰레기 줍기(인벤토리) → 쓰레기통에 버림, 흐트러진 침대 정리
+2. **점심 — 일과 처리**: 울타리 수리, 노숙자 내쫓기, 불법주차 신고 등 매일 다른 이벤트. 일차에 따라 점프스케어
+3. **저녁 — 숙박객 모집 (접객)**: 저녁이 되면 접객 자리로 **자동 착석** → **UI 모드**(플레이어 고정, 마우스 표시) → 테이블 위 컴퓨터·신분증·모니터를 마우스로 조작하며 몽유병 환자 판별 → 수락(방 배정)/거절. 창문에 점프스케어·이상한 방문자
+4. **새벽 — 자유시간**: 자율 이동 복귀. 배정한 방마다 숙박객과 대화(불가한 숙박객·문이 활짝 열리는 방·점프스케어 등). 이상한 점을 느끼면 인벤토리의 총으로 숙박객 처치 가능. 침대 취침 → 다음날
 
 일과 중에는 게임 진행에 따른 분위기 변화를 체감할 수 있다 (예: 초반에 쫓아낸 노숙자가 후반엔 시체로 발견되거나, 불법주차 신고 시 경찰이 응답하지 않는 등).
 
@@ -69,8 +69,9 @@ Assets/
 │  │  ├─ Interaction/   # 상호작용 시스템 — Core(베이스), Effects(효과), Conditions(게이트),
 │  │  │                 #   Drivers(입력), Modes(UI모드) + CartGroundAlign, ItemImpactSound
 │  │  ├─ Inventory/     # 5슬롯 인벤토리 + 아이템 ID 연결(ItemId/HandItem/HandItemRegistry)
-│  │  ├─ Game/          # DayPhaseManager (하루 4단계 진행)
-│  │  ├─ Environment/   # DayNightSwitcher (라이팅/스카이박스/볼륨 전환)
+│  │  ├─ Game/          # DayPhaseManager(하루 4단계+페이드), ReceptionManager(저녁 접객),
+│  │  │                 #   PhaseLabel(HUD), ActivateOnAwake
+│  │  ├─ Environment/   # PhaseVisuals(4단계 라이팅/스카이박스/볼륨), ScreenFader(검정 페이드)
 │  │  ├─ Audio/         # SoundManager (앰비언스 + 발소리)
 │  │  └─ Player/        # FootstepSystem
 │  ├─ InGame/           # 씬에 실제로 쓰는 프리팹/머티리얼/사운드/렌더텍스처
@@ -90,7 +91,7 @@ doc/                     # 세션별 작업 로그 + 코드 변경 전/후 + 설
 
 ## 상호작용 시스템
 
-전체 개편 완료 ([`doc/0078`](doc/0078-interaction-system-redesign.md), [`doc/0079`](doc/0079-interaction-effects-reference.md), 허브 문서 [`Docs/InteractionSystem.md`](Docs/InteractionSystem.md)).
+전체 개편 완료 ([`doc/0078`](doc/0078-interaction-system-redesign.md), [`doc/0079`](doc/0079-interaction-effects-reference.md), 노트/모니터·하루 흐름 [`doc/0100`](doc/0100-note-and-monitor-interactions-design.md), 허브 문서 [`Docs/InteractionSystem.md`](Docs/InteractionSystem.md)).
 
 **구 방식** (`InteractionType` enum + 거대 switch에 케이스를 하나씩 추가) → **컴포넌트 조합 방식**으로 전환:
 
@@ -118,12 +119,16 @@ GameObject
 | 줍기 | `PickupEffect` + `SfxEffect` + `ItemImpactSound` | `Pickup` / `Flashlight` |
 | 사용 | `SpawnObjectEffect` + `SfxEffect` | `ItemDispenser` |
 | 밀기 | `PushEffect` + `SfxEffect` + `ItemImpactSound` | `Push` |
-| 접객 | `EnterUIModeEffect` + `SfxEffect` + `PhaseCondition` | (신규) |
+| 걸기 | `HookEffect` + `SfxEffect` | (신규 — 열쇠고리) |
+| 화면고정 | `EnterUIModeEffect` + `SfxEffect` | 구 `접객` (모니터·컴퓨터, 시간대 무관) |
+| 읽기 | `ShowPanelEffect` + `SfxEffect` | (신규 — 노트/편지/사진) |
+| 아침·점심·저녁·하루 종료 | `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition` | (신규 — 게시판/접객 테이블/침대) |
 | 상호작용 / 조사 | `SfxEffect` | `Generic` + `UnityEvent` |
 
 - **모든 상호작용에 효과음** — `SfxEffect` 는 항상 포함. `[RequireComponent(AudioSource)]` 로 자동 부착.
 - **on/off 상호작용은 소리 2개** — 토글이면 `SfxEffect` 가 `onClip` / `offClip` 을 따로 재생.
 - **획득 아이템은 ID로 연결** — 줍는 프리팹의 `PickupEffect.itemId` ↔ 플레이어 손 오브젝트의 `HandItem.id` (`HandItemRegistry` 가 매칭). 손전등=001, 소다=002.
+- **하루종료 스위치 4종** — 재설정 시 `PhaseSwitchEffect.from/to` 와 `PhaseCondition.allowedPhases` 가 프롬프트에 맞춰 자동 세팅 (아침종료 = Morning→Noon … 하루종료 = Dawn→Morning). 전환은 `ScreenFader` 페이드 경유.
 
 ### 핵심 스크립트
 
@@ -140,19 +145,26 @@ GameObject
 | `PushEffect` | 부모 Rigidbody 를 주체 반대로 임펄스+토크 (쇼핑카트) | [doc](Docs/PushEffect.md) |
 | `PickupEffect` | `InventorySystem.AddItem`. `itemId` 로 손 오브젝트 조회 | [doc](Docs/PickupEffect.md) |
 | `SpawnObjectEffect` | 프리팹 생성, `maxCount` 제한 (자판기) | [doc](Docs/SpawnObjectEffect.md) |
-| `EnterUIModeEffect` | `UIInteractionMode.Enter(anchor)` (책상 접객) | [doc](Docs/EnterUIModeEffect.md) |
+| `HookEffect` | 손에 든 열쇠를 빈 고리에 걸어 고정 (열쇠고리) | [doc](Docs/HookEffect.md) |
+| `EnterUIModeEffect` | `UIInteractionMode.Enter(anchor)` — `화면고정` (모니터/컴퓨터) | [doc](Docs/EnterUIModeEffect.md) |
+| `ShowPanelEffect` | 오브젝트 켜고 플레이어 정지 — `읽기` (노트/편지/사진) | [doc](Docs/ShowPanelEffect.md) |
+| `PhaseSwitchEffect` | 상호작용으로 하루 단계 `from→to` 전환 (게시판/테이블/침대) | [doc](Docs/PhaseSwitchEffect.md) |
 | `PhaseCondition` | 지정 하루 단계에서만 상호작용 허용 | [doc](Docs/PhaseCondition.md) |
 | `GazeInteractor` | 화면중앙 레이 + 아웃라인 + E, 벽 너머 차단 (구 `InteractionOutline`) | [doc](Docs/GazeInteractor.md) |
-| `CursorInteractor` | 마우스 레이 + 좌클릭, UI 모드에서만 활성 | [doc](Docs/CursorInteractor.md) |
-| `UIInteractionMode` | 접객 UI 모드 — 카메라 고정, 마우스 표시, Gaze↔Cursor 전환, ESC | [doc](Docs/UIInteractionMode.md) |
-| `DayPhaseManager` | 아침/점심/저녁/새벽 순환, `OnPhaseChanged` 이벤트 | [doc](Docs/DayPhaseManager.md) |
+| `CursorInteractor` | 마우스 레이 + 좌클릭, UI 모드 전용, RenderTexture 커서 보정 + 가림 체크 | [doc](Docs/CursorInteractor.md) |
+| `UIInteractionMode` | UI 모드 — 앵커 스택(접객/모니터/노트), 플레이어 고정, 커서, ESC 한 겹씩 | [doc](Docs/UIInteractionMode.md) |
+| `DayPhaseManager` | 아침/점심/저녁/새벽 순환 + `ScreenFader` 페이드 전환, `OnPhaseChanged` | [doc](Docs/DayPhaseManager.md) |
+| `ReceptionManager` | 저녁 접객 세션 골격 — `Evening` 자동 진입, `EndSession()`→새벽 | [doc](Docs/ReceptionManager.md) |
+| `PhaseLabel` | HUD 시간대 텍스트 ("Day 3 · Evening") | [doc](Docs/PhaseLabel.md) |
 | `ItemId` / `HandItem` / `HandItemRegistry` | 획득 아이템 프리팹 ↔ 손 오브젝트 번호 연결 | [doc](Docs/HandItemRegistry.md) |
 | `InventorySystem` | 5슬롯, 줍기/장착/사용/던지기, 손전등 슬롯 특수 | [doc](Docs/InventorySystem.md) |
 | `ItemImpactSound` | 물리 충돌 시 임팩트 사운드 (줍기·밀기 자동 추가) | [doc](Docs/ItemImpactSound.md) |
 | `CartGroundAlign` | 쇼핑카트 4바퀴 레이캐스트로 바닥 기울기 정렬 (진행 중) | [doc](Docs/CartGroundAlign.md) |
-| `SoundManager` | 앰비언스(밤/아침) + 지면 레이어별 발소리 재생 | [doc](Docs/SoundManager.md) |
+| `SoundManager` | 앰비언스(밤/낮, `OnPhaseChanged` 구독) + 지면 레이어별 발소리 | [doc](Docs/SoundManager.md) |
 | `FootstepSystem` | 이동 거리 누적 → 발소리 타이밍, 지면 레이어 판정 | [doc](Docs/FootstepSystem.md) |
-| `DayNightSwitcher` | 스카이박스/라이트/볼륨 프로파일 밤↔아침 전환 | [doc](Docs/DayNightSwitcher.md) |
+| `PhaseVisuals` | 4단계 스카이박스/라이트/볼륨/fog 스왑 (구 `DayNightSwitcher`) | [doc](Docs/PhaseVisuals.md) |
+| `ScreenFader` | 전체 화면 검정 페이드 (`FadeThrough`) | [doc](Docs/ScreenFader.md) |
+| `ActivateOnAwake` | 시작 시 지정 오브젝트 활성화 (페이드 오버레이 등) | [doc](Docs/ActivateOnAwake.md) |
 
 ## 구현 완료 기능
 
@@ -163,8 +175,9 @@ GameObject
 
 ### 상호작용 시스템 (개편)
 - [x] `Interactable` + `InteractionEffect` 컴포넌트 조합 구조 — enum+switch 방식 폐기
-- [x] 효과 6종 + 조건 1종 + 입력 드라이버 2종 + UI 모드 매니저
-- [x] `GazeInteractor` — 화면중앙 레이, 아웃라인, E키, **벽 너머 상호작용 차단**(가림 2차 레이캐스트, `doc/0077`)
+- [x] 효과 10종(Sfx/ChangeObject/Hinge/Push/Pickup/SpawnObject/Hook/EnterUIMode/ShowPanel/PhaseSwitch) + 조건 1종 + 입력 드라이버 2종 + UI 모드 매니저
+- [x] `GazeInteractor` — 화면중앙 레이, 아웃라인, E키, **벽 너머 상호작용 차단**(가림 2차 레이캐스트, `doc/0077`). `CursorInteractor` 도 동일 가림 체크
+- [x] `HookEffect` — 손에 든 열쇠를 빈 고리에 걸기 (`걸기` 프롬프트, `doc/0087`~`0090`)
 - [x] `Interactable` 우클릭 **"Prompt Type에 맞게 효과 재설정"** — 카테고리별 표준 효과 추가/제거, 콜라이더·Interaction 레이어·Outline 자동, 컴포넌트 순서 정렬(메쉬→콜라이더→스크립트→사운드→나머지)
 - [x] 모든 상호작용 효과음 + 토글 상호작용 on/off 소리 분리
 - [x] `HingeEffect` — `hinge` Transform·`axis` 지정으로 문/쓰레기통 뚜껑 등 임의 축 여닫기
@@ -177,14 +190,18 @@ GameObject
 - [x] 던질 때 원본 픽업 오브젝트 되살려 Rigidbody 부착 + 플레이어 콜라이더 충돌 무시 + 벽 관통 방지 스피어캐스트
 
 ### 하루 진행 / 환경
-- [x] `DayPhaseManager` — 아침→점심→저녁→새벽 순환, `OnPhaseChanged` 이벤트, 디버그 `N` 키
-- [x] `PhaseCondition` — 특정 단계에서만 상호작용 가능 (책상 접객 = 저녁)
-- [x] `DayNightSwitcher` — 스카이박스/디렉셔널 라이트/URP 볼륨 프로파일/포그 밤↔아침 전환 (현재 `Q` 키 디버그)
-- [x] `SoundManager` — 밤/아침 앰비언스 루프, 발소리 재생
+- [x] `DayPhaseManager` — 아침→점심→저녁→새벽 순환, `ScreenFader` **검정 페이드 전환**(암전 시 상태 갱신 + `OnPhaseChanged`, 페이드 인 후 `OnPhaseChangeFinished`), `Transitioning` 가드, 디버그 `N`/`Q` 키
+- [x] `PhaseSwitchEffect` — 게시판(아침→점심)·접객 테이블(점심→저녁)·침대(새벽→아침) 상호작용으로 단계 전환. `from`/`to` + `PhaseCondition` 은 재설정 시 자동
+- [x] `PhaseVisuals` — 4단계 스카이박스/라이트 묶음/URP 볼륨/포그 스왑 (`OnPhaseChanged` 구독, 구 `DayNightSwitcher` 대체·삭제)
+- [x] `SoundManager` — `OnPhaseChanged` 구독, 저녁·새벽=밤 / 아침·점심=낮 앰비언스 (구 `Q` 토글 삭제), 발소리 재생
+- [x] `PhaseLabel` — HUD 시간대/일차 텍스트
 
-### 접객 UI 모드
-- [x] `UIInteractionMode` — 책상 상호작용 시 FPC·CharacterController 비활성, 카메라를 앵커로 lerp, 마우스 커서 표시, `GazeInteractor`↔`CursorInteractor` 전환, ESC 해제
-- [x] `CursorInteractor` — UI 모드에서 마우스로 테이블 위 오브젝트 상호작용
+### UI 모드 / 접객
+- [x] `UIInteractionMode` — **앵커 스택**: 플레이어를 `Player_Anchor` 로 이동·고정, 커서 표시, `Gaze`↔`Cursor` 전환. 접객(하위) 안에서 모니터(상위) 중첩, ESC 로 한 겹씩 벗김
+- [x] `ReceptionManager` — 저녁 되면 접객 자리로 **자동 착석** + 세션 시작. `EndSession()`(임시 디버그 `K`) → 새벽 페이드. 손님 심사 로직은 미구현
+- [x] `EnterUIModeEffect`(`화면고정`) — 모니터/컴퓨터 줌인. `CursorInteractor` 로 화면 버튼 클릭 (RenderTexture 커서 좌표 보정, `doc/0099`)
+- [x] `ShowPanelEffect`(`읽기`) — 노트/편지 상호작용 시 오브젝트 켜고 플레이어 정지. ESC 계층에서 노트가 우선 소비
+- [x] `ScreenFader` + `ActivateOnAwake` — Overlay 검정 페이드, 에디터에선 꺼두고 런타임에 켬
 
 ### 아트 / 에셋
 - [x] 모텔방 프로토타입 모델링/텍스처링 (`Motel_Room` 프리팹), 시간대별 조명 프리팹
@@ -197,13 +214,13 @@ GameObject
 
 `기획/기능정의서.md` 의 SYS-01~12 중 코어 루프의 접객·판별·경영 파트는 아직 코드가 없다.
 
-- [ ] **접객 게임로직** — 손님 대화, 신분증/서류 확인, TV 구별법 표시, 승인/거절 판단 (SYS-03~05). UI 모드 스캐폴드(`UIInteractionMode`)까지만 완료
-- [ ] **일과 태스크 관리** — 울타리 수리/노숙자/불법주차 등 일별 이벤트, 시간대 전환 HUD (SYS-02, 12)
+- [ ] **접객 게임로직** — 손님 큐/대화, 신분증·서류 확인, TV 구별법 표시, 승인/거절 판단 (SYS-03~05). UI 모드 진입·자동 착석까지 완료, `ReceptionManager.EndSession()` 훅만 있고 손님 없음 (지금은 디버그 `K`)
+- [ ] **일과 태스크 관리** — 아침 청소(쓰레기 줍기·침대 정리)·점심 일과의 "할일 완료" 게이트. 지금은 게시판/테이블/침대가 조건 없이 전환 (`TasksCompleteCondition : InteractionCondition` 훅 예정, SYS-02)
+- [ ] **새벽 행동력** — 침대 취침 게이트, 숙박객 방별 대화/탐문 (SYS-10~11). 지금은 조건 없이 전환
 - [ ] **객실 배정 UI**, **상점 UI/구매** (SYS-06, 08)
-- [ ] **NPC** 이동/경로, 숙박객 대화, 새벽 자유활동(탐문), 취침&일차 전환 (SYS-09~11)
+- [ ] **NPC** 이동/경로, 숙박객 대화, 새벽 총기 사용 (SYS-09)
 - [ ] **몽유병 판별/살해 시뮬레이션** — 밤마다 감염자 수 대비 확률 처리, 게임오버 조건
 - [ ] `StoryFlags` / `OverlayGate` / `DayPhaseManager` 3싱글톤으로 시스템 엮기 (`기획/상호작용-미니게임-연동-설계안.md`) — `DayPhaseManager` 만 존재
-- [ ] `DayPhaseManager` ↔ `DayNightSwitcher` / `SoundManager` 연결 (현재 각자 `Q` 키 디버그 토글)
 - [ ] 세계관 붕괴 연출 (도시 화재, 분위기 변화), 상점 제한, 엔딩 분기
 
 ## 스크립트 정리 분석
@@ -214,6 +231,7 @@ GameObject
 - `Interaction/ItemDispenser.cs` → `SpawnObjectEffect`
 - `Editor/InteractionMigrator.cs` (1회용)
 - `Interactable.cs` 의 `LEGACY` 필드 블록 (`type`, `messyVisual`, `door` …) + `SetEquipTarget`
+- `Environment/DayNightSwitcher.cs` → `PhaseVisuals` (2026-08-28, `doc/0100`)
 
 ### 삭제 검토 (Unity 템플릿/프로토타입 잔재)
 
@@ -229,8 +247,10 @@ GameObject
 
 | 스크립트 | 내용 |
 |---|---|
-| `SoundManager` / `DayNightSwitcher` | 둘 다 자체 `Q` 키 `isNight` 토글 보유 → `DayPhaseManager.OnPhaseChanged` 구독으로 교체해야 4단계와 일관 (Evening/Dawn = 밤) |
 | `SoundManager` | 게임 규모에 비해 너무 얇음 — BGM, SFX 카테고리 볼륨/뮤트, AudioSource 풀링, 3D 감쇠 등 없음. 접객/공포 연출 들어가기 전 확장 필요 |
+| `ReceptionManager` | 접객 정상 종료가 디버그 `K` 뿐 (`ponytail:` 주석). 손님 큐(SYS-03~06/09) 나오면 "전원 처리 완료" 가 `EndSession()` 호출하도록 |
+| `PhaseSwitchEffect` / 게시판·테이블·침대 | 할일 완료 여부와 무관하게 전환 — `TasksCompleteCondition` 훅 지점 |
+| `UIInteractionMode.edgeLook` | 전역 플래그라 접객·모니터가 같은 값. 접객만 둘러보기 켜려면 `Enter(...)` 파라미터화 필요 |
 | `InventorySystem.UpdateFlashlightHint()` | 매 호출 `GameObject.Find("Canvas")` + `transform.Find("HowToUse_Flashlight")` 문자열 탐색 — 직렬화 참조로 교체 |
 | `InventorySystem` | 같은 `ItemId` 아이템 2개(소다 등)를 주우면 두 슬롯이 같은 손 오브젝트를 가리켜 `SelectSlot`/`SetActive` 충돌 — 소모품 다중 소지 규칙 정리 필요 |
 | `CartGroundAlign` | `Quaternion.FromToRotation(transform.forward, targetUp)` — `forward` 를 지면 법선에 맞추면 카트가 앞으로 고꾸라짐. `transform.up` 이 맞을 가능성. (진행 중 표시된 기능) |

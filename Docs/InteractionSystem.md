@@ -36,15 +36,20 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 | 조사 | "조사" | `SfxEffect` | — |
 | 정리하기 | "정리하기" | `ChangeObjectEffect` + `SfxEffect` | ✗ |
 | 밀기 | "밀기" | `PushEffect` + `SfxEffect` + `ItemImpactSound` | ✗ |
-| 접객 | "접객" | `EnterUIModeEffect` + `SfxEffect` + `PhaseCondition` | ✗ |
-| 직접입력 | `customPrompt` | `SfxEffect` | — |
+| 화면고정 | "화면고정" | `EnterUIModeEffect` + `SfxEffect` (구 `접객`, idx 8 유지 — PhaseCondition 자동추가 없음) | ✗ |
+| 읽기 | "읽기" | `ShowPanelEffect` + `SfxEffect` | — |
 | 걸기 | "걸기" | `HookEffect` + `SfxEffect` | — |
+| 아침종료 | "일과 종료" | `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition(Morning)` (from/to·단계 자동) | — |
+| 점심종료 | "일과 종료" | `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition(Noon)` | — |
+| 저녁종료 | "영업 종료" | `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition(Evening)` | — |
+| 하루종료 | "취침" | `PhaseSwitchEffect` + `SfxEffect` + `PhaseCondition(Dawn)` | — |
+| 직접입력 | `customPrompt` | `SfxEffect` | — |
 
 ## "재설정" 우클릭 메뉴가 하는 일
 
 1. promptType 에 맞는 효과 **추가** + 필요 없는 managed 효과 **제거** (Undo 가능, 콘솔 로그)
-   - managed = `Sfx / ChangeObject / Hinge / Push / Pickup / SpawnObject / EnterUIMode / Hook` 만 자동 제거.
-   - `ItemImpactSound` · `PhaseCondition` · 커스텀 효과 · `onInteracted` 는 추가만, 제거 안 함.
+   - managed = `Sfx / ChangeObject / Hinge / Push / Pickup / SpawnObject / EnterUIMode / Hook / ShowPanel / PhaseSwitch` 만 자동 제거.
+   - `ItemImpactSound` · `PhaseCondition` · 커스텀 효과 · `onInteracted` 는 추가만, 제거 안 함. (종료4종은 `PhaseCondition` 도 자동 추가하되 제거는 안 함)
 2. `SfxEffect` 는 항상 포함 → `[RequireComponent(AudioSource)]` 로 AudioSource 자동(3D/논플레이온어웨이크).
 3. 콜라이더 없으면 `BoxCollider`(메시 bounds 크기) 추가 + `Interaction` 레이어. 자식에 있으면 경고.
 4. `Outline` 없으면 추가 → `enabled=off`, 모드 `OutlineVisible`.
@@ -65,10 +70,13 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 | [PickupEffect](PickupEffect.md) | 인벤토리 획득 (구 Pickup/Flashlight), itemId 연결 |
 | [HookEffect](HookEffect.md) | 빈 고리에 든 아이템 걸기 (Key_hook), `걸기` 프롬프트 표준 효과 |
 | [SpawnObjectEffect](SpawnObjectEffect.md) | 프리팹 생성 (구 ItemDispenser) |
-| [EnterUIModeEffect](EnterUIModeEffect.md) | UI 모드 진입 (책상 접객) |
+| [EnterUIModeEffect](EnterUIModeEffect.md) | UI 모드 진입 (`화면고정` — 모니터/컴퓨터) |
+| [ShowPanelEffect](ShowPanelEffect.md) | 오브젝트 켜고 플레이어 정지 (`읽기` — 노트/편지/사진) |
+| [PhaseSwitchEffect](PhaseSwitchEffect.md) | 상호작용으로 하루 단계 `from→to` 전환 (종료4종 — 게시판/테이블/침대) |
 | [PhaseCondition](PhaseCondition.md) | 하루 단계 게이트 |
 | [GazeInteractor](GazeInteractor.md) | 화면중앙 레이 + E (구 InteractionOutline) |
-| [CursorInteractor](CursorInteractor.md) | 마우스 레이 + 클릭 (UI 모드용) |
-| [UIInteractionMode](UIInteractionMode.md) | 접객 UI 모드 매니저 |
-| [DayPhaseManager](DayPhaseManager.md) | 아침/점심/저녁/새벽 진행 |
+| [CursorInteractor](CursorInteractor.md) | 마우스 레이 + 클릭 (UI 모드용, RenderTexture 커서 보정) |
+| [UIInteractionMode](UIInteractionMode.md) | UI 모드 매니저 (앵커 스택 — 접객/모니터/노트) |
+| [DayPhaseManager](DayPhaseManager.md) | 아침/점심/저녁/새벽 진행 (페이드 전환) |
+| [ReceptionManager](ReceptionManager.md) | 저녁 접객 세션 골격 |
 | [HandItemRegistry](HandItemRegistry.md) | ItemId → 손 오브젝트 조회 (`ItemId`, `HandItem` 포함) |

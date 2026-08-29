@@ -3,6 +3,7 @@
 `Assets/My/Scripts/Game/DayPhaseManager.cs`
 
 하루 진행: **아침 → 점심 → 저녁(접객) → 새벽**, 다음 날 아침으로 순환. 싱글턴.
+전환은 [`ScreenFader`](ScreenFader.md) 를 거친다 — 암전 시점에 상태 갱신, 페이드 인 완료 후 후속 이벤트.
 
 ```csharp
 public enum DayPhase { Morning, Noon, Evening, Dawn }
@@ -13,7 +14,7 @@ public enum DayPhase { Morning, Noon, Evening, Dawn }
 | 필드 | 설명 |
 |---|---|
 | `startPhase` (`DayPhase`) | 시작 단계 |
-| `debugAdvanceKey` (bool, 기본 on) | 디버그: `N` 키로 다음 단계 |
+| `debugAdvanceKey` (bool, 기본 on) | 디버그: `N` 또는 `Q` 로 `Advance()` |
 
 ## 프로퍼티 / 이벤트
 
@@ -21,16 +22,30 @@ public enum DayPhase { Morning, Noon, Evening, Dawn }
 |---|---|
 | `Instance` (static) | 싱글턴 |
 | `Current` (`DayPhase`) | 현재 단계 |
-| `DayCount` (int) | 며칠째 (새벽 → 아침 넘어갈 때 +1) |
-| `OnPhaseChanged` (`event Action<DayPhase>`) | 단계 변경 시 발동 (`Start` 에서 최초 1회 포함) |
+| `DayCount` (int) | 며칠째. 어느 단계에서든 `Morning` 으로 **진입**할 때 +1 |
+| `Transitioning` (bool) | 페이드 전환 중 (재-Advance 무시됨) |
+| `OnPhaseChanged` (`event Action<DayPhase>`) | **암전 중** 발동 — 게이트·비주얼용 (`Start` 최초 1회 포함) |
+| `OnPhaseChangeFinished` (`event Action<DayPhase>`) | **페이드 인 완료 후** 발동 — 후속 연출용 |
 
 ## 메소드
-- `Advance()` — 다음 단계로. 새벽이면 `DayCount++`.
 
-## 현재 상태 / 연동 예정
+- `Advance()` — 순환상 다음 단계로 `TransitionTo`. 디버그 N/Q, `ReceptionManager` 접객 종료에서 사용.
+- `TransitionTo(DayPhase target)` — `target` 으로 페이드 전환. 이미 전환 중이거나 같은 단계면 무시.
+  전환 중엔 `UIInteractionMode.FreezeForOverlay(true)` 로 플레이어 조작 정지 (UI 모드 중이면 무시됨).
+  암전 시점: `target==Morning` 이면 `DayCount++`, `Current` 갱신, `OnPhaseChanged`.
+  `ScreenFader` 없으면 즉시 전환.
 
-- [PhaseCondition](PhaseCondition.md) 이 소비 중 (책상 접객 = Evening 게이트).
-- `SoundManager` / `DayNightSwitcher` 의 `Q` 키 낮밤 디버그 토글은 아직 이 매니저에 연결 안 됨 (단계 → 시각 매핑은 후속 작업).
+## 소비자
+
+| 스크립트 | 하는 일 |
+|---|---|
+| [PhaseVisuals](PhaseVisuals.md) | `OnPhaseChanged` → 4단계 조명/스카이박스/볼륨/fog 스왑 |
+| [SoundManager](SoundManager.md) | `OnPhaseChanged` → 저녁·새벽=밤 / 아침·점심=낮 앰비언스 |
+| [ReceptionManager](ReceptionManager.md) | `OnPhaseChanged` → `Evening` 시 접객 세션 시작 |
+| [PhaseCondition](PhaseCondition.md) | 상호작용을 특정 단계로 게이팅 |
+| [PhaseSwitchEffect](PhaseSwitchEffect.md) | 상호작용으로 `TransitionTo` 호출 (게시판/테이블/침대) |
+| [PhaseLabel](PhaseLabel.md) | `OnPhaseChanged` → HUD 텍스트 |
 
 ## 관련
-[PhaseCondition](PhaseCondition.md) · [UIInteractionMode](UIInteractionMode.md) · [`doc/0078`](../doc/0078-interaction-system-redesign.md)
+
+[`doc/0078`](../doc/0078-interaction-system-redesign.md) · [`doc/0097`](../doc/0097-reception-ui-mode-anchor.md) · [`doc/0100`](../doc/0100-note-and-monitor-interactions-design.md)
