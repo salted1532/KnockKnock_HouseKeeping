@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e40a3db4d1fab43a0db0471d87b9ed, type: 3}
+  m_Name: Npc_3
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  id: 3
+  displayName: test3
+  neutralPortrait: {fileID: 310110339, guid: 462fc018cc7915845b09b12f67ea08fd, type: 3}
+  angryPortrait: {fileID: -947359230, guid: 1c25ba0fe1e8b8f4da8196836f26312d, type: 3}
+  modelPrefab: {fileID: 0}
+  isSleepwalker: 0
+  visitorOnly: 0
+  idCard:
+    name: 
+    birthDate: 
+    photo: {fileID: 0}
+    forged: 0

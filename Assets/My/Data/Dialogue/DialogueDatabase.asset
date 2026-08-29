@@ -1,0 +1,653 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e68035b0b6c8a418e4ba69a861bf1d, type: 3}
+  m_Name: DialogueDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueDatabase
+  entries:
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: Evening. Got a room for one night?
+    - expression: 0
+      text: Been walking since dawn. I'm done in.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: name
+    label: Ask their name
+    lines:
+    - expression: 0
+      text: Just call me a traveler. Names don't buy much out here.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: where
+    label: Ask where they're headed
+    lines:
+    - expression: 0
+      text: Somewhere the road stops. You know any place like that?
+    choices:
+    - label: I wish I did
+      goToNode: where_a
+    - label: Just take the room
+      goToNode: where_b
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: where_a
+    label: 
+    lines:
+    - expression: 0
+      text: Yeah. Figured as much.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: where_b
+    label: 
+    lines:
+    - expression: 0
+      text: Fair enough. Lead the way.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    label: Turn them away
+    lines:
+    - expression: 0
+      text: No room? After all that walking?
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    label: 
+    lines:
+    - expression: 0
+      text: I won't be trouble. Gone by first light.
+    choices:
+    - label: Hold firm
+      goToNode: reject_final
+    - label: Reconsider
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    label: 
+    lines:
+    - expression: 0
+      text: ...Fine. I've slept in worse than a ditch.
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    label: 
+    lines:
+    - expression: 0
+      text: Thank you. You won't hear a sound from me.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 1
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: What do you want at this hour?
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: noise
+    label: Ask about the noise last night
+    lines:
+    - expression: 0
+      text: Noise? I was asleep the whole time.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: Ah - yes. Hello. A room. Please. Just the one.
+    - expression: 0
+      text: Long day. Very long. You have no idea.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: case
+    label: Ask about his suitcase
+    lines:
+    - expression: 0
+      text: Samples! Brushes mostly. Nothing you'd want. Nothing at all.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: shaking
+    label: Ask why he's shaking
+    lines:
+    - expression: 0
+      text: Cold out. That's all. Just the cold.
+    choices:
+    - label: Let it go
+      goToNode: 
+    - label: Press him
+      goToNode: shaking_press
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: shaking_press
+    label: 
+    lines:
+    - expression: 1
+      text: I said it's the cold! Are we done here?
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    label: Turn them away
+    lines:
+    - expression: 0
+      text: No? Please. I can pay double.
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    label: 
+    lines:
+    - expression: 0
+      text: Where else is open? Nowhere. You know that.
+    choices:
+    - label: Refuse again
+      goToNode: reject_2
+    - label: Give in
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_2
+    label: 
+    lines:
+    - expression: 1
+      text: This is a mistake. You'll see.
+    choices: []
+    goToNode: reject_final
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    label: 
+    lines:
+    - expression: 0
+      text: Fine. FINE. I'm going.
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    label: 
+    lines:
+    - expression: 0
+      text: Oh thank you. You won't even know I'm here.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: Same as always. Key. Now.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 3
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 1
+      text: You're slow tonight. Move it.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: wait
+    label: Ask him to wait a moment
+    lines:
+    - expression: 1
+      text: I don't wait. That's your job.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    label: Ask for identification
+    lines:
+    - expression: 0
+      text: You've seen my face a hundred times.
+    choices:
+    - label: Insist on ID
+      goToNode: id_show
+    - label: Wave him through
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    label: 
+    lines:
+    - expression: 1
+      text: Here. Happy? Don't lose it this time.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    label: Turn them away
+    lines:
+    - expression: 1
+      text: Excuse me?
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    label: 
+    lines:
+    - expression: 1
+      text: You do NOT turn me away. Not me.
+    choices:
+    - label: Stand your ground
+      goToNode: reject_final
+    - label: Back down
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    label: 
+    lines:
+    - expression: 1
+      text: You'll regret this. Count on it.
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 3
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    label: 
+    lines:
+    - expression: 0
+      text: Finally.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: A room. Away from the road if you have one.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: road
+    label: Ask why away from the road
+    lines:
+    - expression: 0
+      text: I sleep lighter than most.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: alone
+    label: Ask if she's travelling alone
+    lines:
+    - expression: 0
+      text: Is that a requirement?
+    choices:
+    - label: Ask gently
+      goToNode: alone_soft
+    - label: Ask straight
+      goToNode: alone_hard
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: alone_soft
+    label: 
+    lines:
+    - expression: 0
+      text: ...Yes. Alone.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: alone_hard
+    label: 
+    lines:
+    - expression: 1
+      text: That's my business. Not yours.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    label: Turn them away
+    lines:
+    - expression: 0
+      text: I see.
+    choices: []
+    goToNode: reject_final
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    label: 
+    lines:
+    - expression: 0
+      text: I'll find somewhere. I always do.
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    label: 
+    lines:
+    - expression: 0
+      text: Good. Don't knock after dark.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    label: 
+    lines:
+    - expression: 0
+      text: Evening evening! Cold one out there tonight isn't it?
+    - expression: 0
+      text: Room for an old man's bones?
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: trip
+    label: Ask about his journey
+    lines:
+    - expression: 0
+      text: Oh it's a long story. Which part do you want?
+    choices:
+    - label: The beginning
+      goToNode: trip_begin
+    - label: The short version
+      goToNode: trip_short
+    - label: Skip it
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: trip_begin
+    label: 
+    lines:
+    - expression: 0
+      text: It started forty years back in a town that isn't on the maps anymore...
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: trip_short
+    label: 
+    lines:
+    - expression: 0
+      text: Visiting family. Or what's left of them.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: weather
+    label: Ask about the weather
+    lines:
+    - expression: 0
+      text: Storm's coming. Mark my words. Sky goes green first.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: need
+    label: Ask if he needs anything
+    lines:
+    - expression: 0
+      text: Kind of you to ask.
+    choices:
+    - label: Offer an extra blanket
+      goToNode: need_blanket
+    - label: Offer a hot meal
+      goToNode: need_meal
+    - label: Nothing for now
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: need_blanket
+    label: 
+    lines:
+    - expression: 0
+      text: Bless you. These old knees will thank you.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: need_meal
+    label: 
+    lines:
+    - expression: 0
+      text: I wouldn't say no to that.
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    label: Turn them away
+    lines:
+    - expression: 0
+      text: Oh. Oh dear. On a night like this?
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    label: 
+    lines:
+    - expression: 0
+      text: I don't move so fast anymore. Have a heart.
+    choices:
+    - label: Refuse
+      goToNode: reject_final
+    - label: Let him stay
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    label: 
+    lines:
+    - expression: 0
+      text: ...Alright. Sorry to have troubled you.
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    label: 
+    lines:
+    - expression: 0
+      text: Bless you son. Sleep well now.
+    choices: []
+    goToNode: 
+    outcome: 0

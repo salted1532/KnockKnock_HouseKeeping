@@ -4,21 +4,21 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 // 프롬프트 문구 목록. 여닫기/켜고끄기는 토글 상태(IsOn)에 따라 문구가 바뀐다.
-// 새 문구가 필요하면 여기에 추가하거나 직접입력 사용.
+// 새 문구가 필요하면 여기에 추가하거나 Custom 사용.
 // 순서(정수값)로 직렬화됨 — 기존 값 사이에 삽입 금지, 새 값은 끝에만 추가.
-// index 8 은 구 '접객' → '화면고정' 으로 rename (기존 프리팹은 그대로 매핑됨).
+// index 8 은 구 '접객' → ViewScreen 으로 rename (기존 프리팹은 그대로 매핑됨).
 public enum InteractionPrompt
 {
-    상호작용, 여닫기, 켜고끄기, 줍기, 사용, 조사, 정리하기, 밀기, 화면고정, 직접입력, 걸기,
-    읽기, 아침종료, 점심종료, 저녁종료, 하루종료,
+    Interact, OpenClose, Toggle, PickUp, Use, Inspect, CleanUp, Push, ViewScreen, Custom, Hang,
+    Read, EndMorning, EndNoon, EndEvening, EndDay,
 }
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
 // 한 GameObject에 Interactable 1 + Effect 여러 개 + Condition 0~N 를 조합한다.
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private InteractionPrompt promptType = InteractionPrompt.상호작용;
-    [Tooltip("promptType 이 직접입력일 때만 사용")]
+    [SerializeField] private InteractionPrompt promptType = InteractionPrompt.Interact;
+    [Tooltip("promptType 이 Custom 일 때만 사용")]
     [SerializeField] private string customPrompt = "";
     [Tooltip("on/off 로 상태가 왕복하는 상호작용인가 (문/커튼/조명 등). 체크 시 IsOn 이 매번 뒤집힘")]
     [SerializeField] private bool isToggle;
@@ -29,13 +29,18 @@ public class Interactable : MonoBehaviour
 
     public string Prompt => promptType switch
     {
-        InteractionPrompt.여닫기 => IsOn ? "닫기" : "열기",
-        InteractionPrompt.켜고끄기 => IsOn ? "끄기" : "켜기",
-        InteractionPrompt.직접입력 => customPrompt,
-        InteractionPrompt.아침종료 or InteractionPrompt.점심종료 => "일과 종료",
-        InteractionPrompt.저녁종료 => "영업 종료",
-        InteractionPrompt.하루종료 => "취침",
-        _ => promptType.ToString(),
+        InteractionPrompt.OpenClose => IsOn ? "Close" : "Open",
+        InteractionPrompt.Toggle => IsOn ? "Turn off" : "Turn on",
+        InteractionPrompt.PickUp => "Pick up",
+        InteractionPrompt.Inspect => "Inspect",
+        InteractionPrompt.CleanUp => "Clean up",
+        InteractionPrompt.ViewScreen => "View",
+        InteractionPrompt.Custom => customPrompt,
+        InteractionPrompt.Read => "Read",
+        InteractionPrompt.EndMorning or InteractionPrompt.EndNoon => "End shift",
+        InteractionPrompt.EndEvening => "Close up",
+        InteractionPrompt.EndDay => "Sleep",
+        _ => promptType.ToString(),   // Interact / Use / Push / Hang
     };
     public bool IsToggle => isToggle;
     public bool IsOn { get; private set; }
@@ -108,20 +113,20 @@ public class Interactable : MonoBehaviour
         DayPhase? fromPhase = null;   // 값이 있으면 PhaseSwitchEffect(from/to) + PhaseCondition 을 자동 설정
         switch (promptType)
         {
-            case InteractionPrompt.여닫기:   wanted.Add(typeof(HingeEffect));        isToggle = true;  break;
-            case InteractionPrompt.켜고끄기: wanted.Add(typeof(ChangeObjectEffect)); isToggle = true;  break;
-            case InteractionPrompt.정리하기: wanted.Add(typeof(ChangeObjectEffect)); isToggle = false; break;
-            case InteractionPrompt.줍기:     wanted.Add(typeof(PickupEffect)); wanted.Add(typeof(ItemImpactSound)); break;
-            case InteractionPrompt.사용:     wanted.Add(typeof(SpawnObjectEffect));                    break;
-            case InteractionPrompt.밀기:     wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
-            case InteractionPrompt.화면고정: wanted.Add(typeof(EnterUIModeEffect));                    break;
-            case InteractionPrompt.읽기:     wanted.Add(typeof(ShowPanelEffect));                      break;
-            case InteractionPrompt.걸기:     wanted.Add(typeof(HookEffect));                           break;
-            case InteractionPrompt.아침종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Morning; break;
-            case InteractionPrompt.점심종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Noon;    break;
-            case InteractionPrompt.저녁종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Evening; break;
-            case InteractionPrompt.하루종료: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Dawn;    break;
-            default: /* 상호작용 / 조사 / 직접입력 */                                                   break;
+            case InteractionPrompt.OpenClose:  wanted.Add(typeof(HingeEffect));        isToggle = true;  break;
+            case InteractionPrompt.Toggle:     wanted.Add(typeof(ChangeObjectEffect)); isToggle = true;  break;
+            case InteractionPrompt.CleanUp:    wanted.Add(typeof(ChangeObjectEffect)); isToggle = false; break;
+            case InteractionPrompt.PickUp:     wanted.Add(typeof(PickupEffect)); wanted.Add(typeof(ItemImpactSound)); break;
+            case InteractionPrompt.Use:        wanted.Add(typeof(SpawnObjectEffect));                    break;
+            case InteractionPrompt.Push:       wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
+            case InteractionPrompt.ViewScreen: wanted.Add(typeof(EnterUIModeEffect));                    break;
+            case InteractionPrompt.Read:       wanted.Add(typeof(ShowPanelEffect));                      break;
+            case InteractionPrompt.Hang:       wanted.Add(typeof(HookEffect));                           break;
+            case InteractionPrompt.EndMorning: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Morning; break;
+            case InteractionPrompt.EndNoon:    wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Noon;    break;
+            case InteractionPrompt.EndEvening: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Evening; break;
+            case InteractionPrompt.EndDay:     wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Dawn;    break;
+            default: /* Interact / Inspect / Custom */                                                   break;
         }
 
         foreach (var t in ManagedEffects)
@@ -179,7 +184,7 @@ public class Interactable : MonoBehaviour
         }
 
         EnsureOutline();
-        if (promptType == InteractionPrompt.줍기)
+        if (promptType == InteractionPrompt.PickUp)
             EnsureRigidbody();
         ReorderComponents();
         UnityEditor.EditorUtility.SetDirty(this);

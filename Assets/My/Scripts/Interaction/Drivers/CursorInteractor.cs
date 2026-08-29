@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,16 +19,23 @@ public class CursorInteractor : Interactor
     [Tooltip("RawImage 캔버스를 그리는 카메라. Screen Space - Overlay 면 비워둔다")]
     [SerializeField] private Camera canvasCamera;
 
+    [Header("프롬프트 (선택)")]
+    [Tooltip("상호작용 가능한 대상에 호버 시 켜지는 UI. 비우면 표시 안 함")]
+    [SerializeField] private GameObject promptRoot;
+    [Tooltip("promptRoot 안의 문구 라벨. Interactable.Prompt 로 채워짐")]
+    [SerializeField] private TMP_Text promptLabel;
+
     private Outline currentOutline;
+    private Interactable currentHovered;
 
     private void Reset() => worldCamera = Camera.main;
-    private void OnDisable() => ClearOutline();
+    private void OnDisable() => ClearHover();
 
     private void Update()
     {
         if (Mouse.current == null || worldCamera == null || screen == null) return;
 
-        if (!TryCursorRay(out Ray ray)) { ClearOutline(); return; }
+        if (!TryCursorRay(out Ray ray)) { ClearHover(); return; }
 
         Interactable hovered = null;
         Outline hitOutline = null;
@@ -55,6 +63,13 @@ public class CursorInteractor : Interactor
             currentOutline = hitOutline;
         }
 
+        if (hovered != currentHovered)
+        {
+            currentHovered = hovered;
+            if (promptRoot != null) promptRoot.SetActive(hovered != null);
+            if (promptLabel != null && hovered != null) promptLabel.text = hovered.Prompt;
+        }
+
         if (hovered != null && Mouse.current.leftButton.wasPressedThisFrame)
             hovered.Interact(this, point);
     }
@@ -80,9 +95,11 @@ public class CursorInteractor : Interactor
         return true;
     }
 
-    private void ClearOutline()
+    private void ClearHover()
     {
         if (currentOutline != null) currentOutline.enabled = false;
         currentOutline = null;
+        currentHovered = null;
+        if (promptRoot != null) promptRoot.SetActive(false);
     }
 }

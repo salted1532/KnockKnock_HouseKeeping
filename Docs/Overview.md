@@ -38,12 +38,22 @@
 | [InventorySystem](InventorySystem.md) | `Inventory/InventorySystem.cs` |
 | [HandItemRegistry](HandItemRegistry.md) | `Inventory/ItemId.cs`, `HandItem.cs`, `HandItemRegistry.cs` |
 
+## 대화 / 접객 손님
+
+허브: **[DialogueSystem.md](DialogueSystem.md)** — CSV 스키마, 노드/선택지, NpcCatalog/CampaignData, 손님 큐, 거절 흐름.
+
+| 문서 섹션 | 스크립트 |
+|---|---|
+| 데이터 | `Dialogue/NpcData.cs`, `NpcCatalog.cs`, `DialogueLine.cs`(DialogueEntry/Choice), `DialogueDatabase.cs`, `Situation.cs`, `Expression.cs`, `Editor/DialogueImporter.cs`, `Game/CampaignData.cs` |
+| 런타임 | `Dialogue/SpeechBubble.cs`, `DialogueRunner.cs`, `QuestionPanel.cs`, `GuestMover.cs`, `GuestView.cs` |
+| NPC 관리 | `Game/GuestManager.cs`, `ReceptionManager.cs`, `Interaction/Effects/CheckInGuestEffect.cs` |
+
 ## 게임 진행 / 환경 / 사운드
 
 | 문서 | 스크립트 |
 |---|---|
 | [DayPhaseManager](DayPhaseManager.md) | `Game/DayPhaseManager.cs` (아침/점심/저녁/새벽 + 페이드 전환) |
-| [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 세션 골격) |
+| [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 손님 큐) — [DialogueSystem](DialogueSystem.md) 참조 |
 | [PhaseLabel](PhaseLabel.md) | `Game/PhaseLabel.cs` (HUD 시간대 텍스트) |
 | [ActivateOnAwake](ActivateOnAwake.md) | `Game/ActivateOnAwake.cs` (런타임에 UI 켜기 유틸) |
 | [ScreenFader](ScreenFader.md) | `Environment/ScreenFader.cs` (검정 페이드) |

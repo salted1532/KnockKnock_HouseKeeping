@@ -64,6 +64,14 @@ public class UIInteractionMode : MonoBehaviour
     {
         if (!Active) return;
 
+        // 창 포커스가 돌아오면 StarterAssetsInputs.OnApplicationFocus 가 커서를 다시 잠근다.
+        // UI 모드 동안은 매 프레임 다시 풀어둔다 (에디터에서 화면 밖 갔다 오면 커서 사라지는 문제).
+        if (Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         // ESC: 노트가 열려 있으면 노트가 먼저 소비. 아니면 한 겹 벗김
         //  - 하위 뷰(모니터 등) → 상위(접객)로 복귀
         //  - 최상위 → 완전 종료 (접객이면 Exited 구독한 ReceptionManager 가 세션 정리)
