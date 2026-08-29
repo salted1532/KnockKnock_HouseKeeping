@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   displayName: test2
   neutralPortrait: {fileID: 310110339, guid: 462fc018cc7915845b09b12f67ea08fd, type: 3}
-  angryPortrait: {fileID: -947359230, guid: 1c25ba0fe1e8b8f4da8196836f26312d, type: 3}
+  angryPortrait: {fileID: 1096251467, guid: f62366e7bc0e5264eabe12a6b8a08afc, type: 3}
   modelPrefab: {fileID: 0}
   isSleepwalker: 0
   visitorOnly: 0
