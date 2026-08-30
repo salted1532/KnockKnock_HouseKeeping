@@ -30,6 +30,7 @@
 | [ItemImpactSound](ItemImpactSound.md) | `Interaction/ItemImpactSound.cs` |
 | [CartGroundAlign](CartGroundAlign.md) | `Interaction/CartGroundAlign.cs` |
 | [OutlineWhenOff](OutlineWhenOff.md) | `Interaction/OutlineWhenOff.cs` — 꺼져 있을 때 외곽선 상시 표시 (조명 스위치) |
+| [SpriteOutline](SpriteOutline.md) | `Interaction/SpriteOutline.cs` — 2D 스프라이트 손님 hover 하이라이트 (QuickOutline 대체) |
 
 ## 인벤토리 / 아이템
 
@@ -60,6 +61,7 @@
 | [PhaseVisuals](PhaseVisuals.md) | `Environment/PhaseVisuals.cs` (구 `DayNightSwitcher` 대체 — 4단계 조명/스카이박스) |
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |
 | [FootstepSystem](FootstepSystem.md) | `Player/FootstepSystem.cs` |
+| [LocalizationManager](LocalizationManager.md) | `Localization/LocalizationManager.cs` (영어/한글 — 씬 배치, 게임 시작 시 확정) + `LocalizedLabel.cs` + `Editor/FontTool.cs` |
 
 ## 서드파티 로컬 패치
 

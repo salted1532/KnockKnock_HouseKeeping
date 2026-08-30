@@ -46,7 +46,7 @@ public class SpeechBubble : MonoBehaviour
     {
         if (lines == null || lines.Count == 0) yield break;
         if (root != null) root.SetActive(true);
-        if (nameLabel != null) nameLabel.text = npc != null ? npc.displayName : "";
+        if (nameLabel != null) nameLabel.text = npc != null ? npc.DisplayName : "";
 
         foreach (var line in lines)
         {
@@ -58,7 +58,7 @@ public class SpeechBubble : MonoBehaviour
             }
             DialogueRunner.Instance?.RaiseLineShown(npc, line);
 
-            yield return TypeLine(line.text);
+            yield return TypeLine(line.Text);
             yield return WaitForAdvance();
         }
     }
@@ -66,6 +66,13 @@ public class SpeechBubble : MonoBehaviour
     public void Hide()
     {
         if (root != null) root.SetActive(false);
+    }
+
+    // 접객 일시정지용 — 대화 상태(코루틴/버튼)는 그대로 두고 루트만 껐다 켠다.
+    public bool IsVisible => root != null && root.activeSelf;
+    public void SetVisible(bool v)
+    {
+        if (root != null) root.SetActive(v);
     }
 
     private IEnumerator TypeLine(string text)
@@ -79,6 +86,7 @@ public class SpeechBubble : MonoBehaviour
         int shown = 0;
         while (shown < total)
         {
+            if (DialogueRunner.Instance != null && DialogueRunner.Instance.Paused) { yield return null; continue; }
             if (AdvancePressed()) break;          // 즉시 완성
             acc += Time.deltaTime;
             while (acc >= charInterval && shown < total) { acc -= charInterval; shown++; }
@@ -97,6 +105,9 @@ public class SpeechBubble : MonoBehaviour
 
     private static bool AdvancePressed()
     {
+        // 접객 일시정지(ESC) 중엔 월드 클릭이 대사 넘김으로 새지 않게 무시.
+        if (DialogueRunner.Instance != null && DialogueRunner.Instance.Paused) return false;
+
         var m = Mouse.current;
         var k = Keyboard.current;
         return (m != null && m.leftButton.wasPressedThisFrame)

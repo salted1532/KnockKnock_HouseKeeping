@@ -18,12 +18,17 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Evening. Got a room for one night?
+      textEn: Evening. Got a room for one night?
+      textKo: "\uC548\uB155\uD558\uC138\uC694. \uD558\uB8FB\uBC24 \uBB35\uC744 \uBC29
+        \uC788\uC2B5\uB2C8\uAE4C?"
     - expression: 0
-      text: Been walking since dawn. I'm done in.
+      textEn: Been walking since dawn. I'm done in.
+      textKo: "\uC0C8\uBCBD\uBD80\uD130 \uAC78\uC5C8\uC5B4\uC694. \uC644\uC804\uD788
+        \uC9C0\uCCE4\uC2B5\uB2C8\uB2E4."
     choices: []
     goToNode: 
     outcome: 0
@@ -32,10 +37,13 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: name
-    label: Ask their name
+    labelEn: Ask their name
+    labelKo: "\uC774\uB984\uC744 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Just call me a traveler. Names don't buy much out here.
+      textEn: Just call me a traveler. Names don't buy much out here.
+      textKo: "\uADF8\uB0E5 \uB098\uADF8\uB124\uB77C\uACE0 \uBD80\uB974\uC138\uC694.
+        \uC774\uB7F0 \uB370\uC120 \uC774\uB984 \uB530\uC704 \uC4F8\uBAA8\uC5C6\uC73C\uB2C8\uAE4C."
     choices: []
     goToNode: 
     outcome: 0
@@ -44,14 +52,19 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: where
-    label: Ask where they're headed
+    labelEn: Ask where they're headed
+    labelKo: "\uC5B4\uB514\uB85C \uAC00\uB294\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Somewhere the road stops. You know any place like that?
+      textEn: Somewhere the road stops. You know any place like that?
+      textKo: "\uAE38\uC774 \uB05D\uB098\uB294 \uACF3 \uC5B4\uB518\uAC00\uB85C\uC694.
+        \uADF8\uB7F0 \uB370 \uC544\uC138\uC694?"
     choices:
-    - label: I wish I did
+    - labelEn: I wish I did
+      labelKo: "\uB098\uB3C4 \uC54C\uC558\uC73C\uBA74 \uC88B\uACA0\uB124\uC694"
       goToNode: where_a
-    - label: Just take the room
+    - labelEn: Just take the room
+      labelKo: "\uADF8\uB0E5 \uBC29\uC744 \uC4F0\uC138\uC694"
       goToNode: where_b
     goToNode: 
     outcome: 0
@@ -60,10 +73,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: where_a
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Yeah. Figured as much.
+      textEn: Yeah. Figured as much.
+      textKo: "\uADF8\uB807\uC8E0. \uADF8\uB7F4 \uC904 \uC54C\uC558\uC5B4\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -72,10 +87,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: where_b
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Fair enough. Lead the way.
+      textEn: Fair enough. Lead the way.
+      textKo: "\uC54C\uACA0\uC2B5\uB2C8\uB2E4. \uC548\uB0B4\uD574 \uC8FC\uC138\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -84,10 +101,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: reject
-    label: Turn them away
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
     lines:
     - expression: 0
-      text: No room? After all that walking?
+      textEn: No room? After all that walking?
+      textKo: "\uBC29\uC774 \uC5C6\uB2E4\uACE0\uC694? \uADF8\uB807\uAC8C \uAC78\uC5B4\uC654\uB294\uB370?"
     choices: []
     goToNode: reject_insist
     outcome: 0
@@ -96,14 +115,19 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_insist
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: I won't be trouble. Gone by first light.
+      textEn: I won't be trouble. Gone by first light.
+      textKo: "\uD3D0 \uB07C\uCE58\uC9C0 \uC54A\uC744\uAC8C\uC694. \uB3D9\uD2B8\uBA74
+        \uB5A0\uB0A9\uB2C8\uB2E4."
     choices:
-    - label: Hold firm
+    - labelEn: Hold firm
+      labelKo: "\uB2E8\uD638\uD558\uAC8C \uAC70\uC808\uD55C\uB2E4"
       goToNode: reject_final
-    - label: Reconsider
+    - labelEn: Reconsider
+      labelKo: "\uB2E4\uC2DC \uC0DD\uAC01\uD574 \uBCF8\uB2E4"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -112,10 +136,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_final
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: ...Fine. I've slept in worse than a ditch.
+      textEn: ...Fine. I've slept in worse than a ditch.
+      textKo: "...\uC54C\uACA0\uC2B5\uB2C8\uB2E4. \uB3C4\uB791\uBCF4\uB2E4 \uBABB\uD55C
+        \uB370\uC11C\uB3C4 \uC790\uBD24\uC5B4\uC694."
     choices: []
     goToNode: 
     outcome: 2
@@ -124,10 +151,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: checkin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Thank you. You won't hear a sound from me.
+      textEn: Thank you. You won't hear a sound from me.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC18C\uB9AC \uD558\uB098 \uC548 \uB0BC\uAC8C\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -136,10 +165,12 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: What do you want at this hour?
+      textEn: What do you want at this hour?
+      textKo: "\uC774 \uC2DC\uAC04\uC5D0 \uBB34\uC2A8 \uC77C\uC774\uC2ED\uB2C8\uAE4C?"
     choices: []
     goToNode: 
     outcome: 0
@@ -148,10 +179,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: noise
-    label: Ask about the noise last night
+    labelEn: Ask about the noise last night
+    labelKo: "\uAC04\uBC24\uC758 \uC18C\uC74C\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Noise? I was asleep the whole time.
+      textEn: Noise? I was asleep the whole time.
+      textKo: "\uC18C\uC74C\uC774\uC694? \uC800\uB294 \uACC4\uC18D \uC790\uACE0 \uC788\uC5C8\uB294\uB370\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -160,12 +193,17 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Ah - yes. Hello. A room. Please. Just the one.
+      textEn: Ah - yes. Hello. A room. Please. Just the one.
+      textKo: "\uC544 - \uB124. \uC548\uB155\uD558\uC138\uC694. \uBC29\uC774\uC694.
+        \uBD80\uD0C1\uB4DC\uB9BD\uB2C8\uB2E4. \uD558\uB098\uBA74 \uB429\uB2C8\uB2E4."
     - expression: 0
-      text: Long day. Very long. You have no idea.
+      textEn: Long day. Very long. You have no idea.
+      textKo: "\uAE34 \uD558\uB8E8\uC600\uC5B4\uC694. \uC544\uC8FC \uAE38\uC5C8\uC8E0.
+        \uC0C1\uC0C1\uB3C4 \uBABB \uD558\uC2E4 \uAC81\uB2C8\uB2E4."
     choices: []
     goToNode: 
     outcome: 0
@@ -174,10 +212,13 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: case
-    label: Ask about his suitcase
+    labelEn: Ask about his suitcase
+    labelKo: "\uAC00\uBC29\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Samples! Brushes mostly. Nothing you'd want. Nothing at all.
+      textEn: Samples! Brushes mostly. Nothing you'd want. Nothing at all.
+      textKo: "\uACAC\uBCF8\uC785\uB2C8\uB2E4! \uB300\uBD80\uBD84 \uC194\uC774\uC5D0\uC694.
+        \uD0D0\uB098\uC2E4 \uB9CC\uD55C \uAC74 \uC5C6\uC5B4\uC694. \uC804\uD600\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -186,14 +227,19 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: shaking
-    label: Ask why he's shaking
+    labelEn: Ask why he's shaking
+    labelKo: "\uC65C \uB5A8\uACE0 \uC788\uB294\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Cold out. That's all. Just the cold.
+      textEn: Cold out. That's all. Just the cold.
+      textKo: "\uBC16\uC774 \uCD94\uC6CC\uC11C\uC694. \uADF8\uAC8C \uB2E4\uC785\uB2C8\uB2E4.
+        \uADF8\uB0E5 \uCD94\uC704 \uB54C\uBB38\uC774\uC5D0\uC694."
     choices:
-    - label: Let it go
+    - labelEn: Let it go
+      labelKo: "\uB118\uC5B4\uAC04\uB2E4"
       goToNode: 
-    - label: Press him
+    - labelEn: Press him
+      labelKo: "\uCD94\uAD81\uD55C\uB2E4"
       goToNode: shaking_press
     goToNode: 
     outcome: 0
@@ -202,10 +248,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: shaking_press
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: I said it's the cold! Are we done here?
+      textEn: I said it's the cold! Are we done here?
+      textKo: "\uCD94\uC704 \uB54C\uBB38\uC774\uB77C\uACE0 \uD588\uC796\uC544\uC694!
+        \uC774\uC81C \uB410\uC2B5\uB2C8\uAE4C?"
     choices: []
     goToNode: 
     outcome: 0
@@ -214,10 +263,13 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: reject
-    label: Turn them away
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
     lines:
     - expression: 0
-      text: No? Please. I can pay double.
+      textEn: No? Please. I can pay double.
+      textKo: "\uC548 \uB41C\uB2E4\uACE0\uC694? \uC81C\uBC1C\uC694. \uB450 \uBC30\uB85C
+        \uB0B4\uACA0\uC2B5\uB2C8\uB2E4."
     choices: []
     goToNode: reject_insist
     outcome: 0
@@ -226,14 +278,19 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_insist
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Where else is open? Nowhere. You know that.
+      textEn: Where else is open? Nowhere. You know that.
+      textKo: "\uB2E4\uB978 \uB370\uAC00 \uC5B4\uB514 \uC5F4\uC5C8\uACA0\uC5B4\uC694?
+        \uC5C6\uC5B4\uC694. \uC544\uC2DC\uC796\uC544\uC694."
     choices:
-    - label: Refuse again
+    - labelEn: Refuse again
+      labelKo: "\uB2E4\uC2DC \uAC70\uC808\uD55C\uB2E4"
       goToNode: reject_2
-    - label: Give in
+    - labelEn: Give in
+      labelKo: "\uBC1B\uC544\uC900\uB2E4"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -242,10 +299,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_2
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: This is a mistake. You'll see.
+      textEn: This is a mistake. You'll see.
+      textKo: "\uC774\uAC74 \uC2E4\uC218\uC608\uC694. \uB450\uACE0 \uBCF4\uC138\uC694."
     choices: []
     goToNode: reject_final
     outcome: 0
@@ -254,10 +313,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_final
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Fine. FINE. I'm going.
+      textEn: Fine. FINE. I'm going.
+      textKo: "\uC54C\uACA0\uC5B4\uC694. \uC54C\uACA0\uB2E4\uACE0\uC694. \uAC11\uB2C8\uB2E4."
     choices: []
     goToNode: 
     outcome: 2
@@ -266,10 +327,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: checkin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Oh thank you. You won't even know I'm here.
+      textEn: Oh thank you. You won't even know I'm here.
+      textKo: "\uC544 \uAC10\uC0AC\uD569\uB2C8\uB2E4. \uC788\uB294 \uC904\uB3C4 \uBAA8\uB974\uC2E4
+        \uAC70\uC608\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -278,10 +342,12 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Same as always. Key. Now.
+      textEn: Same as always. Key. Now.
+      textKo: "\uB298 \uD558\uB358 \uB300\uB85C. \uC5F4\uC1E0. \uB2F9\uC7A5."
     choices: []
     goToNode: 
     outcome: 0
@@ -290,10 +356,12 @@ MonoBehaviour:
     day: 3
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: You're slow tonight. Move it.
+      textEn: You're slow tonight. Move it.
+      textKo: "\uC624\uB298 \uBC24\uC740 \uAD7C\uB728\uAD70. \uBE68\uB9AC \uD574."
     choices: []
     goToNode: 
     outcome: 0
@@ -302,10 +370,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: wait
-    label: Ask him to wait a moment
+    labelEn: Ask him to wait a moment
+    labelKo: "\uC7A0\uC2DC \uAE30\uB2E4\uB824 \uB2EC\uB77C\uACE0 \uD55C\uB2E4"
     lines:
     - expression: 1
-      text: I don't wait. That's your job.
+      textEn: I don't wait. That's your job.
+      textKo: "\uB09C \uC548 \uAE30\uB2E4\uB824. \uADF8\uAC8C \uB124 \uC77C\uC774\uC796\uC544."
     choices: []
     goToNode: 
     outcome: 0
@@ -314,14 +384,18 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: id
-    label: Ask for identification
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
     lines:
     - expression: 0
-      text: You've seen my face a hundred times.
+      textEn: You've seen my face a hundred times.
+      textKo: "\uB0B4 \uC5BC\uAD74 \uBC31 \uBC88\uC740 \uBD24\uC796\uC544."
     choices:
-    - label: Insist on ID
+    - labelEn: Insist on ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uACC4\uC18D \uC694\uAD6C\uD55C\uB2E4"
       goToNode: id_show
-    - label: Wave him through
+    - labelEn: Wave him through
+      labelKo: "\uADF8\uB0E5 \uB4E4\uC5EC\uBCF4\uB0B8\uB2E4"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -330,10 +404,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: id_show
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: Here. Happy? Don't lose it this time.
+      textEn: Here. Happy? Don't lose it this time.
+      textKo: "\uC5EC\uAE30. \uB410\uC5B4? \uC774\uBC88\uC5D4 \uC783\uC5B4\uBC84\uB9AC\uC9C0
+        \uB9C8."
     choices: []
     goToNode: 
     outcome: 0
@@ -342,10 +419,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: reject
-    label: Turn them away
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
     lines:
     - expression: 1
-      text: Excuse me?
+      textEn: Excuse me?
+      textKo: "\uBB50\uB77C\uACE0?"
     choices: []
     goToNode: reject_insist
     outcome: 0
@@ -354,14 +433,18 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_insist
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: You do NOT turn me away. Not me.
+      textEn: You do NOT turn me away. Not me.
+      textKo: "\uB0A0 \uB3CC\uB824\uBCF4\uB0B8\uB2E4\uACE0? \uB098\uB97C?"
     choices:
-    - label: Stand your ground
+    - labelEn: Stand your ground
+      labelKo: "\uBB3C\uB7EC\uC11C\uC9C0 \uC54A\uB294\uB2E4"
       goToNode: reject_final
-    - label: Back down
+    - labelEn: Back down
+      labelKo: "\uBB3C\uB7EC\uC120\uB2E4"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -370,10 +453,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_final
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: You'll regret this. Count on it.
+      textEn: You'll regret this. Count on it.
+      textKo: "\uD6C4\uD68C\uD558\uAC8C \uB420 \uAC70\uB2E4. \uD2C0\uB9BC\uC5C6\uC774."
     choices: []
     goToNode: 
     outcome: 2
@@ -382,10 +467,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: checkin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Finally.
+      textEn: Finally.
+      textKo: "\uB4DC\uB514\uC5B4."
     choices: []
     goToNode: 
     outcome: 0
@@ -394,10 +481,13 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: A room. Away from the road if you have one.
+      textEn: A room. Away from the road if you have one.
+      textKo: "\uBC29 \uD558\uB098\uC694. \uAC00\uB2A5\uD558\uBA74 \uAE38\uC5D0\uC11C
+        \uBA3C \uCABD\uC73C\uB85C."
     choices: []
     goToNode: 
     outcome: 0
@@ -406,10 +496,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: road
-    label: Ask why away from the road
+    labelEn: Ask why away from the road
+    labelKo: "\uC65C \uAE38\uC5D0\uC11C \uBA3C \uCABD\uC778\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: I sleep lighter than most.
+      textEn: I sleep lighter than most.
+      textKo: "\uC800\uB294 \uC7A0\uADC0\uAC00 \uBC1D\uC740 \uD3B8\uC774\uC5D0\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -418,14 +510,18 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: alone
-    label: Ask if she's travelling alone
+    labelEn: Ask if she's travelling alone
+    labelKo: "\uD63C\uC790 \uC5EC\uD589 \uC911\uC778\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Is that a requirement?
+      textEn: Is that a requirement?
+      textKo: "\uADF8\uAC8C \uC870\uAC74\uC778\uAC00\uC694?"
     choices:
-    - label: Ask gently
+    - labelEn: Ask gently
+      labelKo: "\uBD80\uB4DC\uB7FD\uAC8C \uBB3B\uB294\uB2E4"
       goToNode: alone_soft
-    - label: Ask straight
+    - labelEn: Ask straight
+      labelKo: "\uB2E8\uB3C4\uC9C1\uC785\uC801\uC73C\uB85C \uBB3B\uB294\uB2E4"
       goToNode: alone_hard
     goToNode: 
     outcome: 0
@@ -434,10 +530,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: alone_soft
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: ...Yes. Alone.
+      textEn: ...Yes. Alone.
+      textKo: "...\uB124. \uD63C\uC790\uC608\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -446,10 +544,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: alone_hard
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 1
-      text: That's my business. Not yours.
+      textEn: That's my business. Not yours.
+      textKo: "\uADF8\uAC74 \uC81C \uC77C\uC774\uC5D0\uC694. \uB2F9\uC2E0 \uC77C\uC774
+        \uC544\uB2C8\uB77C."
     choices: []
     goToNode: 
     outcome: 0
@@ -458,10 +559,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: reject
-    label: Turn them away
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
     lines:
     - expression: 0
-      text: I see.
+      textEn: I see.
+      textKo: "\uADF8\uB807\uAD70\uC694."
     choices: []
     goToNode: reject_final
     outcome: 0
@@ -470,10 +573,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_final
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: I'll find somewhere. I always do.
+      textEn: I'll find somewhere. I always do.
+      textKo: "\uC5B4\uB514\uB4E0 \uCC3E\uACA0\uC8E0. \uB298 \uADF8\uB7AC\uC73C\uB2C8\uAE4C."
     choices: []
     goToNode: 
     outcome: 2
@@ -482,10 +587,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: checkin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Good. Don't knock after dark.
+      textEn: Good. Don't knock after dark.
+      textKo: "\uC88B\uC544\uC694. \uC5B4\uB450\uC6CC\uC9C0\uBA74 \uBB38 \uB450\uB4DC\uB9AC\uC9C0
+        \uB9C8\uC138\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -494,12 +602,16 @@ MonoBehaviour:
     day: 0
     role: 0
     nodeKey: 
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Evening evening! Cold one out there tonight isn't it?
+      textEn: Evening evening! Cold one out there tonight isn't it?
+      textKo: "\uC548\uB155\uD558\uC138\uC694 \uC548\uB155\uD558\uC138\uC694! \uC624\uB298
+        \uBC24 \uBC14\uAE65 \uAF64 \uCDA5\uC8E0?"
     - expression: 0
-      text: Room for an old man's bones?
+      textEn: Room for an old man's bones?
+      textKo: "\uB299\uC740\uC774 \uBF08 \uD558\uB098 \uB260 \uBC29 \uC788\uACA0\uC18C?"
     choices: []
     goToNode: 
     outcome: 0
@@ -508,16 +620,22 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: trip
-    label: Ask about his journey
+    labelEn: Ask about his journey
+    labelKo: "\uC5EC\uC815\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Oh it's a long story. Which part do you want?
+      textEn: Oh it's a long story. Which part do you want?
+      textKo: "\uC544, \uAE34 \uC774\uC57C\uAE30\uB77C\uC624. \uC5B4\uB290 \uB300\uBAA9\uC774
+        \uAD81\uAE08\uD558\uC2DC\uC624?"
     choices:
-    - label: The beginning
+    - labelEn: The beginning
+      labelKo: "\uCC98\uC74C\uBD80\uD130"
       goToNode: trip_begin
-    - label: The short version
+    - labelEn: The short version
+      labelKo: "\uC9E7\uAC8C"
       goToNode: trip_short
-    - label: Skip it
+    - labelEn: Skip it
+      labelKo: "\uB410\uC5B4\uC694"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -526,10 +644,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: trip_begin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: It started forty years back in a town that isn't on the maps anymore...
+      textEn: It started forty years back in a town that isn't on the maps anymore...
+      textKo: "\uC0AC\uC2ED \uB144 \uC804, \uC774\uC81C\uB294 \uC9C0\uB3C4\uC5D0\uB3C4
+        \uC5C6\uB294 \uB9C8\uC744\uC5D0\uC11C \uC2DC\uC791\uB410\uB2E4\uC624..."
     choices: []
     goToNode: 
     outcome: 0
@@ -538,10 +659,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: trip_short
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Visiting family. Or what's left of them.
+      textEn: Visiting family. Or what's left of them.
+      textKo: "\uAC00\uC871\uC744 \uBCF4\uB7EC \uAC00\uC624. \uB0A8\uC740 \uC0AC\uB78C\uC774\uB098\uB9C8."
     choices: []
     goToNode: 
     outcome: 0
@@ -550,10 +673,13 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: weather
-    label: Ask about the weather
+    labelEn: Ask about the weather
+    labelKo: "\uB0A0\uC528\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Storm's coming. Mark my words. Sky goes green first.
+      textEn: Storm's coming. Mark my words. Sky goes green first.
+      textKo: "\uD3ED\uD48D\uC774 \uC624\uACE0 \uC788\uC18C. \uB0B4 \uB9D0 \uBA85\uC2EC\uD558\uC2DC\uC624.
+        \uD558\uB298\uBD80\uD130 \uCD08\uB85D\uBE5B\uC73C\uB85C \uBCC0\uD55C\uB2E4\uC624."
     choices: []
     goToNode: 
     outcome: 0
@@ -562,16 +688,21 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: need
-    label: Ask if he needs anything
+    labelEn: Ask if he needs anything
+    labelKo: "\uD544\uC694\uD55C \uAC8C \uC788\uB294\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      text: Kind of you to ask.
+      textEn: Kind of you to ask.
+      textKo: "\uBB3C\uC5B4\uBD10 \uC8FC\uB2C8 \uACE0\uB9D9\uAD6C\uB824."
     choices:
-    - label: Offer an extra blanket
+    - labelEn: Offer an extra blanket
+      labelKo: "\uB2F4\uC694\uB97C \uB354 \uC900\uB2E4"
       goToNode: need_blanket
-    - label: Offer a hot meal
+    - labelEn: Offer a hot meal
+      labelKo: "\uB530\uB73B\uD55C \uC2DD\uC0AC\uB97C \uAD8C\uD55C\uB2E4"
       goToNode: need_meal
-    - label: Nothing for now
+    - labelEn: Nothing for now
+      labelKo: "\uC9C0\uAE08\uC740 \uB410\uC5B4\uC694"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -580,10 +711,13 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: need_blanket
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Bless you. These old knees will thank you.
+      textEn: Bless you. These old knees will thank you.
+      textKo: "\uACE0\uB9D9\uAE30\uB3C4 \uD558\uC9C0. \uC774 \uB299\uC740 \uBB34\uB98E\uC774
+        \uACE0\uB9C8\uC6CC\uD560 \uAC70\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -592,10 +726,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: need_meal
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: I wouldn't say no to that.
+      textEn: I wouldn't say no to that.
+      textKo: "\uADF8\uAC70\uB77C\uBA74 \uB9C8\uB2E4\uD558\uC9C0 \uC54A\uACA0\uC18C."
     choices: []
     goToNode: 
     outcome: 0
@@ -604,10 +740,12 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: reject
-    label: Turn them away
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
     lines:
     - expression: 0
-      text: Oh. Oh dear. On a night like this?
+      textEn: Oh. Oh dear. On a night like this?
+      textKo: "\uC774\uB7F0. \uC800\uB7F0. \uC774\uB7F0 \uBC24\uC5D0 \uB9D0\uC774\uC624?"
     choices: []
     goToNode: reject_insist
     outcome: 0
@@ -616,14 +754,19 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_insist
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: I don't move so fast anymore. Have a heart.
+      textEn: I don't move so fast anymore. Have a heart.
+      textKo: "\uC774\uC81C \uAC78\uC74C\uB3C4 \uB290\uB9AC\uB2E4\uC624. \uC778\uC815\uC744
+        \uBCA0\uD478\uC2DC\uAC8C."
     choices:
-    - label: Refuse
+    - labelEn: Refuse
+      labelKo: "\uAC70\uC808\uD55C\uB2E4"
       goToNode: reject_final
-    - label: Let him stay
+    - labelEn: Let him stay
+      labelKo: "\uBB35\uAC8C \uD55C\uB2E4"
       goToNode: 
     goToNode: 
     outcome: 0
@@ -632,10 +775,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: reject_final
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: ...Alright. Sorry to have troubled you.
+      textEn: ...Alright. Sorry to have troubled you.
+      textKo: "...\uC54C\uACA0\uC18C. \uADC0\uCC2E\uAC8C \uD574\uC11C \uBBF8\uC548\uD558\uC624."
     choices: []
     goToNode: 
     outcome: 2
@@ -644,10 +789,12 @@ MonoBehaviour:
     day: 0
     role: 3
     nodeKey: checkin
-    label: 
+    labelEn: 
+    labelKo: 
     lines:
     - expression: 0
-      text: Bless you son. Sleep well now.
+      textEn: Bless you son. Sleep well now.
+      textKo: "\uBCF5 \uBC1B\uC73C\uC2DC\uAC8C. \uD3B8\uD788 \uC8FC\uBB34\uC2DC\uAD6C\uB824."
     choices: []
     goToNode: 
     outcome: 0

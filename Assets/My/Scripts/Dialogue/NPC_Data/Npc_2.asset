@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NpcData
   id: 2
   displayName: test2
-  neutralPortrait: {fileID: 310110339, guid: 462fc018cc7915845b09b12f67ea08fd, type: 3}
-  angryPortrait: {fileID: 1096251467, guid: f62366e7bc0e5264eabe12a6b8a08afc, type: 3}
+  displayNameKo: 
+  neutralPortrait: {fileID: -1937357602, guid: 9d706c1959bdacd46975adf23c2050a1, type: 3}
+  angryPortrait: {fileID: 503568558, guid: cf09d7bf59197d84aa21bac24887344c, type: 3}
+  backPortrait: {fileID: 1974978444, guid: fc084e398cc762e4eb02ab64da367f7f, type: 3}
+  sidePortrait: {fileID: -134674012, guid: 76229016703bfca419b1f9b3fa135d41, type: 3}
   modelPrefab: {fileID: 0}
   isSleepwalker: 0
   visitorOnly: 0

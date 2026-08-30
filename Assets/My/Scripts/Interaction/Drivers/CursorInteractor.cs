@@ -26,6 +26,7 @@ public class CursorInteractor : Interactor
     [SerializeField] private TMP_Text promptLabel;
 
     private Outline currentOutline;
+    private SpriteOutline currentSprite;
     private Interactable currentHovered;
 
     private void Reset() => worldCamera = Camera.main;
@@ -39,6 +40,7 @@ public class CursorInteractor : Interactor
 
         Interactable hovered = null;
         Outline hitOutline = null;
+        SpriteOutline hitSprite = null;
         Vector3 point = Vector3.zero;
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
@@ -49,10 +51,14 @@ public class CursorInteractor : Interactor
             if (!Physics.Raycast(ray, hit.distance - 0.01f, occlusionMask, QueryTriggerInteraction.Ignore))
             {
                 point = hit.point;
-                hitOutline = hit.collider.GetComponentInParent<Outline>();
                 var candidate = hit.collider.GetComponentInParent<Interactable>();
                 if (candidate != null && candidate.CanInteract)
+                {
                     hovered = candidate;
+                    // 아웃라인/하이라이트도 상호작용 가능할 때만 (조건 불만족 시 안 뜸)
+                    hitOutline = hit.collider.GetComponentInParent<Outline>();
+                    hitSprite = hit.collider.GetComponentInParent<SpriteOutline>();
+                }
             }
         }
 
@@ -61,6 +67,13 @@ public class CursorInteractor : Interactor
             if (currentOutline != null) currentOutline.enabled = false;
             if (hitOutline != null) hitOutline.enabled = true;
             currentOutline = hitOutline;
+        }
+
+        if (hitSprite != currentSprite)
+        {
+            if (currentSprite != null) currentSprite.SetHighlighted(false);
+            if (hitSprite != null) hitSprite.SetHighlighted(true);
+            currentSprite = hitSprite;
         }
 
         if (hovered != currentHovered)
@@ -99,6 +112,8 @@ public class CursorInteractor : Interactor
     {
         if (currentOutline != null) currentOutline.enabled = false;
         currentOutline = null;
+        if (currentSprite != null) currentSprite.SetHighlighted(false);
+        currentSprite = null;
         currentHovered = null;
         if (promptRoot != null) promptRoot.SetActive(false);
     }

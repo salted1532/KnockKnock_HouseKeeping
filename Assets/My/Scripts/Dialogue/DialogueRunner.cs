@@ -22,6 +22,9 @@ public class DialogueRunner : MonoBehaviour
 
     public bool Running { get; private set; }
 
+    // 접객 일시정지(ESC) — 대화 진행 입력(다음 줄 넘기기)을 막는다. 대화 UI 숨김은 ReceptionManager 가.
+    public bool Paused { get; set; }
+
     private bool rejected;
     private int nodeVisits;
 
@@ -94,7 +97,7 @@ public class DialogueRunner : MonoBehaviour
 
             var labels = new List<string>(questions.Count);
             foreach (var q in questions)
-                labels.Add(string.IsNullOrEmpty(q.label) ? q.nodeKey : q.label);
+                labels.Add(string.IsNullOrEmpty(q.Label) ? q.nodeKey : q.Label);
 
             int pick = -2;
             questionPanel.Show(labels, i => pick = i, showDone: true);
@@ -132,7 +135,7 @@ public class DialogueRunner : MonoBehaviour
         if (entry.choices != null && entry.choices.Count > 0 && questionPanel != null)
         {
             var labels = new List<string>(entry.choices.Count);
-            foreach (var c in entry.choices) labels.Add(c.label);
+            foreach (var c in entry.choices) labels.Add(c.Label);
 
             int pick = -2;
             questionPanel.Show(labels, i => pick = i, showDone: false);

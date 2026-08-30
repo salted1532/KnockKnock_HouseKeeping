@@ -10,6 +10,7 @@ public class GazeInteractor : Interactor
     [SerializeField] private GameObject interactionText;
 
     private Outline currentOutline;
+    private SpriteOutline currentSprite;
     private Interactable currentInteractable;
 
     public bool Suspended { get; set; }   // UI 모드 등에서 잠시 끔
@@ -21,6 +22,7 @@ public class GazeInteractor : Interactor
         if (Suspended) { Clear(); return; }
 
         Outline hitOutline = null;
+        SpriteOutline hitSprite = null;
         Interactable hitInteractable = null;
         Vector3 point = Vector3.zero;
 
@@ -33,10 +35,14 @@ public class GazeInteractor : Interactor
             if (!Physics.Raycast(ray, hit.distance - 0.01f, occlusionMask, QueryTriggerInteraction.Ignore))
             {
                 point = hit.point;
-                hitOutline = hit.collider.GetComponentInParent<Outline>();
                 var candidate = hit.collider.GetComponentInParent<Interactable>();
                 if (candidate != null && candidate.CanInteract)
+                {
                     hitInteractable = candidate;
+                    // 아웃라인/하이라이트도 상호작용 가능할 때만 (조건 불만족 시 안 뜸)
+                    hitOutline = hit.collider.GetComponentInParent<Outline>();
+                    hitSprite = hit.collider.GetComponentInParent<SpriteOutline>();
+                }
             }
         }
 
@@ -45,6 +51,13 @@ public class GazeInteractor : Interactor
             if (currentOutline != null) currentOutline.enabled = false;
             if (hitOutline != null) hitOutline.enabled = true;
             currentOutline = hitOutline;
+        }
+
+        if (hitSprite != currentSprite)
+        {
+            if (currentSprite != null) currentSprite.SetHighlighted(false);
+            if (hitSprite != null) hitSprite.SetHighlighted(true);
+            currentSprite = hitSprite;
         }
 
         if (hitInteractable != currentInteractable)
@@ -64,6 +77,8 @@ public class GazeInteractor : Interactor
     {
         if (currentOutline != null) currentOutline.enabled = false;
         currentOutline = null;
+        if (currentSprite != null) currentSprite.SetHighlighted(false);
+        currentSprite = null;
         currentInteractable = null;
         if (interactionText != null) interactionText.SetActive(false);
     }

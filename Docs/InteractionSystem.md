@@ -52,7 +52,7 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
    - `ItemImpactSound` · `PhaseCondition` · 커스텀 효과 · `onInteracted` 는 추가만, 제거 안 함. (종료4종은 `PhaseCondition` 도 자동 추가하되 제거는 안 함)
 2. `SfxEffect` 는 항상 포함 → `[RequireComponent(AudioSource)]` 로 AudioSource 자동(3D/논플레이온어웨이크).
 3. 콜라이더 없으면 `BoxCollider`(메시 bounds 크기) 추가 + `Interaction` 레이어. 자식에 있으면 경고.
-4. `Outline` 없으면 추가 → `enabled=off`, 모드 `OutlineVisible`.
+4. `Outline` 없으면 추가 → `enabled=off`, 모드 `OutlineVisible`. (단 `SpriteOutline` 이 이미 있으면 스킵 — 2D 스프라이트 손님용, [SpriteOutline](SpriteOutline.md))
 5. `줍기`면 `Rigidbody` 없을 때 기본값으로 추가 (바닥에 물리적으로 놓이는 아이템이라 필요).
 6. 컴포넌트 순서 정렬: `Transform → MeshFilter → Renderer → Collider → Rigidbody → Interactable → Condition → 일반 Effect → SfxEffect → Outline·기타 .cs → AudioSource → 그 외`.
 

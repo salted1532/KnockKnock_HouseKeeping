@@ -30,7 +30,10 @@ public class UIInteractionMode : MonoBehaviour
     [Tooltip("끄면 화면 완전 고정. 켜면 커서를 화면 가장자리로 옮겨 조금 둘러볼 수 있음")]
     [SerializeField] private bool edgeLook = false;
     [SerializeField] private float yawRange = 40f;
-    [SerializeField] private float pitchRange = 25f;
+    [Tooltip("커서 상단 → 위로 볼 수 있는 최대 각")]
+    [SerializeField] private float pitchUpRange = 12f;
+    [Tooltip("커서 하단 → 아래로 볼 수 있는 최대 각 (버튼 영역이라 작게)")]
+    [SerializeField] private float pitchDownRange = 4f;
     [Tooltip("화면 중앙 이 비율 안에서는 시야가 안 움직임 (0~1)")]
     [SerializeField] private float edgeDeadZone = 0.25f;
     [Tooltip("목표 각도로 수렴하는 속도")]
@@ -97,6 +100,8 @@ public class UIInteractionMode : MonoBehaviour
 
         float targetYaw = EdgeFactor(nx) * yawRange;
         // ponytail: 커서 위 → 위를 본다고 가정. 플레이 후 반대로 느껴지면 부호만 뒤집기.
+        // 상/하 범위 분리 — 아래는 질문 버튼 영역이라 작게.
+        float pitchRange = ny >= 0f ? pitchUpRange : pitchDownRange;
         float targetPitch = -EdgeFactor(ny) * pitchRange;
 
         curYaw = Mathf.Lerp(curYaw, targetYaw, Time.deltaTime * lookLerp);

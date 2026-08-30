@@ -34,8 +34,18 @@ public class PhaseLabel : MonoBehaviour
     {
         if (label == null) return;
 
-        string name = phase.ToString();   // Morning / Noon / Evening / Dawn
+        string name = LocalizationManager.Korean
+            ? phase switch
+            {
+                DayPhase.Morning => "아침",
+                DayPhase.Noon => "점심",
+                DayPhase.Evening => "저녁",
+                DayPhase.Dawn => "새벽",
+                _ => phase.ToString(),
+            }
+            : phase.ToString();   // Morning / Noon / Evening / Dawn
         int day = DayPhaseManager.Instance != null ? DayPhaseManager.Instance.DayCount : 1;
-        label.text = showDayCount ? $"Day {day} · {name}" : name;
+        if (!showDayCount) { label.text = name; return; }
+        label.text = LocalizationManager.Korean ? $"{day}일차 · {name}" : $"Day {day} · {name}";
     }
 }

@@ -10,13 +10,17 @@ using UnityEngine.Serialization;
 public enum InteractionPrompt
 {
     Interact, OpenClose, Toggle, PickUp, Use, Inspect, CleanUp, Push, ViewScreen, Custom, Hang,
-    Read, EndMorning, EndNoon, EndEvening, EndDay,
+    Read, EndMorning, EndNoon, EndEvening, EndDay, CheckIn,
 }
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
 // 한 GameObject에 Interactable 1 + Effect 여러 개 + Condition 0~N 를 조합한다.
 public class Interactable : MonoBehaviour
 {
+    // 같은 GameObject 의 컴포넌트가 구현하면 프롬프트 문구를 상황에 따라 바꾼다.
+    // null 반환 = promptType 기본값 사용.
+    public interface IPromptOverride { string PromptOverride { get; } }
+
     [SerializeField] private InteractionPrompt promptType = InteractionPrompt.Interact;
     [Tooltip("promptType 이 Custom 일 때만 사용")]
     [SerializeField] private string customPrompt = "";
@@ -27,26 +31,33 @@ public class Interactable : MonoBehaviour
     [FormerlySerializedAs("onInteract")]
     [SerializeField] private UnityEvent onInteracted;
 
-    public string Prompt => promptType switch
+    public string Prompt => promptOverride?.PromptOverride ?? DefaultPrompt;
+
+    private string DefaultPrompt => promptType switch
     {
-        InteractionPrompt.OpenClose => IsOn ? "Close" : "Open",
-        InteractionPrompt.Toggle => IsOn ? "Turn off" : "Turn on",
-        InteractionPrompt.PickUp => "Pick up",
-        InteractionPrompt.Inspect => "Inspect",
-        InteractionPrompt.CleanUp => "Clean up",
-        InteractionPrompt.ViewScreen => "View",
+        InteractionPrompt.OpenClose => IsOn ? LocalizationManager.T("Close", "닫기") : LocalizationManager.T("Open", "열기"),
+        InteractionPrompt.Toggle => IsOn ? LocalizationManager.T("Turn off", "끄기") : LocalizationManager.T("Turn on", "켜기"),
+        InteractionPrompt.PickUp => LocalizationManager.T("Pick up", "줍기"),
+        InteractionPrompt.Inspect => LocalizationManager.T("Inspect", "살펴보기"),
+        InteractionPrompt.CleanUp => LocalizationManager.T("Clean up", "정리하기"),
+        InteractionPrompt.ViewScreen => LocalizationManager.T("View", "보기"),
         InteractionPrompt.Custom => customPrompt,
-        InteractionPrompt.Read => "Read",
-        InteractionPrompt.EndMorning or InteractionPrompt.EndNoon => "End shift",
-        InteractionPrompt.EndEvening => "Close up",
-        InteractionPrompt.EndDay => "Sleep",
-        _ => promptType.ToString(),   // Interact / Use / Push / Hang
+        InteractionPrompt.Read => LocalizationManager.T("Read", "읽기"),
+        InteractionPrompt.EndMorning or InteractionPrompt.EndNoon => LocalizationManager.T("End shift", "근무 종료"),
+        InteractionPrompt.EndEvening => LocalizationManager.T("Close up", "마감"),
+        InteractionPrompt.EndDay => LocalizationManager.T("Sleep", "잠자기"),
+        InteractionPrompt.CheckIn => LocalizationManager.T("Check in", "체크인"),
+        InteractionPrompt.Use => LocalizationManager.T("Use", "사용"),
+        InteractionPrompt.Push => LocalizationManager.T("Push", "밀기"),
+        InteractionPrompt.Hang => LocalizationManager.T("Hang", "걸기"),
+        _ => LocalizationManager.T("Interact", "상호작용"),   // Interact
     };
     public bool IsToggle => isToggle;
     public bool IsOn { get; private set; }
 
     private InteractionEffect[] effects;
     private InteractionCondition[] conditions;
+    private IPromptOverride promptOverride;
 
     public bool CanInteract
     {
@@ -68,6 +79,7 @@ public class Interactable : MonoBehaviour
             .OrderBy(e => e is SfxEffect ? 0 : 1)
             .ToArray();
         conditions = GetComponents<InteractionCondition>();
+        promptOverride = GetComponent<IPromptOverride>();
         IsOn = startOn;
 
         if (effects.Length == 0 && (onInteracted?.GetPersistentEventCount() ?? 0) == 0)
@@ -89,6 +101,18 @@ public class Interactable : MonoBehaviour
 
     // 코드/마이그레이션용
     public void ForceState(bool on) => IsOn = on;
+
+    // 코드/연출용: 토글 상태를 강제 설정하고 효과 재생 (CanInteract·isToggle 무시).
+    // NPC 가 문 여는 연출 등. 이미 그 상태면 아무것도 안 함.
+    public void SetState(bool on)
+    {
+        if (IsOn == on) return;
+        IsOn = on;
+        var ctx = new InteractionContext(this, null, on, transform.position);
+        if (effects != null)
+            foreach (var e in effects)
+                if (e != null && e.enabled) e.Play(in ctx);
+    }
 
 #if UNITY_EDITOR
     // 우클릭 메뉴로 관리되는 효과 목록 (이 안의 것만 자동 제거 대상)
@@ -193,6 +217,8 @@ public class Interactable : MonoBehaviour
     // 상호작용 필수: Outline 컴포넌트. 평소엔 꺼져 있고(Interactor 가 켬), 모드는 OutlineVisible.
     private void EnsureOutline()
     {
+        if (GetComponent<SpriteOutline>() != null) return;   // 스프라이트 손님은 QuickOutline 대신 SpriteOutline 사용
+
         var outline = GetComponent<Outline>();
         if (outline == null)
             outline = UnityEditor.Undo.AddComponent<Outline>(gameObject);

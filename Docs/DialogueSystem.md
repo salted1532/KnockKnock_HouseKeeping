@@ -14,8 +14,8 @@
 
 `Assets/My/Data/Dialogue/*.csv` — 구글시트/엑셀로 작성 후 내보내기. `sample.csv` 참고.
 
-열: `npcId, situation, day, role, nodeKey, label, expression, text, goto, outcome`
-(`goto`/`outcome` 은 없어도 됨)
+열: `npcId, situation, day, role, nodeKey, label_en, label_ko, expression, text_en, text_ko, goto, outcome`
+(`text_ko`/`label_ko`/`goto`/`outcome` 은 없어도 됨 — `_ko` 가 비면 런타임에 `_en` 으로 폴백)
 
 | 열 | 값 |
 |---|---|
@@ -24,15 +24,17 @@
 | `day` | `0` = 모든 일차 공통(폴백), `N` = N일차 전용 |
 | `role` | `Greeting`(자동 인사) / `Question`(허브 버튼) / `Node`(goto 로만 도달) / `Ambient` |
 | `nodeKey` | `(npcId, situation)` 안에서 유일한 노드 이름. Greeting 은 보통 빈칸 |
-| `label` | 질문/선택지 버튼 문구 |
+| `label_en` / `label_ko` | 질문/선택지 버튼 문구 (영어/한글) |
 | `expression` | `Neutral` / `Angry` — 줄별 표정 |
-| `text` | 대사. `\n` → 줄바꿈 |
+| `text_en` / `text_ko` | 대사 (영어/한글). `\n` → 줄바꿈 |
 | `goto` | 다음 노드 nodeKey (대사 줄이면 자동 연결 / 선택지 행이면 그 선택의 목표). 빈 값 = 이 가지 종료(허브 복귀) |
 | `outcome` | `Rejected` 면 이 노드를 다 읽었을 때 대화 전체 종료 + 거절 판정 |
 
 같은 `(npcId, situation, day, role, nodeKey)` 연속 행 = 한 **노드**.
-- `text` 채워진 행 = **대사 줄**. `label`/`goto` 는 노드 자체에 반영.
+- `text_en`/`text_ko` 중 하나라도 채워진 행 = **대사 줄**. `label`/`goto` 는 노드 자체에 반영.
 - `text` 비고 `label`/`goto` 있는 행 = **선택지**. 여러 개면 플레이어가 고름.
+
+언어 선택은 [LocalizationManager](LocalizationManager.md) (씬 배치, 인스펙터 콤보 박스). `DialogueLine.Text` / `DialogueEntry.Label` / `Choice.Label` / `NpcData.DisplayName` 이 현재 언어를 읽는다.
 
 **재생**: lines 읽기 → `outcome==Rejected` 면 종료 → `choices` 있으면 플레이어 선택 → 없으면 `goto` 자동 → 둘 다 없으면 이 가지 끝(허브 복귀).
 
@@ -48,7 +50,7 @@
 
 ### `DialogueEntry` (노드 하나)
 
-`npcId(int)`, `situation`, `day`, `role`, `nodeKey`, `label`, `lines[]`, `choices[] {label, goToNode}`, `goToNode`, `outcome(Verdict)`.
+`npcId(int)`, `situation`, `day`, `role`, `nodeKey`, `labelEn`/`labelKo` (+ `Label`), `lines[]` (`DialogueLine {expression, textEn, textKo, Text}`), `choices[] {labelEn, labelKo, Label, goToNode}`, `goToNode`, `outcome(Verdict)`.
 
 ### `NpcData` (SO) — NPC당 1개, 손으로 작성
 
@@ -57,6 +59,7 @@
 | `id` (int) | CSV `npcId` 와 일치. **1~60** (`OnValidate` 범위 경고) |
 | `displayName` | 표시 이름 |
 | `neutralPortrait` / `angryPortrait` | 말풍선 표정 스프라이트 |
+| `backPortrait` | 퇴장(카운터를 떠날 때) 뒷모습. 비면 정면 유지 |
 | `modelPrefab` | NPC별 3D 모델. **현재 미사용** — 씬의 공용 손님 오브젝트 하나를 재사용 |
 | `isSleepwalker` | **내부 정답** — 몽유병 환자인가 (플레이어에게 안 보임) |
 | `visitorOnly` | 숙박 안 하고 대화만 (메시지 전달 인물) — 접객 판정 스킵 |
@@ -115,11 +118,15 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 버튼 목록 하나로 **질문 허브**(반복 선택)와 **선택지**(1회) 둘 다 그린다. `DialogueRunner` 가 구동.
 
 - `Show(labels, onPick(int), showDone)` — 버튼 생성. `onPick(-1)` = "대화 종료"(showDone 일 때만)
+  - 생성 후 `doneButton`(Dialogue_Exit)을 `SetAsLastSibling` → 항상 맨 오른쪽
+  - `panelRect`(Dialogue_Panel) 지정 시 버튼 행(`Button_Horizontal`, `ContentSizeFitter`+`HorizontalLayoutGroup`) 폭 + `sidePadding*2` 로 패널 폭 조절. 단 `minPanelWidth`(기본 840 = 버튼 3개) 밑으로는 안 좁아짐. 높이는 안 건드림
 - `CanAsk` (`Func<bool>`, null=항상 가능) — 새벽 탐문 행동력 체크
 - `OnAsked` (`Action`) — 질문 1건 답변 후 (행동력 차감)
 - `SetInteractable(bool)` · `Close()`
 
 행동력 시스템 자체는 별도 — 패널은 훅만 받는다.
+
+버튼 스타일: 배경 회색 `(0.20,0.20,0.23)` + 흰 글씨(Center 정렬). `Dialogue_Button.prefab` 과 `Dialogue_Exit` 동일.
 
 ---
 
@@ -128,8 +135,8 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 ### Guest 프리팹 (접객 중 NPC)
 
 접객 큐가 세션당 **1개 인스턴스**를 만들어 손님마다 재활용한다. 프리팹 구성:
-- `GuestMover` — 이동. `WarpTo(Transform)` + `WalkThrough(IReadOnlyList<Transform>)` 코루틴. 경로는 **씬(ReceptionManager)이 넘겨줌** (프리팹이라 씬 참조 못 가짐). 직선 이동 + 진행방향 회전 + (있으면) Animator `Walking` bool. `speed`/`turnSpeed`/`arriveDistance`.
-- `GuestView` — 겉모습. `body` (`SpriteRenderer`) 를 `NpcData` 초상화로 교체. `Apply(npc)` 시 Neutral + `DialogueRunner.OnLineShown` 구독(줄별 표정), `Clear()` 시 해제.
+- `GuestMover` — 이동. `WarpTo(Transform)` + `WalkThrough(waypoints, facings?)` 코루틴. 경로·방향은 **씬(ReceptionManager)이 넘겨줌** (프리팹이라 씬 참조 못 가짐). 직선 이동 + (있으면) Animator `Walking` bool. `speed`/`arriveDistance`. **회전은 걷는 방향과 무관하게 항상 `faceYaw`(기본 -180) 로 고정** (`doc/0110`). 레그 i 마다 `view.SetWalkFacing(facings[i] ?? Auto, 이동방향)`, 끝나면 `view.EndSide()`. **`Frozen`** true 면 그 자리에 멈춤(접객 일시정지, `doc/0115`).
+- `GuestView` — 겉모습. `body` (`SpriteRenderer`) 를 `NpcData` 초상화로 교체. `Apply(npc)` 시 Neutral + `DialogueRunner.OnLineShown` 구독(줄별 표정), `Clear()` 시 해제. **`ShowBack()`** — 퇴장 직전 `ReceptionManager` 가 호출, `npc.backPortrait` 로 스왑. **`SetWalkFacing(Facing, worldDir)` / `EndSide()`** — `Facing {Auto,Front,Back,Left,Right}`. `Auto` = `SetSide` (화면 수평 이동이면 `npc.sidePortrait` 1장+`flipX` 옆모습, 깊이 방향이면 유지). `sidePortrait` 원본은 화면 오른쪽 향함 → `Left` 가 `flipX=true`. 나머지는 명시 스프라이트. 걷기 끝나면 직전 스프라이트 복귀. 경로별 방향은 `ReceptionManager.entryFacing/exitFacing/roomFacing` (`doc/0114`·`doc/0116`). `worldHeight`(기본 3.2) 하나로 스프라이트 균일 스케일 + 바닥을 `feetLocalY` 에 정렬(지면에 안 박힘) + `bodyCollider`(CapsuleCollider) 크기·중심 동기화. 호버 하이라이트 = [SpriteOutline](SpriteOutline.md).
 - 자식 `SpeechBubble` — 말풍선.
 - `Interactable`(상호작용) + `CheckInGuestEffect` + Collider(Interaction 레이어) — 클릭 체크인용.
 
@@ -187,7 +194,7 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 
 ## 스킵 (YAGNI)
 
-비주얼 노드 그래프 에디터/Ink/Yarn (분기는 CSV `goto` 로 충분) · `condition` 열(조건부 대사 — 필요할 때 추가) · 로컬라이제이션 레이어(`text_ko`/`text_en` 열은 나중) · 줄별 음성/애니 트리거 · 밤 판정·엔딩 집계 · 선택 결과 로깅 · 신분증 확인 UI(SYS-04) · 모니터 방배정·`RoomKey` 대조·객실 배치도(SYS-06 풀버전) — doc/0104 후속.
+비주얼 노드 그래프 에디터/Ink/Yarn (분기는 CSV `goto` 로 충분) · `condition` 열(조건부 대사 — 필요할 때 추가) · 줄별 음성/애니 트리거 · 밤 판정·엔딩 집계 · 선택 결과 로깅 · 신분증 확인 UI(SYS-04) · 모니터 방배정·`RoomKey` 대조·객실 배치도(SYS-06 풀버전) — doc/0104 후속.
 
 ## 관련
 

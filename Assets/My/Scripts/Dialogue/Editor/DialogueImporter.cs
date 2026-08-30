@@ -7,11 +7,11 @@ using UnityEngine;
 
 // Tools > Dialogue > Import CSV → DialogueDatabase
 // Assets/My/Data/Dialogue/ 아래 모든 *.csv 를 읽어 단일 DialogueDatabase.asset 을 통째로 재생성한다.
-// 열: npcId,situation,day,role,nodeKey,label,expression,text,goto,outcome
-//   (첫 줄이 "npcId" 로 시작하면 헤더로 건너뜀. goto/outcome 은 없어도 됨)
+// 열: npcId,situation,day,role,nodeKey,label_en,label_ko,expression,text_en,text_ko,goto,outcome
+//   (첫 줄이 "npcId" 로 시작하면 헤더로 건너뜀. text_ko/goto/outcome 은 없어도 됨)
 // 같은 (npcId,situation,day,role,nodeKey) 연속 행 = 한 노드.
 //   text 채워진 행 = 대사 줄. text 비고 label/goto 있는 행 = 선택지.
-//   text 안의 \n 은 실제 줄바꿈으로 변환.
+//   text 안의 \n 은 실제 줄바꿈으로 변환. text_ko/label_ko 가 비면 런타임에 영어로 폴백.
 public static class DialogueImporter
 {
     private const string CsvFolder = "Assets/My/Data/Dialogue";
@@ -56,9 +56,9 @@ public static class DialogueImporter
                 if (string.IsNullOrWhiteSpace(raw)) continue;
 
                 var cols = ParseCsvLine(raw);
-                if (cols.Count < 8)
+                if (cols.Count < 9)
                 {
-                    Debug.LogWarning($"[DialogueImporter] {Path.GetFileName(file)}:{i + 1} 열 부족({cols.Count}/8+) → 스킵");
+                    Debug.LogWarning($"[DialogueImporter] {Path.GetFileName(file)}:{i + 1} 열 부족({cols.Count}/9+) → 스킵");
                     continue;
                 }
 
@@ -71,11 +71,13 @@ public static class DialogueImporter
                 int.TryParse(cols[2].Trim(), out int day);
                 var role = ParseEnum(cols[3].Trim(), EntryRole.Greeting);
                 string nodeKey = cols[4].Trim();
-                string label = cols[5].Trim();
-                var expr = ParseEnum(cols[6].Trim(), Expression.Neutral);
-                string text = cols[7].Replace("\\n", "\n");
-                string goTo = cols.Count > 8 ? cols[8].Trim() : "";
-                string outcomeStr = cols.Count > 9 ? cols[9].Trim() : "";
+                string labelEn = cols[5].Trim();
+                string labelKo = cols[6].Trim();
+                var expr = ParseEnum(cols[7].Trim(), Expression.Neutral);
+                string textEn = cols[8].Replace("\\n", "\n");
+                string textKo = cols.Count > 9 ? cols[9].Replace("\\n", "\n") : "";
+                string goTo = cols.Count > 10 ? cols[10].Trim() : "";
+                string outcomeStr = cols.Count > 11 ? cols[11].Trim() : "";
 
                 if (!knownIds.Contains(npcId)) unknownIds.Add(npcId);
 
@@ -91,18 +93,19 @@ public static class DialogueImporter
                     currentSig = sig;
                 }
 
-                bool hasText = !string.IsNullOrEmpty(text);
+                bool hasText = !string.IsNullOrEmpty(textEn) || !string.IsNullOrEmpty(textKo);
                 if (hasText)
                 {
-                    current.lines.Add(new DialogueLine { expression = expr, text = text });
-                    if (!string.IsNullOrEmpty(label)) current.label = label;
+                    current.lines.Add(new DialogueLine { expression = expr, textEn = textEn, textKo = textKo });
+                    if (!string.IsNullOrEmpty(labelEn)) current.labelEn = labelEn;
+                    if (!string.IsNullOrEmpty(labelKo)) current.labelKo = labelKo;
                     if (!string.IsNullOrEmpty(goTo)) current.goToNode = goTo;
                     if (!string.IsNullOrEmpty(outcomeStr))
                         current.outcome = ParseEnum(outcomeStr, Verdict.None);
                 }
-                else if (!string.IsNullOrEmpty(label) || !string.IsNullOrEmpty(goTo))
+                else if (!string.IsNullOrEmpty(labelEn) || !string.IsNullOrEmpty(labelKo) || !string.IsNullOrEmpty(goTo))
                 {
-                    current.choices.Add(new Choice { label = label, goToNode = goTo });
+                    current.choices.Add(new Choice { labelEn = labelEn, labelKo = labelKo, goToNode = goTo });
                 }
                 else
                 {
@@ -150,7 +153,7 @@ public static class DialogueImporter
         {
             Check(e.npcId, e.situation, e.goToNode, $"노드 '{e.nodeKey}'");
             foreach (var c in e.choices)
-                Check(e.npcId, e.situation, c.goToNode, $"'{e.nodeKey}' 선택지 '{c.label}'");
+                Check(e.npcId, e.situation, c.goToNode, $"'{e.nodeKey}' 선택지 '{c.labelEn}'");
         }
         if (dangling == 0) Debug.Log("[DialogueImporter] goto 검사 통과");
     }
@@ -193,13 +196,13 @@ public static class DialogueImporter
     public static void SelfCheck()
     {
         var db = ScriptableObject.CreateInstance<DialogueDatabase>();
-        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 0, role = EntryRole.Greeting, lines = { new DialogueLine { text = "공통" } } });
-        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 3, role = EntryRole.Greeting, lines = { new DialogueLine { text = "3일차" } } });
-        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 0, role = EntryRole.Node, nodeKey = "leave", lines = { new DialogueLine { text = "나가세요" } }, outcome = Verdict.Rejected });
+        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 0, role = EntryRole.Greeting, lines = { new DialogueLine { textEn = "공통" } } });
+        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 3, role = EntryRole.Greeting, lines = { new DialogueLine { textEn = "3일차" } } });
+        db.entries.Add(new DialogueEntry { npcId = 1, situation = Situation.Reception, day = 0, role = EntryRole.Node, nodeKey = "leave", lines = { new DialogueLine { textEn = "나가세요" } }, outcome = Verdict.Rejected });
         db.RebuildIndex();
 
-        Debug.Assert(db.Query(1, Situation.Reception, 3, EntryRole.Greeting)[0].lines[0].text == "3일차", "3일차 전용이 우선");
-        Debug.Assert(db.Query(1, Situation.Reception, 1, EntryRole.Greeting)[0].lines[0].text == "공통", "전용 없으면 day 0 폴백");
+        Debug.Assert(db.Query(1, Situation.Reception, 3, EntryRole.Greeting)[0].lines[0].textEn == "3일차", "3일차 전용이 우선");
+        Debug.Assert(db.Query(1, Situation.Reception, 1, EntryRole.Greeting)[0].lines[0].textEn == "공통", "전용 없으면 day 0 폴백");
         Debug.Assert(db.Query(1, Situation.Dawn, 1, EntryRole.Greeting).Count == 0, "상황 불일치 → 빈 결과");
         Debug.Assert(db.Query(2, Situation.Reception, 1, EntryRole.Greeting).Count == 0, "미등록 npcId → 빈 결과");
         Debug.Assert(db.GetNode(1, Situation.Reception, "leave", 1)?.outcome == Verdict.Rejected, "GetNode 로 노드 조회 + outcome");

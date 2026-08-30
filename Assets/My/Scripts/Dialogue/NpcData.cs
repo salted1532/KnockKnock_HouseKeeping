@@ -9,10 +9,20 @@ public class NpcData : ScriptableObject
     [Tooltip("CSV 의 npcId 와 일치하는 번호. 1~60 계획")]
     public int id;
     public string displayName;
+    [Tooltip("한글 이름. 비면 displayName 으로 폴백")]
+    public string displayNameKo;
+
+    // 현재 언어에 맞는 표시 이름.
+    public string DisplayName =>
+        LocalizationManager.Korean && !string.IsNullOrEmpty(displayNameKo) ? displayNameKo : displayName;
 
     [Header("초상화 (말풍선 표정)")]
     public Sprite neutralPortrait;
     public Sprite angryPortrait;
+    [Tooltip("퇴장(카운터를 떠날 때) 뒷모습. 비면 정면 유지")]
+    public Sprite backPortrait;
+    [Tooltip("옆모습 (걸어서 입·퇴장 시 수평 이동). 화면 왼쪽 향한 그림 기준 — 오른쪽 이동 시 자동 좌우반전. 비면 정면/뒷모습 유지")]
+    public Sprite sidePortrait;
 
     [Header("외형 (후속: 손님 모델 스왑용 — 현재 미사용)")]
     [Tooltip("NPC별 3D 모델. 지금은 씬의 공용 손님 오브젝트 하나를 재사용하므로 미사용. 모델 스왑 붙일 때 사용")]
