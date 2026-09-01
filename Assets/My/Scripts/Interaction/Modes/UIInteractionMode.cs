@@ -42,6 +42,11 @@ public class UIInteractionMode : MonoBehaviour
     public bool Active { get; private set; }
     public int Depth => anchors.Count;   // 쌓인 앵커 수 (0=비활성, 1=접객만, 2=접객+모니터 …)
 
+    // 오버레이(노트 읽기·페이드 전환)로 플레이어가 정지된 상태. FreezeForOverlay 가 토글.
+    public bool FrozenForOverlay { get; private set; }
+    // 화면고정이든 오버레이든 플레이어 이동이 잠겨 있나 (발소리 등 이동 연출 게이트용).
+    public bool MovementLocked => Active || FrozenForOverlay;
+
     // 이 앵커가 현재 최상위 뷰인가 (토글 진입/해제 판정용).
     public bool IsTopAnchor(Transform t) => anchors.Count > 0 && anchors.Peek() == t;
     public event Action Entered;
@@ -194,6 +199,7 @@ public class UIInteractionMode : MonoBehaviour
     public void FreezeForOverlay(bool on)
     {
         if (Active) return;
+        FrozenForOverlay = on;
         if (firstPersonController != null) firstPersonController.enabled = !on;
         if (gazeInteractor != null) gazeInteractor.Suspended = on;
         if (crosshair != null) crosshair.SetActive(!on);

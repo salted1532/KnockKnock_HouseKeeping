@@ -15,6 +15,7 @@
 
 ## 동작 (`Update`)
 
+- **화면고정/오버레이 중이면 (`!controller.enabled` 또는 `UIInteractionMode.MovementLocked`) 누적 초기화 후 스킵** — CC 가 꺼진 채 `controller.velocity` 가 멈춰 발소리가 무한 트리거되던 문제 (`doc/0142`).
 - 접지 안 됐거나 수평 속도 < 0.1 이면 누적 초기화.
 - 수평 속도 × deltaTime 을 누적, `stepDistance` 넘으면 `PlayFootstep`.
 - `PlayFootstep`: 발밑으로 레이캐스트 → 맞은 콜라이더의 **레이어**와 스프린트 피치를 `SoundManager.PlayFootstep` 에 전달.

@@ -20,8 +20,9 @@
 1. `busy` 면 무시. `RoomController.NightGuest` 없으면 로그 후 종료.
 2. **즉시 화면고정** — `UIInteractionMode.Enter(rc.KnockAnchor)` (플레이어 이동도 정지).
 3. `knockWait` 초 대기.
-4. **`npc.refusesDawnKnock`** (거절):
-   - `dawnPanel` 있으면 `DialogueRunner.SayNode(npc, dawnPanel, Dawn, "refuse")` 한 마디
+4. **새벽이 아니거나(`DayPhaseManager.Current != Dawn` — 아침·점심 청소 시간) `npc.refusesDawnKnock`** (거절):
+   - `refuseMessages` 중 랜덤 하나 → `ScreenMessage.Show`
+   - **새벽일 때만** `dawnPanel` + `Dawn/refuse` 노드로 문 너머 한 마디. 아침·점심엔 대사 없이 `refuseReadTime` 대기 (doc/0136)
    - `UIInteractionMode.Exit()` → 문 안 열림, 손님 스폰 안 함
 5. **수락**:
    - `rc.PeekDoor(peekAngle, openTime)` — 정문 살짝 열림

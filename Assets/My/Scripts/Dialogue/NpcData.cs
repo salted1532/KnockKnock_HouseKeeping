@@ -32,6 +32,12 @@ public class NpcData : ScriptableObject
     public bool isSleepwalker;   // 내부 정답: 몽유병 환자인가
     public bool visitorOnly;     // 숙박 안 하고 대화만 (메시지 전달 인물)
     public bool refusesDawnKnock; // 새벽에 노크해도 문을 안 열어줌 (doc/0118)
+
+    [Tooltip("숙박 박수. 체크인 다음날부터 카운트 — 1 = 다음날 아침 체크아웃, 2 = 이틀 묵고 셋째날 아침 체크아웃 (doc/0132)")]
+    [Min(1)] public int stayNights = 1;
+    [Tooltip("숙박 중 매일 아침 하우스키핑을 위해 방을 열어줌. 끄면 체크아웃 아침에만 개방 (doc/0132)")]
+    public bool allowsMorningCleaning;
+
     public IdCard idCard;
 
     public Sprite Portrait(Expression e) =>

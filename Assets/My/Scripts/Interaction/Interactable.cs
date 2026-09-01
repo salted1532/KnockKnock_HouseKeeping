@@ -105,14 +105,19 @@ public class Interactable : MonoBehaviour
 
     // 코드/연출용: 토글 상태를 강제 설정하고 효과 재생 (CanInteract·isToggle 무시).
     // NPC 가 문 여는 연출 등. 이미 그 상태면 아무것도 안 함.
-    public void SetState(bool on)
+    // silent: SfxEffect 는 건너뛴다 (RoomController 의 새벽 봉인 등, 소리 없이 상태만 바꿀 때).
+    public void SetState(bool on, bool silent = false)
     {
         if (IsOn == on) return;
         IsOn = on;
         var ctx = new InteractionContext(this, null, on, transform.position);
         if (effects != null)
             foreach (var e in effects)
-                if (e != null && e.enabled) e.Play(in ctx);
+            {
+                if (e == null || !e.enabled) continue;
+                if (silent && e is SfxEffect) continue;
+                e.Play(in ctx);
+            }
     }
 
 #if UNITY_EDITOR

@@ -1,9 +1,11 @@
 using UnityEngine;
 
 // 객실 1개의 관제. 각 방에 컴포넌트로 붙이고 방 번호(101~110)와 가구들을 인스펙터로 연결한다.
-// 새벽에 이 방 배정 손님이 있으면: 정문을 잠그고(여닫기 차단) 노크 상호작용을 노출,
-// 내부문·침대 등 sealedInteractables 도 함께 비활성. 노크하면 KnockEffect 가 아래 앵커/스폰포인트를 읽어
-// 화면고정 + 지정 손님 스프라이트 스폰 + 새벽 대화. doc/0118.
+// 배정 손님이 있으면 체크인한 저녁을 빼고 체크아웃까지 정문을 잠그고(여닫기 차단) 노크 상호작용을 노출,
+// 내부문·침대 등 sealedInteractables 도 함께 비활성. 새벽 노크 → KnockEffect 가 앵커/스폰포인트를 읽어
+// 화면고정 + 손님 스프라이트 + 새벽 대화. 새벽이 아닌 노크는 항상 거절.
+// 아침 청소 창(체크아웃 아침 · 청소 허용 손님의 숙박 중 아침)엔 정문을 열고 침대를 흐트러뜨린다.
+// 체크아웃 아침이 지나면 GuestManager.CheckOut 으로 방을 비운다. doc/0118 · doc/0132.
 public class RoomController : MonoBehaviour
 {
     [SerializeField] private int roomNumber = 101;   // 101~110
@@ -18,9 +20,21 @@ public class RoomController : MonoBehaviour
     [Tooltip("노크 시 지정 손님 스프라이트가 스폰될 위치 (문틈/문 앞 빈 오브젝트)")]
     [SerializeField] private Transform guestSpawnPoint;
 
-    [Header("새벽 잠금 시 함께 비활성화할 가구")]
+    [Header("잠금 시 함께 비활성화할 가구")]
     [Tooltip("내부문 · 침대 · 기타 상호작용 가구. 원하는 만큼 추가")]
     [SerializeField] private Interactable[] sealedInteractables;
+
+    [Header("잠금 시 방 안이 안 보이도록")]
+    [Tooltip("잠금 시 커튼을 닫고(SetState true) 상호작용도 끈다")]
+    [SerializeField] private Interactable[] curtains;
+    [Tooltip("잠금 시 전등을 끄고(SetState false) 상호작용도 끈다")]
+    [SerializeField] private Interactable[] lights;
+
+    [Header("아침 청소 (청소 창이 열릴 때 흐트러진 상태로)")]
+    [Tooltip("청소 전 활성화 = 흐트러진 버전 (침대의 Bed_02 등, = Bed 의 ChangeObjectEffect offObjects)")]
+    [SerializeField] private GameObject[] messyObjects;
+    [Tooltip("청소 전 비활성화 = 정리된 버전 (침대의 Bed_01 등, = onObjects). 플레이어가 CleanUp 하면 켜짐")]
+    [SerializeField] private GameObject[] tidyObjects;
 
     public int RoomNumber => roomNumber;
     public Transform KnockAnchor => knockAnchor;
@@ -50,19 +64,71 @@ public class RoomController : MonoBehaviour
 
     private void Apply(DayPhase phase)
     {
-        bool seal = phase == DayPhase.Dawn && NightGuest != null;
+        var gm = GuestManager.Instance;
+        int day = DayPhaseManager.Instance != null ? DayPhaseManager.Instance.DayCount : 1;
+        var g = gm != null ? gm.StateInRoom(roomNumber) : null;
 
+        // 체크아웃 아침이 지났으면 정산 — 그 아침엔 방을 열어 청소하게 두고, 점심 이후 손님을 비운다.
+        if (g != null && day >= g.CheckOutDay && !(day == g.CheckOutDay && phase == DayPhase.Morning))
+        {
+            gm.CheckOut(g.npc);
+            g = null;
+        }
+
+        bool present = g != null;
+
+        // 방문 잠금 판정:
+        //  - 체크인한 그 저녁(접객 중, 손님이 걸어 들어오는 중)엔 안 잠금
+        //  - 체크아웃 아침 = 개방 (손님 나감 → 대청소)
+        //  - 청소 허용 손님은 숙박 중 매일 아침 개방 (하우스키핑)
+        //  - 그 외 전부 잠금
+        bool checkInEvening = present && phase == DayPhase.Evening && day == g.checkInDay;
+        bool checkoutMorning = present && phase == DayPhase.Morning && day == g.CheckOutDay;
+        bool cleaningMorning = present && phase == DayPhase.Morning && g.cleaningRequested
+                               && day > g.checkInDay && day < g.CheckOutDay;
+        bool roomOpenForCleaning = checkoutMorning || cleaningMorning;
+        bool seal = present && !checkInEvening && !roomOpenForCleaning;
+
+        // 후불 손님: 체크아웃 아침에 나가면서 숙박비 지불 (settled 로 1회만, 현금음 자동) — doc/0137
+        if (checkoutMorning && !g.payUpfront && !g.settled && g.nightlyRate > 0)
+        {
+            Wallet.Instance?.Add(g.TotalCharge);
+            g.settled = true;
+        }
+
+        // RoomController 의 상태 변경은 전부 소리 없이 (SetState silent) — doc/0141
         if (frontDoor != null)
         {
-            if (seal) frontDoor.SetState(false);   // 닫기 연출
-            frontDoor.enabled = !seal;             // 여닫기 상호작용 차단 (CanInteract 가 enabled 확인)
+            if (seal) frontDoor.SetState(false, silent: true);   // 닫기 연출
+            frontDoor.enabled = !seal;                            // 여닫기 상호작용 차단 (CanInteract 가 enabled 확인)
         }
 
         if (sealedInteractables != null)
             foreach (var it in sealedInteractables)
                 if (it != null) it.enabled = !seal;
 
-        if (knockTarget != null) knockTarget.SetActive(seal);   // 노크 상호작용 노출
+        // 잠금 시 커튼 OFF + 불 꺼서 창밖에서 방 안이 안 보이게 (doc/0136 · 0141)
+        if (curtains != null)
+            foreach (var it in curtains)
+                if (it != null) { if (seal) it.SetState(false, silent: true); it.enabled = !seal; }
+        if (lights != null)
+            foreach (var it in lights)
+                if (it != null) { if (seal) it.SetState(false, silent: true); it.enabled = !seal; }
+
+        // 잠겨 있으면 노크 노출. 새벽이 아니면 KnockEffect 가 항상 거절 (doc/0132).
+        if (knockTarget != null) knockTarget.SetActive(seal);
+
+        // 아침 청소 창이 열렸으면 침대 등을 흐트러진 상태로 되돌린다 (플레이어가 CleanUp 할 대상).
+        if (roomOpenForCleaning) SetMessy();
+    }
+
+    // 청소 대상을 흐트러진 상태로. Bed 의 CleanUp(ChangeObjectEffect) 이 반대로 되돌린다.
+    private void SetMessy()
+    {
+        if (messyObjects != null)
+            foreach (var o in messyObjects) if (o != null) o.SetActive(true);
+        if (tidyObjects != null)
+            foreach (var o in tidyObjects) if (o != null) o.SetActive(false);
     }
 
     // KnockEffect 가 호출 — 정문을 지정 각도로 스윙 (Interactable.IsOn 안 건드림).

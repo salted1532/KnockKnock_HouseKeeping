@@ -47,6 +47,12 @@
     - 열쇠 든 채 클릭(`ConfirmCheckIn`, `CheckInGuestEffect` 가 `HandItem.IsKey` 확인) → **모니터에서 방 배정(`PendingRoom > 0`)돼 있어야** 함 → 열쇠 `RemoveActiveItem`+`Destroy` → `CheckIn(npc, PendingRoom)` + "checkin" 대사 + `WalkThrough(roomPath)`. 방 미배정이면 열쇠 안 닳고 무동작
     - 프롬프트: 열쇠+방배정 "체크인" / 열쇠+미배정 "방 배정 필요" / 빈손 "대화" (`Interactable.IPromptOverride`)
   → `GuestView.Clear()` → 다음. 큐 끝 → 인스턴스 `Destroy` + `EndSession()`.
+- **결제** (`doc/0137`·`doc/0140`): `DialogueRunner.OnNodeReached` 훅(`HandleReceptionNode`)이 대화 선택을 잡는다 —
+  `stay_pay`→선불 / `stay_trust`·`stay_pay_refused`→후불 / `reject_double_accept`→2배+선불 (+ 하우스키핑 `clean_yes`/`clean_no`).
+  **돈은 승인(방 배정 + 열쇠) 시에만** — 훅은 `pendingPayUpfront` 만 기록. 승인 시 `GuestState.nightlyRate`
+  (2배면 ×2) · `payUpfront`(미선택=false) 세팅, **선불이면 `Wallet.Add(TotalCharge)`** + `settled=true`.
+  후불은 [`RoomController`](RoomController.md) 가 체크아웃 아침에. 선불 손님 승인 대사는 `checkin_paid`(없으면 `checkin`).
+  자세히는 [Wallet](Wallet.md).
 - **`EndSession()`** (public) — 큐 중단 + `UIInteractionMode.ExitAll()` + `OnSessionEnded` + `DayPhaseManager.Advance()`(→새벽 페이드). `K` 디버그 키로도 호출.
 - **일시정지 / 재개** (`doc/0115`):
   - `UIInteractionMode.Exited` 구독 → `HandleUIExit`: ESC 로 빠져나오면 **`Paused=true`** — `guestMover.Frozen`·`DialogueRunner.Paused` 켜고 보이던 대화패널 숨김. 코루틴·손님 인스턴스·세션 그대로. `OnSessionEnded` 안 쏨.

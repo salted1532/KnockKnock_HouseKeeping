@@ -23,6 +23,8 @@ MonoBehaviour:
   isSleepwalker: 0
   visitorOnly: 0
   refusesDawnKnock: 0
+  stayNights: 3
+  allowsMorningCleaning: 1
   idCard:
     name: 
     birthDate: 

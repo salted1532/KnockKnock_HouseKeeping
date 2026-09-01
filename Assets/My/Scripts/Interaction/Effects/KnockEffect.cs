@@ -4,8 +4,8 @@ using UnityEngine;
 // 새벽 노크 상호작용. RoomController.knockTarget 에 부착 (Interactable promptType = Knock).
 // 앵커·손님 스폰 위치는 부모 RoomController 에서 읽는다 (방 배선을 RoomController 한 곳에 모음).
 // 노크 → 즉시 화면고정 → knockWait 대기 →
-//   거절 손님(NpcData.refusesDawnKnock): (dawnPanel + CSV "refuse" 노드 있으면 한 마디) → 화면고정 해제
-//   수락: 정문 peekAngle 만큼 열림 + 문틈에 배정 손님 스프라이트 + 새벽 대화 → 종료 시 문 닫힘 + 화면고정 해제
+//   새벽이 아니거나(아침·점심 청소 시간) 거절 손님(NpcData.refusesDawnKnock): (dawnPanel + CSV "refuse" 노드 있으면 한 마디) → 화면고정 해제
+//   새벽 + 수락: 정문 peekAngle 만큼 열림 + 문틈에 배정 손님 스프라이트 + 새벽 대화 → 종료 시 문 닫힘 + 화면고정 해제
 // 시퀀스 동안 자기 Interactable 을 꺼서 재노크·노크음 반복 차단.
 // ESC 로 화면고정을 빠져나가면(더 이상 최상위 앵커 아님) 시퀀스 취소: 대화 중단·손님 제거·문 닫기·재노크 허용. doc/0118·0131.
 public class KnockEffect : InteractionEffect
@@ -85,7 +85,11 @@ public class KnockEffect : InteractionEffect
 
         if (Locked(anchor))
         {
-            if (npc.refusesDawnKnock)
+            // 새벽이 아니면(아침·점심·저녁 청소 시간) 손님이 문을 열어주지 않는다 — 항상 거절.
+            bool isDawn = DayPhaseManager.Instance == null
+                          || DayPhaseManager.Instance.Current == DayPhase.Dawn;
+
+            if (!isDawn || npc.refusesDawnKnock)
             {
                 if (refuseMessages != null && refuseMessages.Length > 0)
                 {
@@ -93,7 +97,8 @@ public class KnockEffect : InteractionEffect
                     ScreenMessage.Show(f.en, f.ko);
                 }
 
-                if (dawnPanel != null)
+                // 새벽 거절만 문 너머 대사 한 마디 (Dawn/refuse 노드). 아침·점심엔 응답 없이 물러남.
+                if (isDawn && dawnPanel != null)
                 {
                     bool said = false;
                     DialogueRunner.Instance.SayNode(npc, dawnPanel, Situation.Dawn, "refuse", () => said = true);
@@ -119,6 +124,7 @@ public class KnockEffect : InteractionEffect
                 if (view != null) view.Apply(npc);
 
                 bool done = false;
+                DialogueRunner.Instance.ResetConsumedTopics();   // 노크마다 탐문 결정 토픽 초기화
                 DialogueRunner.Instance.Play(npc, bubble, Situation.Dawn, _ => done = true);
                 while (!done && Locked(anchor)) yield return null;
             }

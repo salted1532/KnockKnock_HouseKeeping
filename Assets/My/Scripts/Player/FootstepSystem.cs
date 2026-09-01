@@ -21,6 +21,15 @@ public class FootstepSystem : MonoBehaviour
 
     private void Update()
     {
+        // 화면고정(노크·접객·모니터)이나 오버레이(노트·페이드 전환) 중엔 발소리 안 냄 —
+        // CharacterController 가 꺼진 채 마지막 속도(controller.velocity)가 남아 발소리가 계속 트리거되던 문제.
+        if (!controller.enabled ||
+            (UIInteractionMode.Instance != null && UIInteractionMode.Instance.MovementLocked))
+        {
+            distanceAccumulator = 0f;
+            return;
+        }
+
         if (!controller.isGrounded)
         {
             distanceAccumulator = 0f;

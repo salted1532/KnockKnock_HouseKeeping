@@ -29,6 +29,8 @@
 |---|---|
 | `Instance` (static) | 싱글턴 |
 | `Active` (bool) | UI 모드 진행 중 |
+| `FrozenForOverlay` (bool) | `FreezeForOverlay(true)` 상태 (노트·페이드 전환) |
+| `MovementLocked` (bool) | `Active \|\| FrozenForOverlay` — 발소리 등 이동 연출 게이트용 (`doc/0142`) |
 | `Depth` (int) | 쌓인 앵커 수 (0=비활성, 1=접객만, 2=접객+모니터 …) |
 | `Entered` (`event Action`) | 첫 진입 시 |
 | `Exited` (`event Action`) | 스택 비고 완전 종료(`Teardown`) 시 — `ReceptionManager` 가 세션 정리에 구독 |

@@ -12,6 +12,18 @@ public class GuestState
     public int room = -1;
     public Verdict verdict = Verdict.None;
     public int checkInDay;
+    public int stayNights = 1;       // 체크인 시 npc.stayNights 복사 (doc/0132)
+    public bool cleaningRequested;   // 체크인 시 npc.allowsMorningCleaning 복사 (doc/0132)
+
+    public int nightlyRate;          // 체크인 시 확정 ($/박, 대화로 2배 가능). 0 = 미설정 (doc/0137)
+    public bool payUpfront;          // true=선불(체크인 시 입금) / false=후불(체크아웃 아침 입금). 기본 false
+    public bool settled;             // 숙박비 입금 완료 여부 (중복 입금 방지)
+
+    // 체크아웃하는 일차 — 그날 아침에 나감. 체크인 다음날부터 stayNights 만큼 묵음.
+    public int CheckOutDay => checkInDay + (stayNights < 1 ? 1 : stayNights);
+
+    // 총 숙박비 = 요금 × 박수 (2배 선택 시 nightlyRate 가 이미 2배).
+    public int TotalCharge => (nightlyRate > 0 ? nightlyRate : 0) * (stayNights < 1 ? 1 : stayNights);
 }
 
 // 이번 플레이의 손님 상태 저장소. 접객에서 판정/배정을 기록, 밤 판정 로직이 읽는다.
@@ -27,12 +39,12 @@ public class GuestManager : MonoBehaviour
 
     public GuestState Get(NpcData npc) => active.Find(g => g.npc == npc);
 
+    // 방 번호로 이번 밤 배정 손님 상태 조회. RoomController 가 체크아웃 계산에 쓴다.
+    public GuestState StateInRoom(int room) =>
+        active.Find(g => g.verdict == Verdict.Approved && g.room == room);
+
     // 방 번호로 이번 밤 배정 손님 조회. RoomController / 모니터 방배정 보드가 쓴다.
-    public NpcData GuestInRoom(int room)
-    {
-        var s = active.Find(g => g.verdict == Verdict.Approved && g.room == room);
-        return s != null ? s.npc : null;
-    }
+    public NpcData GuestInRoom(int room) => StateInRoom(room)?.npc;
 
     public bool RoomTaken(int room) => GuestInRoom(room) != null;
 
@@ -42,6 +54,8 @@ public class GuestManager : MonoBehaviour
         s.room = room;
         s.verdict = Verdict.Approved;
         s.checkInDay = day;
+        s.stayNights = npc != null && npc.stayNights > 0 ? npc.stayNights : 1;
+        s.cleaningRequested = npc != null && npc.allowsMorningCleaning;
         return s;
     }
 

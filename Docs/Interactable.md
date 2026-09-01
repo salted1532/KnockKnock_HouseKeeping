@@ -38,7 +38,7 @@
   4. `GetComponents<InteractionEffect>()`(Awake 캐시)를 순서대로 `Play(ctx)` (`enabled` 인 것만)
   5. `onInteracted.Invoke()`
 - `ForceState(bool on)` — 코드에서 IsOn 강제 설정 (연출/저장 로드용). 효과 재생 안 함.
-- `SetState(bool on)` — IsOn 설정 **+ 효과 재생** (`CanInteract`·`isToggle` 무시). NPC 가 문 여는 연출 등. 이미 그 상태면 no-op. `ReceptionManager` 가 손님 입·퇴장 시 출입문에 호출 (`doc/0117`).
+- `SetState(bool on, bool silent = false)` — IsOn 설정 **+ 효과 재생** (`CanInteract`·`isToggle` 무시). NPC 가 문 여는 연출 등. 이미 그 상태면 no-op. `ReceptionManager` 가 손님 입·퇴장 시 출입문에 호출 (`doc/0117`). `silent: true` 면 `SfxEffect` 만 건너뜀 — `RoomController` 새벽 봉인이 소리 없이 문·커튼·조명을 바꿀 때 (`doc/0141`).
 - `Awake()` — 효과·조건 캐시. 효과도 `onInteracted` 도 없으면 경고 로그.
 
 ## 에디터 전용 (`#if UNITY_EDITOR`)

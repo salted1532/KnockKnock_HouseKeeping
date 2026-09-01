@@ -28,8 +28,13 @@ public class DialogueRunner : MonoBehaviour
     private bool rejected;
     private int nodeVisits;
     private SpeechBubble activeBubble;   // 진행 중 대화가 쓰는 말풍선 (Cancel 시 숨김)
+    private readonly HashSet<string> consumedTopics = new();   // 이번 손님이 이미 고른 결정 토픽 (허브에서 숨김)
 
     private void Awake() => Instance = this;
+
+    // 새 손님/새 탐문을 시작할 때 호출 — 결정 토픽 소진 기록 초기화.
+    // Play() 안에서 안 지운다: 같은 손님 대화를 다시 재생(RequestDialogueReplay)해도 결정은 유지돼야 하므로.
+    public void ResetConsumedTopics() => consumedTopics.Clear();
 
     // 진행 중인 대화를 즉시 중단 (새벽 노크 ESC 취소 등). 말풍선·질문패널 정리.
     public void Cancel()
@@ -57,10 +62,14 @@ public class DialogueRunner : MonoBehaviour
     }
 
     // 한 노드의 대사 줄만 재생 (허브·분기 없음). 승인 시 "고맙다" 한마디 같은 짧은 대사용.
-    public void SayNode(NpcData npc, SpeechBubble bubble, Situation situation, string nodeKey, Action onDone = null)
+    // fallbackNodeKey: nodeKey 노드가 없으면 대신 재생 (예: "checkin_paid" 없으면 "checkin").
+    public void SayNode(NpcData npc, SpeechBubble bubble, Situation situation, string nodeKey,
+                        Action onDone = null, string fallbackNodeKey = null)
     {
         int day = DayPhaseManager.Instance != null ? DayPhaseManager.Instance.DayCount : 1;
         var node = database != null && npc != null ? database.GetNode(npc.id, situation, nodeKey, day) : null;
+        if (node == null && !string.IsNullOrEmpty(fallbackNodeKey) && database != null && npc != null)
+            node = database.GetNode(npc.id, situation, fallbackNodeKey, day);
         if (node == null || bubble == null || node.lines.Count == 0) { onDone?.Invoke(); return; }
         StartCoroutine(SayRoutine(npc, bubble, node, onDone));
     }
@@ -108,7 +117,12 @@ public class DialogueRunner : MonoBehaviour
 
         while (!rejected)
         {
-            var questions = database.Query(npc.id, situation, day, EntryRole.Question);
+            // 선택지 있는 "결정 토픽" 은 한 번 고르면 허브에서 사라진다 (번복 방지). 정보성 질문은 계속 반복.
+            var all = database.Query(npc.id, situation, day, EntryRole.Question);
+            var questions = new List<DialogueEntry>(all.Count);
+            foreach (var q in all)
+                if (q.choices.Count == 0 || string.IsNullOrEmpty(q.nodeKey) || !consumedTopics.Contains(q.nodeKey))
+                    questions.Add(q);
             if (questions.Count == 0) yield break;
 
             var labels = new List<string>(questions.Count);
@@ -122,7 +136,10 @@ public class DialogueRunner : MonoBehaviour
             if (pick == -1) yield break;   // 대화 종료
 
             questionPanel.Close();
-            yield return PlayNode(npc, bubble, situation, day, questions[pick]);
+            var chosen = questions[pick];
+            yield return PlayNode(npc, bubble, situation, day, chosen);
+            if (chosen.choices.Count > 0 && !string.IsNullOrEmpty(chosen.nodeKey))
+                consumedTopics.Add(chosen.nodeKey);   // 이 손님 대화 내내 (재재생 포함) 다시 안 뜸
             questionPanel.OnAsked?.Invoke();
         }
     }

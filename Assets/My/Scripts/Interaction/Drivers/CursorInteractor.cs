@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,6 +31,9 @@ public class CursorInteractor : Interactor
     private SpriteOutline currentSprite;
     private Interactable currentHovered;
 
+    private readonly List<RaycastResult> uiHits = new();
+    private PointerEventData uiPointer;
+
     // RenderTextureGraphicRaycaster 등이 같은 RT 파이프라인 참조를 재사용
     public Camera WorldCamera => worldCamera;
     public RawImage Screen => screen;
@@ -42,21 +46,21 @@ public class CursorInteractor : Interactor
     {
         if (Mouse.current == null || worldCamera == null || screen == null) return;
 
-        // 커서가 UI 위(대화 패널·버튼·모니터 화면 등)에 있으면 그 아래 월드 오브젝트는 무시 — UI 만 반응.
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-        {
-            ClearHover();
-            return;
-        }
-
-        if (!TryCursorRay(out Ray ray)) { ClearHover(); return; }
-
         Interactable hovered = null;
         Outline hitOutline = null;
         SpriteOutline hitSprite = null;
         Vector3 point = Vector3.zero;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
+        // 커서가 UI 위(대화 패널·버튼·모니터 화면)면 월드 레이는 안 쏘지만, 그 UI 가 얹힌
+        // Interactable(모니터 등)이 있으면 그 오브젝트 외곽선은 켠다. 클릭·프롬프트는 안 건드림
+        // (UI 요소가 자기 클릭 처리, 모니터 배경은 InteractableProxyClick). doc/0141.
+        bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        if (overUI)
+        {
+            ResolveUIOutline(out hitOutline, out hitSprite);
+        }
+        else if (TryCursorRay(out Ray ray)
+                 && Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask, QueryTriggerInteraction.Ignore))
         {
             // 벽 너머 상호작용 차단: 대상 앞에 막는 콜라이더(Interaction / Ignore Raycast 제외)가 있으면 무시 (GazeInteractor 와 동일)
             const int ignoreRaycastLayer = 2;
@@ -119,6 +123,31 @@ public class CursorInteractor : Interactor
         ray = worldCamera.ViewportPointToRay(
             new Vector3(uv.x + u * uv.width, uv.y + v * uv.height, 0f));
         return true;
+    }
+
+    // 커서 밑 uGUI 요소가 얹혀 있는 Interactable(모니터 화면 등)의 외곽선 컴포넌트를 찾는다.
+    // 이 화면 UI 를 호버해도 모니터 메쉬에 외곽선이 뜨도록. (프리팹 구조: CRTMonitor > screenON > ScreenUI(Canvas) > 버튼)
+    private void ResolveUIOutline(out Outline ol, out SpriteOutline so)
+    {
+        ol = null;
+        so = null;
+        var es = EventSystem.current;
+        if (es == null) return;
+
+        uiPointer ??= new PointerEventData(es);
+        uiPointer.position = Mouse.current.position.ReadValue();
+        uiHits.Clear();
+        es.RaycastAll(uiPointer, uiHits);
+
+        foreach (var r in uiHits)
+        {
+            if (r.gameObject == null) continue;
+            var it = r.gameObject.GetComponentInParent<Interactable>();
+            if (it == null || !it.CanInteract) continue;
+            ol = r.gameObject.GetComponentInParent<Outline>();
+            so = r.gameObject.GetComponentInParent<SpriteOutline>();
+            return;
+        }
     }
 
     private void ClearHover()

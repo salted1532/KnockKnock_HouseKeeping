@@ -61,6 +61,7 @@
 | [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 손님 큐 + 모니터 방배정) — [DialogueSystem](DialogueSystem.md) 참조 |
 | [MonitorRoomBoard](MonitorRoomBoard.md) | `Game/MonitorRoomBoard.cs` (CRT 모니터 방배정 uGUI 보드) |
 | [PhaseLabel](PhaseLabel.md) | `Game/PhaseLabel.cs` (HUD 시간대 텍스트) |
+| [Wallet](Wallet.md) | `Game/Wallet.cs` + `UI/MoneyHud.cs` (소지금 + 숙박비 선불/후불/2배, HUD·현금음) |
 | [ActivateOnAwake](ActivateOnAwake.md) | `Game/ActivateOnAwake.cs` (런타임에 UI 켜기 유틸) |
 | ScreenMessage | `UI/ScreenMessage.cs` — 화면 중앙 임시 나레이션/관찰 문구 (노크 거절 "응답이 없다" 등). `ScreenMessage.Show(en, ko)` 싱글턴, 페이드 인/유지/아웃 |
 | [ScreenFader](ScreenFader.md) | `Environment/ScreenFader.cs` (검정 페이드) |

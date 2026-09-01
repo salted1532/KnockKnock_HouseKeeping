@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,8 @@ public class ReceptionManager : MonoBehaviour
     [Header("편성 / 손님")]
     [SerializeField] private CampaignData campaign;
     [SerializeField] private NpcCatalog catalog;
+    [Tooltip("테스트: 매 저녁 카탈로그의 모든 손님을 랜덤 순서로 오게 함 (이미 투숙 중인 손님 제외). 캠페인 편성 무시. doc/0132")]
+    [SerializeField] private bool testShuffleAllGuests = true;
     [Tooltip("접객 중 NPC 로 쓸 Guest 프리팹 (GuestMover + GuestView, 선택적으로 자식 SpeechBubble). 세션당 1개 인스턴스 재활용. 새벽 노크(KnockEffect)도 이걸 폴백으로 씀")]
     [SerializeField] private GameObject guestPrefab;
     public GameObject GuestPrefab => guestPrefab;
@@ -67,6 +70,9 @@ public class ReceptionManager : MonoBehaviour
     private bool checkInConfirmed;
     private bool replayRequested;
     private bool dlgWasVisibleOnPause;
+    private bool? pendingCleaning;   // 이번 손님 대화에서 하우스키핑 선택 (clean_yes/clean_no). null = 안 물음 → NpcData 기본값
+    private bool? pendingPayUpfront;  // 결제 선택 (stay_pay=선불 / stay_trust=후불). null = 안 정함 → 후불 (doc/0137)
+    private int pendingRateMult;      // 2배 노드(reject_double_accept) 도달 시 2. 0/1 = 기본 요금
 
     private void Awake() => Instance = this;
 
@@ -88,6 +94,8 @@ public class ReceptionManager : MonoBehaviour
     {
         if (DayPhaseManager.Instance != null)
             DayPhaseManager.Instance.OnPhaseChanged -= HandlePhase;
+        if (DialogueRunner.Instance != null)
+            DialogueRunner.Instance.OnNodeReached -= HandleReceptionNode;
         if (UIInteractionMode.Instance != null)
         {
             UIInteractionMode.Instance.Exited -= HandleUIExit;
@@ -110,6 +118,9 @@ public class ReceptionManager : MonoBehaviour
     {
         InSession = true;
 
+        if (DialogueRunner.Instance != null)
+            DialogueRunner.Instance.OnNodeReached += HandleReceptionNode;
+
         if (UIInteractionMode.Instance != null)
         {
             if (receptionAnchor == null)
@@ -119,14 +130,39 @@ public class ReceptionManager : MonoBehaviour
 
         OnSessionStarted?.Invoke();
 
-        var today = campaign != null ? campaign.Day(DayNow()) : null;
-        if (today != null && guestPrefab != null && catalog != null)
-            queue = StartCoroutine(GuestQueue(today));
+        var guestIds = BuildGuestIds();
+        if (guestIds != null && guestIds.Count > 0 && guestPrefab != null && catalog != null)
+            queue = StartCoroutine(GuestQueue(guestIds));
         else
             Debug.Log($"[ReceptionManager] Day {DayNow()} 편성/guestPrefab/catalog 없음 — 손님 큐 없이 디버그 K 로만 종료", this);
     }
 
-    private IEnumerator GuestQueue(CampaignData.DayPlan today)
+    // 이 저녁 접객에 올 손님 번호 목록. 테스트 모드면 카탈로그 전체(투숙 중 제외) 셔플, 아니면 캠페인 편성.
+    private List<int> BuildGuestIds()
+    {
+        if (testShuffleAllGuests && catalog != null)
+        {
+            var ids = new List<int>();
+            foreach (var n in catalog.npcs)
+            {
+                if (n == null) continue;
+                var st = GuestManager.Instance != null ? GuestManager.Instance.Get(n) : null;
+                if (st != null && st.verdict == Verdict.Approved) continue;   // 이미 투숙 중 — 다시 안 옴
+                ids.Add(n.id);
+            }
+            for (int i = ids.Count - 1; i > 0; i--)   // Fisher-Yates
+            {
+                int j = UnityEngine.Random.Range(0, i + 1);
+                (ids[i], ids[j]) = (ids[j], ids[i]);
+            }
+            return ids;
+        }
+
+        var today = campaign != null ? campaign.Day(DayNow()) : null;
+        return today != null ? today.eveningGuestIds : null;
+    }
+
+    private IEnumerator GuestQueue(List<int> guestIds)
     {
         yield return new WaitForSeconds(enterDelay);
 
@@ -140,13 +176,17 @@ public class ReceptionManager : MonoBehaviour
         guestMover = mover;
         if (guestMover != null) guestMover.Frozen = Paused;
 
-        foreach (int id in today.eveningGuestIds)
+        foreach (int id in guestIds)
         {
             var npc = catalog.Get(id);
             if (npc == null) continue;
 
             CurrentGuest = npc;
             PendingRoom = -1;
+            pendingCleaning = null;
+            pendingPayUpfront = null;
+            pendingRateMult = 0;
+            DialogueRunner.Instance?.ResetConsumedTopics();   // 새 손님 — 결정 토픽 소진 초기화
 
             view?.Apply(npc);
             mover?.WarpTo(guestSpawn);
@@ -207,13 +247,33 @@ public class ReceptionManager : MonoBehaviour
                 {
                     Debug.Log($"[ReceptionManager] 체크인 승인 — {PendingRoom}호 ← '{npc.DisplayName}' (id {npc.id}, Day {DayNow()})", this);
                     GuestManager.Instance?.CheckIn(npc, PendingRoom, DayNow());
+                    var gs = GuestManager.Instance?.Get(npc);
+                    if (gs != null)
+                    {
+                        if (pendingCleaning.HasValue)
+                            gs.cleaningRequested = pendingCleaning.Value;   // 대화 선택이 NpcData 기본값을 덮음
+
+                        int rate = Wallet.Instance != null ? Wallet.Instance.RoomRate : 0;
+                        if (pendingRateMult == 2) rate *= 2;
+                        gs.nightlyRate = rate;
+                        gs.payUpfront = pendingPayUpfront ?? false;         // 안 정하면 후불 (doc/0137)
+                        gs.settled = false;
+                        if (gs.payUpfront)                                  // 선불 → 지금 입금 (+ 현금음)
+                        {
+                            Wallet.Instance?.Add(gs.TotalCharge);
+                            gs.settled = true;
+                        }
+                    }
                     PendingRoom = -1;
 
-                    // 승인 → 손님이 "고맙다" 한마디 (CSV 의 checkin 노드) 후 뒷모습으로 방으로
+                    // 승인 → 손님이 "고맙다" 한마디 후 뒷모습으로 방으로.
+                    // 선불 손님은 checkin_paid("여기 선불금입니다…") 노드, 없으면 checkin 폴백. (doc/0140)
                     if (DialogueRunner.Instance != null && bubble != null)
                     {
                         bool said = false;
-                        DialogueRunner.Instance.SayNode(npc, bubble, Situation.Reception, "checkin", () => said = true);
+                        bool paidUpfront = gs != null && gs.payUpfront;
+                        DialogueRunner.Instance.SayNode(npc, bubble, Situation.Reception,
+                            paidUpfront ? "checkin_paid" : "checkin", () => said = true, "checkin");
                         yield return new WaitUntil(() => said);
                     }
 
@@ -299,11 +359,31 @@ public class ReceptionManager : MonoBehaviour
         Debug.Log("[ReceptionManager] 접객 재개", this);
     }
 
+    // 대화 노드 도달 훅 — 선택지 결과를 잡는다 (하우스키핑 / 결제 / 2배).
+    private void HandleReceptionNode(NpcData npc, string nodeKey)
+    {
+        switch (nodeKey)
+        {
+            case "clean_yes":  pendingCleaning = true;   break;
+            case "clean_no":   pendingCleaning = false;  break;
+            case "stay_pay":          pendingPayUpfront = true;  break;   // 손님이 선불 수락 → 승인 시 입금
+            case "stay_trust":        pendingPayUpfront = false; break;   // 나갈 때 정산
+            case "stay_pay_refused":  pendingPayUpfront = false; break;   // 손님이 선불 요구 거부 → 후불
+            case "reject_double_accept":                            // 두 배 제안 수락 (doc/0137)
+                pendingRateMult = 2;
+                pendingPayUpfront = true;                           // 두 배 내면서 그 자리에서 지불
+                break;
+        }
+    }
+
     // 그날 접객 완료 → 세션 닫고 새벽으로.
     public void EndSession()
     {
         if (!InSession) return;
         InSession = false;
+
+        if (DialogueRunner.Instance != null)
+            DialogueRunner.Instance.OnNodeReached -= HandleReceptionNode;
         Paused = false;
         AwaitingCheckIn = false;
         CurrentGuest = null;

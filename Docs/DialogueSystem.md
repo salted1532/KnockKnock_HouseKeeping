@@ -104,12 +104,13 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 1. 오늘 일차 계산 (`DayPhaseManager.DayCount`, 없으면 1)
 2. `Greeting` 노드들 순차 재생 (`PlayNode` — 재귀)
 3. **질문 허브**: `Question` 노드로 버튼 목록 → 선택 시 그 노드 `PlayNode` → 끝나면 허브 재표시. "대화 종료" 까지 반복
+   - **결정 토픽**(= `choices` 있는 Question): 한 번 고르면 허브에서 사라짐 (`consumedTopics`, 번복 방지). 정보성 질문은 계속 반복. `ResetConsumedTopics()` 는 `ReceptionManager`(새 손님)·`KnockEffect`(노크마다)가 호출 — 같은 손님 재재생 시엔 유지 (doc/0138)
 4. `PlayNode(entry)`: `lines` 읽기 → `OnNodeReached(npc, nodeKey)` → `outcome==Rejected` 면 거절 플래그+종료 → `choices` 있으면 버튼→선택→`goto` 노드로 재귀 → 없으면 `goToNode` 자동 재귀
 5. `bubble.Hide()` + `onResult(거절이면 Rejected, 아니면 None)`
 
 `maxNodeVisits`(기본 40) — 이 횟수 넘게 노드 방문 시 순환으로 보고 중단.
 
-이벤트: `OnDialogueStarted(npc)` / `OnDialogueEnded(npc)` / `OnLineShown(npc, line)` / **`OnNodeReached(npc, nodeKey)`** — SFX·카메라·표정·**점프스케어** 훅 (거절 반복의 마지막 노드에 씬 컴포넌트가 구독해 연출, doc/0103).
+이벤트: `OnDialogueStarted(npc)` / `OnDialogueEnded(npc)` / `OnLineShown(npc, line)` / **`OnNodeReached(npc, nodeKey)`** — SFX·카메라·표정·**점프스케어** 훅 (거절 반복의 마지막 노드에 씬 컴포넌트가 구독해 연출, doc/0103). `ReceptionManager` 도 이걸 구독해 `clean_yes`/`clean_no` 노드로 하우스키핑 여부를 잡는다 (doc/0135).
 
 필드: `database`, `questionPanel`, `maxNodeVisits`.
 
@@ -118,8 +119,9 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 버튼 목록 하나로 **질문 허브**(반복 선택)와 **선택지**(1회) 둘 다 그린다. `DialogueRunner` 가 구동.
 
 - `Show(labels, onPick(int), showDone)` — 버튼 생성. `onPick(-1)` = "대화 종료"(showDone 일 때만)
-  - 생성 후 `doneButton`(Dialogue_Exit)을 `SetAsLastSibling` → 항상 맨 오른쪽
-  - `panelRect`(Dialogue_Panel) 지정 시 버튼 행(`Button_Horizontal`, `ContentSizeFitter`+`HorizontalLayoutGroup`) 폭 + `sidePadding*2` 로 패널 폭 조절. 단 `minPanelWidth`(기본 840 = 버튼 3개) 밑으로는 안 좁아짐. 높이는 안 건드림
+  - 생성 후 `doneButton`(Dialogue_Exit)을 `SetAsLastSibling` → 항상 마지막
+  - 버튼 행(`Button_Horizontal`)은 **`GridLayoutGroup`**(셀 240×60). 버튼(대화 종료 포함)이 `wrapAfter`(기본 4)를 넘으면 여러 줄로 배열 — `ArrangeGrid` 가 `rows/cols` 계산해 `constraintCount` 설정 (doc/0135)
+  - `panelRect`(Dialogue_Panel) 폭 = 버튼 블록 폭 + `sidePadding*2` (최소 `minPanelWidth` 840). **여러 줄이면 패널 높이 `기본+(rows-1)*72` 로 위로 키우고 `dialogueArea`(대사 영역) 아래 여백도 그만큼 늘림.** `Close()` 가 기본값 복원
 - `CanAsk` (`Func<bool>`, null=항상 가능) — 새벽 탐문 행동력 체크
 - `OnAsked` (`Action`) — 질문 1건 답변 후 (행동력 차감)
 - `SetInteractable(bool)` · `Close()`
