@@ -144,13 +144,13 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 
 > ponytail: NavMesh·경로탐색 없음. 장애물 회피 필요하면 `NavMeshAgent` 로 교체.
 
-### `GuestManager` (싱글턴)
+### `GuestManager` (싱글턴) → [GuestManager.md](GuestManager.md)
 
-이번 판 손님 상태. `GuestState { npc, room, verdict, checkInDay }`, `enum Verdict { None, Approved, Rejected, Killed }`.
+이번 판 손님 상태. `GuestState { npc, room, verdict, checkInDay, stayNights, cleaningRequested, nightlyRate, payUpfront, settled }`.
+`CheckOutDay = checkInDay + stayNights`, `TotalCharge = nightlyRate × stayNights`.
 
-`CheckIn(npc, room, day)` · `SetVerdict(npc, v, day)` · `CheckOut(npc)` · `Get(npc)` · `Active` (읽기 전용).
-
-밤 판정(누가 죽나)은 별도 시스템 — 여기선 `npc.isSleepwalker`(정답) vs `state.verdict`(플레이어) 데이터만 보관. 이 괴리가 오판 시스템의 근거.
+`CheckIn` · `SetVerdict` · `CheckOut` · `Get` · `StateInRoom` · `GuestInRoom` · `RoomTaken` · `Active`.
+체크아웃/숙박비/하우스키핑 상태는 [RoomController](RoomController.md) 가 읽어 처리. 밤 판정은 별도 — `isSleepwalker` vs `verdict` 괴리만 보관.
 
 ### `CheckInGuestEffect` (`InteractionEffect`, 손님 오브젝트)
 
@@ -161,13 +161,15 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 
 `Evening` 진입 → `BeginSession()`: `UIInteractionMode.Enter(receptionAnchor)` + `OnSessionStarted` + (오늘 편성 있으면) 손님 큐 코루틴.
 
-**손님 큐** (`GuestQueue`): 세션 시작 시 `guestPrefab` 을 1개 `Instantiate` (재활용). `campaign.Day(DayCount).eveningGuestIds` 순회 →
-번호 → `catalog.Get(id)` → `view.Apply(npc)` (스프라이트 교체) → `mover.WarpTo(guestSpawn)` → `mover.WalkThrough(entryPath)` →
-`DialogueRunner.Play(npc, bubble, Reception, onResult)` →
+**손님 큐** (`GuestQueue`): 세션 시작 시 `guestPrefab` 을 1개 `Instantiate` (재활용). `BuildGuestIds()` 로 오늘 손님 번호 목록 →
+`testShuffleAllGuests`(기본 on) 면 **카탈로그 전원(투숙 중 제외) 랜덤 순서 = 무한 일차 반복**, 아니면 `campaign.Day(d).eveningGuestIds`. 각 번호마다:
+`catalog.Get(id)` → `DialogueRunner.ResetConsumedTopics()` → `view.Apply(npc)` → `mover.WarpTo/WalkThrough(entryPath)` →
+`DialogueRunner.Play(npc, bubble, Reception, onResult)` (`OnNodeReached` 훅으로 `clean_yes/no`·`stay_pay/trust`·`reject_double_accept` 를 잡음) →
 - `visitorOnly` → `WalkThrough(exitPath)` (대화만)
-- `onResult == Rejected` (대화에서 거절 노드) → `SetVerdict(Rejected)` + `WalkThrough(exitPath)`
-- 그 외 → **`AwaitingCheckIn = true`** → 모니터에서 방 배정(`AssignRoom` → `PendingRoom`) + 플레이어가 열쇠 들고 손님 클릭(`CheckInGuestEffect` → `ConfirmCheckIn`) → `CheckIn(npc, PendingRoom)` + `WalkThrough(roomPath)`
-→ `view.Clear()` → 다음. 큐 끝 → 인스턴스 `Destroy` + `EndSession()`.
+- `onResult == Rejected` → `SetVerdict(Rejected)` + `WalkThrough(exitPath)`
+- 그 외 → **`AwaitingCheckIn`** → [모니터 보드](MonitorRoomBoard.md)에서 방 배정(`AssignRoom` → `PendingRoom`) + 플레이어가 열쇠 들고 손님 클릭(`CheckInGuestEffect` → `ConfirmCheckIn`) →
+  `GuestManager.CheckIn(npc, PendingRoom, day)` + 숙박비 확정(`nightlyRate`·`payUpfront`, 선불이면 [`Wallet.Add`](Wallet.md)) + `SayNode("checkin"/"checkin_paid")` + `WalkThrough(roomPath)`
+→ `view.Clear()` → 다음. 큐 끝 → 인스턴스 `Destroy` + `EndSession()` → 새벽 페이드.
 
 | 필드 | 설명 |
 |---|---|

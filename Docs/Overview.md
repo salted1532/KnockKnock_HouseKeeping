@@ -23,9 +23,13 @@
 | [EnterUIModeEffect](EnterUIModeEffect.md) | `Interaction/Effects/EnterUIModeEffect.cs` (화면고정 — 모니터) |
 | [ShowPanelEffect](ShowPanelEffect.md) | `Interaction/Effects/ShowPanelEffect.cs` (읽기 — 노트/편지) |
 | [PhaseSwitchEffect](PhaseSwitchEffect.md) | `Interaction/Effects/PhaseSwitchEffect.cs` (하루종료 스위치 — 게시판/테이블/침대) |
-| [KnockEffect](KnockEffect.md) | `Interaction/Effects/KnockEffect.cs` (새벽 노크 — 배정 방문) |
-| [RoomController](RoomController.md) | `Interaction/RoomController.cs` (객실 관제 — 새벽 문 잠금/노크 전환) |
+| [KnockEffect](KnockEffect.md) | `Interaction/Effects/KnockEffect.cs` (새벽 노크 — 배정 방문. 새벽 아니면 항상 거절) |
+| `CheckInGuestEffect` | `Interaction/Effects/CheckInGuestEffect.cs` (접객 중 손님 클릭 → 체크인) — [DialogueSystem](DialogueSystem.md) |
+| `InteractableProxyClick` | `Interaction/InteractableProxyClick.cs` (UI 그래픽 클릭 → 상위 Interactable 실행. 모니터 화면 배경) — `doc/0130` |
+| [RoomController](RoomController.md) | `Interaction/RoomController.cs` (객실 관제 — 잠금/노크·아침 청소 창·체크아웃 정산·커튼/소등) |
 | [PhaseCondition](PhaseCondition.md) | `Interaction/Conditions/PhaseCondition.cs` |
+| `AwaitingCheckInCondition` | `Interaction/Conditions/AwaitingCheckInCondition.cs` (접객 대화 끝 = 체크인 대기 때만 손님 클릭 허용) |
+| `Interactor` | `Interaction/Core/Interactor.cs` (입력 드라이버 베이스 — `Owner`, `TryInteract`) |
 | [GazeInteractor](GazeInteractor.md) | `Interaction/Drivers/GazeInteractor.cs` |
 | [CursorInteractor](CursorInteractor.md) | `Interaction/Drivers/CursorInteractor.cs` |
 | [RenderTextureGraphicRaycaster](RenderTextureGraphicRaycaster.md) | `Interaction/Drivers/RenderTextureGraphicRaycaster.cs` — 오브젝트 화면(CRT 모니터 등)에 얹은 World Space Canvas uGUI 클릭 보정 |
@@ -50,8 +54,9 @@
 |---|---|
 | 데이터 | `Dialogue/NpcData.cs`, `NpcCatalog.cs`, `DialogueLine.cs`(DialogueEntry/Choice), `DialogueDatabase.cs`, `Situation.cs`, `Expression.cs`, `Editor/DialogueImporter.cs`, `Game/CampaignData.cs` |
 | 런타임 | `Dialogue/SpeechBubble.cs`, `DialogueRunner.cs`, `QuestionPanel.cs`, `GuestMover.cs`, `GuestView.cs` |
-| NPC 관리 | `Game/GuestManager.cs`, `ReceptionManager.cs`, `Interaction/Effects/CheckInGuestEffect.cs` |
-| 방배정 / 새벽 노크 | [MonitorRoomBoard](MonitorRoomBoard.md), [RoomController](RoomController.md), [KnockEffect](KnockEffect.md) (`doc/0118`) |
+| NPC 관리 | [GuestManager](GuestManager.md), `Game/ReceptionManager.cs`, `Interaction/Effects/CheckInGuestEffect.cs` |
+| 방배정 / 새벽 노크 / 체크아웃 | [MonitorRoomBoard](MonitorRoomBoard.md), [RoomController](RoomController.md), [KnockEffect](KnockEffect.md) (`doc/0118`·`0132`) |
+| 숙박비 | [Wallet](Wallet.md) (+ MoneyHud) — 1박 $70, 선불/후불/2배 (`doc/0137`·`0140`) |
 
 ## 게임 진행 / 환경 / 사운드
 
@@ -63,7 +68,7 @@
 | [PhaseLabel](PhaseLabel.md) | `Game/PhaseLabel.cs` (HUD 시간대 텍스트) |
 | [Wallet](Wallet.md) | `Game/Wallet.cs` + `UI/MoneyHud.cs` (소지금 + 숙박비 선불/후불/2배, HUD·현금음) |
 | [ActivateOnAwake](ActivateOnAwake.md) | `Game/ActivateOnAwake.cs` (런타임에 UI 켜기 유틸) |
-| ScreenMessage | `UI/ScreenMessage.cs` — 화면 중앙 임시 나레이션/관찰 문구 (노크 거절 "응답이 없다" 등). `ScreenMessage.Show(en, ko)` 싱글턴, 페이드 인/유지/아웃 |
+| [ScreenMessage](ScreenMessage.md) | `UI/ScreenMessage.cs` — 화면 중앙 임시 나레이션/관찰 문구 (노크 거절 "응답이 없다" 등). `Show(en, ko)` 싱글턴 |
 | [ScreenFader](ScreenFader.md) | `Environment/ScreenFader.cs` (검정 페이드) |
 | [PhaseVisuals](PhaseVisuals.md) | `Environment/PhaseVisuals.cs` (구 `DayNightSwitcher` 대체 — 4단계 조명/스카이박스) |
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |
