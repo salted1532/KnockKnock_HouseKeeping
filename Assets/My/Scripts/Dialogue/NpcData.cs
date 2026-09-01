@@ -31,6 +31,7 @@ public class NpcData : ScriptableObject
     [Header("게임 로직 (밤 판정·신분증 — 플레이어에게 안 보임)")]
     public bool isSleepwalker;   // 내부 정답: 몽유병 환자인가
     public bool visitorOnly;     // 숙박 안 하고 대화만 (메시지 전달 인물)
+    public bool refusesDawnKnock; // 새벽에 노크해도 문을 안 열어줌 (doc/0118)
     public IdCard idCard;
 
     public Sprite Portrait(Expression e) =>

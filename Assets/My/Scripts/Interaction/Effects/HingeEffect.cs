@@ -36,19 +36,31 @@ public class HingeEffect : InteractionEffect
     public override void Play(in InteractionContext ctx)
     {
         bool open = ctx.Interactable.IsToggle ? ctx.IsOn : true;
-        if (swing != null) StopCoroutine(swing);
-        swing = StartCoroutine(Swing(open ? openRot : closedRot));
+        StartSwing(open ? openRot : closedRot, openTime);
     }
 
-    private IEnumerator Swing(Quaternion target)
+    // 코드/연출용: 닫힘 기준 임의 각도로 스윙 (KnockEffect 노크 살짝 열기 등). Interactable.IsOn 안 건드림.
+    public void SwingTo(float angleDeg, float time)
+    {
+        Vector3 a = axis.sqrMagnitude > 0.0001f ? axis.normalized : Vector3.up;
+        StartSwing(closedRot * Quaternion.AngleAxis(angleDeg, a), Mathf.Max(0.01f, time));
+    }
+
+    private void StartSwing(Quaternion target, float dur)
+    {
+        if (swing != null) StopCoroutine(swing);
+        swing = StartCoroutine(Swing(target, dur));
+    }
+
+    private IEnumerator Swing(Quaternion target, float dur)
     {
         Transform tr = Target;
         Quaternion from = tr.localRotation;
         float t = 0f;
-        while (t < openTime)
+        while (t < dur)
         {
             t += Time.deltaTime;
-            tr.localRotation = Quaternion.Slerp(from, target, ease.Evaluate(Mathf.Clamp01(t / openTime)));
+            tr.localRotation = Quaternion.Slerp(from, target, ease.Evaluate(Mathf.Clamp01(t / dur)));
             yield return null;
         }
         tr.localRotation = target;

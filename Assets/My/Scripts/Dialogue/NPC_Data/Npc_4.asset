@@ -15,13 +15,14 @@ MonoBehaviour:
   id: 4
   displayName: test4
   displayNameKo: 
-  neutralPortrait: {fileID: 310110339, guid: 462fc018cc7915845b09b12f67ea08fd, type: 3}
-  angryPortrait: {fileID: 1096251467, guid: f62366e7bc0e5264eabe12a6b8a08afc, type: 3}
-  backPortrait: {fileID: 1970465886, guid: 1f1a2e2f575144d46bd033c99b611abc, type: 3}
-  sidePortrait: {fileID: 1935928952, guid: a22611f0e0801e440ae52f93b29fc406, type: 3}
+  neutralPortrait: {fileID: 842194614, guid: e9c1d1a20502fd849ad9c1867fbc2672, type: 3}
+  angryPortrait: {fileID: 1029345980, guid: 91185e65d04cbba4f8b48ea63416ccf9, type: 3}
+  backPortrait: {fileID: 1912472009, guid: 4ef501194d5be704b983cde76bede8a2, type: 3}
+  sidePortrait: {fileID: 342816486, guid: a2beebeb97c67394ba72f5d40e9574f5, type: 3}
   modelPrefab: {fileID: 0}
   isSleepwalker: 0
   visitorOnly: 0
+  refusesDawnKnock: 1
   idCard:
     name: 
     birthDate: 

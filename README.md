@@ -80,7 +80,7 @@ Assets/
 ├─ Scenes/              # InGame(본편), SampleScene·TestScene(프로토타입 잔재)
 ├─ AssetsFolder/        # 3rd-party 원본 에셋 팩 (임포트 상태, HDRP→URP 변환 등)
 ├─ Editor/              # AssetOrganizer, InteractionMigrator (1회용 마이그레이션)
-└─ TutorialInfo, TextMesh Pro/Examples  # Unity 템플릿/샘플 잔재 (게임에 미사용)
+└─ TextMesh Pro/Examples  # Unity 샘플 잔재 (게임에 미사용). TutorialInfo 는 doc/0124 에서 삭제됨
 
 Docs/                    # 스크립트별 레퍼런스 문서 (역할/필드/동작) — 허브: Docs/Overview.md
 doc/                     # 세션별 작업 로그 + 코드 변경 전/후 + 설계 노트, 0001~ 번호 통합
@@ -237,7 +237,7 @@ GameObject
 
 | 대상 | 사유 |
 |---|---|
-| `Assets/TutorialInfo/` (`Readme.cs`, `ReadmeEditor.cs`) | Unity 템플릿 안내문. 게임 미사용 |
+| ~~`Assets/TutorialInfo/`~~ + `Assets/Readme.asset` | **삭제 완료 (doc/0124)** — Unity 템플릿 안내문. `ReadmeEditor` 가 `[InitializeOnLoad]` 로 창 레이아웃을 건드려서 제거 |
 | `Assets/TextMesh Pro/Examples & Extras/` | TMP 샘플 씬/스크립트 40여 개. 게임 미사용 |
 | `Assets/Scenes/SampleScene.unity`, `TestScene.unity` | 초기 프로토타입 씬. `InGame` 으로 대체됨 |
 | `Assets/My/InGame/Editor/StripTestRoomProBuilder.cs` | 특정 테스트룸 ProBuilder 정리용 1회 유틸 — 역할 다했으면 삭제 |

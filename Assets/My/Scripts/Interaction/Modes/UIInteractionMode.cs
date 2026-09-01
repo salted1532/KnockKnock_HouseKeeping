@@ -41,10 +41,15 @@ public class UIInteractionMode : MonoBehaviour
 
     public bool Active { get; private set; }
     public int Depth => anchors.Count;   // 쌓인 앵커 수 (0=비활성, 1=접객만, 2=접객+모니터 …)
+
+    // 이 앵커가 현재 최상위 뷰인가 (토글 진입/해제 판정용).
+    public bool IsTopAnchor(Transform t) => anchors.Count > 0 && anchors.Peek() == t;
     public event Action Entered;
     public event Action Exited;          // 완전 종료(스택 비고 Teardown) 시. 접객 세션 정리 등에서 구독
 
     private readonly Stack<Transform> anchors = new();
+    private readonly Stack<float> anchorLookScales = new();   // 앵커별 가장자리 둘러보기 배율 (0=완전고정, 1=기본)
+    private float CurLookScale => anchorLookScales.Count > 0 ? anchorLookScales.Peek() : 1f;
 
     private Vector3 savedPlayerPos;
     private Quaternion savedPlayerRot;
@@ -98,10 +103,11 @@ public class UIInteractionMode : MonoBehaviour
         float nx = Mathf.Clamp((p.x / Mathf.Max(1f, Screen.width)) * 2f - 1f, -1f, 1f);
         float ny = Mathf.Clamp((p.y / Mathf.Max(1f, Screen.height)) * 2f - 1f, -1f, 1f);
 
-        float targetYaw = EdgeFactor(nx) * yawRange;
+        float s = CurLookScale;   // 현재 앵커의 둘러보기 배율 (노크 = 좁게)
+        float targetYaw = EdgeFactor(nx) * yawRange * s;
         // ponytail: 커서 위 → 위를 본다고 가정. 플레이 후 반대로 느껴지면 부호만 뒤집기.
         // 상/하 범위 분리 — 아래는 질문 버튼 영역이라 작게.
-        float pitchRange = ny >= 0f ? pitchUpRange : pitchDownRange;
+        float pitchRange = (ny >= 0f ? pitchUpRange : pitchDownRange) * s;
         float targetPitch = -EdgeFactor(ny) * pitchRange;
 
         curYaw = Mathf.Lerp(curYaw, targetYaw, Time.deltaTime * lookLerp);
@@ -122,7 +128,10 @@ public class UIInteractionMode : MonoBehaviour
     }
 
     // anchor 뷰로 진입. 이미 UI 모드면 그 위에 쌓는다 (접객 → 모니터). 같은 앵커 재진입은 무시.
-    public void Enter(Transform anchor)
+    public void Enter(Transform anchor) => Enter(anchor, 1f);
+
+    // lookScale: 가장자리 둘러보기 배율 (0 = 완전 고정, 1 = 기본). 노크는 좁게 (0.2~0.3 권장).
+    public void Enter(Transform anchor, float lookScale)
     {
         if (anchor == null || playerRoot == null)
         {
@@ -159,6 +168,7 @@ public class UIInteractionMode : MonoBehaviour
 
         Debug.Log($"[UIInteractionMode] Enter → '{anchor.name}' (depth {anchors.Count + 1})", this);
         anchors.Push(anchor);
+        anchorLookScales.Push(Mathf.Clamp01(lookScale));
         MoveToAnchor(anchor);
     }
 
@@ -196,6 +206,7 @@ public class UIInteractionMode : MonoBehaviour
     {
         if (!Active || anchors.Count == 0) return;
         anchors.Pop();
+        if (anchorLookScales.Count > 0) anchorLookScales.Pop();
 
         if (anchors.Count > 0)
         {
@@ -210,6 +221,7 @@ public class UIInteractionMode : MonoBehaviour
     {
         if (!Active) return;
         anchors.Clear();
+        anchorLookScales.Clear();
         Teardown();
     }
 

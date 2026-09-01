@@ -22,6 +22,7 @@ MonoBehaviour:
   modelPrefab: {fileID: 0}
   isSleepwalker: 0
   visitorOnly: 0
+  refusesDawnKnock: 0
   idCard:
     name: 
     birthDate: 

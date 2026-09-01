@@ -19,6 +19,7 @@
 - `Awake`: `hinge` 현재 로컬 회전을 "닫힘"으로 기억, `openRot = 닫힘 * Quaternion.AngleAxis(openAngle, axis)`.
 - `Start`: `Interactable.IsOn` 에 맞춰 초기 회전 적용.
 - `Play`: 목표 회전으로 코루틴 `Slerp`. 스윙 도중 재상호작용하면 코루틴 중단 후 반대 방향으로 (인터럽트 안전).
+- `SwingTo(float angleDeg, float time)` (public) — 닫힘 기준 **임의 각도**로 스윙. `Interactable.IsOn` 안 건드림. `RoomController.PeekDoor` 가 새벽 노크 시 문 살짝 열기(`peekAngle`)/닫기(0)에 사용 (`doc/0118`).
 
 ## 배치
 

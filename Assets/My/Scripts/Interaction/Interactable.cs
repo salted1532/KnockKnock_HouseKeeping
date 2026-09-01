@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public enum InteractionPrompt
 {
     Interact, OpenClose, Toggle, PickUp, Use, Inspect, CleanUp, Push, ViewScreen, Custom, Hang,
-    Read, EndMorning, EndNoon, EndEvening, EndDay, CheckIn,
+    Read, EndMorning, EndNoon, EndEvening, EndDay, CheckIn, Knock,
 }
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
@@ -47,6 +47,7 @@ public class Interactable : MonoBehaviour
         InteractionPrompt.EndEvening => LocalizationManager.T("Close up", "마감"),
         InteractionPrompt.EndDay => LocalizationManager.T("Sleep", "잠자기"),
         InteractionPrompt.CheckIn => LocalizationManager.T("Check in", "체크인"),
+        InteractionPrompt.Knock => LocalizationManager.T("Knock", "노크"),
         InteractionPrompt.Use => LocalizationManager.T("Use", "사용"),
         InteractionPrompt.Push => LocalizationManager.T("Push", "밀기"),
         InteractionPrompt.Hang => LocalizationManager.T("Hang", "걸기"),
@@ -120,7 +121,7 @@ public class Interactable : MonoBehaviour
     {
         typeof(SfxEffect), typeof(ChangeObjectEffect), typeof(HingeEffect),
         typeof(PushEffect), typeof(PickupEffect), typeof(SpawnObjectEffect), typeof(EnterUIModeEffect),
-        typeof(HookEffect), typeof(ShowPanelEffect), typeof(PhaseSwitchEffect),
+        typeof(HookEffect), typeof(ShowPanelEffect), typeof(PhaseSwitchEffect), typeof(KnockEffect),
     };
 
     // 컴포넌트 우클릭 메뉴: promptType 에 맞게 효과 구성을 맞춘다.
@@ -144,6 +145,7 @@ public class Interactable : MonoBehaviour
             case InteractionPrompt.Use:        wanted.Add(typeof(SpawnObjectEffect));                    break;
             case InteractionPrompt.Push:       wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
             case InteractionPrompt.ViewScreen: wanted.Add(typeof(EnterUIModeEffect));                    break;
+            case InteractionPrompt.Knock:      wanted.Add(typeof(KnockEffect));                          break;
             case InteractionPrompt.Read:       wanted.Add(typeof(ShowPanelEffect));                      break;
             case InteractionPrompt.Hang:       wanted.Add(typeof(HookEffect));                           break;
             case InteractionPrompt.EndMorning: wanted.Add(typeof(PhaseSwitchEffect)); fromPhase = DayPhase.Morning; break;

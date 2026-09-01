@@ -23,9 +23,12 @@
 | [EnterUIModeEffect](EnterUIModeEffect.md) | `Interaction/Effects/EnterUIModeEffect.cs` (화면고정 — 모니터) |
 | [ShowPanelEffect](ShowPanelEffect.md) | `Interaction/Effects/ShowPanelEffect.cs` (읽기 — 노트/편지) |
 | [PhaseSwitchEffect](PhaseSwitchEffect.md) | `Interaction/Effects/PhaseSwitchEffect.cs` (하루종료 스위치 — 게시판/테이블/침대) |
+| [KnockEffect](KnockEffect.md) | `Interaction/Effects/KnockEffect.cs` (새벽 노크 — 배정 방문) |
+| [RoomController](RoomController.md) | `Interaction/RoomController.cs` (객실 관제 — 새벽 문 잠금/노크 전환) |
 | [PhaseCondition](PhaseCondition.md) | `Interaction/Conditions/PhaseCondition.cs` |
 | [GazeInteractor](GazeInteractor.md) | `Interaction/Drivers/GazeInteractor.cs` |
 | [CursorInteractor](CursorInteractor.md) | `Interaction/Drivers/CursorInteractor.cs` |
+| [RenderTextureGraphicRaycaster](RenderTextureGraphicRaycaster.md) | `Interaction/Drivers/RenderTextureGraphicRaycaster.cs` — 오브젝트 화면(CRT 모니터 등)에 얹은 World Space Canvas uGUI 클릭 보정 |
 | [UIInteractionMode](UIInteractionMode.md) | `Interaction/Modes/UIInteractionMode.cs` |
 | [ItemImpactSound](ItemImpactSound.md) | `Interaction/ItemImpactSound.cs` |
 | [CartGroundAlign](CartGroundAlign.md) | `Interaction/CartGroundAlign.cs` |
@@ -48,15 +51,18 @@
 | 데이터 | `Dialogue/NpcData.cs`, `NpcCatalog.cs`, `DialogueLine.cs`(DialogueEntry/Choice), `DialogueDatabase.cs`, `Situation.cs`, `Expression.cs`, `Editor/DialogueImporter.cs`, `Game/CampaignData.cs` |
 | 런타임 | `Dialogue/SpeechBubble.cs`, `DialogueRunner.cs`, `QuestionPanel.cs`, `GuestMover.cs`, `GuestView.cs` |
 | NPC 관리 | `Game/GuestManager.cs`, `ReceptionManager.cs`, `Interaction/Effects/CheckInGuestEffect.cs` |
+| 방배정 / 새벽 노크 | [MonitorRoomBoard](MonitorRoomBoard.md), [RoomController](RoomController.md), [KnockEffect](KnockEffect.md) (`doc/0118`) |
 
 ## 게임 진행 / 환경 / 사운드
 
 | 문서 | 스크립트 |
 |---|---|
 | [DayPhaseManager](DayPhaseManager.md) | `Game/DayPhaseManager.cs` (아침/점심/저녁/새벽 + 페이드 전환) |
-| [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 손님 큐) — [DialogueSystem](DialogueSystem.md) 참조 |
+| [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 손님 큐 + 모니터 방배정) — [DialogueSystem](DialogueSystem.md) 참조 |
+| [MonitorRoomBoard](MonitorRoomBoard.md) | `Game/MonitorRoomBoard.cs` (CRT 모니터 방배정 uGUI 보드) |
 | [PhaseLabel](PhaseLabel.md) | `Game/PhaseLabel.cs` (HUD 시간대 텍스트) |
 | [ActivateOnAwake](ActivateOnAwake.md) | `Game/ActivateOnAwake.cs` (런타임에 UI 켜기 유틸) |
+| ScreenMessage | `UI/ScreenMessage.cs` — 화면 중앙 임시 나레이션/관찰 문구 (노크 거절 "응답이 없다" 등). `ScreenMessage.Show(en, ko)` 싱글턴, 페이드 인/유지/아웃 |
 | [ScreenFader](ScreenFader.md) | `Environment/ScreenFader.cs` (검정 페이드) |
 | [PhaseVisuals](PhaseVisuals.md) | `Environment/PhaseVisuals.cs` (구 `DayNightSwitcher` 대체 — 4단계 조명/스카이박스) |
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |

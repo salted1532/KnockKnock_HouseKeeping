@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -29,12 +30,24 @@ public class CursorInteractor : Interactor
     private SpriteOutline currentSprite;
     private Interactable currentHovered;
 
+    // RenderTextureGraphicRaycaster 등이 같은 RT 파이프라인 참조를 재사용
+    public Camera WorldCamera => worldCamera;
+    public RawImage Screen => screen;
+    public Camera CanvasCamera => canvasCamera;
+
     private void Reset() => worldCamera = Camera.main;
     private void OnDisable() => ClearHover();
 
     private void Update()
     {
         if (Mouse.current == null || worldCamera == null || screen == null) return;
+
+        // 커서가 UI 위(대화 패널·버튼·모니터 화면 등)에 있으면 그 아래 월드 오브젝트는 무시 — UI 만 반응.
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            ClearHover();
+            return;
+        }
 
         if (!TryCursorRay(out Ray ray)) { ClearHover(); return; }
 

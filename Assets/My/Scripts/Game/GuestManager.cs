@@ -27,6 +27,15 @@ public class GuestManager : MonoBehaviour
 
     public GuestState Get(NpcData npc) => active.Find(g => g.npc == npc);
 
+    // 방 번호로 이번 밤 배정 손님 조회. RoomController / 모니터 방배정 보드가 쓴다.
+    public NpcData GuestInRoom(int room)
+    {
+        var s = active.Find(g => g.verdict == Verdict.Approved && g.room == room);
+        return s != null ? s.npc : null;
+    }
+
+    public bool RoomTaken(int room) => GuestInRoom(room) != null;
+
     public GuestState CheckIn(NpcData npc, int room, int day)
     {
         var s = Get(npc) ?? AddNew(npc);

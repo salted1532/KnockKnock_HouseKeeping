@@ -36,6 +36,7 @@
 ## 메소드
 
 - `Enter(Transform anchor)` — anchor 뷰로 진입. 첫 진입이면 플레이어 상태 저장 + FPC/CC 끔 + Gaze 정지 + 커서 표시 + 크로스헤어 숨김. 이미 Active 면 스택 위에 쌓음. 같은 앵커 재진입은 무시. anchor/`playerRoot` null 이면 경고 후 중단.
+- `Enter(Transform anchor, float lookScale)` — 위와 같되 이 앵커의 `edgeLook` 각도에 `lookScale`(0~1) 을 곱한다. 앵커별로 스택에 쌓임 (`0` = 이 뷰에선 완전 고정, `1` = 기본). `KnockEffect` 가 `0.25` 로 노크 화면을 거의 고정 (`doc/0118`).
 - `Exit()` — 한 단계 pop. 하위 뷰 남으면 그리로 복귀(모드 유지), 스택 비면 `Teardown`(플레이어 원위치 복귀 + 커서 락).
 - `ExitAll()` — 전부 닫고 완전 종료 (접객 `EndSession` 등).
 - `FreezeForOverlay(bool)` — **이동 없이** FPC 정지 + Gaze suspend + 커서 표시 (노트 `ShowPanelEffect`, 시간대 전환 중). `Active` 면 무시 — 그쪽이 이미 관리 중.

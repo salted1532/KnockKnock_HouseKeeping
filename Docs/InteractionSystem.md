@@ -76,6 +76,7 @@ GameObject (Interaction 레이어 11 + Collider + Outline[off])
 | [PhaseCondition](PhaseCondition.md) | 하루 단계 게이트 |
 | [GazeInteractor](GazeInteractor.md) | 화면중앙 레이 + E (구 InteractionOutline) |
 | [CursorInteractor](CursorInteractor.md) | 마우스 레이 + 클릭 (UI 모드용, RenderTexture 커서 보정) |
+| [RenderTextureGraphicRaycaster](RenderTextureGraphicRaycaster.md) | 오브젝트 화면 위 World Space Canvas uGUI 클릭 보정 (CRT 모니터) |
 | [UIInteractionMode](UIInteractionMode.md) | UI 모드 매니저 (앵커 스택 — 접객/모니터/노트) |
 | [DayPhaseManager](DayPhaseManager.md) | 아침/점심/저녁/새벽 진행 (페이드 전환) |
 | [ReceptionManager](ReceptionManager.md) | 저녁 접객 세션 골격 |

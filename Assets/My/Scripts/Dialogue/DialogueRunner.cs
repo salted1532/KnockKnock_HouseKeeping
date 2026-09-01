@@ -27,8 +27,20 @@ public class DialogueRunner : MonoBehaviour
 
     private bool rejected;
     private int nodeVisits;
+    private SpeechBubble activeBubble;   // 진행 중 대화가 쓰는 말풍선 (Cancel 시 숨김)
 
     private void Awake() => Instance = this;
+
+    // 진행 중인 대화를 즉시 중단 (새벽 노크 ESC 취소 등). 말풍선·질문패널 정리.
+    public void Cancel()
+    {
+        if (!Running && activeBubble == null) return;
+        StopAllCoroutines();
+        Running = false;
+        if (activeBubble != null) activeBubble.Hide();
+        activeBubble = null;
+        if (questionPanel != null) questionPanel.Close();
+    }
 
     internal void RaiseLineShown(NpcData npc, DialogueLine line) => OnLineShown?.Invoke(npc, line);
 
@@ -55,14 +67,17 @@ public class DialogueRunner : MonoBehaviour
 
     private IEnumerator SayRoutine(NpcData npc, SpeechBubble bubble, DialogueEntry node, Action onDone)
     {
+        activeBubble = bubble;
         yield return bubble.Show(npc, node.lines);
         bubble.Hide();
+        activeBubble = null;
         onDone?.Invoke();
     }
 
     private IEnumerator Run(NpcData npc, SpeechBubble bubble, Situation situation, Action<Verdict> onResult)
     {
         Running = true;
+        activeBubble = bubble;
         rejected = false;
         nodeVisits = 0;
         OnDialogueStarted?.Invoke(npc);
@@ -81,6 +96,7 @@ public class DialogueRunner : MonoBehaviour
         bubble.Hide();
         if (questionPanel != null) questionPanel.Close();
         Running = false;
+        activeBubble = null;
         OnDialogueEnded?.Invoke(npc);
         onResult?.Invoke(rejected ? Verdict.Rejected : Verdict.None);
     }

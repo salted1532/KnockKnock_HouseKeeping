@@ -164,7 +164,7 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 `DialogueRunner.Play(npc, bubble, Reception, onResult)` →
 - `visitorOnly` → `WalkThrough(exitPath)` (대화만)
 - `onResult == Rejected` (대화에서 거절 노드) → `SetVerdict(Rejected)` + `WalkThrough(exitPath)`
-- 그 외 → **`AwaitingCheckIn = true`** → 플레이어가 손님 클릭(`CheckInGuestEffect` → `ConfirmCheckIn`) → `CheckIn(npc, nextRoom++)` + `WalkThrough(roomPath)`
+- 그 외 → **`AwaitingCheckIn = true`** → 모니터에서 방 배정(`AssignRoom` → `PendingRoom`) + 플레이어가 열쇠 들고 손님 클릭(`CheckInGuestEffect` → `ConfirmCheckIn`) → `CheckIn(npc, PendingRoom)` + `WalkThrough(roomPath)`
 → `view.Clear()` → 다음. 큐 끝 → 인스턴스 `Destroy` + `EndSession()`.
 
 | 필드 | 설명 |
@@ -175,7 +175,6 @@ NPC 머리 오른쪽 위 World Space Canvas. `root` 를 켜고 끄며 켜진 동
 | `guestPrefab` (`GameObject`) | 접객 NPC 프리팹 (GuestMover + GuestView + 자식 SpeechBubble + Interactable/CheckInGuestEffect). 세션당 1개 인스턴스 재활용 |
 | `guestSpawn` (`Transform`) | 스폰/리셋 위치 |
 | `entryPath` / `exitPath` / `roomPath` (`Transform[]`) | 스폰→카운터 / 카운터→밖 / 카운터→방. 씬 트랜스폼, GuestMover 에 넘김 |
-| `firstRoomNumber` (기본 101) | 승인 시 자동 증가 |
 | `enterDelay` (기본 0.6) | 착석/페이드 후 첫 손님까지 |
 | `debugEndKey` (K) | 즉시 종료 (큐 중단 → 새벽) |
 

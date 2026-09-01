@@ -22,8 +22,9 @@ public class ReceptionManager : MonoBehaviour
     [Header("편성 / 손님")]
     [SerializeField] private CampaignData campaign;
     [SerializeField] private NpcCatalog catalog;
-    [Tooltip("접객 중 NPC 로 쓸 Guest 프리팹 (GuestMover + GuestView, 선택적으로 자식 SpeechBubble). 세션당 1개 인스턴스 재활용")]
+    [Tooltip("접객 중 NPC 로 쓸 Guest 프리팹 (GuestMover + GuestView, 선택적으로 자식 SpeechBubble). 세션당 1개 인스턴스 재활용. 새벽 노크(KnockEffect)도 이걸 폴백으로 씀")]
     [SerializeField] private GameObject guestPrefab;
+    public GameObject GuestPrefab => guestPrefab;
     [Tooltip("대사 출력용 SpeechBubble. 비우면 손님 프리팹 자식에서 찾음. 스크린 대화 패널(Dialogue_Panel)이면 여기에 연결")]
     [SerializeField] private SpeechBubble speechBubble;
 
@@ -49,20 +50,20 @@ public class ReceptionManager : MonoBehaviour
     [SerializeField] private int roomDoorElement = 0;
 
     [Header("기타")]
-    [SerializeField] private int firstRoomNumber = 101;
     [SerializeField] private float enterDelay = 0.6f;   // 착석/페이드 후 첫 손님까지
     [SerializeField] private bool debugEndKey = true;   // K 로 즉시 종료(큐 중단 → 새벽)
 
     public bool InSession { get; private set; }
     public bool Paused { get; private set; }            // ESC 로 UI 모드 이탈 = 일시정지 (세션 유지)
     public bool AwaitingCheckIn { get; private set; }   // 대화 끝, 손님 클릭 대기 중
+    public NpcData CurrentGuest { get; private set; }   // 현재 큐 손님 (모니터 방배정 보드용)
+    public int PendingRoom { get; private set; } = -1;  // 모니터에서 현재 손님에게 배정한 방 (-1 = 미배정)
     public event Action OnSessionStarted;
     public event Action OnSessionEnded;
 
     private Coroutine queue;
     private GameObject guestInstance;
     private GuestMover guestMover;
-    private int nextRoom;
     private bool checkInConfirmed;
     private bool replayRequested;
     private bool dlgWasVisibleOnPause;
@@ -108,7 +109,6 @@ public class ReceptionManager : MonoBehaviour
     private void BeginSession()
     {
         InSession = true;
-        nextRoom = firstRoomNumber;
 
         if (UIInteractionMode.Instance != null)
         {
@@ -144,6 +144,9 @@ public class ReceptionManager : MonoBehaviour
         {
             var npc = catalog.Get(id);
             if (npc == null) continue;
+
+            CurrentGuest = npc;
+            PendingRoom = -1;
 
             view?.Apply(npc);
             mover?.WarpTo(guestSpawn);
@@ -200,9 +203,11 @@ public class ReceptionManager : MonoBehaviour
                     view?.ShowBack();
                     yield return WalkExit(mover);
                 }
-                else                             // 열쇠로 승인됨
+                else                             // 방 배정 + 열쇠로 승인됨
                 {
-                    GuestManager.Instance?.CheckIn(npc, nextRoom++, DayNow());
+                    Debug.Log($"[ReceptionManager] 체크인 승인 — {PendingRoom}호 ← '{npc.DisplayName}' (id {npc.id}, Day {DayNow()})", this);
+                    GuestManager.Instance?.CheckIn(npc, PendingRoom, DayNow());
+                    PendingRoom = -1;
 
                     // 승인 → 손님이 "고맙다" 한마디 (CSV 의 checkin 노드) 후 뒷모습으로 방으로
                     if (DialogueRunner.Instance != null && bubble != null)
@@ -218,6 +223,8 @@ public class ReceptionManager : MonoBehaviour
             }
 
             view?.Clear();
+            CurrentGuest = null;
+            PendingRoom = -1;
         }
 
         queue = null;
@@ -240,10 +247,20 @@ public class ReceptionManager : MonoBehaviour
         });
     }
 
-    // CheckInGuestEffect 가 손님 클릭 시 호출.
+    // CheckInGuestEffect 가 손님 클릭 시 호출. 방 배정(PendingRoom>0)돼 있어야 승인.
     public void ConfirmCheckIn()
     {
-        if (AwaitingCheckIn) checkInConfirmed = true;
+        if (AwaitingCheckIn && PendingRoom > 0) checkInConfirmed = true;
+    }
+
+    // 모니터 방배정 보드가 호출 — 현재 손님에게 방 배정 (토글: 같은 방 재클릭 = 선택 해제).
+    // PendingRoom 이 정수 1개라 라디오처럼 항상 하나만 선택된다. 대기 손님 없거나 이미 찬 방이면 무시.
+    public void AssignRoom(int room)
+    {
+        if (CurrentGuest == null) return;
+        if (PendingRoom == room) { PendingRoom = -1; return; }
+        if (GuestManager.Instance != null && GuestManager.Instance.RoomTaken(room)) return;
+        PendingRoom = room;
     }
 
     // 승인 대기 중 빈손으로 손님 클릭 → 대화 다시 재생.
@@ -289,6 +306,8 @@ public class ReceptionManager : MonoBehaviour
         InSession = false;
         Paused = false;
         AwaitingCheckIn = false;
+        CurrentGuest = null;
+        PendingRoom = -1;
         if (DialogueRunner.Instance != null) DialogueRunner.Instance.Paused = false;
         StopQueue();
 

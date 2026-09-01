@@ -21,13 +21,13 @@
 |---|---|
 | `IsOn` | 현재 토글 상태 (비토글이면 항상 `startOn`) |
 | `IsToggle` | `isToggle` 값 |
-| `Prompt` (string) | `promptOverride?.PromptOverride ?? DefaultPrompt`. `DefaultPrompt`: `OpenClose`/`Toggle` 는 `IsOn` 으로 동적, `Custom`→`customPrompt`, 그 외는 [LocalizationManager](LocalizationManager.md)`.T(en, ko)`. `CheckIn` = "Check in"/"체크인" |
+| `Prompt` (string) | `promptOverride?.PromptOverride ?? DefaultPrompt`. `DefaultPrompt`: `OpenClose`/`Toggle` 는 `IsOn` 으로 동적, `Custom`→`customPrompt`, 그 외는 [LocalizationManager](LocalizationManager.md)`.T(en, ko)`. `CheckIn` = "Check in"/"체크인", `Knock` = "Knock"/"노크" |
 | `CanInteract` (bool) | `enabled` && 활성 상태 && 모든 `Condition.IsMet`. false면 상호작용·아웃라인·프롬프트 전부 무시 |
 
 ### `IPromptOverride` (인터페이스)
 
 같은 GameObject 의 컴포넌트가 구현하면 `Prompt` 를 상황에 따라 바꾼다. `PromptOverride` 가 `null` 이면 `DefaultPrompt` 사용. `Awake` 에서 `GetComponent<IPromptOverride>()` 로 1개만 캐시.
-예: `CheckInGuestEffect` — 승인 대기 중 손에 열쇠 있으면 "체크인", 없으면 "대화".
+예: `CheckInGuestEffect` — 승인 대기 중 손에 열쇠 + 방 배정됨이면 "체크인", 열쇠만 있고 방 미배정이면 "방 배정 필요", 빈손이면 "대화".
 
 ## 메소드
 
