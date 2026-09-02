@@ -81,6 +81,12 @@ public class Outline : MonoBehaviour {
   private Material outlineMaskMaterial;
   private Material outlineFillMaterial;
 
+  // LOCAL PATCH (doc/0144): renderer.materials 세터가 머티리얼을 복제하므로, 렌더러에 실제로 붙은
+  // 복제본을 따로 잡아 여기에 담고 UpdateMaterialProperties 가 그 인스턴스들에도 색/두께/ZTest 를 쓴다.
+  // (안 그러면 복제본이 OutlineFill.mat 애셋 기본값 — 흰색·두께2 — 으로 고정돼 외곽선 색이 안 먹음)
+  private readonly List<Material> liveMaskMaterials = new List<Material>();
+  private readonly List<Material> liveFillMaterials = new List<Material>();
+
   private bool needsUpdate;
 
   void Awake() {
@@ -118,6 +124,9 @@ public class Outline : MonoBehaviour {
   }
 
   void OnEnable() {
+    liveMaskMaterials.Clear();
+    liveFillMaterials.Clear();
+
     foreach (var renderer in renderers) {
 
       // Append outline shaders
@@ -127,7 +136,18 @@ public class Outline : MonoBehaviour {
       materials.Add(outlineFillMaterial);
 
       renderer.materials = materials.ToArray();
+
+      // LOCAL PATCH (doc/0144): 세터가 복제했을 수 있으니 렌더러에 실제 붙은 인스턴스를 셰이더로 골라 캐시
+      // (sharedMaterials 게터는 복제하지 않음)
+      foreach (var m in renderer.sharedMaterials) {
+        if (m == null) continue;
+        if (m.shader == outlineFillMaterial.shader) { if (!liveFillMaterials.Contains(m)) liveFillMaterials.Add(m); }
+        else if (m.shader == outlineMaskMaterial.shader) { if (!liveMaskMaterials.Contains(m)) liveMaskMaterials.Add(m); }
+      }
     }
+
+    // 재활성화 때마다 새 복제본에 프로퍼티를 다시 적용해야 함
+    needsUpdate = true;
   }
 
   void OnValidate() {
@@ -161,11 +181,15 @@ public class Outline : MonoBehaviour {
       // Remove outline shaders
       var materials = renderer.sharedMaterials.ToList();
 
-      materials.Remove(outlineMaskMaterial);
-      materials.Remove(outlineFillMaterial);
+      // LOCAL PATCH (doc/0144): 참조가 아니라 셰이더로 제거 — 복제본이라 Remove(field) 가 안 먹음
+      materials.RemoveAll(m => m != null &&
+        (m.shader == outlineFillMaterial.shader || m.shader == outlineMaskMaterial.shader));
 
       renderer.materials = materials.ToArray();
     }
+
+    liveMaskMaterials.Clear();
+    liveFillMaterials.Clear();
   }
 
   void OnDestroy() {
@@ -289,39 +313,60 @@ public class Outline : MonoBehaviour {
 
   void UpdateMaterialProperties() {
 
+    // 템플릿 인스턴스 + 렌더러에 실제 붙은 복제본 모두에 적용 (LOCAL PATCH doc/0144)
+    ApplyProperties(outlineMaskMaterial, outlineFillMaterial);
+
+    int n = Mathf.Max(liveMaskMaterials.Count, liveFillMaterials.Count);
+    for (int i = 0; i < n; i++) {
+      var mask = i < liveMaskMaterials.Count ? liveMaskMaterials[i] : null;
+      var fill = i < liveFillMaterials.Count ? liveFillMaterials[i] : null;
+      ApplyProperties(mask, fill);
+    }
+  }
+
+  void ApplyProperties(Material mask, Material fill) {
+
+    if (fill != null) {
+      fill.SetColor("_OutlineColor", outlineColor);
+    }
+
     // Apply properties according to mode
-    outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
+    var maskZTest = UnityEngine.Rendering.CompareFunction.Always;
+    var fillZTest = UnityEngine.Rendering.CompareFunction.Always;
+    float width = outlineWidth;
 
     switch (outlineMode) {
       case Mode.OutlineAll:
-        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        maskZTest = UnityEngine.Rendering.CompareFunction.Always;
+        fillZTest = UnityEngine.Rendering.CompareFunction.Always;
         break;
 
       case Mode.OutlineVisible:
-        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
-        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        maskZTest = UnityEngine.Rendering.CompareFunction.Always;
+        fillZTest = UnityEngine.Rendering.CompareFunction.LessEqual;
         break;
 
       case Mode.OutlineHidden:
-        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
-        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        maskZTest = UnityEngine.Rendering.CompareFunction.Always;
+        fillZTest = UnityEngine.Rendering.CompareFunction.Greater;
         break;
 
       case Mode.OutlineAndSilhouette:
-        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        maskZTest = UnityEngine.Rendering.CompareFunction.LessEqual;
+        fillZTest = UnityEngine.Rendering.CompareFunction.Always;
         break;
 
       case Mode.SilhouetteOnly:
-        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
-        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
-        outlineFillMaterial.SetFloat("_OutlineWidth", 0f);
+        maskZTest = UnityEngine.Rendering.CompareFunction.LessEqual;
+        fillZTest = UnityEngine.Rendering.CompareFunction.Greater;
+        width = 0f;
         break;
+    }
+
+    if (mask != null) mask.SetFloat("_ZTest", (float)maskZTest);
+    if (fill != null) {
+      fill.SetFloat("_ZTest", (float)fillZTest);
+      fill.SetFloat("_OutlineWidth", width);
     }
   }
 }

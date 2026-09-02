@@ -31,14 +31,30 @@ public class RoomController : MonoBehaviour
     [SerializeField] private Interactable[] lights;
 
     [Header("아침 청소 (청소 창이 열릴 때 흐트러진 상태로)")]
-    [Tooltip("청소 전 활성화 = 흐트러진 버전 (침대의 Bed_02 등, = Bed 의 ChangeObjectEffect offObjects)")]
+    [Tooltip("흐트러진 버전 (침대의 Bed_02 등, = Bed 의 ChangeObjectEffect offObjects). tidyObjects 와 같은 인덱스 = 같은 침대")]
     [SerializeField] private GameObject[] messyObjects;
-    [Tooltip("청소 전 비활성화 = 정리된 버전 (침대의 Bed_01 등, = onObjects). 플레이어가 CleanUp 하면 켜짐")]
+    [Tooltip("정리된 버전 (침대의 Bed_01 등, = onObjects). messyObjects 와 같은 인덱스 = 같은 침대. 플레이어가 CleanUp 하면 켜짐")]
     [SerializeField] private GameObject[] tidyObjects;
 
     public int RoomNumber => roomNumber;
     public Transform KnockAnchor => knockAnchor;
     public Transform GuestSpawnPoint => guestSpawnPoint;
+
+    // 이번 청소 아침에 흐트러뜨린 침대 수 (랜덤 1~2). 청소 창이 아니면 0.
+    private int messyTargetCount;
+
+    public int MessyTotal => messyTargetCount;                 // 개야 할 침대 수
+    public int MessyRemaining                                  // 아직 안 갠 침대 수
+    {
+        get
+        {
+            int n = 0;
+            if (messyObjects != null)
+                foreach (var o in messyObjects) if (o != null && o.activeSelf) n++;
+            return n;
+        }
+    }
+    public int MessyDone => Mathf.Max(0, messyTargetCount - MessyRemaining);
 
     // 이 방에 배정된 이번 밤 손님. 없으면 null.
     public NpcData NightGuest =>
@@ -118,17 +134,45 @@ public class RoomController : MonoBehaviour
         // 잠겨 있으면 노크 노출. 새벽이 아니면 KnockEffect 가 항상 거절 (doc/0132).
         if (knockTarget != null) knockTarget.SetActive(seal);
 
-        // 아침 청소 창이 열렸으면 침대 등을 흐트러진 상태로 되돌린다 (플레이어가 CleanUp 할 대상).
-        if (roomOpenForCleaning) SetMessy();
+        // 아침 청소 창이면 침대를 흐트러진 상태로(랜덤 1~2개), 아니면(시작·평소) 정리된 상태로.
+        if (roomOpenForCleaning) SetMessy(); else SetTidy();
     }
 
-    // 청소 대상을 흐트러진 상태로. Bed 의 CleanUp(ChangeObjectEffect) 이 반대로 되돌린다.
+    // 청소 대상 침대 중 랜덤하게 1~2개를 흐트러뜨린다. Bed 의 CleanUp(ChangeObjectEffect) 이 개별로 되돌린다.
+    // messyObjects[i] / tidyObjects[i] 는 같은 침대의 두 버전 (인덱스로 쌍).
     private void SetMessy()
     {
+        int beds = Mathf.Min(messyObjects?.Length ?? 0, tidyObjects?.Length ?? 0);
+        if (beds == 0) { messyTargetCount = 0; return; }
+
+        // 인덱스 섞기 (Fisher-Yates) → 앞에서 dirty 개를 흐트러뜨림
+        int[] order = new int[beds];
+        for (int i = 0; i < beds; i++) order[i] = i;
+        for (int i = beds - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (order[i], order[j]) = (order[j], order[i]);
+        }
+
+        int dirty = Random.Range(1, beds + 1);   // 1..beds
+        for (int k = 0; k < beds; k++)
+        {
+            int i = order[k];
+            bool messy = k < dirty;
+            if (messyObjects[i] != null) messyObjects[i].SetActive(messy);
+            if (tidyObjects[i] != null) tidyObjects[i].SetActive(!messy);
+        }
+        messyTargetCount = dirty;
+    }
+
+    // 모든 침대를 정리된 상태로 (게임 시작·청소 창이 아닌 단계).
+    private void SetTidy()
+    {
         if (messyObjects != null)
-            foreach (var o in messyObjects) if (o != null) o.SetActive(true);
+            foreach (var o in messyObjects) if (o != null) o.SetActive(false);
         if (tidyObjects != null)
-            foreach (var o in tidyObjects) if (o != null) o.SetActive(false);
+            foreach (var o in tidyObjects) if (o != null) o.SetActive(true);
+        messyTargetCount = 0;
     }
 
     // KnockEffect 가 호출 — 정문을 지정 각도로 스윙 (Interactable.IsOn 안 건드림).
