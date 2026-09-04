@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public enum InteractionPrompt
 {
     Interact, OpenClose, Toggle, PickUp, Use, Inspect, CleanUp, Push, ViewScreen, Custom, Hang,
-    Read, EndMorning, EndNoon, EndEvening, EndDay, CheckIn, Knock,
+    Read, EndMorning, EndNoon, EndEvening, EndDay, CheckIn, Knock, Repair, Report,
 }
 
 // 플레이어의 레이/커서가 찾는 대상. 얇은 디스패처 — 실제 동작은 붙어 있는 InteractionEffect들이 담당.
@@ -51,6 +51,8 @@ public class Interactable : MonoBehaviour
         InteractionPrompt.Use => LocalizationManager.T("Use", "사용"),
         InteractionPrompt.Push => LocalizationManager.T("Push", "밀기"),
         InteractionPrompt.Hang => LocalizationManager.T("Hang", "걸기"),
+        InteractionPrompt.Repair => LocalizationManager.T("Repair", "수리하기"),
+        InteractionPrompt.Report => LocalizationManager.T("Report", "신고하기"),
         _ => LocalizationManager.T("Interact", "상호작용"),   // Interact
     };
     public bool IsToggle => isToggle;
@@ -146,6 +148,8 @@ public class Interactable : MonoBehaviour
             case InteractionPrompt.OpenClose:  wanted.Add(typeof(HingeEffect));        isToggle = true;  break;
             case InteractionPrompt.Toggle:     wanted.Add(typeof(ChangeObjectEffect)); isToggle = true;  break;
             case InteractionPrompt.CleanUp:    wanted.Add(typeof(ChangeObjectEffect)); isToggle = false; break;
+            case InteractionPrompt.Repair:     wanted.Add(typeof(ChangeObjectEffect)); isToggle = false; break;
+            case InteractionPrompt.Report:     wanted.Add(typeof(ChangeObjectEffect)); isToggle = false; break;
             case InteractionPrompt.PickUp:     wanted.Add(typeof(PickupEffect)); wanted.Add(typeof(ItemImpactSound)); break;
             case InteractionPrompt.Use:        wanted.Add(typeof(SpawnObjectEffect));                    break;
             case InteractionPrompt.Push:       wanted.Add(typeof(PushEffect));   wanted.Add(typeof(ItemImpactSound)); break;
