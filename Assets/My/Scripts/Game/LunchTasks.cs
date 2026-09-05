@@ -29,7 +29,23 @@ public class LunchTasks : MonoBehaviour
 
     private void Awake() => Instance = this;
 
-    private void OnDestroy() { if (Instance == this) Instance = null; }
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.OnPhaseChanged -= HandlePhaseChanged;
+    }
+
+    // 아침으로 전환될 때(=새 날) 모든 태스크를 재활용: doc 요청대로 일단은 같은 오브젝트를 다시 씀.
+    private void Start()
+    {
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.OnPhaseChanged += HandlePhaseChanged;
+    }
+
+    private void HandlePhaseChanged(DayPhase phase)
+    {
+        if (phase != DayPhase.Morning) return;
+        foreach (var t in Targets) t.ResetForNewDay();
+    }
 
     private void Update()
     {

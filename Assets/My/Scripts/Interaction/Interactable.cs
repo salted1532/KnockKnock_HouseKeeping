@@ -58,6 +58,9 @@ public class Interactable : MonoBehaviour
     public bool IsToggle => isToggle;
     public bool IsOn { get; private set; }
 
+    // 성공적으로 상호작용할 때마다 발생 (조건 불충족으로 막힌 경우엔 안 뜸). 코드 훅용 — Inspector 배선 불필요.
+    public event System.Action Interacted;
+
     private InteractionEffect[] effects;
     private InteractionCondition[] conditions;
     private IPromptOverride promptOverride;
@@ -100,6 +103,7 @@ public class Interactable : MonoBehaviour
             if (e != null && e.enabled) e.Play(in ctx);
 
         onInteracted?.Invoke();
+        Interacted?.Invoke();
     }
 
     // 코드/마이그레이션용

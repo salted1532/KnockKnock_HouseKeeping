@@ -15,6 +15,13 @@ public class ChangeObjectEffect : InteractionEffect
         Set(offObjects, !on);
     }
 
+    // 비토글 상호작용을 되돌린다 (예: 점심 할일 재활용 시 울타리를 다시 고장 상태로).
+    public void ResetToOff()
+    {
+        Set(onObjects, false);
+        Set(offObjects, true);
+    }
+
     private static void Set(GameObject[] objs, bool active)
     {
         if (objs == null) return;
