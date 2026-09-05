@@ -125,6 +125,7 @@ public class KnockEffect : InteractionEffect
 
                 bool done = false;
                 DialogueRunner.Instance.ResetConsumedTopics();   // 노크마다 탐문 결정 토픽 초기화
+                ActionPoints.Instance?.Use(1);   // 새벽 손님과 대화 1회 = 행동력 1 소모
                 DialogueRunner.Instance.Play(npc, bubble, Situation.Dawn, _ => done = true);
                 while (!done && Locked(anchor)) yield return null;
             }

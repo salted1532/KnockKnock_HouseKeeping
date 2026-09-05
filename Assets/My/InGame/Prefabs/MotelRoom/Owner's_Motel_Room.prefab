@@ -93631,6 +93631,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 295582378453900072, guid: 2d5a10e4f3ef28045b2857431e1acdd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4146099688691784887}
+    - targetCorrespondingSourceObject: {fileID: 295582378453900072, guid: 2d5a10e4f3ef28045b2857431e1acdd2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 411827272493800856}
   m_SourcePrefab: {fileID: 100100000, guid: 2d5a10e4f3ef28045b2857431e1acdd2, type: 3}
 --- !u!1 &275874878697099819 stripped
 GameObject:
@@ -93836,6 +93839,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &411827272493800856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275874878697099819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0120ca31c44c144e90b0f604f51fe98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActionPointsDepletedCondition
 --- !u!4 &8758972254000508014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9097300922754540909, guid: 2d5a10e4f3ef28045b2857431e1acdd2, type: 3}

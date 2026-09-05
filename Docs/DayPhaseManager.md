@@ -34,6 +34,7 @@ public enum DayPhase { Morning, Noon, Evening, Dawn }
   전환 중엔 `UIInteractionMode.FreezeForOverlay(true)` 로 플레이어 조작 정지 (UI 모드 중이면 무시됨).
   암전 시점: `target==Morning` 이면 `DayCount++`, `Current` 갱신, `OnPhaseChanged`.
   `ScreenFader` 없으면 즉시 전환.
+- `TransitionTo(DayPhase target, bool fade)` — `fade=false` 면 페이드·`FreezeForOverlay` 없이 `DayCount++`·`Current`·이벤트만 (동기). 호출 연출이 자체 페이드를 제공할 때 ([`NightNewsBriefing`](NightNewsBriefing.md) 닫는 페이드). `TransitionTo(target)` = `(target, true)`.
 
 ## 소비자
 
@@ -43,8 +44,10 @@ public enum DayPhase { Morning, Noon, Evening, Dawn }
 | [SoundManager](SoundManager.md) | `OnPhaseChanged` → 저녁·새벽=밤 / 아침·점심=낮 앰비언스 |
 | [ReceptionManager](ReceptionManager.md) | `OnPhaseChanged` → `Evening` 시 접객 세션 시작 |
 | [PhaseCondition](PhaseCondition.md) | 상호작용을 특정 단계로 게이팅 |
-| [PhaseSwitchEffect](PhaseSwitchEffect.md) | 상호작용으로 `TransitionTo` 호출 (게시판/테이블/침대) |
+| [PhaseSwitchEffect](PhaseSwitchEffect.md) | 상호작용으로 `TransitionTo` 호출 (게시판/테이블) |
+| [NightNewsBriefing](NightNewsBriefing.md) | 침대(새벽): 뉴스 브리핑 연출 후 `TransitionTo(Morning)`. `Playing` 이 디버그 키 가드 |
 | [PhaseLabel](PhaseLabel.md) | `OnPhaseChanged` → HUD 텍스트 |
+| [PhaseMessage](PhaseMessage.md) | `OnPhaseChangeFinished` → 해당 단계 진입 시 `ScreenMessage` 문구 1회 (새벽="손님은 다 온 것 같다…") |
 
 ## 관련
 

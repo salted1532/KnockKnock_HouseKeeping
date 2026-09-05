@@ -31,7 +31,7 @@ public class DayPhaseManager : MonoBehaviour
 
     private void Update()
     {
-        if (!debugAdvanceKey || Keyboard.current == null) return;
+        if (!debugAdvanceKey || Keyboard.current == null || NightNewsBriefing.Playing) return;
         if (Keyboard.current.nKey.wasPressedThisFrame || Keyboard.current.qKey.wasPressedThisFrame)
             Advance();
     }
@@ -40,14 +40,18 @@ public class DayPhaseManager : MonoBehaviour
     public void Advance() => TransitionTo((DayPhase)(((int)Current + 1) % 4));
 
     // target 단계로 전환 (페이드 경유). 이미 전환 중이거나 같은 단계면 무시.
-    public void TransitionTo(DayPhase target)
+    public void TransitionTo(DayPhase target) => TransitionTo(target, true);
+
+    // fade=false: 페이드·플레이어 정지 없이 상태·이벤트만 갱신한다.
+    // 호출 연출이 자체 페이드/화면고정을 제공하는 경우 (NightNewsBriefing 닫는 페이드) 에만.
+    public void TransitionTo(DayPhase target, bool fade)
     {
         if (Transitioning || target == Current) return;
         Transitioning = true;
 
         // 전환 중엔 플레이어 조작 정지 (암전 동안 돌아다니거나 다른 상호작용 못 하게).
         // UI 모드로 진입한 경우(접객)엔 FreezeForOverlay 가 알아서 무시하고, 해제도 안 함.
-        UIInteractionMode.Instance?.FreezeForOverlay(true);
+        if (fade) UIInteractionMode.Instance?.FreezeForOverlay(true);
 
         void AtBlack()
         {
@@ -59,11 +63,11 @@ public class DayPhaseManager : MonoBehaviour
         void Done()
         {
             Transitioning = false;
-            UIInteractionMode.Instance?.FreezeForOverlay(false);
+            if (fade) UIInteractionMode.Instance?.FreezeForOverlay(false);
             OnPhaseChangeFinished?.Invoke(Current);
         }
 
-        if (ScreenFader.Instance != null)
+        if (fade && ScreenFader.Instance != null)
             ScreenFader.Instance.FadeThrough(AtBlack, Done);
         else
         {

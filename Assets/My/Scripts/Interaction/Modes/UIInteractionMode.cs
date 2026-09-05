@@ -233,17 +233,44 @@ public class UIInteractionMode : MonoBehaviour
             }));
     }
 
-    // 이동 없이 플레이어만 정지 + 커서 표시 (노트 등 오버레이 UI 용). Enter 와 달리 앵커 이동/전환 없음.
+    private bool overlayAnchored;   // FreezeForOverlay(true, anchor) 로 순간이동한 상태 — 해제 시 원위치 복원
+
+    public void FreezeForOverlay(bool on) => FreezeForOverlay(on, null);
+
+    // 이동 없이 플레이어만 정지 + 커서 표시 (노트 등 오버레이 UI 용). Enter 와 달리 전환 애니메이션 없음.
+    // anchor 를 주면 그 위치/정면으로 **즉시 순간이동**(페이드 암전 중 호출용, doc/0145 뉴스 브리핑).
+    //   해제(on=false) 시 순간이동했던 원위치로 복원.
     // 실제 UI 모드(Active)가 돌고 있으면 무시 — 그쪽이 이미 관리 중.
-    public void FreezeForOverlay(bool on)
+    // 이미 정지 중일 때 중복 on 호출도 무시 (전환 페이드가 브리핑 위에 겹쳐 부를 수 있음).
+    public void FreezeForOverlay(bool on, Transform anchor)
     {
         if (Active) return;
+        if (on && FrozenForOverlay) return;
+
         FrozenForOverlay = on;
         if (firstPersonController != null) firstPersonController.enabled = !on;
         if (gazeInteractor != null) gazeInteractor.Suspended = on;
         if (crosshair != null) crosshair.SetActive(!on);
         Cursor.lockState = on ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = on;
+
+        if (on && anchor != null && playerRoot != null)
+        {
+            savedPlayerPos = playerRoot.position;
+            savedPlayerRot = playerRoot.rotation;
+            savedPitch = cameraPitchPivot != null ? cameraPitchPivot.localRotation : Quaternion.identity;
+            if (characterController != null) characterController.enabled = false;   // 끈 뒤에야 transform 이동
+            playerRoot.SetPositionAndRotation(anchor.position, Quaternion.Euler(0f, anchor.eulerAngles.y, 0f));
+            if (cameraPitchPivot != null) cameraPitchPivot.localRotation = Quaternion.identity;
+            overlayAnchored = true;
+        }
+        else if (!on && overlayAnchored)
+        {
+            overlayAnchored = false;
+            if (playerRoot != null) playerRoot.SetPositionAndRotation(savedPlayerPos, savedPlayerRot);
+            if (cameraPitchPivot != null) cameraPitchPivot.localRotation = savedPitch;
+            if (characterController != null) characterController.enabled = true;
+        }
     }
 
     // 한 단계 뒤로. 하위 뷰가 남아 있으면 그 뷰로 복귀, 스택이 비면 완전 종료.

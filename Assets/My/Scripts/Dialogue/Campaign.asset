@@ -14,10 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CampaignData
   days:
   - day: 1
-    eveningGuestIds:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
+    eveningGuestIds: 0100000002000000030000000400000005000000
     nightNews: day1 end
+    newsLinesEn:
+    - This is your midnight update. The roads in and around town saw no incidents
+      today.
+    - A few residents near the west highway reported an unfamiliar animal cry after
+      dark.
+    - "Police aren't treating it as anything unusual \u2014 just keep your doors
+      locked, as always."
+    - Clear skies again tomorrow. Good night.
+    newsLinesKo:
+    - "\uC790\uC815 \uB274\uC2A4\uC785\uB2C8\uB2E4. \uC624\uB298 \uB0AE \uB3D9\uC548
+      \uB9C8\uC744 \uB3C4\uB85C\uB294 \uD2B9\uBCC4\uD55C \uC0AC\uACE0 \uC5C6\uC774
+      \uC9C0\uB098\uAC14\uC2B5\uB2C8\uB2E4."
+    - "\uB2E4\uB9CC \uC11C\uCABD \uAD6D\uB3C4 \uC778\uADFC\uC5D0\uC11C \uC815\uCCB4\uB97C
+      \uC54C \uC218 \uC5C6\uB294 \uC9D0\uC2B9 \uC6B8\uC74C\uC18C\uB9AC\uAC00 \uB4E4\uB838\uB2E4\uB294
+      \uC2E0\uACE0\uAC00 \uBA87 \uAC74 \uC811\uC218\uB410\uC2B5\uB2C8\uB2E4."
+    - "\uACBD\uCC30\uC740 \uB300\uC218\uB86D\uC9C0 \uC54A\uC740 \uC77C\uB85C \uBCF4\uACE0
+      \uC788\uC73C\uB2C8, \uC8FC\uBBFC \uC5EC\uB7EC\uBD84\uC740 \uD3C9\uC18C\uCC98\uB7FC
+      \uBB38\uB2E8\uC18D\uB9CC \uC798 \uD558\uC2DC\uBA74 \uB429\uB2C8\uB2E4."
+    - "\uB0B4\uC77C\uB3C4 \uB9D1\uACA0\uC2B5\uB2C8\uB2E4. \uD3B8\uC548\uD55C \uBC24
+      \uB418\uC2ED\uC2DC\uC624."
+    newsSlides: []

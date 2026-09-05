@@ -63,6 +63,16 @@ public class SpeechBubble : MonoBehaviour
         }
     }
 
+    // NPC 없는 선형 나레이션(일차 종료 뉴스 브리핑 등) — 한 줄 타이핑 + 넘김 대기.
+    // 선택지·초상화·이름 없음. 호출측이 줄마다 부르고, 끝나면 Hide().
+    public IEnumerator ShowLine(string text)
+    {
+        if (root != null) root.SetActive(true);
+        if (portrait != null) portrait.enabled = false;
+        yield return TypeLine(text);
+        yield return WaitForAdvance();
+    }
+
     public void Hide()
     {
         if (root != null) root.SetActive(false);

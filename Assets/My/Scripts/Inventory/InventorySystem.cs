@@ -22,6 +22,7 @@ public class InventorySystem : MonoBehaviour
     private readonly bool[] isFlashlightSlot = new bool[SlotCount];
     private readonly AudioClip[] useClips = new AudioClip[SlotCount];
     private readonly bool[] consumeOnUseSlot = new bool[SlotCount];
+    private readonly bool[] depletesActionPointsSlot = new bool[SlotCount];
     private readonly Flashlight[] flashlightRefs = new Flashlight[SlotCount];
     private int activeSlot = -1;
 
@@ -61,7 +62,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false)
+    public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false, bool depletesActionPoints = false)
     {
         for (int i = 0; i < SlotCount; i++)
         {
@@ -74,6 +75,7 @@ public class InventorySystem : MonoBehaviour
             isFlashlightSlot[i] = isFlashlight;
             useClips[i] = useClip;
             consumeOnUseSlot[i] = consumeOnUse;
+            depletesActionPointsSlot[i] = depletesActionPoints;
             flashlightRefs[i] = isFlashlight ? equipTarget.GetComponentInChildren<Flashlight>(true) : null;
             equipTarget.SetActive(i == activeSlot);
 
@@ -155,6 +157,9 @@ public class InventorySystem : MonoBehaviour
         if (audioSource != null)
             audioSource.PlayOneShot(useClips[activeSlot]);
 
+        if (depletesActionPointsSlot[activeSlot])
+            ActionPoints.Instance?.ForceDeplete();
+
         if (consumeOnUseSlot[activeSlot])
         {
             if (pickupSources[activeSlot] != null)
@@ -189,6 +194,7 @@ public class InventorySystem : MonoBehaviour
         isFlashlightSlot[index] = false;
         useClips[index] = null;
         consumeOnUseSlot[index] = false;
+        depletesActionPointsSlot[index] = false;
         flashlightRefs[index] = null;
         if (slotIcons[index] != null)
         {

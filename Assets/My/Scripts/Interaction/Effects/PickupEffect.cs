@@ -12,6 +12,8 @@ public class PickupEffect : InteractionEffect
     [SerializeField] private GameObject equipTargetOverride;
     [SerializeField] private AudioClip useClip;
     [SerializeField] private bool consumeOnUse;
+    [Tooltip("사용(Use) 시 새벽 행동력을 즉시 0으로 만든다 (Can_Coke 등)")]
+    [SerializeField] private bool depletesActionPoints;
 
     public override void Play(in InteractionContext ctx)
     {
@@ -30,7 +32,7 @@ public class PickupEffect : InteractionEffect
         }
 
         bool isFlashlight = target.GetComponentInChildren<Game.PlayerHandItem.Flashlight>(true) != null;
-        if (InventorySystem.Instance.AddItem(icon, target, gameObject, isFlashlight, useClip, consumeOnUse))
+        if (InventorySystem.Instance.AddItem(icon, target, gameObject, isFlashlight, useClip, consumeOnUse, depletesActionPoints))
             Hide(destroy: false);
     }
 

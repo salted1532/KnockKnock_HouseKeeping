@@ -1,7 +1,7 @@
 # 0145 - 일차 종료 TV 뉴스 브리핑 (설계안)
 
-날짜: 2026-09-05
-상태: **제안 — 승인 대기**
+날짜: 2026-09-05 (구현·배선: 2026-09-06)
+상태: **코드 + 씬 배선 완료, 런타임 검증 완료. 닫는 페이드 추가(2026-09-06 2차)**
 관련: `doc/0118`(새벽 노크), `doc/0119`(CRT World Canvas + RT 파이프라인), `doc/0131`(새벽 대화), `Docs/DayPhaseManager.md`, `Docs/ScreenFader.md`, `Docs/UIInteractionMode.md`, `Docs/DialogueSystem.md`
 
 ## 요청 (원문 요약)
@@ -29,6 +29,8 @@
 핵심: 대사 타이핑·암전·플레이어 정지·커서는 **이미 다 있다**. 새로 필요한 건 (1) 뉴스가 선형 나레이션이라 분기 대화 그래프를 안 태우는 얇은 재생 경로, (2) 새벽→아침 전환 앞에 브리핑 시퀀스를 끼우는 훅, (3) 씬의 TV 오브젝트.
 
 ## 설계
+
+> ⚠️ 아래는 최초 제안. 실제 구현은 **"## 구현" / "### 2차 변경"** 참조 (`onComplete` 콜백 제거, 닫는 페이드 자체 처리 등 차이 있음).
 
 새 컴포넌트 **1개** + 얇은 효과 1개 + `SpeechBubble`·`CampaignData`·`DayPhaseManager` 소폭 수정. 새 "모드" 없음.
 
@@ -184,7 +186,102 @@ private void Update()
 - **아침 전용 복귀 스폰(`morningSpawn`)** — 침대 자리 복원으로 충분. 그 자리가 부적절할 때만 추가.
 - **행동력·판정 연동** — 뉴스는 정보 전달만. 밤 판정은 별도.
 
-## 확인 필요 (승인 전)
+## 구현 (2026-09-06)
+
+승인된 범위: 새벽 → 침대 상호작용 → 페이드 아웃 → 앵커로 순간이동(화면고정·상호작용 차단) → 대화창 나레이션 → 아침. TV 슬라이드도 코드에 포함(선택, 미배선 시 무시).
+
+| 파일 | 변경 |
+|---|---|
+| `Dialogue/SpeechBubble.cs` | `IEnumerator ShowLine(string)` 추가 — NPC 없는 한 줄 타이핑 + 넘김 대기 (초상화 off) |
+| `Game/CampaignData.cs` | `DayPlan` 에 `newsLinesEn` / `newsLinesKo` (List<string>) + `newsSlides` (List<Sprite>). `nightNews` 는 메모용으로 유지 |
+| `Interaction/Modes/UIInteractionMode.cs` | `FreezeForOverlay(bool, Transform anchor)` 오버로드 — `anchor` 주면 CC 끄고 그 위치/정면으로 **즉시 순간이동**(전환 애니 없음), 해제 시 원위치 복원. 중복 `on` 호출 무시(`if (on && FrozenForOverlay) return;`). 기존 `FreezeForOverlay(bool)` 은 `(on, null)` 위임 |
+| `Game/NightNewsBriefing.cs` | **신규**. `static bool Playing`. `Play(Action onComplete)` → 오늘 `DayPlan` 뉴스 없으면 `false`. 시퀀스: `ScreenFader.FadeThrough(atBlack: FreezeForOverlay(true, briefingAnchor)+TV on, done: 나레이션)` → 줄마다 `newsPanel.ShowLine` + TV 슬라이드 → 끝 → TV off + `Playing=false` + `onComplete()`. 언어: `LocalizationManager.Korean` && Ko 리스트 있으면 Ko, 아니면 En |
+| `Interaction/Effects/NewsBriefingEffect.cs` | **신규**. `Current==Dawn` && `!Playing` 확인 → `briefing.Play(() => TransitionTo(Morning))`, 브리핑 없음/콘텐츠 없음이면 `TransitionTo(Morning)` 직행 |
+| `Game/DayPhaseManager.cs` | `Update` 디버그 키 가드에 `|| NightNewsBriefing.Playing` |
+
+**전환 흐름**: 브리핑이 `FreezeForOverlay(true, anchor)` 로 순간이동·정지 → 나레이션 → `TransitionTo(Morning)` → 그 안의 `FreezeForOverlay(true)` 는 no-op(중복 가드) → 아침 페이드 → `Done()` 의 `FreezeForOverlay(false)` 가 CC 재활성 + **플레이어 원위치 복원**(침대 자리 = "잠에서 깬"). 이중 페이드(브리핑 아웃 → 아침 전환) 의도적.
+
+**검증**: `uloop compile` Error 0 (기존 warning 1건 무관). 플레이 검증은 씬 배선 후.
+
+### 씬 배선 (2026-09-06 완료, uloop)
+
+| # | 한 것 |
+|---|---|
+| 1 | `Owner's_Motel_Room/bed_03_Interior` (씬 인스턴스): `PhaseSwitchEffect`(3→0) 제거 + `NewsBriefingEffect` 추가 (프리팹 오버라이드, `InGame.unity` 에 저장). `Interactable`·`PhaseCondition`(Dawn)·`SfxEffect` 유지 |
+| 2 | 씬 루트에 `NightNewsBriefing` GameObject 생성 — `NightNewsBriefing` + `SpeechBubble`(billboard off) 컴포넌트 |
+| 3 | `Canvas/News_Panel` 생성 — `Canvas/Dialogue_Panel` 복제 → `Button_Horizontal` 제거, `npc_name` 비활성, RT 좌측 중앙 앵커(anchorMin/Max=(0,0.5), pivot=(0,0.5), anchoredPos=(48,0)) |
+| 4 | 연결: `SpeechBubble.root`→News_Panel, `.label`→Dialogue_Text, `.billboard`=false / `NightNewsBriefing.campaign`→Campaign.asset, `.newsPanel`→그 SpeechBubble / `NewsBriefingEffect.briefing`→NightNewsBriefing |
+| 5 | **미연결(의도)**: `briefingAnchor`(사용자 배치), `tv`·`tvImage`(선택) |
+
+### 2차 변경 — 닫는 페이드 (2026-09-06)
+
+사용자 요청: "TV 화면 끝나고도 페이드 아웃 되고 화면 검게 되고 텔포". 기존엔 나레이션 끝 → `TransitionTo(Morning)` 의 자체 페이드였는데, 플레이어 원위치 복원이 페이드 **인 완료 후**(`Done()`)라 화면이 밝은 상태에서 순간이동이 보였음.
+
+| 파일 | 변경 |
+|---|---|
+| `DayPhaseManager.cs` | `TransitionTo(DayPhase, bool fade)` 오버로드. `fade=false` 면 페이드·`FreezeForOverlay` 없이 `DayCount++`·`Current`·이벤트만. 기존 `TransitionTo(target)` = `(target, true)` 위임 (다른 호출부 영향 없음) |
+| `NightNewsBriefing.cs` | `Play()` 가 콜백 안 받음 (스스로 아침 전환). `Run` 끝에 **닫는 `Fade()`** 추가 — 암전 중 `tv` 끄기 + `FreezeForOverlay(false)`(원위치 복원) + `TransitionTo(Morning, false)`. 아침 페이드 인은 이 `Fade` 가 담당 |
+| `NightNewsBriefing.Fade()` | 소프트락 방지 강화: 앞선 페이드 최대 2초 대기 → `FadeThrough` → `done` 최대 3초 대기 → 안 오면 `atBlack()` 직접 (페이더 이상 시에도 상태는 넘어감) |
+| `NewsBriefingEffect.cs` | `briefing.Play()` (콜백 인자 제거) |
+
+닫는 흐름: 마지막 줄 클릭 → **페이드 아웃 → 검은 화면** → (암전 중) TV 끄기 + 플레이어 원위치 순간이동 + 아침 단계 전환(DayCount++/조명 스왑) → **아침으로 페이드 인**. 순간이동이 화면에 안 보임.
+
+### 4차 — 새벽 진입 문구 `PhaseMessage` (2026-09-06)
+
+저녁(접객) 종료 → 새벽 전환 페이드 인 완료 직후 화면 중앙에 문구 1회.
+
+| 파일 | 변경 |
+|---|---|
+| `Game/PhaseMessage.cs` | **신규** — `[phase, messageEn, messageKo]`. `DayPhaseManager.OnPhaseChangeFinished` 구독 → `phase` 일치 시 `ScreenMessage.Show`. `PhaseLabel` 과 동일 구독 패턴. 한 오브젝트에 여러 개 가능(시간대별) |
+| `InGame.unity` | `GameManager` 에 `PhaseMessage` 추가 — `phase=Dawn`, KO `"손님은 다 온 것 같다. 이제 조용한 시간이다."` / EN `"That looks like the last of the guests. The quiet hours now."` |
+
+검증: `OnPhaseChangeFinished(Dawn)` 직접 발동 → `ScreenMessage.label` 에 KO 문구 정상 세팅 확인 (`subs=1`). `uloop compile` Error 0.
+
+새벽 문구 2개 순서: 진입 시 `PhaseMessage`("손님은 다 온 것 같다…") → 나중에 행동력 소진 시 침대 `ObjectiveMarker`("너무 늦었다…").
+
+### 3차 — 새벽 종료 안내 문구 (2026-09-06)
+
+침대(`bed_03_Interior`)의 `ObjectiveMarker` 는 행동력 소진(→ `ActionPointsDepletedCondition.IsMet`)으로 침대가 상호작용 가능해질 때 `ScreenMessage` 를 1회 띄운다. 컨셉(몽유병·새벽 이동 위험)에 맞게 문구 교체 — 씬 데이터만.
+
+| | 기존 | 신규 |
+|---|---|---|
+| KO | 오늘 손님은 여기까지인 것 같다. 이제 자러 가자. | 너무 늦었다. 더 돌아다니는 건 위험하다 — 자러 가야 한다. |
+| EN | That looks like all the guests for tonight. Time to sleep. | It's too late. Wandering any further is dangerous. Time to sleep. |
+
+### 런타임 검증 (Play 모드, uloop)
+
+| 케이스 | 결과 |
+|---|---|
+| 콘텐츠 없음 → `NightNewsBriefing.Play()` | `false` 반환, `NewsBriefingEffect` 가 `TransitionTo(Morning)` 직행 (fallback) ✓ |
+| 아침에 침대 상호작용 | `Current!=Dawn` 가드로 무시 (전환 없음) ✓ |
+| 새벽 + 콘텐츠 + 침대 상호작용 | `Playing=true` + `ScreenFader` 여는 페이드 ✓ |
+| 여는 페이드 완료 후 | `FrozenForOverlay=true`(정지·상호작용 차단), `News_Panel` 활성, 첫 줄(한글) 타이핑, **플레이어가 `briefingAnchor` 로 순간이동**(`(-14.2,0.1,18.0)`→`(7.6,0,50.3)`) ✓ |
+| `TransitionTo(Morning, false)` 직접 호출 | `Dawn→Morning`, `DayCount 1→2`, **`alpha 0→0`(페이드 없음)**, `Transitioning=false` ✓ |
+| 나레이션 완료 → 아침 (초기 버전, 닫는 페이드 전) | `DayCount 1→2`, `Dawn→Morning`, `FrozenForOverlay` 해제, `Playing=false`, 플레이어 원위치 복원 ✓ |
+
+닫는 `Fade()` 는 여는 `Fade()` 와 동일 헬퍼 + `TransitionTo(Morning,false)`(위에서 개별 검증) 조합이라, 각 조각은 검증됨. 동시 편집 세션이 Play 세션을 계속 도메인 리로드시켜 최종 end-to-end 캡처(닫는 페이드 중 alpha>0)는 못 남김 — 다음 안정 세션에서 실플레이 확인 권장.
+
+`uloop compile` Error 0. `briefingAnchor`·`tv` 는 다른 세션이 배치 완료(현재 씬에 `GameObject (1)`·`TV_01` 연결됨).
+
+> ⚠️ 배선 중 다른 세션이 동시에 프로젝트 편집 중이었음(커밋 `f3d34cfe`, ActionPoints 스크립트). uloop 의 `AssetDatabase.SaveAssets()` 가 그 세션의 미저장 프리팹 변경(`Owner's_Motel_Room.prefab` 의 `ActionPointsDepletedCondition`, `Can_Coke.prefab`)도 디스크에 함께 flush 함 — 작업 손실은 없으나 커밋 분리 시 주의.
+
+### 남은 작업 (사용자)
+
+1. ~~`briefingAnchor` 배치~~ — 다른 세션이 `GameObject (1)` 로 연결함. 카메라 프레이밍(왼쪽 패널 / 오른쪽 TV) 확인·조정.
+2. `CampaignData` (`Assets/My/Scripts/Dialogue/Campaign.asset`) 각 `DayPlan` 에 `newsLinesEn`/`newsLinesKo` 입력. 현재 Day 1 만 존재 — Day 2+ 는 `DayPlan` 자체가 없음(추가 필요).
+3. ~~TV 오브젝트~~ — 다른 세션이 `TV_01` 로 연결함. `newsSlides` 이미지만 입력하면 됨.
+4. `News_Panel` 위치·크기 취향대로 조정.
+5. 안정된 Play 세션에서 실제 새벽→침대→브리핑→아침 1회 플레이 확인 (닫는 페이드 시각 확인).
+
+### (원 설계) 씬 배선 참고
+
+1. `Owner's_Motel_Room` / `bed_03_Interior` 인스턴스: `PhaseSwitchEffect`(from 3→to 0) 제거 → `NewsBriefingEffect` 추가. `Interactable`(promptType 15) · `PhaseCondition`(Dawn) · `SfxEffect` 유지.
+2. 씬에 빈 GameObject `NightNewsBriefing` → 컴포넌트 붙이고 연결: `campaign`(CampaignData 에셋), `briefingAnchor`(새 Transform — 카메라가 왼쪽=대화창/오른쪽=TV 되게 배치), `newsPanel`(왼쪽 중앙 스크린 `SpeechBubble`, billboard off, `root`/`label` 연결), TV 쓸 거면 `tv`(시작 비활성)·`tvImage`.
+3. `NewsBriefingEffect.briefing` ← 그 GameObject.
+4. `CampaignData` 각 `DayPlan` 에 `newsLinesEn`/`newsLinesKo` 문구, (선택) `newsSlides` 이미지 입력. 비어 있으면 그 날은 브리핑 스킵 → 기존처럼 바로 아침.
+5. `UIInteractionMode` 의 `playerRoot`·`cameraPitchPivot`·`characterController` 가 채워져 있어야 순간이동 동작 (접객용으로 이미 연결돼 있음).
+
+## 확인 필요 (승인 전 → 일부 미해결, 씬 작업 중 판단)
 
 1. ~~새벽→아침 트리거 위치~~ — 확인됨 (`Owner's_Motel_Room` / `bed_03_Interior`). 이 인스턴스의 `PhaseSwitchEffect` 를 `NewsBriefingEffect` 로 교체(`PhaseCondition` Dawn 은 유지).
 2. TV = **월드 오브젝트**(권장, 연출 일관) vs 오른쪽 반쪽 스크린 UI 패널(CRT 베젤 스프라이트). 후자면 TV 오브젝트/`briefingAnchor` 카메라 조정 불필요, `NightNewsBriefing` 이 패널만 토글.

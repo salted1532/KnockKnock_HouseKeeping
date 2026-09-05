@@ -167,21 +167,6 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  type: 99
-  itemName: 
-  itemIcon: {fileID: 0}
-  equipTarget: {fileID: 0}
-  useClip: {fileID: 0}
-  consumeOnUse: 1
-  messyVisual: {fileID: 0}
-  tidyVisual: {fileID: 0}
-  pushForce: 6
-  rotationForce: 2
-  door: {fileID: 0}
-  curtainOpen: {fileID: 0}
-  curtainClosed: {fileID: 0}
-  curtainOpenClip: {fileID: 0}
-  curtainCloseClip: {fileID: 0}
 --- !u!114 &5750402917392186614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +184,7 @@ MonoBehaviour:
   equipTargetOverride: {fileID: 0}
   useClip: {fileID: 8300000, guid: 5e0c8dcb44c86c94791b47deacc122f2, type: 3}
   consumeOnUse: 1
+  depletesActionPoints: 1
 --- !u!114 &6348552908890946059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +216,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
+  excludeRoots: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

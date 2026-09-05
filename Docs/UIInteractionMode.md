@@ -41,7 +41,8 @@
 - `Enter(Transform anchor, float lookScale)` — 위와 같되 이 앵커의 `edgeLook` 각도에 `lookScale`(0~1) 을 곱한다. 앵커별로 스택에 쌓임 (`0` = 이 뷰에선 완전 고정, `1` = 기본). `KnockEffect` 가 `0.25` 로 노크 화면을 거의 고정 (`doc/0118`).
 - `Exit()` — 한 단계 pop. 하위 뷰 남으면 그리로 복귀(모드 유지), 스택 비면 `Teardown`(플레이어 원위치 복귀 + 커서 락).
 - `ExitAll()` — 전부 닫고 완전 종료 (접객 `EndSession` 등).
-- `FreezeForOverlay(bool)` — **이동 없이** FPC 정지 + Gaze suspend + 커서 표시 (노트 `ShowPanelEffect`, 시간대 전환 중). `Active` 면 무시 — 그쪽이 이미 관리 중.
+- `FreezeForOverlay(bool)` — **이동 없이** FPC 정지 + Gaze suspend + 커서 표시 (노트 `ShowPanelEffect`, 시간대 전환 중). `Active` 면 무시 — 그쪽이 이미 관리 중. 이미 정지 중일 때 중복 `on` 호출도 무시.
+- `FreezeForOverlay(bool, Transform anchor)` — 위와 같되 `anchor` 주면 CC 끄고 그 위치/정면으로 **즉시 순간이동**(전환 애니 없음, 페이드 암전 중 호출용). 해제 시 원위치 복원. [`NightNewsBriefing`](NightNewsBriefing.md) 일차 종료 연출 (`doc/0145`).
 
 ## ESC 처리
 
