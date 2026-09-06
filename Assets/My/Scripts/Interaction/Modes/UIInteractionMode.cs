@@ -235,14 +235,16 @@ public class UIInteractionMode : MonoBehaviour
 
     private bool overlayAnchored;   // FreezeForOverlay(true, anchor) 로 순간이동한 상태 — 해제 시 원위치 복원
 
-    public void FreezeForOverlay(bool on) => FreezeForOverlay(on, null);
+    public void FreezeForOverlay(bool on) => FreezeForOverlay(on, null, true);
+    public void FreezeForOverlay(bool on, Transform anchor) => FreezeForOverlay(on, anchor, true);
 
-    // 이동 없이 플레이어만 정지 + 커서 표시 (노트 등 오버레이 UI 용). Enter 와 달리 전환 애니메이션 없음.
+    // 이동 없이 플레이어만 정지 (노트 등 오버레이 UI · 시간대 전환 페이드 용). Enter 와 달리 전환 애니메이션 없음.
     // anchor 를 주면 그 위치/정면으로 **즉시 순간이동**(페이드 암전 중 호출용, doc/0145 뉴스 브리핑).
     //   해제(on=false) 시 순간이동했던 원위치로 복원.
+    // showCursor: on 동안 커서를 보일지. 노트/대화는 true, 시간대 전환 페이드는 false (커서 노출 방지).
     // 실제 UI 모드(Active)가 돌고 있으면 무시 — 그쪽이 이미 관리 중.
     // 이미 정지 중일 때 중복 on 호출도 무시 (전환 페이드가 브리핑 위에 겹쳐 부를 수 있음).
-    public void FreezeForOverlay(bool on, Transform anchor)
+    public void FreezeForOverlay(bool on, Transform anchor, bool showCursor)
     {
         if (Active) return;
         if (on && FrozenForOverlay) return;
@@ -251,8 +253,9 @@ public class UIInteractionMode : MonoBehaviour
         if (firstPersonController != null) firstPersonController.enabled = !on;
         if (gazeInteractor != null) gazeInteractor.Suspended = on;
         if (crosshair != null) crosshair.SetActive(!on);
-        Cursor.lockState = on ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = on;
+        bool cursor = on && showCursor;
+        Cursor.lockState = cursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = cursor;
 
         if (on && anchor != null && playerRoot != null)
         {

@@ -21,7 +21,7 @@
 | `spawnPoints` | `Transform[]` | - | 스폰 포인트 (여러 개, 인스펙터 연결). 각 포인트의 **forward 방향**으로 주행 |
 | `travelDistance` | `float` | 400 | 스폰 지점에서 전진 거리 |
 | `speed` | `float` | 12 | 주행 속도(units/sec). 이동시간 = distance/speed |
-| `spawnInterval` | `Vector2` | (4, 10) | 다음 스폰까지 랜덤 대기(min,max) 초 |
+| `spawnInterval` | `Vector2` | (4, 10) | 다음 스폰까지 랜덤 대기(min,max) 초. 인스펙터에서 조절, 런타임은 `SetSpawnInterval(min,max)` |
 | `maxAlive` | `int` | 6 | 동시 존재 자동차 상한 |
 | `autoStart` | `bool` | true | Start 시 자동 스폰 루프 시작 |
 
@@ -47,5 +47,13 @@
 - 엔진 사운드: 요청 없음.
 - 곡선 경로/웨이포인트: 직선 이동만.
 
-## 승인 대기
-위 설계로 `CarSpawner.cs` 작성 진행할지 확인 요청.
+## 적용 결과
+- `Assets/My/Scripts/Environment/CarSpawner.cs` 작성 — 컴파일 통과(에러 0, 기존 무관 경고 1).
+- `InGame.unity` 에 `CarSpawner` GameObject 추가 (siblingIndex 32), 자식으로 `SpawnPoint_A`(localPos (0,0,-200), forward +Z), `SpawnPoint_B`(localPos (6,0,200), forward -Z).
+- 인스펙터 연결 완료: `carPrefabs = [Auto.prefab, Carro_su.prefab]`, `spawnPoints = [SpawnPoint_A, SpawnPoint_B]`.
+- 씬 저장됨(`EditorSceneManager.SaveScene`).
+
+## 남은 작업 (사용자)
+- `CarSpawner` 오브젝트 + 스폰 포인트 2개를 실제 도로 위치/방향으로 이동. 현재는 임시로 z ±200 에 원점 기준 배치.
+- 필요 시 스폰 포인트 추가, `carPrefabs` 에 다른 차 프리팹 연결.
+- Play 로 주행/엔진 진동 육안 확인.

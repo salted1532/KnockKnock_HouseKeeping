@@ -70,6 +70,7 @@ public class Interactable : MonoBehaviour
         get
         {
             if (!enabled || !gameObject.activeInHierarchy) return false;
+            if (NightNewsBriefing.Playing) return false;   // 뉴스 브리핑 연출 중엔 모든 상호작용/마커/외곽선 정지
             if (conditions != null)
                 foreach (var c in conditions)
                     if (c != null && c.enabled && !c.IsMet) return false;

@@ -51,7 +51,7 @@ public class DayPhaseManager : MonoBehaviour
 
         // 전환 중엔 플레이어 조작 정지 (암전 동안 돌아다니거나 다른 상호작용 못 하게).
         // UI 모드로 진입한 경우(접객)엔 FreezeForOverlay 가 알아서 무시하고, 해제도 안 함.
-        if (fade) UIInteractionMode.Instance?.FreezeForOverlay(true);
+        if (fade) UIInteractionMode.Instance?.FreezeForOverlay(true, null, false);   // 전환 중 커서 노출 방지
 
         void AtBlack()
         {
