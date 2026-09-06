@@ -23,12 +23,19 @@
 | [EnterUIModeEffect](EnterUIModeEffect.md) | `Interaction/Effects/EnterUIModeEffect.cs` (화면고정 — 모니터) |
 | [ShowPanelEffect](ShowPanelEffect.md) | `Interaction/Effects/ShowPanelEffect.cs` (읽기 — 노트/편지) |
 | [PhaseSwitchEffect](PhaseSwitchEffect.md) | `Interaction/Effects/PhaseSwitchEffect.cs` (하루종료 스위치 — 게시판/테이블/침대) |
+| [MonitorViewEffect](MonitorViewEffect.md) | `Interaction/Effects/MonitorViewEffect.cs` (가벼운 화면고정 — 모니터. ESC/재클릭으로 해제) |
+| [NewsBriefingEffect](NewsBriefingEffect.md) | `Interaction/Effects/NewsBriefingEffect.cs` (새벽 침대 → 일차 종료 뉴스 브리핑 → 아침) |
 | [KnockEffect](KnockEffect.md) | `Interaction/Effects/KnockEffect.cs` (새벽 노크 — 배정 방문. 새벽 아니면 항상 거절) |
 | `CheckInGuestEffect` | `Interaction/Effects/CheckInGuestEffect.cs` (접객 중 손님 클릭 → 체크인) — [DialogueSystem](DialogueSystem.md) |
 | `InteractableProxyClick` | `Interaction/InteractableProxyClick.cs` (UI 그래픽 클릭 → 상위 Interactable 실행. 모니터 화면 배경) — `doc/0130` |
 | [RoomController](RoomController.md) | `Interaction/RoomController.cs` (객실 관제 — 잠금/노크·아침 청소 창·체크아웃 정산·커튼/소등) |
 | [PhaseCondition](PhaseCondition.md) | `Interaction/Conditions/PhaseCondition.cs` |
 | `AwaitingCheckInCondition` | `Interaction/Conditions/AwaitingCheckInCondition.cs` (접객 대화 끝 = 체크인 대기 때만 손님 클릭 허용) |
+| [TasksCompleteCondition](MorningTasks.md) | `Interaction/Conditions/TasksCompleteCondition.cs` (아침 할일 완료 시만 게시판 상호작용) |
+| [LunchTasksCompleteCondition](LunchTasks.md) | `Interaction/Conditions/LunchTasksCompleteCondition.cs` (점심 일과 완료 시만 접객 테이블) |
+| [ActionPointsDepletedCondition](ActionPoints.md) | `Interaction/Conditions/ActionPointsDepletedCondition.cs` (새벽 행동력 소진 시만 잠자기) |
+| [LunchTaskTarget](LunchTasks.md) | `Interaction/LunchTaskTarget.cs` (점심 일과 오브젝트 1개 — 1회 상호작용 = 완료, 아침에 재활용) |
+| [OutlineWhileInteractable](ObjectiveMarker.md) | `Interaction/OutlineWhileInteractable.cs` (상호작용 가능한 동안 외곽선 상시 — 유도 표식) |
 | `Interactor` | `Interaction/Core/Interactor.cs` (입력 드라이버 베이스 — `Owner`, `TryInteract`) |
 | [GazeInteractor](GazeInteractor.md) | `Interaction/Drivers/GazeInteractor.cs` |
 | [CursorInteractor](CursorInteractor.md) | `Interaction/Drivers/CursorInteractor.cs` |
@@ -66,11 +73,20 @@
 | [ReceptionManager](ReceptionManager.md) | `Game/ReceptionManager.cs` (저녁 접객 손님 큐 + 모니터 방배정) — [DialogueSystem](DialogueSystem.md) 참조 |
 | [MonitorRoomBoard](MonitorRoomBoard.md) | `Game/MonitorRoomBoard.cs` (CRT 모니터 방배정 uGUI 보드) |
 | [PhaseLabel](PhaseLabel.md) | `Game/PhaseLabel.cs` (HUD 시간대 텍스트) |
+| [PhaseMessage](PhaseMessage.md) | `Game/PhaseMessage.cs` (지정 단계 진입 완료 시 화면 중앙 문구 1회) |
+| [DayEndTitle](DayEndTitle.md) | `Game/DayEndTitle.cs` (다음 날 아침 진입 시 "N일차" 중앙 크게 1회) |
+| [MorningTasks](MorningTasks.md) | `Game/MorningTasks.cs` + `Conditions/TasksCompleteCondition.cs` (아침 할일 HUD "침대 개기" + 게시판 게이트) |
+| [LunchTasks](LunchTasks.md) | `Game/LunchTasks.cs` + `LunchTaskTarget.cs` + `Conditions/LunchTasksCompleteCondition.cs` (점심 일과 HUD + 접객 테이블 게이트) |
+| [ActionPoints](ActionPoints.md) | `Game/ActionPoints.cs` + `Conditions/ActionPointsDepletedCondition.cs` + `UI/ActionPointsHud.cs` (새벽 행동력 4칸 + 잠자기 게이트) |
+| [NightNewsBriefing](NightNewsBriefing.md) | `Game/NightNewsBriefing.cs` (일차 종료 뉴스 브리핑 — 순간이동 + 왼쪽 대화창 + 오른쪽 인게임 TV) |
 | [Wallet](Wallet.md) | `Game/Wallet.cs` + `UI/MoneyHud.cs` (소지금 + 숙박비 선불/후불/2배, HUD·현금음) |
 | [ActivateOnAwake](ActivateOnAwake.md) | `Game/ActivateOnAwake.cs` (런타임에 UI 켜기 유틸) |
+| [ObjectiveMarker](ObjectiveMarker.md) | `UI/ObjectiveMarker.cs` + `UI/ExitHintGauge.cs` — HUD 유도 마커(하루 진행 트리거) + 나가기 홀드 게이지 |
 | [ScreenMessage](ScreenMessage.md) | `UI/ScreenMessage.cs` — 화면 중앙 임시 나레이션/관찰 문구 (노크 거절 "응답이 없다" 등). `Show(en, ko)` 싱글턴 |
 | [ScreenFader](ScreenFader.md) | `Environment/ScreenFader.cs` (검정 페이드) |
 | [PhaseVisuals](PhaseVisuals.md) | `Environment/PhaseVisuals.cs` (구 `DayNightSwitcher` 대체 — 4단계 조명/스카이박스) |
+| [ActiveInPhases](ActiveInPhases.md) | `Environment/ActiveInPhases.cs` (지정 시간대에만 오브젝트 on — 가로등 저녁·새벽 점등) |
+| [CarSpawner](CarSpawner.md) | `Environment/CarSpawner.cs` (도로 자동차 주기 스폰 + 직선 주행 + DOTween 엔진 진동) |
 | [SoundManager](SoundManager.md) | `Audio/SoundManager.cs` |
 | [FootstepSystem](FootstepSystem.md) | `Player/FootstepSystem.cs` |
 | [LocalizationManager](LocalizationManager.md) | `Localization/LocalizationManager.cs` (영어/한글 — 씬 배치, 게임 시작 시 확정) + `LocalizedLabel.cs` + `Editor/FontTool.cs` |
