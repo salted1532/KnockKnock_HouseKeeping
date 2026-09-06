@@ -1007,13 +1007,13 @@ GameObject:
   - component: {fileID: 4325958130951295716}
   - component: {fileID: 1935747364354327111}
   - component: {fileID: 3525992798184629391}
-  - component: {fileID: 5435975164376148623}
   - component: {fileID: 3344697550951980269}
   - component: {fileID: 6165671246445145467}
   - component: {fileID: 2748534251458026123}
   - component: {fileID: 905019317888101017}
   - component: {fileID: 5564333731137164578}
   - component: {fileID: 6263480235167215792}
+  - component: {fileID: 5190627570507682253}
   m_Layer: 11
   m_Name: illegal_parking
   m_TagString: Untagged
@@ -1128,29 +1128,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07326178, y: 0.012, z: 0.02624232}
-  m_Center: {x: -0.0012681056, y: -0.003, z: 0.000032011885}
---- !u!65 &5435975164376148623
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9141445753542093100}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.035, y: 0.022732046, z: 0.02624232}
-  m_Center: {x: -0.0012681056, y: 0.0024837642, z: 0.000032011885}
+  m_Size: {x: 0.07326182, y: 0.022732046, z: 0.026242334}
+  m_Center: {x: -0.0012681062, y: 0.0024837642, z: 0.000032011936}
 --- !u!114 &3344697550951980269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,6 +1307,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5190627570507682253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141445753542093100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce066cc2b02f83b46b1d154e373facb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineWhileInteractable
 --- !u!1 &9202086341232299024
 GameObject:
   m_ObjectHideFlags: 0

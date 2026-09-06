@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 7200893075890192943}
   - component: {fileID: 1034217998851062282}
   - component: {fileID: 8066971123776855220}
+  - component: {fileID: 8919982701508482334}
   m_Layer: 11
   m_Name: Fence
   m_TagString: Untagged
@@ -427,6 +428,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhaseCondition
   allowedPhases: 01000000
+--- !u!114 &8919982701508482334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2934435885316958923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce066cc2b02f83b46b1d154e373facb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineWhileInteractable
 --- !u!1 &5736760569914536625
 GameObject:
   m_ObjectHideFlags: 0
