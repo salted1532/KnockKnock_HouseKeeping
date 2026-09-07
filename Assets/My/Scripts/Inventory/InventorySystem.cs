@@ -45,9 +45,14 @@ public class InventorySystem : MonoBehaviour
         if (Keyboard.current == null)
             return;
 
-        // 화면고정(접객·노크·모니터)·오버레이(노트·페이드) 중엔 아이템 조작 전면 차단.
-        // 이때 허용되는 상호작용은 CursorInteractor 의 커서 클릭뿐.
-        if (UIInteractionMode.Instance != null && UIInteractionMode.Instance.MovementLocked)
+        var uim = UIInteractionMode.Instance;
+        bool locked = uim != null && uim.MovementLocked;
+
+        // 접객 세션 중 화면고정 상태에선 슬롯 선택(1~5)·휠 스크롤만 허용하고 던지기·사용은 막는다.
+        // 그 외 화면고정/오버레이(노크·모니터 단독·노트·페이드)는 아이템 조작 전면 차단.
+        bool receptionUI = locked && uim.Active
+                           && ReceptionManager.Instance != null && ReceptionManager.Instance.InSession;
+        if (locked && !receptionUI)
             return;
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectSlot(0);
@@ -56,15 +61,19 @@ public class InventorySystem : MonoBehaviour
         else if (Keyboard.current.digit4Key.wasPressedThisFrame) SelectSlot(3);
         else if (Keyboard.current.digit5Key.wasPressedThisFrame) SelectSlot(4);
 
-        if (Keyboard.current.fKey.wasPressedThisFrame) ThrowActiveItem();
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) UseActiveItem();
-
         if (Mouse.current != null)
         {
             float scroll = Mouse.current.scroll.ReadValue().y;
             if (scroll != 0f && !IsActiveFlashlightOn())
                 SelectSlot((activeSlot + (scroll > 0f ? SlotCount - 1 : 1)) % SlotCount);
         }
+
+        // 던지기(F)·사용(좌클릭)은 화면고정 중엔 금지 (접객 UI 포함 — 좌클릭은 손님·모니터 클릭용).
+        if (locked)
+            return;
+
+        if (Keyboard.current.fKey.wasPressedThisFrame) ThrowActiveItem();
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) UseActiveItem();
     }
 
     public bool AddItem(Sprite icon, GameObject equipTarget, GameObject pickupSource, bool isFlashlight = false, AudioClip useClip = null, bool consumeOnUse = false, bool depletesActionPoints = false)

@@ -55,9 +55,15 @@ after dialogue end:    Interactable.enabled=False
 - `ID` Cube: `Interactable.enabled = true` 로 되돌림, 하위 전체 **Interaction 레이어(11)** 로 통일(자식 Cube 콜라이더 오클루전 제거).
 - 검증: start `ID.active=False` / id_show 후 `active=True, CanInteract=True`, 카메라 레이가 ID Interactable 에 명중 / `Interact()` → `ID_image.active=True` + 텍스트 / dialogue end → 둘 다 `False`.
 
-## 수정 2 — 사라지는 타이밍
-`OnDialogueEnded`(대사 텍스트 끝)에서 치우니 방배정·키 주기 전에 사라졌음. → **`ReceptionManager.CurrentGuest` 폴링**으로 변경: id_show 때 `shownFor = npc`, `Update` 에서 `CurrentGuest != shownFor` 이면 Hide. 즉 그 손님이 체크인/거절로 **퇴장할 때**(CurrentGuest 해제) 사라짐 — 대화 종료 후 방배정·키 단계 내내 유지.
-검증: start False / id_show True / 대화종료·체크인대기 중 **True 유지** / 손님 퇴장(CurrentGuest=null) False / 다음 손님 id 안 물음 False.
+## 수정 2·3 — 사라지는 타이밍
+- 2: `OnDialogueEnded`(대사 텍스트 끝) 에서 치우니 방배정·키 전에 사라짐 → CurrentGuest 폴링으로.
+- 3: 손님 완전 퇴장까지 유지되니 너무 늦음 → **판정 확정 순간** 으로. `Update` 에서:
+  - `ReceptionManager.CurrentGuest != shownFor` → Hide (다음 손님/세션 종료 안전망)
+  - `GuestManager.Get(shownFor).verdict` 가 `id_show` 시점 baseline 과 달라지고 Approved/Rejected → Hide
+- **승인**: `ReceptionManager` 가 `checkInConfirmed` 후 `GuestManager.CheckIn`(verdict=Approved) 호출 → SayNode("checkin/checkin_paid") 전 → 승인 대사 뜰 때 신분증 사라짐.
+- **거절**: reject_final(outcome=Rejected) 대사 후 `SetVerdict(Rejected)` → 거절 대사 직후 사라짐.
+- baseline 으로 **재방문한 거절 손님**의 과거 판정 무시 (id_show 시 다시 뜸).
+- 검증(플레이): 승인 id_show→True, CheckIn→False / 거절 id_show→True, SetVerdict→False / 재방문 거절손님 id_show→True.
 
 ## 참고 / 후속
 - 신분증 정보에 사진(`idCard.photo`)·주소 등 더 넣으려면 `ReceptionIdCard.Populate` + 이미지 스왑 추가.

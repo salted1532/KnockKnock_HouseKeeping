@@ -23,6 +23,8 @@ public class NpcData : ScriptableObject
     public Sprite backPortrait;
     [Tooltip("옆모습 (걸어서 입·퇴장 시 수평 이동). 화면 왼쪽 향한 그림 기준 — 오른쪽 이동 시 자동 좌우반전. 비면 정면/뒷모습 유지")]
     public Sprite sidePortrait;
+    [Tooltip("신분증 사진용 얼굴 크롭. neutralPortrait 의 textureRect 기준 정규화(0~1, y=0 이 아래). w·h 둘 다 0 이면 자동 크롭(상단 정사각형)")]
+    public Rect faceRect01;
 
     [Header("외형 (후속: 손님 모델 스왑용 — 현재 미사용)")]
     [Tooltip("NPC별 3D 모델. 지금은 씬의 공용 손님 오브젝트 하나를 재사용하므로 미사용. 모델 스왑 붙일 때 사용")]

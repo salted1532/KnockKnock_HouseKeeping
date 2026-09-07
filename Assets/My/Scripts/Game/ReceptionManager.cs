@@ -25,6 +25,8 @@ public class ReceptionManager : MonoBehaviour
     [SerializeField] private NpcCatalog catalog;
     [Tooltip("테스트: 매 저녁 카탈로그의 모든 손님을 랜덤 순서로 오게 함 (이미 투숙 중인 손님 제외). 캠페인 편성 무시. doc/0132")]
     [SerializeField] private bool testShuffleAllGuests = true;
+    [Tooltip("한 저녁에 오는 손님 최대 수. 0 이하 = 제한 없음")]
+    [SerializeField] private int maxGuestsPerEvening = 5;
     [Tooltip("접객 중 NPC 로 쓸 Guest 프리팹 (GuestMover + GuestView, 선택적으로 자식 SpeechBubble). 세션당 1개 인스턴스 재활용. 새벽 노크(KnockEffect)도 이걸 폴백으로 씀")]
     [SerializeField] private GameObject guestPrefab;
     public GameObject GuestPrefab => guestPrefab;
@@ -138,11 +140,13 @@ public class ReceptionManager : MonoBehaviour
     }
 
     // 이 저녁 접객에 올 손님 번호 목록. 테스트 모드면 카탈로그 전체(투숙 중 제외) 셔플, 아니면 캠페인 편성.
+    // 마지막에 maxGuestsPerEvening 으로 잘라낸다 (셔플 후 앞에서 N명 = 매일 랜덤한 N명).
     private List<int> BuildGuestIds()
     {
+        List<int> ids;
         if (testShuffleAllGuests && catalog != null)
         {
-            var ids = new List<int>();
+            ids = new List<int>();
             foreach (var n in catalog.npcs)
             {
                 if (n == null) continue;
@@ -155,11 +159,17 @@ public class ReceptionManager : MonoBehaviour
                 int j = UnityEngine.Random.Range(0, i + 1);
                 (ids[i], ids[j]) = (ids[j], ids[i]);
             }
-            return ids;
+        }
+        else
+        {
+            var today = campaign != null ? campaign.Day(DayNow()) : null;
+            if (today?.eveningGuestIds == null) return null;
+            ids = new List<int>(today.eveningGuestIds);   // 캠페인 에셋 리스트 원본을 안 건드리게 복사
         }
 
-        var today = campaign != null ? campaign.Day(DayNow()) : null;
-        return today != null ? today.eveningGuestIds : null;
+        if (maxGuestsPerEvening > 0 && ids.Count > maxGuestsPerEvening)
+            ids.RemoveRange(maxGuestsPerEvening, ids.Count - maxGuestsPerEvening);
+        return ids;
     }
 
     private IEnumerator GuestQueue(List<int> guestIds)

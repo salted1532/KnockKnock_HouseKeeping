@@ -26,6 +26,9 @@ public class GuestMover : MonoBehaviour
     // 접객 일시정지(ESC) — true 면 이동 코루틴이 그 자리에 멈춘다. ReceptionManager 가 토글.
     public bool Frozen { get; set; }
 
+    // 지금 이동(걷기) 중인가 — GuestWalkBob 이 스텝 흔들림을 켜고 끄는 데 사용.
+    public bool Walking { get; private set; }
+
     private void Reset()
     {
         animator = GetComponentInChildren<Animator>();
@@ -86,6 +89,7 @@ public class GuestMover : MonoBehaviour
 
     private void SetWalking(bool v)
     {
+        Walking = v;
         if (animator != null && !string.IsNullOrEmpty(walkBool))
             animator.SetBool(walkBool, v);
     }

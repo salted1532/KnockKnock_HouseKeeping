@@ -36,7 +36,21 @@ public bool Walking { get; private set; }
 - 스쿼시&스트레치(착지 눌림) — `GuestView` 가 scale 을 덮어써서 충돌, rotation+position 만
 - NavMesh/실제 보행 애니메이션 — 스프라이트 연출이라 불필요
 
+## 결과 (구현·플레이모드 검증 완료)
+- `GuestMover.Walking` 프로퍼티 추가, 신규 `GuestWalkBob.cs`, `uloop compile` 에러 0
+- `Guest.prefab` → `Square` 에 `GuestWalkBob` 부착 (`mover`/`body` 배선, hop 0.12/0.2)
+- 플레이모드: 손님 인스턴스 걷기 중 `Square.localPos.y` 1.60→1.66~1.72 통통, 정지 시 0.15s 로 base(1.60) 복귀 확인
+
+## 후속: 좌우 흔들(sway) 제거
+사용자 요청으로 좌우 기울기(rotation) 삭제 → **상하 hop 만** 남김. `swayAngle`/`swayInterval`/`bobRot`/sway 트윈/`localRotation` 처리 전부 제거. 프리팹 재직렬화로 스테일 필드 정리. 검증: rotZ 0 유지, hop 정상.
+
+## 후속: hop 간격 느리게
+`stepInterval` 0.2 → **0.32** (스크립트 기본값 + 프리팹).
+
+## 후속: hop 높이 줄이기
+`hopHeight` 0.12 → **0.07** (스크립트 기본값 + 프리팹).
+
 ## 수정 파일
-- `Assets/My/Scripts/Dialogue/GuestMover.cs` (+2줄, `Walking` 프로퍼티)
+- `Assets/My/Scripts/Dialogue/GuestMover.cs` (+`Walking` 프로퍼티, SetWalking 에서 세팅)
 - `Assets/My/Scripts/Dialogue/GuestWalkBob.cs` (신규)
-- `Assets/My/InGame/Prefabs/Guest.prefab` (Square 에 컴포넌트)
+- `Assets/My/InGame/Prefabs/Guest.prefab` (Square 에 GuestWalkBob)
