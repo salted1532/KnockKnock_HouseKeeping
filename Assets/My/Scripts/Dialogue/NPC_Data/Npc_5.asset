@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Npc_5
   m_EditorClassIdentifier: Assembly-CSharp::NpcData
   id: 5
-  displayName: test5
-  displayNameKo: 
+  displayName: Old Man
+  displayNameKo: "\uB178\uC778"
   neutralPortrait: {fileID: 867051817, guid: d3720058038b24940988b39122c09f41, type: 3}
   angryPortrait: {fileID: 1098375046, guid: 3ec42e07ffd643540b0a3632f0778af2, type: 3}
   backPortrait: {fileID: 1590840017, guid: ae7db72dbc5eab645b89db9bdcd0b313, type: 3}
@@ -23,10 +23,10 @@ MonoBehaviour:
   isSleepwalker: 0
   visitorOnly: 0
   refusesDawnKnock: 0
-  stayNights: 3
+  stayNights: 7
   allowsMorningCleaning: 1
   idCard:
-    name: 
-    birthDate: 
+    name: Walter Boden
+    birthDate: 1949.01.27
     photo: {fileID: 0}
     forged: 0

@@ -67,8 +67,9 @@ public class UIInteractionMode : MonoBehaviour
     private readonly Stack<bool> anchorEscExits = new();      // 이 앵커는 ESC 한 번으로 나가나 (모니터=true, 접객·대화=false)
     private float CurLookScale => anchorLookScales.Count > 0 ? anchorLookScales.Peek() : 1f;
 
-    // 최상위 뷰가 ESC 로 나가는 뷰인가 (모니터 화면고정 등). 아니면 exitKey 홀드로만 나감.
-    private bool TopEscExits => anchorEscExits.Count > 0 && anchorEscExits.Peek();
+    // 최상위 뷰가 ESC 로 나가는 뷰인가 (모니터 화면고정·새벽 노크 등). 아니면 exitKey 홀드로만 나감.
+    // PauseMenu 가 "이번 Esc 를 다른 뷰가 먼저 소비하나" 판정에 읽는다.
+    public bool TopEscExits => anchorEscExits.Count > 0 && anchorEscExits.Peek();
 
     private Vector3 savedPlayerPos;
     private Quaternion savedPlayerRot;

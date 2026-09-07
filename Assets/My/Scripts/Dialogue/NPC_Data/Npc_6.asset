@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e40a3db4d1fab43a0db0471d87b9ed, type: 3}
+  m_Name: Npc_6
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  id: 6
+  displayName: Truck Driver
+  displayNameKo: "\uD2B8\uB7ED\uAE30\uC0AC"
+  neutralPortrait: {fileID: -22355134, guid: 21b792987e00cd845b9f05a48e463d76, type: 3}
+  angryPortrait: {fileID: -668431806, guid: 478e99a1deeb77b43b7e5242d441627d, type: 3}
+  backPortrait: {fileID: -634317385, guid: 0c5933fb4c43ebd498bc333d959c46ee, type: 3}
+  sidePortrait: {fileID: -1085420637, guid: eca29009eb9dab246badb5d3e04c24c3, type: 3}
+  modelPrefab: {fileID: 0}
+  isSleepwalker: 0
+  visitorOnly: 0
+  refusesDawnKnock: 0
+  stayNights: 1
+  allowsMorningCleaning: 1
+  idCard:
+    name: Dale Whitmore
+    birthDate: 1974.05.16
+    photo: {fileID: 0}
+    forged: 0

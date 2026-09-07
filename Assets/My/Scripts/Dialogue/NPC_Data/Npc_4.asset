@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Npc_4
   m_EditorClassIdentifier: Assembly-CSharp::NpcData
   id: 4
-  displayName: test4
-  displayNameKo: 
+  displayName: Young Woman
+  displayNameKo: "\uC80A\uC740 \uC5EC\uC131"
   neutralPortrait: {fileID: 842194614, guid: e9c1d1a20502fd849ad9c1867fbc2672, type: 3}
   angryPortrait: {fileID: 1029345980, guid: 91185e65d04cbba4f8b48ea63416ccf9, type: 3}
   backPortrait: {fileID: 1912472009, guid: 4ef501194d5be704b983cde76bede8a2, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
   stayNights: 2
   allowsMorningCleaning: 0
   idCard:
-    name: 
-    birthDate: 
+    name: Ellen Marsh
+    birthDate: 1994.06.09
     photo: {fileID: 0}
     forged: 0

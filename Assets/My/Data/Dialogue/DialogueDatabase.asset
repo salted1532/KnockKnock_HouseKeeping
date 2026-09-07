@@ -13,6 +13,1475 @@ MonoBehaviour:
   m_Name: DialogueDatabase
   m_EditorClassIdentifier: Assembly-CSharp::DialogueDatabase
   entries:
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Evening. You got a spot where I can see the rig from the window?
+      textKo: "\uC548\uB155\uD558\uC2DC\uC624. \uCC3D\uC5D0\uC11C \uD2B8\uB7ED\uC774
+        \uBCF4\uC774\uB294 \uBC29 \uD558\uB098 \uC788\uC18C?"
+    - expression: 0
+      textEn: One night. I roll out before the sun's up.
+      textKo: "\uD558\uB8FB\uBC24\uC774\uBA74 \uB418\uC624. \uD574 \uB728\uAE30 \uC804\uC5D0
+        \uCD9C\uBC1C\uD560 \uAC70\uB77C\uC11C."
+    - expression: 0
+      textEn: Been on the road eighteen hours. My eyes are done.
+      textKo: "\uC5F4\uC5EC\uB35F \uC2DC\uAC04\uC744 \uB2EC\uB838\uC18C. \uB208\uC774
+        \uC548 \uB5A0\uC9C0\uB294\uAD6C\uB824."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: name
+    labelEn: Ask their name
+    labelKo: "\uC774\uB984\uC744 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: It's on the log sheet. Nobody reads those anyway.
+      textKo: "\uC6B4\uD589 \uC77C\uC9C0\uC5D0 \uC801\uD600 \uC788\uC18C. \uBB50
+        \uC544\uBB34\uB3C4 \uC548 \uC77D\uC9C0\uB9CC."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: haul
+    labelEn: Ask what he's hauling
+    labelKo: "\uBB34\uC5C7\uC744 \uC2E3\uACE0 \uAC00\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Dry freight. Boxes. I don't open the trailer and I don't ask.
+      textKo: "\uB9C8\uB978 \uD654\uBB3C. \uC0C1\uC790\uC694. \uB098\uB294 \uC9D0\uCE78\uC744
+        \uC548 \uC5F4\uACE0, \uBB54\uC9C0\uB3C4 \uC548 \uBB3B\uC18C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: where
+    labelEn: Ask where he's headed
+    labelKo: "\uC5B4\uB514\uB85C \uAC00\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: North. The delivery address changed twice since I left. Still says
+        a town I've never heard of.
+      textKo: "\uBD81\uCABD\uC774\uC624. \uCD9C\uBC1C\uD55C \uB4A4\uB85C \uBC30\uC1A1\uC9C0\uAC00
+        \uB450 \uBC88 \uBC14\uB00C\uC5C8\uC18C. \uC9C0\uAE08\uC740 \uB4E4\uC5B4\uBCF8
+        \uC801\uB3C4 \uC5C6\uB294 \uB3D9\uB124\uB85C \uB3FC \uC788\uACE0."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: stay
+    labelEn: Confirm how long he's staying
+    labelKo: "\uBA70\uCE60 \uBB35\uC744\uC9C0 \uD655\uC778\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: One night. I told you. Gone by first light.
+      textKo: "\uD558\uB8FB\uBC24. \uB9D0\uD588\uC796\uC18C. \uB3D9\uD2B8\uBA74 \uB5A0\uB098\uC624."
+    choices:
+    - labelEn: Take the night up front
+      labelKo: "\uD558\uB8FB\uBC24\uCE58\uB97C \uC120\uBD88\uB85C \uBC1B\uB294\uB2E4"
+      goToNode: stay_pay
+    - labelEn: Settle when he leaves
+      labelKo: "\uB098\uAC08 \uB54C \uC815\uC0B0\uD558\uAE30\uB85C \uD55C\uB2E4"
+      goToNode: stay_trust
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_pay
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Up front. Fine. Company card. It clears.
+      textKo: "\uC120\uBD88\uC774\uB77C. \uC88B\uC18C. \uBC95\uC778 \uCE74\uB4DC\uC694.
+        \uC2B9\uC778\uB420 \uAC70\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_trust
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: When I leave, then. Less to fumble for in the dark.
+      textKo: "\uADF8\uB7FC \uB098\uAC08 \uB54C. \uC5B4\uB450\uC6B8 \uB54C \uC9C0\uAC11
+        \uB4A4\uC9C8 \uC77C \uC5C6\uACE0 \uC88B\uC18C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: clean
+    labelEn: Ask about housekeeping
+    labelKo: "\uD558\uC6B0\uC2A4\uD0A4\uD551\uC744 \uC5B4\uB5BB\uAC8C \uD560\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Come in whenever. I won't be in it much.
+      textKo: "\uC544\uBB34 \uB54C\uB098 \uB4E4\uC5B4\uC624\uC2DC\uC624. \uBC29\uC5D0
+        \uC624\uB798 \uC788\uC744 \uAC83\uB3C4 \uC544\uB2C8\uACE0."
+    choices:
+    - labelEn: Tidy the room in the morning
+      labelKo: "\uC544\uCE68\uC5D0 \uBC29\uC744 \uC815\uB9AC\uD55C\uB2E4"
+      goToNode: clean_yes
+    - labelEn: Leave it be
+      labelKo: "\uADF8\uB0E5 \uB454\uB2E4"
+      goToNode: clean_no
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_yes
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Sure. Just don't move my boots if they're by the door.
+      textKo: "\uC88B\uC18C. \uBB38 \uC606\uC5D0 \uBD80\uCE20 \uC788\uC73C\uBA74
+        \uADF8\uAC83\uB9CC \uAC74\uB4DC\uB9AC\uC9C0 \uB9C8\uC2DC\uC624."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_no
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Even easier. Suits me.
+      textKo: "\uADF8\uAC8C \uB354 \uD3B8\uD558\uC9C0. \uC88B\uC18C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    labelEn: Turn him away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
+    lines:
+    - expression: 0
+      textEn: No room? I can't drive another mile. Not tonight.
+      textKo: "\uBC29\uC774 \uC5C6\uB2E4\uACE0? \uD55C \uB9C8\uC77C\uB3C4 \uB354
+        \uBABB \uAC00\uC624. \uC624\uB298 \uBC24\uC740 \uC548 \uB418\uC624."
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: I'll sleep in the cab if I have to. Just let me park it lit.
+      textKo: "\uC815 \uC548 \uB418\uBA74 \uC6B4\uC804\uC11D\uC5D0\uC11C \uC790\uACA0\uC18C.
+        \uBD88 \uCF1C\uC9C4 \uB370 \uC138\uC6B0\uAE30\uB9CC \uD558\uAC8C \uD574 \uC8FC\uC2DC\uC624."
+    choices:
+    - labelEn: Hold firm
+      labelKo: "\uB2E8\uD638\uD558\uAC8C \uAC70\uC808\uD55C\uB2E4"
+      goToNode: reject_final
+    - labelEn: Let him park and stay
+      labelKo: "\uB300\uACE0 \uBB35\uAC8C \uD55C\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: ...Alright. I've slept in that cab plenty. One more night won't kill
+        me.
+      textKo: "...\uC54C\uACA0\uC18C. \uADF8 \uC6B4\uC804\uC11D\uC5D0\uC11C \uC231\uD558\uAC8C
+        \uC7A4\uC18C. \uD558\uB8FB\uBC24 \uB354 \uC794\uB2E4\uACE0 \uC8FD\uAE30\uC57C
+        \uD558\uACA0\uC18C."
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Appreciate it. You won't hear the engine till morning.
+      textKo: "\uACE0\uB9D9\uC18C. \uC544\uCE68\uAE4C\uC9C4 \uC5D4\uC9C4 \uC18C\uB9AC
+        \uC548 \uB0BC \uAC70\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin_paid
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: There. Paid. Now point me at the bed.
+      textKo: "\uC790. \uB0C8\uC18C. \uC774\uC81C \uCE68\uB300\uB098 \uAC00\uB9AC\uCF1C
+        \uC8FC\uC2DC\uC624."
+    - expression: 0
+      textEn: Appreciate it. You won't hear the engine till morning.
+      textKo: "\uACE0\uB9D9\uC18C. \uC544\uCE68\uAE4C\uC9C4 \uC5D4\uC9C4 \uC18C\uB9AC
+        \uC548 \uB0BC \uAC70\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 1
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: You again. I was just at the window.
+      textKo: "\uB610 \uB2F9\uC2E0\uC774\uC624. \uBC29\uAE08 \uCC3D\uAC00\uC5D0 \uC788\uC5C8\uC18C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: noise
+    labelEn: Ask about the noise last night
+    labelKo: "\uAC04\uBC24\uC758 \uC18C\uC74C\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Gravel. Out by the rig. Like someone walking a slow circle around it.
+      textKo: "\uC790\uAC08 \uC18C\uB9AC. \uD2B8\uB7ED \uCABD\uC5D0\uC11C. \uB204\uAC00
+        \uADF8 \uC8FC\uC704\uB97C \uCC9C\uCC9C\uD788 \uD55C \uBC14\uD034 \uB3C4\uB294
+        \uAC83\uCC98\uB7FC."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: truck
+    labelEn: Ask about his truck
+    labelKo: "\uADF8\uC758 \uD2B8\uB7ED\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Cab light was on. I never leave it on. And the door was open on the
+        driver's side.
+      textKo: "\uC6B4\uC804\uC11D \uB4F1\uC774 \uCF1C\uC838 \uC788\uC5C8\uC18C. \uB098\uB294
+        \uADF8\uAC78 \uC808\uB300 \uC548 \uCF1C\uB450\uB294\uB370. \uC6B4\uC804\uC11D
+        \uBB38\uB3C4 \uC5F4\uB824 \uC788\uC5C8\uACE0."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: leaving
+    labelEn: Ask when he's leaving
+    labelKo: "\uC5B8\uC81C \uB5A0\uB0A0 \uAC74\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Soon as it's light enough to see the road. I don't like this lot in
+        the dark.
+      textKo: "\uAE38\uC774 \uBCF4\uC77C \uB9CC\uD07C \uBC1D\uC544\uC9C0\uBA74 \uBC14\uB85C.
+        \uC5B4\uB450\uC6B8 \uB54C \uC774 \uC8FC\uCC28\uC7A5\uC740 \uC601 \uB9C8\uC74C\uC5D0
+        \uC548 \uB4DC\uC624."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: A quiet room, if you have one. My boy's worn out.
+      textKo: "\uC870\uC6A9\uD55C \uBC29\uC774\uBA74 \uC88B\uACA0\uC2B5\uB2C8\uB2E4.
+        \uC560\uAC00 \uC9C0\uCCD0\uC11C\uC694."
+    - expression: 0
+      textEn: Just the two of us. One night, maybe two.
+      textKo: "\uC800\uD76C \uB458\uC774\uC5D0\uC694. \uD558\uB8FB\uBC24, \uC5B4\uCA4C\uBA74
+        \uC774\uD2C0."
+    - expression: 0
+      textEn: He doesn't talk to strangers. Don't take it personally.
+      textKo: "\uC560\uAC00 \uB0AF\uC120 \uC0AC\uB78C\uD558\uACE0\uB294 \uB9D0\uC744
+        \uC548 \uD569\uB2C8\uB2E4. \uC11C\uC6B4\uD574 \uB9C8\uC138\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: name
+    labelEn: Ask their name
+    labelKo: "\uC774\uB984\uC744 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Mine's on the card. His isn't on anything. He's just my boy.
+      textKo: "\uC81C \uAC74 \uC2E0\uBD84\uC99D\uC5D0 \uC788\uC2B5\uB2C8\uB2E4. \uC560
+        \uAC74 \uC544\uBB34 \uB370\uB3C4 \uC5C6\uC5B4\uC694. \uADF8\uB0E5 \uC81C
+        \uC544\uB4E4\uC774\uB2C8\uAE4C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: boy
+    labelEn: Ask about his son
+    labelKo: "\uC544\uB4E4\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: He's been like this since his mother. Quiet. Watches a lot. He's no
+        trouble.
+      textKo: "\uC5C4\uB9C8 \uC77C \uC774\uD6C4\uB85C \uACC4\uC18D \uC774\uB798\uC694.
+        \uC870\uC6A9\uD558\uACE0. \uAC00\uB9CC\uD788 \uCCD0\uB2E4\uBCF4\uACE0. \uB9D0\uC37D\uC740
+        \uC548 \uBD80\uB9BD\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: stay
+    labelEn: Ask how long they're staying
+    labelKo: "\uBA70\uCE60 \uBB35\uC744\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: One night to start. I'll tell you in the morning if we need another.
+      textKo: "\uC77C\uB2E8 \uD558\uB8FB\uBC24\uC774\uC694. \uD558\uB8E8 \uB354 \uD544\uC694\uD558\uBA74
+        \uC544\uCE68\uC5D0 \uB9D0\uC500\uB4DC\uB9B4\uAC8C\uC694."
+    choices:
+    - labelEn: Charge one night up front
+      labelKo: "\uD558\uB8FB\uBC24\uCE58\uB97C \uC120\uBD88\uB85C \uBC1B\uB294\uB2E4"
+      goToNode: stay_pay
+    - labelEn: Settle it later
+      labelKo: "\uB098\uC911\uC5D0 \uC815\uC0B0\uD55C\uB2E4"
+      goToNode: stay_trust
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_pay
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Up front. Of course. Here - for the one night.
+      textKo: "\uC120\uBD88\uC774\uC694. \uADF8\uB7FC\uC694. \uC5EC\uAE30 - \uD558\uB8FB\uBC24\uCE58\uC785\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_trust
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Thank you. Makes it easier, carrying him and all.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC560\uB97C \uC548\uACE0 \uB2E4\uB2C8\uB290\uB77C,
+        \uADF8\uAC8C \uD3B8\uD558\uB124\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: clean
+    labelEn: Ask about housekeeping
+    labelKo: "\uD558\uC6B0\uC2A4\uD0A4\uD551\uC744 \uC5B4\uB5BB\uAC8C \uD560\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Please don't come in during the day. He naps, and he startles.
+      textKo: "\uB0AE\uC5D0\uB294 \uB4E4\uC5B4\uC624\uC9C0 \uB9D0\uC544 \uC8FC\uC138\uC694.
+        \uC560\uAC00 \uB0AE\uC7A0\uC744 \uC790\uB294\uB370, \uC798 \uB180\uB78D\uB2C8\uB2E4."
+    choices:
+    - labelEn: Respect that - leave the room
+      labelKo: "\uADF8\uB807\uAC8C \uD55C\uB2E4 - \uBC29\uC740 \uAC74\uB4DC\uB9AC\uC9C0
+        \uC54A\uB294\uB2E4"
+      goToNode: clean_no
+    - labelEn: Insist on a morning tidy
+      labelKo: "\uADF8\uB798\uB3C4 \uC544\uCE68 \uCCAD\uC18C\uB97C \uD55C\uB2E4"
+      goToNode: clean_yes
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_no
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Thank you. Really. He needs the room to feel the same.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC815\uB9D0\uB85C\uC694. \uC560\uB294
+        \uBC29\uC774 \uB298 \uB611\uAC19\uC544\uC57C \uC548\uC2EC\uD574\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_yes
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: ...If you must. Knock first. Loudly. Give him time to hide.
+      textKo: "...\uC815 \uADF8\uB7EC\uC154\uC57C \uD55C\uB2E4\uBA74. \uBA3C\uC800
+        \uB178\uD06C\uD558\uC138\uC694. \uD06C\uAC8C. \uC560\uAC00 \uC228\uC744 \uC2DC\uAC04\uC744
+        \uC8FC\uC2DC\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
+    lines:
+    - expression: 0
+      textEn: With a child? At this hour?
+      textKo: "\uC560\uB97C \uB370\uB9AC\uACE0\uC694? \uC774 \uC2DC\uAC04\uC5D0?"
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Look at him. He can barely keep his eyes open. Please.
+      textKo: "\uC560 \uC880 \uBCF4\uC138\uC694. \uB208\uB3C4 \uBABB \uB728\uACE0
+        \uC788\uC796\uC544\uC694. \uBD80\uD0C1\uB4DC\uB9BD\uB2C8\uB2E4."
+    choices:
+    - labelEn: Hold firm
+      labelKo: "\uB2E8\uD638\uD558\uAC8C \uAC70\uC808\uD55C\uB2E4"
+      goToNode: reject_final
+    - labelEn: Let them in
+      labelKo: "\uB4E4\uC5EC\uBCF4\uB0B8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: ...Come on. We'll find the car warm enough.
+      textKo: "...\uAC00\uC790. \uCC28 \uC548\uC774 \uADF8\uB798\uB3C4 \uB530\uB73B\uD560
+        \uAC70\uC57C."
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Thank you. You won't even know he's here.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC560\uAC00 \uC788\uB294 \uC904\uB3C4
+        \uBAA8\uB974\uC2E4 \uAC70\uC608\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin_paid
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: There. Paid. Say thank you to the man - ...he's shy.
+      textKo: "\uC5EC\uAE30\uC694. \uB0C8\uC2B5\uB2C8\uB2E4. \uC544\uC800\uC528\uD55C\uD14C
+        \uC778\uC0AC\uD574\uC57C\uC9C0 - ...\uC560\uAC00 \uBD80\uB044\uB7FC\uC774
+        \uB9CE\uC544\uC11C\uC694."
+    - expression: 0
+      textEn: Thank you. You won't even know he's here.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC560\uAC00 \uC788\uB294 \uC904\uB3C4
+        \uBAA8\uB974\uC2E4 \uAC70\uC608\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 1
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Keep your voice down. He's finally asleep.
+      textKo: "\uBAA9\uC18C\uB9AC \uB0AE\uCDB0 \uC8FC\uC138\uC694. \uC774\uC81C\uC57C
+        \uACA8\uC6B0 \uC7A0\uB4E4\uC5C8\uC5B4\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: noise
+    labelEn: Ask about the noise last night
+    labelKo: "\uAC04\uBC24\uC758 \uC18C\uC74C\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: That was him. Talking in his sleep. He does that. It's nothing.
+      textKo: "\uADF8\uAC74 \uC560\uC608\uC694. \uC7A0\uAF2C\uB300\uC694. \uC6D0\uB798
+        \uADF8\uB798\uC694. \uC544\uBB34\uAC83\uB3C4 \uC544\uB2D9\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: voices
+    labelEn: Ask why it sounded like more than one child
+    labelKo: "\uC65C \uC544\uC774\uAC00 \uC5EC\uB7FF\uC778 \uAC83\uCC98\uB7FC \uB4E4\uB838\uB294\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: ...It's a small room. Voices bounce. It's just him. It's always just
+        him.
+      textKo: "...\uBC29\uC774 \uC881\uC544\uC11C\uC694. \uC18C\uB9AC\uAC00 \uC6B8\uB824\uC694.
+        \uC560 \uD558\uB098\uBFD0\uC774\uC5D0\uC694. \uB298 \uC560 \uD558\uB098\uBFD0\uC785\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: seen
+    labelEn: Ask if he saw anything in the hall
+    labelKo: "\uBCF5\uB3C4\uC5D0\uC11C \uBB58 \uBABB \uBD24\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: I don't leave him alone to go looking. Whatever you heard, it wasn't
+        us.
+      textKo: "\uC560\uB97C \uD63C\uC790 \uB450\uACE0 \uB098\uAC00\uC11C \uC0B4\uD53C\uC9C4
+        \uC54A\uC544\uC694. \uBB58 \uB4E4\uC73C\uC168\uB4E0, \uC6B0\uB9B0 \uC544\uB2D9\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Evening. I'll want a room that faces the walkway, if that's an option.
+      textKo: "\uC548\uB155\uD558\uC138\uC694. \uAC00\uB2A5\uD558\uBA74 \uBCF5\uB3C4
+        \uCABD\uC744 \uBCF4\uB294 \uBC29\uC73C\uB85C \uBD80\uD0C1\uB4DC\uB9BD\uB2C8\uB2E4."
+    - expression: 0
+      textEn: A night or two. Depends on the light.
+      textKo: "\uD558\uB8FB\uBC24\uC774\uB098 \uC774\uD2C0\uC774\uC694. \uBE5B\uC5D0
+        \uB530\uB77C \uB2EC\uB77C\uC694."
+    - expression: 0
+      textEn: Don't mind the bag. It's just cameras.
+      textKo: "\uAC00\uBC29\uC740 \uC2E0\uACBD \uC4F0\uC9C0 \uB9C8\uC138\uC694. \uADF8\uB0E5
+        \uCE74\uBA54\uB77C\uC608\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: name
+    labelEn: Ask their name
+    labelKo: "\uC774\uB984\uC744 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: It's on my ID. The work doesn't have my name on it, if that's what
+        you're asking.
+      textKo: "\uC2E0\uBD84\uC99D\uC5D0 \uC788\uC2B5\uB2C8\uB2E4. \uC791\uC5C5\uBB3C\uC5D4
+        \uC81C \uC774\uB984\uC774 \uC548 \uB4E4\uC5B4\uAC00\uC694, \uADF8\uAC78 \uBB3C\uC73C\uC2E0
+        \uAC70\uB77C\uBA74."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: shoot
+    labelEn: Ask what he's photographing
+    labelKo: "\uBB34\uC5C7\uC744 \uCD2C\uC601\uD558\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: The building. The corridor, mostly. Places people pass through without
+        looking.
+      textKo: "\uAC74\uBB3C\uC774\uC694. \uB300\uBD80\uBD84\uC740 \uBCF5\uB3C4. \uC0AC\uB78C\uB4E4\uC774
+        \uC548 \uBCF4\uACE0 \uC9C0\uB098\uCE58\uB294 \uC790\uB9AC\uB4E4\uC694."
+    choices:
+    - labelEn: Ask who it's for
+      labelKo: "\uB204\uAD6C \uC758\uB8B0\uC778\uC9C0 \uBB3B\uB294\uB2E4"
+      goToNode: shoot_client
+    - labelEn: Let it go
+      labelKo: "\uB118\uC5B4\uAC04\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: shoot_client
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Nobody, yet. Some pictures you take first and find the buyer after.
+        This is one of those.
+      textKo: "\uC544\uC9C1 \uC544\uBB34\uB3C4\uC694. \uC5B4\uB5A4 \uC0AC\uC9C4\uC740
+        \uBA3C\uC800 \uCC0D\uACE0 \uB098\uC911\uC5D0 \uC0B4 \uC0AC\uB78C\uC744 \uCC3E\uC2B5\uB2C8\uB2E4.
+        \uC774\uAC8C \uADF8\uB7F0 \uAC81\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: traffic
+    labelEn: Ask about the foot traffic remark
+    labelKo: "\uC0AC\uB78C\uC774 \uB9CE\uC774 \uB2E4\uB2C8\uB0D0\uB358 \uB9D0\uC744
+      \uB418\uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Just curious how busy that hallway gets after dark. It photographs...
+        fuller than it should.
+      textKo: "\uADF8\uB0E5 \uADF8 \uBCF5\uB3C4\uAC00 \uBC24\uC5D0 \uC5BC\uB9C8\uB098
+        \uBD90\uBE44\uB098 \uAD81\uAE08\uD574\uC11C\uC694. \uC0AC\uC9C4\uC5D0\uB294...
+        \uC788\uC5B4\uC57C \uD560 \uAC83\uBCF4\uB2E4 \uAF49 \uCC28\uAC8C \uB098\uC624\uB354\uB77C\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: stay
+    labelEn: Ask how long he's staying
+    labelKo: "\uBA70\uCE60 \uBB35\uC744\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Two nights. If the shot doesn't come by then it isn't coming.
+      textKo: "\uC774\uD2C0\uC774\uC694. \uADF8\uB54C\uAE4C\uC9C0 \uC6D0\uD558\uB294
+        \uCEF7\uC774 \uC548 \uB098\uC624\uBA74 \uC548 \uB098\uC624\uB294 \uAC81\uB2C8\uB2E4."
+    choices:
+    - labelEn: Take it up front
+      labelKo: "\uC120\uBD88\uB85C \uBC1B\uB294\uB2E4"
+      goToNode: stay_pay
+    - labelEn: Let him settle after
+      labelKo: "\uB098\uC911\uC5D0 \uC815\uC0B0\uD558\uAC8C \uD55C\uB2E4"
+      goToNode: stay_trust
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_pay
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Up front's fine. Cash. Photographers always have cash.
+      textKo: "\uC120\uBD88 \uC88B\uC2B5\uB2C8\uB2E4. \uD604\uAE08\uC774\uC694. \uC0AC\uC9C4\uAC00\uB294
+        \uB298 \uD604\uAE08\uC744 \uAC16\uACE0 \uB2E4\uB140\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_trust
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: After, then. I'll leave it under the door if I'm out early.
+      textKo: "\uADF8\uB7FC \uB098\uC911\uC5D0\uC694. \uC77C\uCC0D \uB098\uAC00\uBA74
+        \uBB38 \uBC11\uC5D0 \uB123\uC5B4\uB450\uACA0\uC2B5\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: clean
+    labelEn: Ask about housekeeping
+    labelKo: "\uD558\uC6B0\uC2A4\uD0A4\uD551\uC744 \uC5B4\uB5BB\uAC8C \uD560\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Mornings are fine. Don't touch the camera on the tripod. It's aimed.
+      textKo: "\uC544\uCE68\uC740 \uAD1C\uCC2E\uC2B5\uB2C8\uB2E4. \uC0BC\uAC01\uB300
+        \uC704 \uCE74\uBA54\uB77C\uB294 \uAC74\uB4DC\uB9AC\uC9C0 \uB9C8\uC138\uC694.
+        \uC870\uC900\uD574 \uB454 \uAC81\uB2C8\uB2E4."
+    choices:
+    - labelEn: Tidy each morning
+      labelKo: "\uB9E4\uC77C \uC544\uCE68 \uC815\uB9AC\uD55C\uB2E4"
+      goToNode: clean_yes
+    - labelEn: Leave the room
+      labelKo: "\uBC29\uC740 \uAC74\uB4DC\uB9AC\uC9C0 \uC54A\uB294\uB2E4"
+      goToNode: clean_no
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_yes
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Good. Just work around the tripod. Don't turn it.
+      textKo: "\uC88B\uC2B5\uB2C8\uB2E4. \uC0BC\uAC01\uB300\uB9CC \uD53C\uD574\uC11C\uC694.
+        \uB3CC\uB9AC\uC9C0\uB294 \uB9C8\uC2DC\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_no
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Even better. The frame stays exactly where I set it.
+      textKo: "\uADF8\uAC8C \uB354 \uC88B\uC8E0. \uAD6C\uB3C4\uAC00 \uC81C\uAC00
+        \uC7A1\uC544\uB454 \uADF8\uB300\uB85C \uC788\uC73C\uB2C8\uAE4C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
+    lines:
+    - expression: 0
+      textEn: That's a shame. The light here is very specific.
+      textKo: "\uC544\uC27D\uB124\uC694. \uC5EC\uAE30 \uBE5B\uC774 \uC544\uC8FC \uD2B9\uC774\uD55C\uB370."
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: I can shoot from the lot. I'd rather have a door, but I don't need
+        one.
+      textKo: "\uC8FC\uCC28\uC7A5\uC5D0\uC11C\uB3C4 \uCC0D\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+        \uBC29\uC774 \uC788\uC73C\uBA74 \uC88B\uC9C0\uB9CC, \uAF2D \uD544\uC694\uD558\uC9C4
+        \uC54A\uC544\uC694."
+    choices:
+    - labelEn: Hold firm
+      labelKo: "\uB2E8\uD638\uD558\uAC8C \uAC70\uC808\uD55C\uB2E4"
+      goToNode: reject_final
+    - labelEn: Give him a room
+      labelKo: "\uBC29\uC744 \uC900\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Alright. I'll set up across the road. You won't notice me.
+      textKo: "\uC54C\uACA0\uC2B5\uB2C8\uB2E4. \uAE38 \uAC74\uB108\uD3B8\uC5D0 \uC790\uB9AC
+        \uC7A1\uC8E0. \uC788\uB294 \uC904\uB3C4 \uBAA8\uB974\uC2E4 \uAC81\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Thank you. I'll be quiet. The camera does all the work anyway.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC870\uC6A9\uD788 \uC788\uACA0\uC2B5\uB2C8\uB2E4.
+        \uC5B4\uCC28\uD53C \uC77C\uC740 \uCE74\uBA54\uB77C\uAC00 \uB2E4 \uD558\uB2C8\uAE4C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin_paid
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Paid. Now - which way does that corridor run?
+      textKo: "\uB0C8\uC2B5\uB2C8\uB2E4. \uADF8\uB7F0\uB370 - \uADF8 \uBCF5\uB3C4\uAC00
+        \uC5B4\uB290 \uCABD\uC73C\uB85C \uB098 \uC788\uC8E0?"
+    - expression: 0
+      textEn: Thank you. I'll be quiet. The camera does all the work anyway.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uC870\uC6A9\uD788 \uC788\uACA0\uC2B5\uB2C8\uB2E4.
+        \uC5B4\uCC28\uD53C \uC77C\uC740 \uCE74\uBA54\uB77C\uAC00 \uB2E4 \uD558\uB2C8\uAE4C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 1
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: You're up early. So am I. The hallway's better before dawn.
+      textKo: "\uC77C\uCC0D \uC77C\uC5B4\uB098\uC168\uB124\uC694. \uC800\uB3C4\uC694.
+        \uBCF5\uB3C4\uB294 \uB3D9\uD2B8\uAE30 \uC804\uC774 \uC81C\uC77C \uC88B\uC2B5\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: noise
+    labelEn: Ask about the noise last night
+    labelKo: "\uAC04\uBC24\uC758 \uC18C\uC74C\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Shutter. Mine. I got up three times. Kept feeling like I'd missed something.
+      textKo: "\uC154\uD130\uC694. \uC81C \uAC81\uB2C8\uB2E4. \uC138 \uBC88 \uC77C\uC5B4\uB0AC\uC5B4\uC694.
+        \uBB54\uAC00 \uB193\uCE5C \uAC83 \uAC19\uC740 \uAE30\uBD84\uC774 \uACC4\uC18D
+        \uB4E4\uC5B4\uC11C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: shots
+    labelEn: Ask what he photographed in the night
+    labelKo: "\uBC24\uC5D0 \uBB34\uC5C7\uC744 \uCC0D\uC5C8\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Empty wall. End of the corridor. When I check the back of the camera,
+        it isn't empty.
+      textKo: "\uBE48 \uBCBD\uC774\uC694. \uBCF5\uB3C4 \uB05D. \uCE74\uBA54\uB77C
+        \uB4B7\uBA74\uC73C\uB85C \uD655\uC778\uD558\uBA74, \uBE44\uC5B4 \uC788\uC9C0\uAC00
+        \uC54A\uC2B5\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: who
+    labelEn: Ask who's in the pictures
+    labelKo: "\uC0AC\uC9C4\uC5D0 \uB204\uAC00 \uC788\uB294\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: I don't know them. They're always facing away. And there's one more
+        every time I look.
+      textKo: "\uBAA8\uB974\uB294 \uC0AC\uB78C\uB4E4\uC785\uB2C8\uB2E4. \uB298 \uB4F1\uC744
+        \uB3CC\uB9AC\uACE0 \uC788\uC5B4\uC694. \uADF8\uB9AC\uACE0 \uBCFC \uB54C\uB9C8\uB2E4
+        \uD55C \uBA85\uC529 \uB298\uC5B4 \uC788\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Good evening. I won't keep you long - a room, two or three nights.
+      textKo: "\uC548\uB155\uD558\uC2ED\uB2C8\uAE4C. \uC624\uB798 \uBD99\uC7A1\uC9C0
+        \uC54A\uACA0\uC2B5\uB2C8\uB2E4 - \uBC29 \uD558\uB098, \uC774\uC0BC \uC77C\uC774\uBA74
+        \uB429\uB2C8\uB2E4."
+    - expression: 0
+      textEn: The end room, if it's free. I like to be where the hall stops.
+      textKo: "\uAC00\uB2A5\uD558\uBA74 \uB05D\uBC29\uC73C\uB85C\uC694. \uBCF5\uB3C4\uAC00
+        \uB05D\uB098\uB294 \uC790\uB9AC\uAC00 \uC88B\uC2B5\uB2C8\uB2E4."
+    - expression: 0
+      textEn: Bless this house. It has seen a great deal, hasn't it.
+      textKo: "\uC774 \uC9D1\uC5D0 \uBCF5\uC774 \uC788\uAE30\uB97C. \uC774 \uC9D1\uB3C4
+        \uCC38 \uB9CE\uC740 \uAC78 \uBCF4\uC558\uACA0\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: name
+    labelEn: Ask their name
+    labelKo: "\uC774\uB984\uC744 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Father. That will do. The rest is on the diocese card.
+      textKo: "\uC2E0\uBD80\uB77C\uACE0 \uD558\uC2DC\uBA74 \uB429\uB2C8\uB2E4. \uB098\uBA38\uC9C0\uB294
+        \uAD50\uAD6C \uC2E0\uBD84\uC99D\uC5D0 \uC788\uC5B4\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: purpose
+    labelEn: Ask why he's in town
+    labelKo: "\uC774 \uB3D9\uB124\uC5D0 \uC628 \uC774\uC720\uB97C \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: To see one of the flock off. The service is the day after tomorrow.
+        Someone should sit with them until then.
+      textKo: "\uC591 \uD55C \uB9C8\uB9AC\uB97C \uBC30\uC6C5\uD558\uB7EC\uC694. \uC7A5\uB840\uB294
+        \uBAA8\uB808\uC785\uB2C8\uB2E4. \uADF8\uB54C\uAE4C\uC9C0 \uB204\uAD70\uAC00\uB294
+        \uACC1\uC744 \uC9C0\uCF1C\uC57C\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: room
+    labelEn: Ask about the end-room request
+    labelKo: "\uB05D\uBC29\uC744 \uC6D0\uD558\uB294 \uC774\uC720\uB97C \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Fewer walls for sound to carry through. I pray aloud. It disturbs people.
+      textKo: "\uC18C\uB9AC\uAC00 \uC0C8\uC5B4 \uB098\uAC08 \uBCBD\uC774 \uC801\uC5B4\uC11C\uC694.
+        \uC800\uB294 \uC18C\uB9AC \uB0B4\uC5B4 \uAE30\uB3C4\uD569\uB2C8\uB2E4. \uC0AC\uB78C\uB4E4\uC774
+        \uBD88\uD3B8\uD574\uD558\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: stay
+    labelEn: Ask how many nights
+    labelKo: "\uBA70\uCE60 \uBB35\uC744\uC9C0 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Three. Unless they hold the service longer. These things run their
+        own time.
+      textKo: "\uC0AC\uD758\uC774\uC694. \uC7A5\uB840\uAC00 \uAE38\uC5B4\uC9C0\uC9C0
+        \uC54A\uB294\uB2E4\uBA74\uC694. \uC774\uB7F0 \uC77C\uC740 \uC81C \uB098\uB984\uC758
+        \uC2DC\uAC04\uC774 \uC788\uC5B4\uC11C."
+    choices:
+    - labelEn: Ask for payment up front
+      labelKo: "\uC120\uBD88\uC744 \uC694\uAD6C\uD55C\uB2E4"
+      goToNode: stay_pay
+    - labelEn: Let the church settle it
+      labelKo: "\uAD50\uD68C\uAC00 \uC815\uC0B0\uD558\uAC8C \uD55C\uB2E4"
+      goToNode: stay_trust
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_pay
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Up front. Of course. The Lord's money spends the same.
+      textKo: "\uC120\uBD88\uC774\uC694. \uADF8\uB7FC\uC694. \uC8FC\uB2D8\uC758 \uB3C8\uB3C4
+        \uC4F0\uC774\uB294 \uAC74 \uB611\uAC19\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: stay_trust
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: The parish will send it. Put it in whatever box you keep for such things.
+      textKo: "\uAD50\uAD6C\uC5D0\uC11C \uBCF4\uB0BC \uAC81\uB2C8\uB2E4. \uADF8\uB7F0
+        \uAC78 \uB123\uC5B4\uB450\uB294 \uD568\uC774 \uC788\uC73C\uBA74 \uAC70\uAE30\uC5D0
+        \uB123\uC5B4\uB450\uC2DC\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: clean
+    labelEn: Ask about housekeeping
+    labelKo: "\uD558\uC6B0\uC2A4\uD0A4\uD551\uC744 \uC5B4\uB5BB\uAC8C \uD560\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Leave the room as it is. Once I've knelt in it, it is a place of prayer.
+        It should not be tidied.
+      textKo: "\uBC29\uC740 \uADF8\uB300\uB85C \uB450\uC2ED\uC2DC\uC624. \uC81C\uAC00
+        \uD55C \uBC88 \uBB34\uB98E \uAFC7\uC740 \uBC29\uC740 \uAE30\uB3C4\uD558\uB294
+        \uC790\uB9AC\uC785\uB2C8\uB2E4. \uC815\uB9AC\uD560 \uACF3\uC774 \uC544\uB2C8\uC5D0\uC694."
+    choices:
+    - labelEn: Agree to leave it
+      labelKo: "\uADF8\uB7EC\uAE30\uB85C \uD55C\uB2E4"
+      goToNode: clean_no
+    - labelEn: Say it will be cleaned anyway
+      labelKo: "\uADF8\uB798\uB3C4 \uCCAD\uC18C\uD55C\uB2E4\uACE0 \uD55C\uB2E4"
+      goToNode: clean_yes
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_no
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Thank you. You would be surprised how much a room remembers.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uBC29\uC774 \uC5BC\uB9C8\uB098 \uB9CE\uC740
+        \uAC78 \uAE30\uC5B5\uD558\uB294\uC9C0 \uC544\uC2DC\uBA74 \uB180\uB77C\uC2E4
+        \uAC81\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: clean_yes
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Then do it in daylight, and say nothing while you work. Some of what's
+        in there is listening.
+      textKo: "\uADF8\uB7FC \uB0AE\uC5D0 \uD558\uC2DC\uACE0, \uC77C\uD558\uB294 \uB3D9\uC548
+        \uC544\uBB34 \uB9D0\uB3C4 \uB9C8\uC2ED\uC2DC\uC624. \uADF8 \uC548\uC5D0 \uC788\uB294
+        \uAC83 \uC911\uC5D4 \uADC0\uB97C \uAE30\uC6B8\uC774\uB294 \uAC83\uB3C4 \uC788\uC73C\uB2C8."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: reject
+    labelEn: Turn them away
+    labelKo: "\uB3CC\uB824\uBCF4\uB0B8\uB2E4"
+    lines:
+    - expression: 0
+      textEn: You would send a priest back onto the road at night?
+      textKo: "\uD55C\uBC24\uC911\uC5D0 \uC2E0\uBD80\uB97C \uAE38\uBC14\uB2E5\uC73C\uB85C
+        \uB3CC\uB824\uBCF4\uB0B4\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+    choices: []
+    goToNode: reject_insist
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_insist
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: I have slept in churches with no roof. I only ask because someone in
+        this town needs me tomorrow.
+      textKo: "\uC9C0\uBD95\uB3C4 \uC5C6\uB294 \uC131\uB2F9\uC5D0\uC11C\uB3C4 \uC790\uBD24\uC2B5\uB2C8\uB2E4.
+        \uB2E4\uB9CC \uB0B4\uC77C \uC774 \uB3D9\uB124\uC5D0 \uC800\uB97C \uD544\uC694\uB85C
+        \uD558\uB294 \uC0AC\uB78C\uC774 \uC788\uC5B4\uC11C \uCCAD\uD558\uB294 \uAC81\uB2C8\uB2E4."
+    choices:
+    - labelEn: Hold firm
+      labelKo: "\uB2E8\uD638\uD558\uAC8C \uAC70\uC808\uD55C\uB2E4"
+      goToNode: reject_final
+    - labelEn: Let him stay
+      labelKo: "\uBB35\uAC8C \uD55C\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: reject_final
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Then I'll keep my vigil in the lot. God is not particular about walls.
+      textKo: "\uADF8\uB7FC \uC8FC\uCC28\uC7A5\uC5D0\uC11C \uBC24\uC744 \uC0C8\uC6B0\uC9C0\uC694.
+        \uD558\uB290\uB2D8\uC740 \uBCBD\uC744 \uAC00\uB9AC\uC9C0 \uC54A\uC73C\uC2ED\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 2
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Bless you. Sleep without fear tonight - I'll be awake for both of us.
+      textKo: "\uBCF5 \uBC1B\uC73C\uC2ED\uC2DC\uC624. \uC624\uB298 \uBC24\uC740 \uB450\uB824\uC6C0
+        \uC5C6\uC774 \uC8FC\uBB34\uC2DC\uACE0\uC694 - \uC6B0\uB9AC \uB458 \uBAAB\uC73C\uB85C
+        \uC81C\uAC00 \uAE68\uC5B4 \uC788\uACA0\uC2B5\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: checkin_paid
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: There. The full stay. Now show me to the end of the hall.
+      textKo: "\uC5EC\uAE30\uC694. \uC219\uBC15\uBE44 \uC804\uC561\uC785\uB2C8\uB2E4.
+        \uC774\uC81C \uBCF5\uB3C4 \uB05D\uC73C\uB85C \uC548\uB0B4\uD574 \uC8FC\uC2ED\uC2DC\uC624."
+    - expression: 0
+      textEn: Bless you. Sleep without fear tonight - I'll be awake for both of us.
+      textKo: "\uBCF5 \uBC1B\uC73C\uC2ED\uC2DC\uC624. \uC624\uB298 \uBC24\uC740 \uB450\uB824\uC6C0
+        \uC5C6\uC774 \uC8FC\uBB34\uC2DC\uACE0\uC694 - \uC6B0\uB9AC \uB458 \uBAAB\uC73C\uB85C
+        \uC81C\uAC00 \uAE68\uC5B4 \uC788\uACA0\uC2B5\uB2C8\uB2E4."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 1
+    day: 0
+    role: 0
+    nodeKey: 
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Come in, come in. I was only reading. I'm always only reading, at this
+        hour.
+      textKo: "\uB4E4\uC5B4\uC624\uC138\uC694, \uB4E4\uC5B4\uC624\uC138\uC694. \uADF8\uB0E5
+        \uC77D\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4. \uC774 \uC2DC\uAC04\uC5D4 \uB298
+        \uADF8\uB0E5 \uC77D\uACE0 \uC788\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: noise
+    labelEn: Ask about the noise last night
+    labelKo: "\uAC04\uBC24\uC758 \uC18C\uC74C\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: That was me. Prayer, most of it. Toward the end I was answering someone.
+        Habit.
+      textKo: "\uADF8\uAC74 \uC800\uC600\uC2B5\uB2C8\uB2E4. \uB300\uBD80\uBD84 \uAE30\uB3C4\uACE0\uC694.
+        \uB05D \uBB34\uB835\uC5D4 \uB204\uAD70\uAC00\uC5D0\uAC8C \uB300\uB2F5\uC744
+        \uD558\uACE0 \uC788\uC5C8\uC5B4\uC694. \uC2B5\uAD00\uC774\uC9C0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: room
+    labelEn: Ask who left this room before him
+    labelKo: "\uC804\uC5D0 \uC774 \uBC29\uC744 \uB5A0\uB09C \uC0AC\uB78C\uC774 \uB204\uAD6C\uC778\uC9C0
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Someone did. I can tell. The air in a room hangs different after. This
+        one hangs very heavy.
+      textKo: "\uB204\uAD70\uAC00 \uB5A0\uB0AC\uC2B5\uB2C8\uB2E4. \uC555\uB2C8\uB2E4.
+        \uADF8 \uB4A4\uC5D4 \uBC29 \uACF5\uAE30\uAC00 \uB2E4\uB974\uAC8C \uAC78\uB824
+        \uC788\uC5B4\uC694. \uC774 \uBC29\uC740 \uC544\uC8FC \uBB34\uAC81\uAC8C \uAC78\uB824
+        \uC788\uACE0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 1
+    day: 0
+    role: 1
+    nodeKey: doors
+    labelEn: Ask why he touches every door in the hall
+    labelKo: "\uBCF5\uB3C4\uC758 \uBB38\uB9C8\uB2E4 \uC190\uC744 \uB300\uB294 \uC774\uC720\uB97C
+      \uBB3B\uB294\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Marking them. So that whatever walks the hall tonight knows which rooms
+        are spoken for.
+      textKo: "\uD45C\uC2DC\uD558\uB294 \uAC81\uB2C8\uB2E4. \uC624\uB298 \uBC24 \uBCF5\uB3C4\uB97C
+        \uAC77\uB294 \uAC8C \uBB34\uC5C7\uC774\uB4E0, \uC5B4\uB290 \uBC29\uC774 \uC774\uBBF8
+        \uC784\uC790\uAC00 \uC788\uB294\uC9C0 \uC54C\uB3C4\uB85D."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: License and hauling permit. Both current.
+      textKo: "\uBA74\uD5C8\uD558\uACE0 \uC6B4\uC1A1 \uD5C8\uAC00\uC99D\uC774\uC694.
+        \uB458 \uB2E4 \uC720\uD6A8\uD558\uACE0."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 6
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Address on there's two states back. I move around.
+      textKo: "\uAC70\uAE30 \uC8FC\uC18C\uB294 \uB450 \uC8FC \uC804 \uAC70\uC694.
+        \uC5EC\uAE30\uC800\uAE30 \uB2E4\uB2C8\uB2C8\uAE4C."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Mine's here. Don't ask him for his - he's four.
+      textKo: "\uC81C \uAC74 \uC5EC\uAE30\uC694. \uC560\uD55C\uD14C\uB294 \uBB3B\uC9C0
+        \uB9C8\uC138\uC694, \uB124 \uC0B4\uC774\uB2C8\uAE4C."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 7
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Just me on it. He's not registered anywhere yet.
+      textKo: "\uC800 \uD558\uB098\uB9CC \uC788\uC5B4\uC694. \uC560\uB294 \uC544\uC9C1
+        \uC5B4\uB514\uC5D0\uB3C4 \uB4F1\uB85D\uC774 \uC548 \uB3FC\uC11C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Press card's expired. State ID's fine, though.
+      textKo: "\uAE30\uC790\uC99D\uC740 \uB9CC\uB8CC\uB410\uACE0\uC694. \uC2E0\uBD84\uC99D\uC740
+        \uBA40\uCA61\uD569\uB2C8\uB2E4."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 8
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: The address is a P.O. box. I'm not home much.
+      textKo: "\uC8FC\uC18C\uB294 \uC0AC\uC11C\uD568\uC774\uC5D0\uC694. \uC9D1\uC5D0
+        \uC798 \uC5C6\uC5B4\uC11C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: The diocese issued it. A long time ago now.
+      textKo: "\uAD50\uAD6C\uC5D0\uC11C \uBC1C\uAE09\uD55C \uAC81\uB2C8\uB2E4. \uC774\uC81C\uB294
+        \uAF64 \uC624\uB798\uB410\uC9C0\uB9CC\uC694."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 9
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: The parish on there closed years ago. I never updated it.
+      textKo: "\uAC70\uAE30 \uC801\uD78C \uAD50\uAD6C\uB294 \uBA87 \uB144 \uC804\uC5D0
+        \uBB38\uC744 \uB2EB\uC558\uC2B5\uB2C8\uB2E4. \uAC31\uC2E0\uC744 \uC548 \uD588\uC5B4\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
   - npcId: 1
     situation: 0
     day: 0
@@ -375,14 +1844,14 @@ MonoBehaviour:
     day: 0
     role: 1
     nodeKey: case
-    labelEn: Ask about his suitcase
-    labelKo: "\uAC00\uBC29\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
+    labelEn: Ask about his briefcase
+    labelKo: "\uC11C\uB958\uAC00\uBC29\uC5D0 \uB300\uD574 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      textEn: Samples! Brushes mostly. Nothing you'd want. Nothing at all.
-      textKo: "\uD310\uB9E4\uC6A9 \uACAC\uBCF8\uC774\uC5D0\uC694! \uB300\uBD80\uBD84
-        \uCCAD\uC18C\uC194\uC774\uACE0\uC694. \uD0D0\uB098\uC2E4 \uBB3C\uAC74\uC740
-        \uC5C6\uC2B5\uB2C8\uB2E4. \uC815\uB9D0 \uC544\uBB34\uAC83\uB3C4\uC694."
+      textEn: Work files. Contracts, mostly. Nothing you'd want. Nothing at all.
+      textKo: "\uC5C5\uBB34 \uC790\uB8CC\uC608\uC694. \uB300\uBD80\uBD84 \uACC4\uC57D\uC11C\uACE0\uC694.
+        \uD0D0\uB098\uC2E4 \uBB3C\uAC74\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uC815\uB9D0
+        \uC544\uBB34\uAC83\uB3C4\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -508,9 +1977,9 @@ MonoBehaviour:
     labelKo: 
     lines:
     - expression: 0
-      textEn: Thank you. Just - the samples. Don't move the samples.
-      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uADF8\uB0E5 - \uACAC\uBCF8\uB9CC\uC694.
-        \uACAC\uBCF8\uC740 \uC62E\uAE30\uC9C0 \uB9D0\uC544 \uC8FC\uC138\uC694."
+      textEn: Thank you. Just - the briefcase. Don't move the briefcase.
+      textKo: "\uACE0\uB9D9\uC2B5\uB2C8\uB2E4. \uADF8\uB0E5 - \uC11C\uB958\uAC00\uBC29\uB9CC\uC694.
+        \uC11C\uB958\uAC00\uBC29\uC740 \uC62E\uAE30\uC9C0 \uB9D0\uC544 \uC8FC\uC138\uC694."
     choices: []
     goToNode: 
     outcome: 0
@@ -647,11 +2116,11 @@ MonoBehaviour:
     labelKo: "\uBC24\uC0C8 \uBB58 \uD588\uB294\uC9C0 \uBB3B\uB294\uB2E4"
     lines:
     - expression: 0
-      textEn: Packing. Repacking. The samples have to sit a certain way, or they-
-        it doesn't matter. Why?
-      textKo: "\uC9D0 \uC2F8\uACE0. \uB2E4\uC2DC \uC2F8\uACE0. \uACAC\uBCF8\uC740
-        \uB531 \uB9DE\uAC8C \uB123\uC5B4\uC57C \uC548 \uADF8\uB7EC\uBA74- \uC544\uBB34\uD2BC\uC694.
-        \uC65C\uC694?"
+      textEn: Sorting papers. Re-sorting them. They have to go back in a certain
+        order, or they- it doesn't matter. Why?
+      textKo: "\uC11C\uB958 \uC815\uB9AC\uD558\uACE0. \uB2E4\uC2DC \uC815\uB9AC\uD558\uACE0.
+        \uB531 \uC21C\uC11C\uB300\uB85C \uB123\uC5B4\uC57C \uC548 \uADF8\uB7EC\uBA74-
+        \uC544\uBB34\uD2BC\uC694. \uC65C\uC694?"
     choices: []
     goToNode: 
     outcome: 0
@@ -1558,6 +3027,148 @@ MonoBehaviour:
       textKo: "\uC790\uAE30 \uC804\uC5D0 \uD558\uB298\uC744 \uBCF4\uC2DC\uC624. \uBC8C\uC368
         \uBCC0\uD558\uACE0 \uC788\uC18C. \uAC00\uC7A5\uC790\uB9AC\uBD80\uD130 \uCD08\uB85D\uBE5B\uC73C\uB85C.
         \uB298 \uADF8\uB807\uAC8C \uC2DC\uC791\uD55C\uB2E4\uC624."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: A name's a name out here. But sure.
+      textKo: "\uC774\uB7F0 \uB370\uC11C \uC774\uB984\uC774 \uBB50 \uB300\uC218\uACA0\uC18C\uB9CC.
+        \uC790, \uC5EC\uAE30."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 1
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: There. Not much to look at.
+      textKo: "\uC5EC\uAE30\uC694. \uBCFC \uAC83\uB3C4 \uC5C6\uC9C0\uB9CC."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Of course. It's in here somewhere - here. Here.
+      textKo: "\uADF8\uB7FC\uC694. \uC5EC\uAE30 \uC5B4\uB518\uAC00... \uC5EC\uAE30,
+        \uC5EC\uAE30 \uC788\uB124\uC694."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 2
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: Take your time. It's all in order. It is.
+      textKo: "\uCC9C\uCC9C\uD788 \uBCF4\uC138\uC694. \uB2E4 \uC815\uC0C1\uC774\uC5D0\uC694.
+        \uC815\uB9D0\uB85C\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: ...Fine.
+      textKo: "...\uC54C\uACA0\uC5B4\uC694."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 4
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: It's really me. The photo's just old.
+      textKo: "\uC800 \uB9DE\uC544\uC694. \uC0AC\uC9C4\uC774 \uC880 \uC624\uB798\uB410\uC744
+        \uBFD0\uC774\uC5D0\uC694."
+    choices: []
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 1
+    nodeKey: id
+    labelEn: Ask for identification
+    labelKo: "\uC2E0\uBD84\uC99D\uC744 \uC694\uAD6C\uD55C\uB2E4"
+    lines:
+    - expression: 0
+      textEn: Somewhere in this coat... ah, here.
+      textKo: "\uC774 \uCF54\uD2B8 \uC5B4\uB518\uAC00\uC5D0... \uC544, \uC5EC\uAE30
+        \uC788\uC18C."
+    choices:
+    - labelEn: Look at the ID
+      labelKo: "\uC2E0\uBD84\uC99D\uC744 \uD655\uC778\uD55C\uB2E4"
+      goToNode: id_show
+    - labelEn: Never mind
+      labelKo: "\uB410\uC2B5\uB2C8\uB2E4"
+      goToNode: 
+    goToNode: 
+    outcome: 0
+  - npcId: 5
+    situation: 0
+    day: 0
+    role: 3
+    nodeKey: id_show
+    labelEn: 
+    labelKo: 
+    lines:
+    - expression: 0
+      textEn: The photo's from before the beard. Look at the eyes.
+      textKo: "\uC0AC\uC9C4\uC740 \uC218\uC5FC \uB098\uAE30 \uC804 \uAC70\uC694.
+        \uB208\uC744 \uBCF4\uC2DC\uC624."
     choices: []
     goToNode: 
     outcome: 0

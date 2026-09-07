@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e40a3db4d1fab43a0db0471d87b9ed, type: 3}
+  m_Name: Npc_9
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  id: 9
+  displayName: Pastor
+  displayNameKo: "\uBAA9\uC0AC"
+  neutralPortrait: {fileID: -1794901242, guid: 34f96f18de576314c81a11110122f49c, type: 3}
+  angryPortrait: {fileID: -2024672295, guid: 237d14becea533042b64985afff79e92, type: 3}
+  backPortrait: {fileID: 460119571, guid: 763d0da677f2de646b7491887ca7d857, type: 3}
+  sidePortrait: {fileID: 510578247, guid: 3b44acb6c63654840b19c49a784ab66a, type: 3}
+  modelPrefab: {fileID: 0}
+  isSleepwalker: 0
+  visitorOnly: 0
+  refusesDawnKnock: 0
+  stayNights: 3
+  allowsMorningCleaning: 0
+  idCard:
+    name: Nathaniel Ross
+    birthDate: 1961.02.05
+    photo: {fileID: 0}
+    forged: 0

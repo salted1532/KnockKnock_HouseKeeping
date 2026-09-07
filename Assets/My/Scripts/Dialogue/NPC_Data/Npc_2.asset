@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Npc_2
   m_EditorClassIdentifier: Assembly-CSharp::NpcData
   id: 2
-  displayName: test2
-  displayNameKo: 
+  displayName: Salesman
+  displayNameKo: "\uD68C\uC0AC\uC6D0"
   neutralPortrait: {fileID: -1937357602, guid: 9d706c1959bdacd46975adf23c2050a1, type: 3}
   angryPortrait: {fileID: 503568558, guid: cf09d7bf59197d84aa21bac24887344c, type: 3}
   backPortrait: {fileID: 1974978444, guid: fc084e398cc762e4eb02ab64da367f7f, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
   stayNights: 2
   allowsMorningCleaning: 1
   idCard:
-    name: 
-    birthDate: 
+    name: Martin Reese
+    birthDate: 1979.08.02
     photo: {fileID: 0}
     forged: 0

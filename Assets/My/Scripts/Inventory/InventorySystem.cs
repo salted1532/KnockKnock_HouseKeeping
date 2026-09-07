@@ -45,6 +45,11 @@ public class InventorySystem : MonoBehaviour
         if (Keyboard.current == null)
             return;
 
+        // 화면고정(접객·노크·모니터)·오버레이(노트·페이드) 중엔 아이템 조작 전면 차단.
+        // 이때 허용되는 상호작용은 CursorInteractor 의 커서 클릭뿐.
+        if (UIInteractionMode.Instance != null && UIInteractionMode.Instance.MovementLocked)
+            return;
+
         if (Keyboard.current.digit1Key.wasPressedThisFrame) SelectSlot(0);
         else if (Keyboard.current.digit2Key.wasPressedThisFrame) SelectSlot(1);
         else if (Keyboard.current.digit3Key.wasPressedThisFrame) SelectSlot(2);

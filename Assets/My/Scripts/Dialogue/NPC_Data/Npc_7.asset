@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e40a3db4d1fab43a0db0471d87b9ed, type: 3}
+  m_Name: Npc_7
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  id: 7
+  displayName: Father
+  displayNameKo: "\uC544\uBC84\uC9C0"
+  neutralPortrait: {fileID: -813794749, guid: 8375b78451a76fd47ab3df17f72067c5, type: 3}
+  angryPortrait: {fileID: 389883732, guid: 2cce722bbcac77342ac17e3b040fa6ee, type: 3}
+  backPortrait: {fileID: 228862840, guid: 131cc50091b81bb44bec1803de1635fd, type: 3}
+  sidePortrait: {fileID: 1568298812, guid: 75573a3695eb3f24280b1078242a1082, type: 3}
+  modelPrefab: {fileID: 0}
+  isSleepwalker: 0
+  visitorOnly: 0
+  refusesDawnKnock: 0
+  stayNights: 1
+  allowsMorningCleaning: 0
+  idCard:
+    name: Samuel Ford
+    birthDate: 1986.04.30
+    photo: {fileID: 0}
+    forged: 0

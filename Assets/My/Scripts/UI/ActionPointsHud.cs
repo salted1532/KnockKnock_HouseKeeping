@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ActionPointsHud : MonoBehaviour
 {
     [SerializeField] private Image[] pips = new Image[4];
+    [SerializeField] private GameObject label;   // "행동력" — pip 과 함께 새벽에만 켬
     [SerializeField] private Color filledColor = Color.yellow;
     [SerializeField] private Color emptyColor = new(1f, 1f, 1f, 0.25f);
 
@@ -20,6 +21,7 @@ public class ActionPointsHud : MonoBehaviour
         bool dawn = DayPhaseManager.Instance != null && DayPhaseManager.Instance.Current == DayPhase.Dawn;
         foreach (var p in pips)
             if (p != null && p.gameObject.activeSelf != dawn) p.gameObject.SetActive(dawn);
+        if (label != null && label.activeSelf != dawn) label.SetActive(dawn);
     }
 
     private void OnDisable()

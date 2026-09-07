@@ -74,7 +74,7 @@ public class KnockEffect : InteractionEffect
         if (self != null) self.enabled = false;   // 대화 종료까지 재노크·노크음 차단
 
         Transform anchor = rc.KnockAnchor != null ? rc.KnockAnchor : transform;
-        UIInteractionMode.Instance.Enter(anchor, lookScale);   // 노크 즉시 화면고정 (거의 고정)
+        UIInteractionMode.Instance.Enter(anchor, lookScale, escExits: true);   // 노크 즉시 화면고정 (거의 고정). Esc 한 번에 취소
 
         GameObject guest = null;
         GuestView view = null;
@@ -125,9 +125,9 @@ public class KnockEffect : InteractionEffect
 
                 bool done = false;
                 DialogueRunner.Instance.ResetConsumedTopics();   // 노크마다 탐문 결정 토픽 초기화
-                ActionPoints.Instance?.Use(1);   // 새벽 손님과 대화 1회 = 행동력 1 소모
                 DialogueRunner.Instance.Play(npc, bubble, Situation.Dawn, _ => done = true);
                 while (!done && Locked(anchor)) yield return null;
+                if (done) ActionPoints.Instance?.Use(1);   // 대화를 끝까지 마쳤을 때만 행동력 1 소모 (ESC 취소 시 X)
             }
         }
 

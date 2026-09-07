@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e40a3db4d1fab43a0db0471d87b9ed, type: 3}
+  m_Name: Npc_8
+  m_EditorClassIdentifier: Assembly-CSharp::NpcData
+  id: 8
+  displayName: Photographer
+  displayNameKo: "\uC0AC\uC9C4\uC791\uAC00"
+  neutralPortrait: {fileID: -295941191, guid: 6612ef05faf81fc478d13bba05d7e540, type: 3}
+  angryPortrait: {fileID: -1703950509, guid: 38848c83b599c204e9f848968658e856, type: 3}
+  backPortrait: {fileID: 1251414652, guid: 0db9b207e8a9c7e459fa661476fda658, type: 3}
+  sidePortrait: {fileID: -378117050, guid: 93fcdb2d2c975ca4295f5d357ad17e2f, type: 3}
+  modelPrefab: {fileID: 0}
+  isSleepwalker: 0
+  visitorOnly: 0
+  refusesDawnKnock: 0
+  stayNights: 2
+  allowsMorningCleaning: 1
+  idCard:
+    name: Aaron Vale
+    birthDate: 1990.09.12
+    photo: {fileID: 0}
+    forged: 0

@@ -26,6 +26,12 @@ public class CampaignData : ScriptableObject
         [TextArea(1, 3)] public List<string> newsLinesKo = new();
         [Tooltip("오른쪽 인게임 TV 슬라이드. 나레이션 줄 i → 슬라이드 i (모자라면 마지막 유지). 비우면 TV 이미지 그대로")]
         public List<Sprite> newsSlides = new();
+
+        [Header("몽유병 환자 구별법 노트 (doc/0171)")]
+        [Tooltip("숙소 노트에 뜨는 구별법. 한 항목 = 한 줄, 앞에 '1. 2. 3.' 자동 번호")]
+        [TextArea(1, 3)] public List<string> sleepwalkerHintsEn = new();
+        [Tooltip("비면 영어(sleepwalkerHintsEn) 사용")]
+        [TextArea(1, 3)] public List<string> sleepwalkerHintsKo = new();
     }
 
     private void OnValidate()

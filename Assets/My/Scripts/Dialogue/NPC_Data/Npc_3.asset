@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Npc_3
   m_EditorClassIdentifier: Assembly-CSharp::NpcData
   id: 3
-  displayName: test3
-  displayNameKo: 
+  displayName: Arrogant Man
+  displayNameKo: "\uAC70\uB9CC\uD55C \uB0A8\uC131"
   neutralPortrait: {fileID: -1508451039, guid: 7ab2e27cfdd354e4588cf0b5d055f846, type: 3}
   angryPortrait: {fileID: -448231272, guid: 963cd4d3084cbad46b9d11f49a3af491, type: 3}
   backPortrait: {fileID: -667265741, guid: 124e7d111ae4c434d8053e8aa028f91f, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
   stayNights: 3
   allowsMorningCleaning: 0
   idCard:
-    name: 
-    birthDate: 
+    name: Victor Crane
+    birthDate: 1968.11.20
     photo: {fileID: 0}
     forged: 0

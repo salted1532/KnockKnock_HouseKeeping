@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-// 새벽 행동력. 새벽이 시작될 때마다 perDawn 으로 초기화, 손님과 대화할 때마다 KnockEffect 가 Use(1) 호출.
+// 새벽 행동력. 새벽이 시작될 때마다 perDawn 으로 초기화, 손님과 대화를 끝까지 마치면 KnockEffect 가 Use(1) 호출(ESC 취소 시 X).
 // 0 이 돼야 ActionPointsDepletedCondition 이 열려 침대로 새벽을 끝낼 수 있다.
 // Can_Coke 등 "즉시 다 쓴 걸로" 아이템은 ForceDeplete 로 우회. HUD 는 ActionPointsHud 가 OnChanged 구독.
 public class ActionPoints : MonoBehaviour
