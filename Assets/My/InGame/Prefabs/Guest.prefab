@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 947526049876006581}
   - component: {fileID: 3465128938826811047}
   - component: {fileID: 8638701741594097714}
+  - component: {fileID: 8638701741594097720}
   m_Layer: 11
   m_Name: Square
   m_TagString: Untagged
@@ -102,12 +103,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf7fdcf60466eb34abfd603a041ff473, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GuestWalkBob
   mover: {fileID: 4746250171328778281}
   body: {fileID: 3465128938826811047}
   hopHeight: 0.07
   stepInterval: 0.32
+--- !u!114 &8638701741594097720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528246207758371775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffa7ef4b1ac0f3418eab3e30ad474fc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteLightResponse
+  minBrightness: 0.15
+  maxBrightness: 1
+  sensitivity: 1
+  updateInterval: 0.15
+  lerpSpeed: 6
 --- !u!1 &5078447691306709615
 GameObject:
   m_ObjectHideFlags: 0

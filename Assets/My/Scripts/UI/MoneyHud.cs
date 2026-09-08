@@ -51,8 +51,11 @@ public class MoneyHud : MonoBehaviour
         if (delta > 0 && sfx != null && cashClip != null) sfx.PlayOneShot(cashClip);
     }
 
+    // "$" 기호만 초록색 (리치텍스트), 숫자는 기본색
+    private const string DollarColor = "#3CB043";
+
     private void Show(int balance)
     {
-        if (label != null) label.text = $"${balance:N0}";
+        if (label != null) label.text = $"<color={DollarColor}>$</color>{balance:N0}";
     }
 }

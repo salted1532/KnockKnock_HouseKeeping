@@ -31,8 +31,8 @@
 
 1. **아침 — 방 청소 / 체크아웃**: 오늘 나가는 손님(`stayNights` 만큼 묵음)의 방이 열린다. **하우스키핑을 요청한 손님** 방은 숙박 중에도 매일 아침 열려 침대를 정리해야 하고, 후불 손님은 이때 숙박비를 낸다 (`RoomController` + `GuestManager`). 우상단 할일 HUD `☐ 침대 개기 3/6` 를 다 채우면(`MorningTasks`) 게시판이 열려 점심 전환
 2. **점심 — 일과 처리**: 울타리 수리·불법주차 신고 등. 씬의 `LunchTaskTarget` 을 전부 처리하면(`LunchTasks`) 접객 테이블이 열려 저녁 전환. 일차별 변형·점프스케어는 아직 *(설계 — `doc/0134`)*
-3. **저녁 — 숙박객 모집 (접객)**: 저녁이 되면 접객 자리로 **자동 착석** → **UI 모드**(플레이어 고정, 마우스 표시) → 손님이 걸어 들어와 **말풍선 대화**(인사 → 질문 허브 → 선택지) → CRT **모니터로 방 배정**(101~110) → 열쇠를 손에 들고 손님 클릭 = 체크인. 대화에서 숙박 일수·선불/후불·하우스키핑 여부가 정해진다. 거절하면 손님이 돌아나감
-4. **새벽 — 탐문 (행동력 제)**: 자율 이동 복귀. 배정된 방문은 여닫기 대신 **노크** → 화면고정 → 문이 살짝 열리고 문틈으로 손님이 나와 질문 대화(`Situation.Dawn`). 문을 안 열어주는 손님도 있다. 대화 1회 = **행동력 1 소모**(새벽마다 4, `ActionPoints`), 다 써야 주인방 침대에서 잘 수 있다. 잠들면 **일차 종료 뉴스 브리핑** → 다음날
+3. **저녁 — 숙박객 모집 (접객)**: 저녁이 되면 접객 자리로 **자동 착석** → **UI 모드**(플레이어 고정, 마우스 표시) → 손님이 걸어 들어와 **말풍선 대화**(인사 → 질문 허브 → 선택지) → CRT **모니터로 방 배정**(101~110) → 열쇠를 손에 들고 손님 클릭 = 체크인. 대화에서 숙박 일수·선불/후불·하우스키핑 여부가 정해지고, "신분증 제시" 선택지를 고르면 책상 `ID` 오브젝트로 손님 신분증(이름·생년월일·얼굴)을 확인할 수 있다. 거절하면 손님이 돌아나감. 저녁마다 최대 5명(`maxGuestsPerEvening`). 접객 중에도 슬롯 선택·휠은 되고 던지기·사용만 막힘. 접객을 마치면 정해진 앵커 위치로 빠져나온다
+4. **새벽 — 탐문 (행동력 제)**: 자율 이동 복귀. 배정된 방문은 여닫기 대신 **노크** → 화면고정 → 문이 살짝 열리고 문틈으로 손님이 나와 질문 대화(`Situation.Dawn`). 문을 안 열어주는 손님도 있다. **대화가 끝나면 행동력 1 소모**(새벽마다 4, `ActionPoints` — 중간에 ESC로 나가면 소모 안 됨), 다 써야 주인방 침대에서 잘 수 있다. 주인방 `note` 를 읽으면 그날의 "몽유병 환자 구별법"(일차별). 잠들면 **일차 종료 뉴스 브리핑** → 다음날
 5. **일차 종료 — 뉴스 브리핑**: 침대에 누우면 암전 중 브리핑 자리로 **순간이동**(조작 차단) → 왼쪽 대화창에 그날 뉴스 나레이션(선택지 없음) + 오른쪽 인게임 TV 슬라이드 (`NightNewsBriefing`, 콘텐츠는 `CampaignData.DayPlan`) → 다 보면 아침으로. 아침 진입 시 화면 중앙에 **"N일차"** (`DayEndTitle`)
 
 **돈**: 시작금 $100, 1박 $70 (`Wallet`). 손님별 `숙박비 = 요금 × 박수`, 선불이면 체크인 시·후불이면 체크아웃 아침에 입금(현금음). 두 배 요금 이벤트도 있음.
@@ -61,6 +61,7 @@
 | 입력 | Unity Input System 1.19.0 (StarterAssets FirstPersonController 기반) |
 | 길찾기 | AI Navigation (NavMesh) 2.0.12 |
 | 기타 패키지 | Timeline 1.8.12, Visual Scripting 1.9.11, TextMesh Pro |
+| 트위닝 | DOTween (`Assets/Plugins/Demigiant`, asmdef 없음 — 자동차 진동·손님 걷기·조명) |
 | 외곽선 | QuickOutline (로컬 패치됨 — `doc/0076`) |
 
 ## 프로젝트 구조
@@ -70,19 +71,23 @@ Assets/
 ├─ My/
 │  ├─ Scripts/
 │  │  ├─ Interaction/   # 상호작용 시스템 — Core(베이스), Effects(효과: Knock/CheckInGuest 포함),
-│  │  │                 #   Conditions(게이트), Drivers(입력), Modes(UI모드), RoomController(객실 관제)
+│  │  │                 #   Conditions(게이트), Drivers(입력), Modes(UI모드), RoomController(객실 관제),
+│  │  │                 #   RoomNumberLabel(방번호 라벨), ReceptionIdCard(접객 신분증)
 │  │  ├─ Inventory/     # 5슬롯 인벤토리 + 아이템 ID 연결(ItemId/HandItem/HandItemRegistry)
 │  │  ├─ Dialogue/      # 대화 시스템 — DialogueRunner/QuestionPanel/SpeechBubble, NpcData/Catalog,
-│  │  │                 #   DialogueDatabase(CSV→SO), GuestMover/GuestView, Editor/DialogueImporter
+│  │  │                 #   DialogueDatabase(CSV→SO), GuestMover/GuestView, GuestWalkBob(걷기 총총+숨쉬기),
+│  │  │                 #   Editor/DialogueImporter
 │  │  ├─ Game/          # DayPhaseManager(하루 4단계+페이드), ReceptionManager(저녁 접객),
 │  │  │                 #   GuestManager(손님 상태·체크아웃·숙박비), CampaignData, Wallet(돈), PhaseLabel,
 │  │  │                 #   MorningTasks/LunchTasks/ActionPoints(단계별 할일·게이트),
-│  │  │                 #   NightNewsBriefing(일차 종료 TV), DayEndTitle("N일차"), PhaseMessage
+│  │  │                 #   NightNewsBriefing(일차 종료 TV), DayEndTitle("N일차"), PhaseMessage,
+│  │  │                 #   MainMenu(타이틀 Play/Exit), PauseMenu(InGame Esc 옵션창), SleepwalkerNote(구별법 노트)
 │  │  ├─ UI/            # MoneyHud, ActionPointsHud(행동력 4칸), ObjectiveMarker(유도 마커),
-│  │  │                 #   ExitHintGauge(나가기 홀드), ScreenMessage(중앙 관찰 문구)
+│  │  │                 #   ExitHintGauge(나가기 홀드), ScreenMessage(중앙 관찰 문구), HoverTextOutline(버튼 호버)
 │  │  ├─ Localization/  # LocalizationManager(영/한, 게임시작 시 확정), LocalizedLabel, Editor/FontTool
 │  │  ├─ Environment/   # PhaseVisuals(4단계 라이팅/스카이박스/볼륨), ScreenFader(검정 페이드),
-│  │  │                 #   ActiveInPhases(시간대별 on/off — 가로등), CarSpawner(거리 자동차)
+│  │  │                 #   ActiveInPhases(시간대별 on/off — 가로등), CarSpawner(거리 자동차, 낮에만),
+│  │  │                 #   LightFlicker(형광등 깜박임), SpriteLightResponse(스프라이트 조명 반응)
 │  │  ├─ Audio/         # SoundManager (앰비언스 + 발소리)
 │  │  └─ Player/        # FootstepSystem
 │  ├─ InGame/           # 씬에 실제로 쓰는 프리팹/머티리얼/사운드/렌더텍스처
@@ -169,9 +174,12 @@ GameObject
 | `CursorInteractor` | 마우스 레이 + 좌클릭, UI 모드 전용, RenderTexture 커서 보정 + 가림 체크 | [doc](Docs/CursorInteractor.md) |
 | `UIInteractionMode` | UI 모드 — 앵커 스택(접객/모니터/노트), 플레이어 고정, 커서, ESC 한 겹씩 | [doc](Docs/UIInteractionMode.md) |
 | `DayPhaseManager` | 아침/점심/저녁/새벽 순환 + `ScreenFader` 페이드 전환, `OnPhaseChanged` | [doc](Docs/DayPhaseManager.md) |
-| `ReceptionManager` | 저녁 접객 세션 — 손님 큐(무한 일차 셔플), 대화, 모니터 방배정, 체크인+숙박비 | [doc](Docs/ReceptionManager.md) |
+| `ReceptionManager` | 저녁 접객 세션 — 손님 큐(셔플, 저녁당 최대 `maxGuestsPerEvening`), 대화, 모니터 방배정, 체크인+숙박비 | [doc](Docs/ReceptionManager.md) |
+| `ReceptionIdCard` | 접객 대화 `id_show` 노드 → 책상 `ID` 오브젝트 활성 + 신분증 UI(이름·생년월일·얼굴 크롭) | `doc/0168`·`0173` |
 | `GuestManager` | 손님 상태(`GuestState`) — 판정·방·숙박 박수·하우스키핑·숙박비·체크아웃 | [doc](Docs/GuestManager.md) |
 | `RoomController` | 객실 ×10 관제 — 배정 손님 있으면 문 잠금/노크 전환, 아침 청소 창 개방·침대 흐트러뜨림, 체크아웃 정산, 잠금 시 커튼/소등 | [doc](Docs/RoomController.md) |
+| `RoomNumberLabel` | `Room_Number` 큐브 Canvas 에 `RoomController.RoomNumber` 표시 (`ExecuteAlways`, 큐브 비균등 스케일 보정) | `doc/0161` |
+| `SleepwalkerNote` | 주인방 `note` 읽기 → 일차별 몽유병 구별법 목록 (`CampaignData.DayPlan.sleepwalkerHints`) | `doc/0171` |
 | `KnockEffect` | 새벽 노크 → 화면고정 + 문틈 손님 + 탐문 대화. 새벽 아니면 항상 거절. 대화 1회 = 행동력 1 | [doc](Docs/KnockEffect.md) |
 | `MorningTasks` / `TasksCompleteCondition` | 아침 할일 HUD `☐ 침대 개기 N/M` (방 messy 합산) + 완료 시 게시판 개방 | [doc](Docs/MorningTasks.md) |
 | `LunchTasks` / `LunchTaskTarget` / `LunchTasksCompleteCondition` | 점심 일과 HUD + 오브젝트별 1회 처리 + 완료 시 접객 테이블 개방, 아침에 재활용 | [doc](Docs/LunchTasks.md) |
@@ -186,7 +194,7 @@ GameObject
 | `DialogueRunner` / `QuestionPanel` / `SpeechBubble` | 대화 1회 오케스트레이션(인사→허브→분기), 질문/선택지 버튼, 타이핑 말풍선 | [hub](Docs/DialogueSystem.md) |
 | `NpcData` / `NpcCatalog` / `CampaignData` / `DialogueDatabase` | 손님 정체성 SO, 번호→NpcData, 일차 편성, CSV→대사 DB(임포터) | [hub](Docs/DialogueSystem.md) |
 | `GuestMover` / `GuestView` | 접객 손님 웨이포인트 이동, 스프라이트/표정 교체 | [hub](Docs/DialogueSystem.md) |
-| `Wallet` / `MoneyHud` | 소지금($100 시작), 1박 $70, 선불/후불/2배, HUD + 현금음 | [doc](Docs/Wallet.md) |
+| `Wallet` / `MoneyHud` | 소지금($100 시작), 1박 $70, 선불/후불/2배, HUD(`$` 초록) + 현금음 | [doc](Docs/Wallet.md) |
 | `ScreenMessage` | 화면 중앙 임시 관찰 문구 ("노크가 거절됐다") | [doc](Docs/ScreenMessage.md) |
 | `LocalizationManager` | 영/한 — 게임 시작 시 언어 확정, `T(en, ko)` 읽기 전용 | [doc](Docs/LocalizationManager.md) |
 | `PhaseLabel` | HUD 시간대 텍스트 ("Day 3 · Evening") | [doc](Docs/PhaseLabel.md) |
@@ -200,7 +208,12 @@ GameObject
 | `ScreenFader` | 전체 화면 검정 페이드 (`FadeThrough`) | [doc](Docs/ScreenFader.md) |
 | `ActivateOnAwake` | 시작 시 지정 오브젝트 활성화 (페이드 오버레이 등) | [doc](Docs/ActivateOnAwake.md) |
 | `ActiveInPhases` | 지정 시간대에만 오브젝트 on/off (가로등 저녁·새벽 점등) | [doc](Docs/ActiveInPhases.md) |
-| `CarSpawner` | 거리 자동차 주기 스폰 + 직선 주행 + DOTween 엔진 진동 | [doc](Docs/CarSpawner.md) |
+| `CarSpawner` | 거리 자동차 주기 스폰 + 직선 주행 + DOTween 엔진 진동. `activePhases`(기본 아침·점심)에만 스폰 | [doc](Docs/CarSpawner.md) |
+| `LightFlicker` | Light 를 고장난 형광등처럼 랜덤 깜박임(소등/stutter/버즈) + 선택 사운드 (MainScene 네온 간판) | `doc/0170` |
+| `SpriteLightResponse` | NPC 스프라이트(`SpriteRenderer.color`)를 주변 조명 밝기에 곱해 어둡게/밝게 (URP 3D, 셰이더 교체 없이) | `doc/0179` |
+| `GuestWalkBob` | 손님 걷는 동안 스프라이트 상하 총총 + 좌우 흔들, 멈추면 idle 숨쉬기 (DOTween) | `doc/0172`·`0180` |
+| `MainMenu` / `PauseMenu` | 타이틀 Play(→InGame)/Exit · InGame `Esc` 옵션창("메인화면으로 나가기", 노트/모니터/노크 중엔 억제) | `doc/0165`·`0166` |
+| `HoverTextOutline` | UI 버튼 호버 시 자식 TMP 글자색 + 외곽선 노랑 (인스턴스 머티리얼) | `doc/0169` |
 
 ## 코드 아키텍처
 
@@ -299,6 +312,8 @@ flowchart TB
 - [x] `SoundManager` — `OnPhaseChanged` 구독, 저녁·새벽=밤 / 아침·점심=낮 앰비언스 (구 `Q` 토글 삭제), 발소리 재생
 - [x] `PhaseLabel` — HUD 시간대/일차 텍스트, `PhaseMessage` — 지정 단계 진입 완료 시 화면 중앙 문구 1회
 - [x] **시간대 전환 중 마우스 커서 숨김** (`doc/0151`)
+- [x] HUD 텍스트 BG 자동 크기 — ScreenMessage/DayEndTitle/Money/Watch 배경이 텍스트 길이·크기 따라 늘어남 (`ContentSizeFitter`, `doc/0159`)
+- [x] `ActionPointsBar` pip 4칸 왼쪽에 "행동력" 라벨 (`doc/0166`), `DayEndTitle` "N일차" 사라짐 속도 조정 (`doc/0168`)
 
 ### 일차 종료 연출 (뉴스 브리핑, `doc/0145`)
 - [x] `NewsBriefingEffect` — 새벽 침대 상호작용 시, 브리핑이 있으면 재생하고 없으면 바로 아침 전환
@@ -307,10 +322,15 @@ flowchart TB
 - [x] `DayEndTitle` — 다음 날 아침 진입 시 화면 중앙에 **"N일차"** 크게 페이드 (1일차엔 안 뜸, `doc/0150`·off-by-one `doc/0157`)
 
 ### 환경 / 분위기
-- [x] `CarSpawner` — 도로 자동차 주기 스폰, 스폰 포인트 forward 로 직선 주행 후 소멸, DOTween 셰이크 엔진 진동 (`doc/0148`)
+- [x] `CarSpawner` — 도로 자동차 주기 스폰, 스폰 포인트 forward 로 직선 주행 후 소멸, DOTween 셰이크 엔진 진동 (`doc/0148`). **아침·점심에만 스폰**, 저녁·새벽엔 정지 (`doc/0177`)
 - [x] `ActiveInPhases` — 가로등(`street light`) 램프+광원을 저녁·새벽만 점등 (`doc/0156`)
+- [x] `LightFlicker` — 고장난 형광등 깜박임(소등/stutter/버즈 상태머신) + 선택 사운드, MainScene 네온 간판 (`doc/0170`)
+- [x] `SpriteLightResponse` — NPC 스프라이트가 주변 조명 밝기에 반응해 어두워짐/밝아짐 (URP 3D, `color` 곱, `doc/0179`)
+- [x] `GuestWalkBob` — 손님 걷기 총총 상하튐 + 좌우 흔들, 멈추면 숨쉬기 (DOTween, `doc/0172`·`0180`)
+- [x] `RoomNumberLabel` — `Room_Number` 큐브에 방 번호(101~110) 자동 표시 (`doc/0161`)
 - [x] InGame 씬 전면 실시간 조명(라이트맵 미사용, `doc/0149`) + 오클루전 컬링 베이크 (`doc/0152`)
 - [x] 모텔 맵 리모델링(임시), 맵 위 자동차
+- [x] `Poster` 프리팹 — 겹쳐 있던 회색 Lit 판 제거로 이미지 하얗게 뜨던 문제 수정 (`doc/0174`)
 
 ### UI 모드
 - [x] `UIInteractionMode` — **앵커 스택**: 플레이어를 `Player_Anchor` 로 이동·고정, 커서 표시, `Gaze`↔`Cursor` 전환. 접객(하위) 안에서 모니터(상위) 중첩, ESC 로 한 겹씩 벗김. `MovementLocked` — 화면고정/오버레이 중 발소리 등 이동 연출 차단 (`doc/0142`)
@@ -318,6 +338,9 @@ flowchart TB
 - [x] `CursorInteractor` — 화면 UI(모니터 방배정 버튼) 호버 시에도 **모니터 메쉬 외곽선** (`doc/0141`)
 - [x] `ShowPanelEffect`(`읽기`) — 노트/편지 상호작용 시 오브젝트 켜고 플레이어 정지. ESC 계층에서 노트가 우선 소비
 - [x] `ScreenFader` + `ActivateOnAwake` — Overlay 검정 페이드, 에디터에선 꺼두고 런타임에 켬
+- [x] `PauseMenu` — InGame `Esc` → 옵션창("메인화면으로 나가기" → `MainScene`). 노트/모니터/새벽 노크 대화 중엔 그 뷰만 빠져나가고 옵션창 억제, 접객 중엔 열림 (`doc/0166`)
+- [x] `MainMenu` + `HoverTextOutline` — MainScene Play/Exit 버튼 배선(EventSystem 추가), 호버 시 글자색·외곽선 노랑 (`doc/0165`·`0169`)
+- [x] 화면 비율 — `MainCamera` → 고정 1280×720 RT, `RawImage` 에 `AspectRatioFitter`(FitInParent) + 레터박스 BG 로 비 16:9 창에서도 왜곡 없음 (`doc/0162`). CRT 모니터 화면은 재클릭/ESC/`Road_Image` 클릭으로 나감
 
 ### 대화 / 접객 (저녁)
 - [x] `DialogueRunner` — 대화 1회: **인사 → 질문 허브(반복 선택) → 선택지 분기 → 종료**. 거절 노드(`outcome=Rejected`)로 대화 전체 거절. `Reception` / `Dawn` 상황
@@ -325,9 +348,12 @@ flowchart TB
 - [x] `QuestionPanel` — 질문/선택지 버튼. **버튼 5개 이상이면 여러 줄 배열** + 패널 크기 자동 (`doc/0135`). **결정 토픽**(선택지 있는 질문: 숙박·결제·신분증)은 한 번 고르면 사라짐 = 번복 불가 (`doc/0138`)
 - [x] `SpeechBubble` — 타이핑 연출 말풍선, 클릭/E/Space 진행, 줄별 표정(Neutral/Angry)
 - [x] `ReceptionManager` 손님 큐 — 손님이 걸어 들어옴(`GuestMover`/`GuestView` 2D 스프라이트) → 대화 → **모니터 방배정** → 열쇠 들고 손님 클릭 = 체크인 → 방으로 이동 / 거절 시 퇴장
-- [x] **무한 일차** — `testShuffleAllGuests`(기본 on): 매 저녁 카탈로그 손님 전원(투숙 중 제외)이 랜덤 순서로 옴
+- [x] **손님 큐** — `testShuffleAllGuests`(기본 on): 매 저녁 카탈로그 손님(투숙 중 제외)을 셔플해 앞에서 `maxGuestsPerEvening`(기본 5)명. 카탈로그 = `NpcData` 9명(나그네/회사원/거만한 남성/젊은 여성/노인 + 트럭기사/아버지와 아들/사진작가/목사 — `doc/0167`)
+- [x] **접객 신분증** — "신분증 제시" 선택지 → 책상 `ID` 활성 + `Canvas/ID_image` 에 손님 이름·생년월일·얼굴(초상화에서 상단 크롭) 표시 (`ReceptionIdCard`, `doc/0168`·`0173`)
+- [x] **접객 편의** — 접객 중 슬롯 1~5·휠 인벤토리 이동은 허용, 던지기·사용만 차단 (`doc/0176`). 접객 종료 시 진입 위치가 아닌 지정 앵커로 복귀 (`doc/0178`)
 - [x] `MonitorRoomBoard` — CRT 모니터 uGUI 방배정 버튼 101~110 (빈방/선택됨/사용중 색·활성)
-- [x] 새벽 **탐문** — 배정 방문 노크 → 화면고정 → 문 살짝 열림 + 문틈 손님 + `Situation.Dawn` 질문 대화. `refusesDawnKnock` 손님은 거절(`ScreenMessage`). 새벽 아닌 시간 노크는 항상 무응답 (`doc/0136`). 대화 1회 = 행동력 1 소모
+- [x] 새벽 **탐문** — 배정 방문 노크 → 화면고정 → 문 살짝 열림 + 문틈 손님 + `Situation.Dawn` 질문 대화. `refusesDawnKnock` 손님은 거절(`ScreenMessage`). 새벽 아닌 시간 노크는 항상 무응답 (`doc/0136`). **대화가 끝나는 시점**에 행동력 1 소모 (중간 ESC 는 소모 안 됨, `doc/0160`)
+- [x] `SleepwalkerNote` — 주인방 `note` 읽기 → 그 일차의 몽유병 환자 구별법을 번호 목록으로 (`CampaignData.DayPlan.sleepwalkerHints`, `doc/0171`)
 
 ### 객실 생애주기 / 체크아웃 / 하우스키핑
 - [x] `GuestManager.GuestState` — 손님별 `stayNights`(숙박 박수) · `cleaningRequested`(하우스키핑) · `nightlyRate`/`payUpfront`/`settled`(숙박비) · `CheckOutDay`
@@ -338,7 +364,7 @@ flowchart TB
 - [x] `Wallet` — 시작금 **$100**, 1박 **$70**. `Add(amount)` + `OnChanged` 이벤트
 - [x] 손님별 `숙박비 = 요금 × 박수`. 대화에서 **선불 수락 → 체크인 시 입금** / **후불(기본) → 체크아웃 아침 입금** (`RoomController`). 입금 시 현금 효과음
 - [x] 두 배 요금 이벤트 (`reject_double_accept` — 돌려보내려는 손님이 2배 제안)
-- [x] `MoneyHud` — 소지금 HUD 텍스트 (`$N`) + 입금 효과음
+- [x] `MoneyHud` — 소지금 HUD 텍스트 (`$` 초록 + 숫자, `doc/0180`) + 입금 효과음
 
 ### 로컬라이제이션 (`doc/0107`)
 - [x] `LocalizationManager` — 영어/한글, **게임 시작 시 언어 확정**(런타임 전환 없음). `T(en, ko)` / `Korean` 정적 읽기. 대사·버튼·프롬프트·손님 이름이 표시 직전에 읽음. Galmuri11 폰트 + LiberationSans 폴백
@@ -354,7 +380,7 @@ flowchart TB
 
 접객 골격(손님 큐·대화·방배정·체크인·체크아웃·숙박비), 4단계 할일 게이트, 일차 종료 뉴스 브리핑은 섰다. 남은 것:
 
-- [ ] **판별 로직** — 신분증·서류 확인 UI, TV 구별법을 뉴스 브리핑 슬라이드에 반영, `isSleepwalker` vs `verdict` 를 밤 판정에 연결 (SYS-04·05). 브리핑 골격은 섰고 콘텐츠·판정 연동이 남음
+- [ ] **판별 로직** — 접객 신분증 UI(`ReceptionIdCard`)·주인방 구별법 노트(`SleepwalkerNote`)는 표시까지 됨. 남은 것: 신분증 위조(`idCard.forged`) 판정, TV/노트 구별법을 뉴스 브리핑 슬라이드·`CampaignData` 에 채우기, `isSleepwalker` vs `verdict` 를 밤 판정에 연결 (SYS-04·05)
 - [ ] **일과 다종화** — 아침 할일은 "침대 개기" 1종(열쇠 회수·장부 대조 예정), 점심은 테스트용 `LunchTaskTarget` 뿐. 게이트 구조(`*CompleteCondition`)는 완료 (SYS-02, `doc/0133`·`0134`)
 - [ ] **점심 일과 내용** — 울타리 수리·노숙자·불법주차 등 실제 이벤트, 일차별 변형, 점프스케어
 - [ ] **새벽 행동력 활용** — 행동력 소모/게이트는 완료 (`ActionPoints`). 총기 사용 등 대화 외 소모처가 남음 (SYS-10·11)
