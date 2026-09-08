@@ -19,6 +19,8 @@ public class ReceptionManager : MonoBehaviour
     [Header("접객 자리")]
     [Tooltip("접객 시 플레이어가 앉을 위치/정면 (접객 테이블의 Player_Anchor)")]
     [SerializeField] private Transform receptionAnchor;
+    [Tooltip("접객 종료 시 플레이어가 나올 위치/정면 (Y 회전만). 비우면 접객 시작 직전 위치로 복귀")]
+    [SerializeField] private Transform receptionExitAnchor;
 
     [Header("편성 / 손님")]
     [SerializeField] private CampaignData campaign;
@@ -127,7 +129,7 @@ public class ReceptionManager : MonoBehaviour
         {
             if (receptionAnchor == null)
                 Debug.LogWarning("[ReceptionManager] receptionAnchor 미할당 — 접객 자리로 이동 못 함", this);
-            UIInteractionMode.Instance.Enter(receptionAnchor);
+            UIInteractionMode.Instance.Enter(receptionAnchor, 1f, false, receptionExitAnchor);
         }
 
         OnSessionStarted?.Invoke();

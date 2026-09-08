@@ -74,6 +74,7 @@ public class UIInteractionMode : MonoBehaviour
     private Vector3 savedPlayerPos;
     private Quaternion savedPlayerRot;
     private Quaternion savedPitch;
+    private Transform teardownExitAnchor;   // 완전 종료 시 여기로 나감 (null = savedPlayer* 로 복귀)
 
     private float baseYaw;    // 앵커 정면 yaw (월드)
     private float curYaw;     // baseYaw 기준 오프셋
@@ -175,7 +176,9 @@ public class UIInteractionMode : MonoBehaviour
 
     // lookScale: 가장자리 둘러보기 배율 (0 = 완전 고정, 1 = 기본). 노크는 좁게 (0.2~0.3 권장).
     // escExits: true 면 이 뷰는 ESC 한 번으로 나감(모니터 등). false(기본) 면 exitKey 홀드로만 (접객·노크·연출).
-    public void Enter(Transform anchor, float lookScale, bool escExits)
+    // exitAnchor: 스택이 완전히 비어 종료할 때 플레이어가 나올 위치/정면 (Y 회전만). null = 진입 직전 위치로 복귀.
+    //   첫 진입에서만 의미 있음 (위에 쌓이는 뷰의 값은 무시).
+    public void Enter(Transform anchor, float lookScale, bool escExits, Transform exitAnchor = null)
     {
         if (anchor == null || playerRoot == null)
         {
@@ -197,6 +200,8 @@ public class UIInteractionMode : MonoBehaviour
             savedPlayerPos = playerRoot.position;
             savedPlayerRot = playerRoot.rotation;
             savedPitch = cameraPitchPivot != null ? cameraPitchPivot.localRotation : Quaternion.identity;
+
+            teardownExitAnchor = exitAnchor;
 
             if (firstPersonController != null) firstPersonController.enabled = false;
             if (characterController != null) characterController.enabled = false;   // 끈 뒤에야 transform 이동 가능
@@ -316,9 +321,16 @@ public class UIInteractionMode : MonoBehaviour
 
         Exited?.Invoke();
 
+        // 종료 앵커가 지정돼 있으면 진입 직전 위치 대신 그리로 나간다 (Y 회전만, pitch 0).
+        Vector3 endPos = teardownExitAnchor != null ? teardownExitAnchor.position : savedPlayerPos;
+        Quaternion endRot = teardownExitAnchor != null
+            ? Quaternion.Euler(0f, teardownExitAnchor.eulerAngles.y, 0f) : savedPlayerRot;
+        Quaternion endPitch = teardownExitAnchor != null ? Quaternion.identity : savedPitch;
+        teardownExitAnchor = null;
+
         if (move != null) StopCoroutine(move);
         move = StartCoroutine(Transition(
-            savedPlayerPos, savedPlayerRot, savedPitch,
+            endPos, endRot, endPitch,
             () =>
             {
                 if (characterController != null) characterController.enabled = true;

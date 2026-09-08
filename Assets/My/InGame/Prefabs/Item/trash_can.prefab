@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.5000003, y: 0.49999985, z: 0.49999973, w: 0.50000024}
   m_LocalPosition: {x: -22.324575, y: 0.3845769, z: 0.679716}
-  m_LocalScale: {x: 65.558815, y: 65.558815, z: 65.55882}
+  m_LocalScale: {x: 75, y: 75, z: 75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7673998294739681875}
@@ -209,6 +209,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
+  excludeRoots: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

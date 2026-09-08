@@ -30,8 +30,11 @@ public class CarSpawner : MonoBehaviour
     [Tooltip("동시에 존재할 수 있는 자동차 최대 수")]
     [SerializeField] private int maxAlive = 6;
 
-    [Tooltip("Start 시 자동으로 스폰 루프 시작")]
+    [Tooltip("Start 시 자동으로 스폰 루프 시작 (DayPhaseManager 없을 때 폴백)")]
     [SerializeField] private bool autoStart = true;
+
+    [Tooltip("이 시간대에만 스폰. 저녁·새벽엔 도로가 조용하도록 비워둠")]
+    [SerializeField] private DayPhase[] activePhases = { DayPhase.Morning, DayPhase.Noon };
 
     [Header("엔진 진동")]
     [SerializeField] private float shakePositionStrength = 0.02f;
@@ -42,7 +45,25 @@ public class CarSpawner : MonoBehaviour
 
     private void Start()
     {
-        if (autoStart) StartSpawning();
+        if (DayPhaseManager.Instance != null)
+        {
+            DayPhaseManager.Instance.OnPhaseChanged += ApplyPhase;
+            ApplyPhase(DayPhaseManager.Instance.Current);
+        }
+        else if (autoStart) StartSpawning();
+    }
+
+    private void OnDestroy()
+    {
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.OnPhaseChanged -= ApplyPhase;
+    }
+
+    // 낮(activePhases)엔 스폰, 저녁·새벽엔 멈춤. 도로에 있던 차는 트윈 끝나면 자연 소멸.
+    private void ApplyPhase(DayPhase phase)
+    {
+        if (System.Array.IndexOf(activePhases, phase) >= 0) StartSpawning();
+        else StopSpawning();
     }
 
     public void StartSpawning()
