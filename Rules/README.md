@@ -4,8 +4,9 @@
 원본은 Claude Code의 영구 메모리(`~/.claude/projects/.../memory/`)에 있으며, 이 폴더는 프로젝트 내에서
 바로 확인할 수 있도록 만든 사본/요약본입니다.
 
-- [session-logging-rule.md](session-logging-rule.md) — 세션 로깅 규칙
-- [confirm-before-implementing-rule.md](confirm-before-implementing-rule.md) — 구현 전 확인 규칙
+- [session-logging-rule.md](session-logging-rule.md) — 세션 로깅 규칙 (상시)
+- [confirm-before-implementing-rule.md](confirm-before-implementing-rule.md) — 구현 전 확인 규칙 (상시)
+- [readme-refresh-rule.md](readme-refresh-rule.md) — README 갱신 규칙 ("Readme 갱신" 요청 시에만)
 
 ## 폴더 규칙 참고
 - `doc/` (소문자) — 세션 로그, `NNNN-<영문-slug>.md`
